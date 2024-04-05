@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DefaultFrame from './DefaultFrame';
 
-const MainDashBoard = ({ bgColor, chart, title }) => {
+const MainDashBoard = ({ bgColor, chart }) => {
   return (
     <div className="flex flex-col w-full items-center" style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col w-[1200px]">
