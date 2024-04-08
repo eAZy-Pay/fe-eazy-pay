@@ -3,9 +3,10 @@ import MainLogo from '../../assets/mainLogo.svg';
 import VerticalStepper from './VerticalStepper';
 import AgreementForm from './AgreementForm';
 import { useState } from 'react';
+import EazyPayRegisterForm from './EazyPayRegisterForm';
 
 const RegisterPage = () => {
-  const [stepperIndex, setStepperIndex] = useState(0);
+  const [stepperIndex] = useState(1);
 
   return (
     <DefaultLayout>
@@ -18,6 +19,7 @@ const RegisterPage = () => {
         <div className="flex items-start w-full">
           <VerticalStepper />
           {stepperIndex === 0 && <AgreementForm />}
+          {stepperIndex === 1 && <EazyPayRegisterForm />}
         </div>
 
         <button className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300">
