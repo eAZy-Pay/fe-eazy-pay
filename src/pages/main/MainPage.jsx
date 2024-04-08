@@ -3,6 +3,9 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import MainBenefits from './MainBenefits';
 import eazy from '../../assets/eAZyCard.svg';
 import CardRecommendation from '../recommendation/CardRecommendation';
+import CardPerfomance from '../main/CardPerformance';
+// import React from 'react';
+
 const userMain = {
   userName: '박선주',
   images: [
@@ -202,7 +205,13 @@ const MainPage = () => {
         <div className="my-4">
           <MainBenefits userMain={userMain} />
         </div>
-        {/* 지민's화려한 그래프!! */}
+
+        <div>
+          {userMain.images.map(
+            (image, index) => index !== 0 && <CardPerfomance key={index} image={image} />
+          )}
+        </div>
+
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
         <CardRecommendation
