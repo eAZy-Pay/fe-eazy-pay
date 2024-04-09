@@ -17,7 +17,7 @@ const MainBenefits = ({ userMain }) => {
           </div>
 
           <div className="mx-5 flex-end relative top-0 mt-[8rem] self-bottom">
-            <span className="text-5xl font-black text-blue-700 relative absolute right-0">
+            <span className="text-5xl font-black text-blue-700 relative right-0">
               {userMain.benefitAmount}
             </span>
             <span className="text-3xl">원</span>
@@ -29,6 +29,7 @@ const MainBenefits = ({ userMain }) => {
 };
 
 MainBenefits.propTypes = {
-  userMain: PropTypes.node.isRequired,
+  userMain: PropTypes.object.isRequired,
 };
+
 export default MainBenefits;
