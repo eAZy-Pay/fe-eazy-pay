@@ -1,21 +1,28 @@
-import * as React from 'react';
+// import * as React from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-import { FormControl, FormHelperText } from '@mui/material';
+//import { FormControl, FormHelperText } from '@mui/material';
 
-const EazyPayRegisterForm = () => {
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-    if (event.target.value.length >= 8) {
-      setError('');
-    } else {
-      setError('비밀번호는 8자리 이상으로 입력해주세요.');
-    }
+const EazyPayRegisterForm = ({ onEazyRegDataChange }) => {
+  const [eazyRegData, setEazyRegData] = useState({ name: '', id: '', pw1: '', pw2: '' });
+  const handleChange = (info) => (event) => {
+    const newEazyRegData = { ...eazyRegData, [info]: event.target.value };
+    setEazyRegData(newEazyRegData); // 상태를 업데이트
+    onEazyRegDataChange(newEazyRegData); // 부모 컴포넌트에 변경 사항을 전달
   };
+  // const [password, setPassword] = useState('');
+  // const [error, setError] = useState('');
+
+  // const handlePasswordChange = (event) => {
+  //   setPassword(event.target.value);
+  //   if (event.target.value.length >= 8) {
+  //     setError('');
+  //   } else {
+  //     setError('비밀번호는 8자리 이상으로 입력해주세요.');
+  //   }
+  // };
 
   return (
     <div className="flex ml-48">
@@ -28,7 +35,13 @@ const EazyPayRegisterForm = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="이름" variant="outlined" />
+          <TextField
+            id="name"
+            label="이름"
+            variant="outlined"
+            value={eazyRegData.name}
+            onChange={handleChange('name')}
+          />
         </Box>
         <Box
           component="form"
@@ -38,9 +51,15 @@ const EazyPayRegisterForm = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="아이디" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="아이디"
+            variant="outlined"
+            value={eazyRegData.id}
+            onChange={handleChange('id')}
+          />
         </Box>
-        <Box
+        {/* <Box
           component="form"
           sx={{
             '& > :not(style)': { m: 1, width: '30ch' },
@@ -48,6 +67,13 @@ const EazyPayRegisterForm = () => {
           noValidate
           autoComplete="off"
         >
+          <TextField
+            id="pw1"
+            label="비밀번호"
+            variant="outlined"
+            value={eazyRegData.pw1}
+            onChange={handleChange('pw2')}
+          />
           <FormControl error={!!error}>
             <TextField
               id="outlined-basic"
@@ -60,6 +86,23 @@ const EazyPayRegisterForm = () => {
               helperText={error}
             />
           </FormControl>
+        </Box> */}
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '30ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="pw1"
+            label="비밀번호를 입력해주세요"
+            variant="outlined"
+            value={eazyRegData.pw1}
+            onChange={handleChange('pw1')}
+          />
         </Box>
 
         <Box
@@ -71,9 +114,11 @@ const EazyPayRegisterForm = () => {
           autoComplete="off"
         >
           <TextField
-            id="outlined-basic"
+            id="pw2"
             label="비밀번호를 한 번 더 입력해주세요"
             variant="outlined"
+            value={eazyRegData.pw2}
+            onChange={handleChange('pw2')}
           />
         </Box>
 
@@ -110,6 +155,10 @@ const EazyPayRegisterForm = () => {
       </div>
     </div>
   );
+};
+
+EazyPayRegisterForm.propTypes = {
+  onEazyRegDataChange: PropTypes.func.isRequired,
 };
 
 export default EazyPayRegisterForm;

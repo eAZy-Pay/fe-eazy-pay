@@ -1,4 +1,5 @@
-import * as React from 'react';
+// import * as React from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -78,3 +79,8 @@ export default function VerticalLinearStepper({ activeStep, setActiveStep }) {
     </Box>
   );
 }
+
+VerticalLinearStepper.propTypes = {
+  activeStep: PropTypes.number.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
+};
