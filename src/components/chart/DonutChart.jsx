@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import PropTypes from 'prop-types';
 
-const DonutChart = ({ data, handleLegendClick, checkedCategoryIndex }) => {
+const DonutChart = ({ data, handleLegendClick, checkedIndex }) => {
   const legendFontSize = '20px';
   const dataLabelFontSize = '16px';
   const tooltipFontSize = '18px';
@@ -29,7 +29,7 @@ const DonutChart = ({ data, handleLegendClick, checkedCategoryIndex }) => {
             legendItemClick: function () {
               handleLegendClick(this.index);
               var series = this.series;
-              if (this.index === checkedCategoryIndex) {
+              if (this.index === checkedIndex) {
                 series.data[this.index].select(false, false);
                 return false;
               }
@@ -40,7 +40,7 @@ const DonutChart = ({ data, handleLegendClick, checkedCategoryIndex }) => {
             click: function () {
               handleLegendClick(this.index);
               var series = this.series;
-              if (this.index === checkedCategoryIndex) {
+              if (this.index === checkedIndex) {
                 series.data[this.index].select(false, false);
                 return false;
               }
@@ -59,8 +59,8 @@ const DonutChart = ({ data, handleLegendClick, checkedCategoryIndex }) => {
         data: data.map((item, index) => ({
           name: item.categoryName,
           y: item.useAmount,
-          sliced: checkedCategoryIndex === index,
-          selected: checkedCategoryIndex === index,
+          sliced: checkedIndex === index,
+          selected: checkedIndex === index,
         })),
       },
     ],
@@ -122,7 +122,7 @@ DonutChart.propTypes = {
     })
   ).isRequired,
   handleLegendClick: PropTypes.func.isRequired,
-  checkedCategoryIndex: PropTypes.number.isRequired,
+  checkedIndex: PropTypes.number.isRequired,
 };
 
 export default DonutChart;

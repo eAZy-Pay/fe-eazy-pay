@@ -1,17 +1,13 @@
 import PropTypes from 'prop-types';
 import CreditCard from '../../components/card/CreditCard';
 
-const CardRecommendation = ({ data, dummyCards, handleLegendClick, checkedCategoryIndex }) => {
+const CardRecommendation = ({ data, categoryCards, handleLegendClick, checkedIndex }) => {
   const makeRecommendation = () => {
-    let categoryIndex = checkedCategoryIndex;
-    if (checkedCategoryIndex < 0 || checkedCategoryIndex === undefined) {
-      categoryIndex = 0;
-    }
-
     const recommendationGroups = [];
-    const cards = dummyCards[categoryIndex]?.cards || [];
-    for (let i = 0; i < cards.length; i += 3) {
-      const group = cards.slice(i, i + 3);
+    // 추천 카드 최대 6개까지만 보여주기
+    const categoryCardsLength = categoryCards.length > 6 ? 6 : categoryCards.length;
+    for (let i = 0; i < categoryCardsLength; i += 3) {
+      const group = categoryCards.slice(i, i + 3);
       recommendationGroups.push(
         <div className="flex justify-center gap-x-10 mt-8" key={i}>
           {group.map((card, index) => (
@@ -24,7 +20,7 @@ const CardRecommendation = ({ data, dummyCards, handleLegendClick, checkedCatego
   };
 
   const makeSelectCategory = (index, category) => {
-    if (index === checkedCategoryIndex) {
+    if (index === checkedIndex) {
       return (
         <div key={category} onClick={() => handleLegendClick(index)} className="cursor-pointer">
           {'#' + category}
@@ -55,13 +51,9 @@ const CardRecommendation = ({ data, dummyCards, handleLegendClick, checkedCatego
 
 CardRecommendation.propTypes = {
   data: PropTypes.array.isRequired,
-  dummyCards: PropTypes.arrayOf(
-    PropTypes.shape({
-      cards: PropTypes.array.isRequired,
-    })
-  ).isRequired,
+  categoryCards: PropTypes.array.isRequired,
   handleLegendClick: PropTypes.func.isRequired,
-  checkedCategoryIndex: PropTypes.number.isRequired,
+  checkedIndex: PropTypes.number.isRequired,
 };
 
 export default CardRecommendation;
