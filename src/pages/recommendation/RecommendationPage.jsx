@@ -1,35 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import CardRecommendation from './CardRecommendation';
 import DonutChart from '../../components/chart/DonutChart';
 import MainDashBoard from '../../components/layout/MainDashBoard';
-import { getCategoryCards } from '../../apis/CardAPI';
-import { getMonthlyFor6ByUserId } from '../../apis/PaymentHistoryAPI';
-
-// 사용자 지출 데이터를 가져오는 커스텀 훅
-function useUserExpenses(userId) {
-  const [monthlyFor6, setMonthlyFor6] = useState([]);
-
-  useEffect(() => {
-    getMonthlyFor6ByUserId(userId).then(setMonthlyFor6);
-  }, [userId]);
-
-  return monthlyFor6;
-}
-
-// 카테고리 별 카드 정보를 가져오는 커스텀 훅
-function useCategoryCards(categoryId) {
-  const [categoryCards, setCategoryCards] = useState([]);
-
-  useEffect(() => {
-    if (categoryId !== undefined) {
-      getCategoryCards(categoryId).then(setCategoryCards);
-    }
-  }, [categoryId]);
-
-  return categoryCards;
-}
+import useCategoryCards from '../../hooks/useCategoryCards';
+import useUserMonthlyFor6 from '../../hooks/useUserMonthlyFor6';
 
 const RecommendationPage = () => {
   const [checkedIndex, setcheckedIndex] = useState(0);
@@ -41,7 +17,7 @@ const RecommendationPage = () => {
     // }
     setcheckedIndex(seriesIndex);
   };
-  const monthlyFor6 = useUserExpenses(2);
+  const monthlyFor6 = useUserMonthlyFor6(2);
   const categoryId = monthlyFor6[checkedIndex]?.categoryId;
   const categoryCards = useCategoryCards(categoryId);
 
