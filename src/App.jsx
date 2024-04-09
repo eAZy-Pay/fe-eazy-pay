@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecommendationPage from './pages/recommendation/RecommendationPage';
-
+import MainPage from './pages/main/MainPage';
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<RecommendationPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/recog" element={<RecommendationPage />} />
+        
       </Routes>
     </Router>
   );
