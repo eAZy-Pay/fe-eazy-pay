@@ -4,6 +4,7 @@ import VerticalStepper from './VerticalStepper';
 import AgreementForm from './AgreementForm';
 import { useState } from 'react';
 import EazyPayRegisterForm from './EazyPayRegisterForm';
+import CardAuthenticationForm from './CardAuthenticationForm';
 
 const RegisterPage = () => {
   const [stepperIndex, setStepperIndex] = useState(0);
@@ -25,6 +26,7 @@ const RegisterPage = () => {
           <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
           {stepperIndex === 0 && <AgreementForm />}
           {stepperIndex === 1 && <EazyPayRegisterForm />}
+          {stepperIndex === 2 && <CardAuthenticationForm />}
         </div>
 
         <button
