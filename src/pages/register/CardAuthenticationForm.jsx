@@ -14,7 +14,7 @@ const CardAuthenticationForm = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="이름" variant="outlined" />
+          <TextField id="outlined-basic" label="이름*" variant="outlined" />
         </Box>
         <Box
           component="form"
@@ -24,7 +24,7 @@ const CardAuthenticationForm = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="생년월일" variant="outlined" />
+          <TextField id="outlined-basic" label="생년월일*" variant="outlined" />
         </Box>
         <Box
           component="form"
@@ -34,7 +34,17 @@ const CardAuthenticationForm = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="휴대폰번호" variant="outlined" />
+          <TextField id="outlined-basic" label="휴대폰번호*" variant="outlined" />
+        </Box>
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '30ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField id="outlined-basic" label="이메일 주소" variant="outlined" />
         </Box>
       </div>
     </div>
