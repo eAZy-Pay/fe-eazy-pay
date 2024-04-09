@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 
 const DefaultLayout = ({ children, banner = <></> }) => {
   return (
-    <>
-      <div className="h-screen w-screen flex flex-col items-center">
-        <div className="flex flex-col w-[1200px]">
-          <NavBar />
-        </div>
+    <div className="flex flex-col items-center w-screen">
+      <div className="flex flex-col w-full max-w-screen-xl">
+        <NavBar />
         {banner}
-        <div className="flex flex-col w-full items-center">
-          <div className="flex flex-col w-[1200px]">{children}</div>
-        </div>
+        <div>{children}</div>
       </div>
-    </>
+    </div>
   );
 };
 

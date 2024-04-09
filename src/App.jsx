@@ -6,8 +6,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/recog" element={<RecommendationPage />} />
-        
+        <Route path="/card-recommend" element={<RecommendationPage />} />
       </Routes>
     </Router>
   );
