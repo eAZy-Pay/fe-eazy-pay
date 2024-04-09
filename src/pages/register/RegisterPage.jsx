@@ -5,6 +5,7 @@ import AgreementForm from './AgreementForm';
 import { useState } from 'react';
 import EazyPayRegisterForm from './EazyPayRegisterForm';
 import CardAuthenticationForm from './CardAuthenticationForm';
+import PinForm from './PinForm';
 
 const RegisterPage = () => {
   const [stepperIndex, setStepperIndex] = useState(0);
@@ -27,6 +28,7 @@ const RegisterPage = () => {
           {stepperIndex === 0 && <AgreementForm />}
           {stepperIndex === 1 && <EazyPayRegisterForm />}
           {stepperIndex === 2 && <CardAuthenticationForm />}
+          {stepperIndex === 3 && <PinForm />}
         </div>
 
         <button

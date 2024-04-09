@@ -19,6 +19,9 @@ const steps = [
     label: '우리카드 인증을 해주세요',
   },
   {
+    label: 'pin 번호를 등록해주세요',
+  },
+  {
     label: '데이터를 불러올 차례예요',
   },
 ];
@@ -43,7 +46,7 @@ export default function VerticalLinearStepper({ activeStep, setActiveStep }) {
           <Step key={step.label}>
             <StepLabel
               optional={
-                index === 3 ? <Typography variant="caption">마지막 단계예요!</Typography> : null
+                index === 4 ? <Typography variant="caption">마지막 단계예요!</Typography> : null
               }
             >
               {step.label}
