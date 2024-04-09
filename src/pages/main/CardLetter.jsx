@@ -1,16 +1,19 @@
 // import React from "react";
-
+import PropTypes from 'prop-types';
 
 const CardsLetter = ({ color, label, amount, total }) => {
   return (
     <div className="ml-8">
       <div className="flex items-start">
         <div className="font-semibold text-[#bfbdbd] mr-4">
-          <div className="w-[44px] h-[34px] text-2xl"
+          <div
+            className="w-[44px] h-[34px] text-2xl"
             style={{
-              color: color
+              color: color,
             }}
-          >{label}</div>
+          >
+            {label}
+          </div>
         </div>
         <div>
           <div className="w-[200px] h-[34px]">
@@ -20,9 +23,14 @@ const CardsLetter = ({ color, label, amount, total }) => {
         </div>
       </div>
     </div>
-
   );
 };
 
-export default CardsLetter;
+CardsLetter.propTypes = {
+  color: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+};
 
+export default CardsLetter;
