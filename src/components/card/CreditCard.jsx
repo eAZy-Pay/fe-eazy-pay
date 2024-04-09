@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-const CreditCard = ({ card }) => {
+const CreditCard = ({ card, showInfo = true }) => {
   return (
     <div className="w-[400px] h-[400px] flex flex-col items-center justify-center gap-4">
       <img className="w-[157.71px] h-[251.98px]" src={card.image} alt="Credit Card" />
-      <div className="text-xl font-bold text-black">{card.name}</div>
-      <div className="text-lg font-bold text-black">{card.info}</div>
+      <div className="text-lg font-bold text-black">{card.name}</div>
+      {showInfo && <div className="text-base font-bold text-black">{card.info}</div>}
     </div>
   );
 };
@@ -16,5 +16,6 @@ CreditCard.propTypes = {
     name: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
   }).isRequired,
+  showInfo: PropTypes.bool,
 };
 export default CreditCard;

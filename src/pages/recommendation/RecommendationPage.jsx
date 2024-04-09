@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import CardRecommendation from './CardRecommendation';
+import CardCategorySearch from './CardCategorySearch';
 import DonutChart from '../../components/chart/DonutChart';
 import MainDashBoard from '../../components/layout/MainDashBoard';
 import useCategoryCards from '../../hooks/useCategoryCards';
@@ -40,7 +40,7 @@ const RecommendationPage = () => {
           />
         }
       >
-        <CardRecommendation
+        <CardCategorySearch
           data={monthlyFor6}
           categoryCards={categoryCards}
           handleLegendClick={handleLegendClick}
