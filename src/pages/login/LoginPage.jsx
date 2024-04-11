@@ -5,9 +5,18 @@ import { requestSignIn } from '../../apis/AuthAPI.js';
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const requestLogin = (e) => {
+  const [error, setErrorMessage] = useState('');
+  const requestLogin = async (e) => {
     e.preventDefault();
-    requestSignIn(userName, userPassword);
+    await requestSignIn(userName, userPassword).then((response) => {
+      console.log(response);
+      if (response.status === 'UNAUTHORIZED') {
+        setErrorMessage('유효하지 않은 사용자 이름 또는 비밀번호입니다.');
+        setUserName('');
+        setUserPassword('');
+        return;
+      }
+    });
   };
   return (
     <>
@@ -25,7 +34,7 @@ const LoginPage = () => {
                 // action=""
                 method="POST"
                 onSubmit={(e) => {
-                  console.log(requestLogin(e));
+                  requestLogin(e);
                 }}
               >
                 <div>
@@ -39,6 +48,7 @@ const LoginPage = () => {
                       type="id"
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
+                      onClick={() => setErrorMessage('')}
                       autoComplete="username"
                       required
                       className="block w-full px-3 border-0 py-2.5 bg-gray-100 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -62,6 +72,7 @@ const LoginPage = () => {
                       type="password"
                       value={userPassword}
                       onChange={(e) => setUserPassword(e.target.value)}
+                      onClick={() => setErrorMessage('')}
                       autoComplete="current-password"
                       required
                       className="block w-full px-3 border-0 py-2.5 bg-gray-100 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -70,6 +81,7 @@ const LoginPage = () => {
                 </div>
 
                 <div>
+                  <div className="h-[25px] mt-[10px] text-[#dc2626] text-center">{error}</div>
                   <button
                     type="submit"
                     className="flex w-full justify-center bg-blue-600 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
