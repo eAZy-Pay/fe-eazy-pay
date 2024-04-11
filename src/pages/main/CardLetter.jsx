@@ -1,7 +1,7 @@
 // import React from "react";
 import PropTypes from 'prop-types';
 
-const CardsLetter = ({ color, label, amount, total }) => {
+const CardLetter = ({ color, label, amount, total }) => {
   return (
     <div className="ml-8">
       <div className="flex items-start">
@@ -17,8 +17,8 @@ const CardsLetter = ({ color, label, amount, total }) => {
         </div>
         <div>
           <div className="w-[200px] h-[34px]">
-            <span className="text-2xl font-semibold">{amount}</span>
-            <span className="text-base"> / {total}</span>
+            <span className="text-2xl font-semibold">{amount.toLocaleString()}</span>
+            <span className="text-base"> / {total.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -26,11 +26,11 @@ const CardsLetter = ({ color, label, amount, total }) => {
   );
 };
 
-CardsLetter.propTypes = {
+CardLetter.propTypes = {
   color: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
 };
 
-export default CardsLetter;
+export default CardLetter;

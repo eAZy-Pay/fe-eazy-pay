@@ -1,21 +1,26 @@
 import PropTypes from 'prop-types';
 import CreditCard from '../../components/card/CreditCard';
 
-const CardRecommendation = ({ data, dummyCards, handleLegendClick, checkedCategoryIndex }) => {
+const CardCategorySearch = ({
+  data,
+  categoryCards,
+  handleLegendClick,
+  checkedIndex,
+  maxColumn = 3,
+  maxRow = 2,
+  showInfo = true,
+}) => {
   const makeRecommendation = () => {
-    let categoryIndex = checkedCategoryIndex;
-    if (checkedCategoryIndex < 0 || checkedCategoryIndex === undefined) {
-      categoryIndex = 0;
-    }
-
     const recommendationGroups = [];
-    const cards = dummyCards[categoryIndex]?.cards || [];
-    for (let i = 0; i < cards.length; i += 3) {
-      const group = cards.slice(i, i + 3);
+    // 추천 카드 최대 maxRow * maxColumn 개수만큼만 보여줌
+    const categoryCardsLength =
+      categoryCards.length > maxColumn * maxRow ? maxColumn * maxRow : categoryCards?.length;
+    for (let i = 0; i < categoryCardsLength; i += maxColumn) {
+      const group = categoryCards.slice(i, i + maxColumn);
       recommendationGroups.push(
         <div className="flex justify-center gap-x-10 mt-8" key={i}>
           {group.map((card, index) => (
-            <CreditCard key={index} card={card} />
+            <CreditCard key={index} card={card} showInfo={showInfo} />
           ))}
         </div>
       );
@@ -24,7 +29,7 @@ const CardRecommendation = ({ data, dummyCards, handleLegendClick, checkedCatego
   };
 
   const makeSelectCategory = (index, category) => {
-    if (index === checkedCategoryIndex) {
+    if (index === checkedIndex) {
       return (
         <div key={category} onClick={() => handleLegendClick(index)} className="cursor-pointer">
           {'#' + category}
@@ -53,15 +58,14 @@ const CardRecommendation = ({ data, dummyCards, handleLegendClick, checkedCatego
   );
 };
 
-CardRecommendation.propTypes = {
+CardCategorySearch.propTypes = {
   data: PropTypes.array.isRequired,
-  dummyCards: PropTypes.arrayOf(
-    PropTypes.shape({
-      cards: PropTypes.array.isRequired,
-    })
-  ).isRequired,
+  categoryCards: PropTypes.array.isRequired,
   handleLegendClick: PropTypes.func.isRequired,
-  checkedCategoryIndex: PropTypes.number.isRequired,
+  checkedIndex: PropTypes.number.isRequired,
+  maxColumn: PropTypes.number,
+  maxRow: PropTypes.number,
+  showInfo: PropTypes.bool,
 };
 
-export default CardRecommendation;
+export default CardCategorySearch;

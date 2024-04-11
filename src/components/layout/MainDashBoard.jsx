@@ -22,7 +22,6 @@ const MainDashBoard = ({ bgColor, chart }) => {
 MainDashBoard.propTypes = {
   bgColor: PropTypes.string.isRequired,
   chart: PropTypes.node.isRequired,
-  title: PropTypes.node.isRequired,
 };
 
 export default MainDashBoard;

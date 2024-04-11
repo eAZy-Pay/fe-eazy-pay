@@ -17,21 +17,11 @@ const UserMainComponent = ({ image }) => {
         <div className="flex flex-col items-center gap-8">
           <div className="flex">
             <CardsGage color="#f79042" amount={ben_amount} total={ben_total} />
-            <CardLetter
-              color="#f79042"
-              label="혜택"
-              amount={ben_amount.toLocaleString()}
-              total={ben_total.toLocaleString()}
-            />
+            <CardLetter color="#f79042" label="혜택" amount={ben_amount} total={ben_total} />
           </div>
           <div className="flex">
             <CardsGage color="#70a6e8" amount={per_amount} total={per_total} />
-            <CardLetter
-              color="#70a6e8"
-              label="실적"
-              amount={per_amount.toLocaleString()}
-              total={per_total.toLocaleString()}
-            />
+            <CardLetter color="#70a6e8" label="실적" amount={per_amount} total={per_total} />
           </div>
         </div>
       </div>
