@@ -155,10 +155,13 @@ const MainPage = () => {
   return (
     <>
       <DefaultLayout>
+        <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">eAZy 하게 챙겼어요</div>
+
         <div className="my-4">
           <MainBenefits userMain={userMain} />
         </div>
 
+        <div className="mt-8 text-2xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
         <div>
           {userMain.images.map(
             (image, index) => index !== 0 && <CardPerfomance key={index} image={image} />
