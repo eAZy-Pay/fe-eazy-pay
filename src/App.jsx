@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecommendationPage from './pages/recommendation/RecommendationPage';
+import RegisterPage from './pages/register/RegisterPage';
 
 import MainPage from './pages/main/MainPage';
 
