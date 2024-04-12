@@ -21,3 +21,7 @@ body {
 body * {
   font-family: 'NanumSquare', 'noto-sans', Arial, sans-serif;
 }
+
+div {
+  user-select: none;
+}
