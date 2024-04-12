@@ -1,48 +1,41 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout.jsx';
 import mainLogo from '../../assets/mainLogo.svg';
 import { requestSignIn } from '../../apis/AuthAPI.js';
-import { LoginUserContext } from '../../App.jsx';
 
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [error, setErrorMessage] = useState('');
-  const { loginUser, setLoginUser } = useContext(LoginUserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loginUser?.uid > 0 || sessionStorage.getItem('user').json().uid>0) {
+    if (sessionStorage.getItem('user') !== null) {
       alert('이미 로그인된 상태입니다.');
       navigate('/');
     }
-  }, []);
+  }, [navigate]);
 
   const requestLogin = async (e) => {
     e.preventDefault();
-    await requestSignIn(userName, userPassword).then(
-      (response) => {
-        console.log(response);
-        if (response.status === 'UNAUTHORIZED') {
-          setErrorMessage('유효하지 않은 사용자 이름 또는 비밀번호입니다.');
-          setUserName('');
-          setUserPassword('');
-          return;
-        } else if (response.status === 'OK') {
-          const signedUser = {
-            uid: response.uid,
-            userName: response.userName,
-            isAdmin: response.isAdmin,
-          };
-          setLoginUser(signedUser);
-          sessionStorage.setItem('user',JSON.stringify(signedUser));
-          alert('로그인 완료');
-          navigate('/');
-        }
-      },
-      [navigate]
-    );
+    await requestSignIn(userName, userPassword).then((response) => {
+      if (response.status === 'UNAUTHORIZED') {
+        setErrorMessage('유효하지 않은 사용자 이름 또는 비밀번호입니다.');
+        setUserName('');
+        setUserPassword('');
+        return;
+      } else if (response.status === 'OK') {
+        const signedUser = {
+          uid: response.uid,
+          userName: response.userName,
+          isAdmin: response.isAdmin,
+        };
+        sessionStorage.setItem('user', JSON.stringify(signedUser));
+        alert('로그인 완료');
+        navigate('/');
+      }
+    });
   };
   return (
     <>

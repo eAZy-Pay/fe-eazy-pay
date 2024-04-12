@@ -1,7 +1,11 @@
 const BASE_URL = 'http://localhost:3030';
 
 export const requestSignIn = async (userName, userPassword) => {
-  const queryParams = new URLSearchParams({ userName, userPassword }).toString();
+  const queryParams = new URLSearchParams({
+    user_name : userName,
+    user_password : userPassword,
+  }).toString();
+
   const data = (
     await fetch(`${BASE_URL}/login`, {
       method: 'POST',
