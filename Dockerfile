@@ -12,8 +12,12 @@ RUN npm install
 # 프로젝트 파일 복사
 COPY . .
 
+# 빌드에 필요한 환경변수 설정
+ARG VITE_LOCAL_URL
+ENV VITE_LOCAL_URL=${VITE_LOCAL_URL}
+
 # 프로젝트 빌드
-RUN VITE_LOCAL_URL=${env.VITE_LOCAL_URL}
+RUN npm run build
 
 # 실행 스테이지
 FROM nginx:stable-alpine AS runtime
