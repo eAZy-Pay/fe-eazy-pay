@@ -145,6 +145,7 @@ const omakase = {
 const MainPage = () => {
   const navigate = useNavigate();
   const [checkedIndex, setcheckedIndex] = useState(0);
+  const [user, setUser] = useState(sessionStorage.getItem('user'));
   const handleLegendClick = (seriesIndex) => {
     // if (checkedIndex === seriesIndex) {
     //   setcheckedIndex(-1);
@@ -154,15 +155,23 @@ const MainPage = () => {
     setcheckedIndex(seriesIndex);
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     if (sessionStorage.getItem('user') == null) {
       navigate('/');
     }
-  },)
+  }, [user]);
   return (
     <>
       <DefaultLayout>
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            setUser(sessionStorage.removeItem('user'));
+            alert('로그아웃 되었습니다.');
+          }}
+        >
+          로그아웃
+        </div>
         <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">eAZy 하게 챙겼어요</div>
 
         <div className="my-4">
