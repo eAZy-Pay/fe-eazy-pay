@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # 프로젝트 빌드
-RUN npm run build
+RUN VITE_LOCAL_URL=${env.VITE_LOCAL_URL}
 
 # 실행 스테이지
 FROM nginx:stable-alpine AS runtime
