@@ -32,7 +32,6 @@ const LoginPage = () => {
           isAdmin: response.isAdmin,
         };
         sessionStorage.setItem('user', JSON.stringify(signedUser));
-        alert('로그인 완료');
         navigate('/');
       }
     });
