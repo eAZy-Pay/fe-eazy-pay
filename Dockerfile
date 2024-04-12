@@ -12,6 +12,10 @@ RUN npm install
 # 프로젝트 파일 복사
 COPY . .
 
+# 빌드에 필요한 환경변수 설정
+ARG VITE_LOCAL_URL
+ENV VITE_LOCAL_URL=${VITE_LOCAL_URL}
+
 # 프로젝트 빌드
 RUN npm run build
 
