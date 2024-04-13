@@ -6,45 +6,60 @@ import { useState } from 'react';
 import EazyPayRegisterForm from './EazyPayRegisterForm';
 import CardAuthenticationForm from './CardAuthenticationForm';
 import PinForm from './PinForm';
+import LoadData from './LoadData';
+import { submitAllData } from '../../apis/RegisterAPI';
 
 const RegisterPage = () => {
   const [stepperIndex, setStepperIndex] = useState(0);
-  const [eazyRegData, setEazyRegData] = useState({ name: '', id: '', pw1: '', pw2: '' });
-  const [cardAuthData, setCardAuthData] = useState({ name: '', birth: '', mobile: '', email: '' });
-  const [pinData, setPinData] = useState({ pin1: '', pin2: '' });
+  const [loading, setLoading] = useState(false); // 로딩 중인 상태에만 true
+  const [dataLoaded, setDataLoaded] = useState(false); // 데이터 로드가 완료되면 true
+  const [name, setName] = useState('');
+  const [birth, setBirth] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const [pin, setPin] = useState('');
 
-  const submitAllData = async () => {
-    const allData = {
-      eazyReg: eazyRegData,
-      cardAuth: cardAuthData,
-      pin: pinData,
-    };
-
-    try {
-      const response = await fetch('YOUR_BACKEND_ENDPOINT', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(allData),
-      });
-      if (!response.ok) {
-        throw new Error('Server error');
-      }
-      // 요청 성공 처리 로직 (예: 상태 초기화, 사용자에게 성공 알림 등)
-    } catch (error) {
-      // 에러 처리 로직
-    }
+  // 데이터 로딩이 완료되었을 때 loading 변수의 상태를 false로 변경
+  const handleDataLoaded = () => {
+    setLoading(false);
+    setDataLoaded(true);
   };
 
+  // 다음 버튼 클릭 로직
   const handleNext = () => {
     if (stepperIndex === 3) {
-      console.log(cardAuthData.birth);
-      submitAllData();
-      setStepperIndex(4);
+      regInfoSubmit({ name, birth, phoneNumber, email, id, pw, pin });
     } else {
       setStepperIndex((prevStepperIndex) => prevStepperIndex + 1);
     }
+  };
+
+  const regInfoSubmit = async () => {
+    // API를 호출하고 응답을 처리합니다.
+    try {
+      const data = await submitAllData({ name, birth, phoneNumber, email, id, pw, pin });
+      console.log('Registration Success:', data);
+    } catch (error) {
+      console.error('Registration Failed:', error);
+    }
+  };
+
+  // 다음 버튼의 활성화/비활성화 조건 설정. true일 때 비활성화
+  const isButtonDisabled = () => {
+    if (stepperIndex === 1) {
+      return !(name && birth && phoneNumber && email); // 모든 필드가 비어 있지 않아야 true
+    }
+    if (stepperIndex === 2) {
+      return !(id && pw); // 모든 필드가 비어 있지 않아야 true
+    }
+
+    if (stepperIndex === 3) {
+      return pin.length !== 6;
+    }
+
+    return false;
   };
 
   return (
@@ -54,24 +69,33 @@ const RegisterPage = () => {
         <p className="text-base font-semibold text-slate-600 mb-10">
           세상에서 가장 쉽고 편리한 결제
         </p>
-
         <div className="flex items-start w-full">
           <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
+
           {stepperIndex === 0 && <AgreementForm />}
-          {stepperIndex === 1 && <EazyPayRegisterForm onEazyRegDataChange={setEazyRegData} />}
-          {stepperIndex === 2 && <CardAuthenticationForm onCardAuthDataChange={setCardAuthData} />}
-          {stepperIndex === 3 && <PinForm onPinDataChange={setPinData} />}
-          {stepperIndex === 4 && <AgreementForm />}
+          {stepperIndex === 1 && (
+            <CardAuthenticationForm
+              setName={setName}
+              setBirth={setBirth}
+              setPhoneNumber={setPhoneNumber}
+              setEmail={setEmail}
+            />
+          )}
+          {stepperIndex === 2 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
+          {stepperIndex === 3 && <PinForm setValidPin={setPin} />}
+          {stepperIndex === 4 && <LoadData onLoadingComplete={handleDataLoaded} />}
         </div>
 
-        {/* StepperIndex === 3 일 때 다음 버튼 누르면 spring으로 값 날아가게 */}
-        <button
-          className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg
-         hover:bg-blue-700 transition duration-300"
-          onClick={handleNext}
-        >
-          {stepperIndex === 3 ? '제출' : '다음'}
-        </button>
+        {/*  로딩 중이 아닐 때만 버튼을 렌더링 */}
+        {!loading && (dataLoaded || stepperIndex < 4) && (
+          <button
+            className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+            onClick={handleNext}
+            disabled={isButtonDisabled()}
+          >
+            {stepperIndex === 3 ? '가입' : '다음'}
+          </button>
+        )}
       </div>
     </DefaultLayout>
   );

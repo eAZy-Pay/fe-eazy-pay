@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
@@ -14,10 +13,10 @@ const steps = [
     label: '약관에 동의해주세요',
   },
   {
-    label: '이지페이에 가입해주세요',
+    label: '우리카드 회원 인증을 해주세요',
   },
   {
-    label: '우리카드 인증을 해주세요',
+    label: '이지페이에 가입해주세요',
   },
   {
     label: 'pin 번호를 등록해주세요',

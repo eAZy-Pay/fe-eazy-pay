@@ -1,20 +1,35 @@
-// import * as React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-// props로 상태 변경 함수(onPinsChange)를 받도록 수정
-const PinForm = ({ onPinDataChange }) => {
-  // pin1과 pin2 값을 관리하기 위한 상태
-  const [pinData, setPinData] = useState({ pin1: '', pin2: '' });
+const PinForm = ({ setValidPin }) => {
+  const [pin, setPin] = useState('');
+  const [pinCheck, setPinCheck] = useState('');
+  const [error, setError] = useState('');
+  const [errorCheck, setErrorCheck] = useState('');
 
-  // TextField에서 값이 변경될 때 호출되는 핸들러
-  const handleChange = (pinNumber) => (event) => {
-    const newPinData = { ...pinData, [pinNumber]: event.target.value };
-    setPinData(newPinData); // 상태를 업데이트
-    onPinDataChange(newPinData); // 부모 컴포넌트에 변경 사항을 전달
+  const handlePinChange = (event) => {
+    const newPin = event.target.value;
+    setPin(newPin);
+    if (newPin.length !== 6) {
+      setError('pin 번호를 6자리로 입력해주세요');
+    } else {
+      setError('');
+    }
   };
+
+  const handlePinCheckChange = (event) => {
+    const newPinCheck = event.target.value;
+    setPinCheck(newPinCheck);
+    if (pin !== newPinCheck) {
+      setErrorCheck('pin 번호가 일치하지 않습니다.');
+    } else {
+      setErrorCheck('');
+      setValidPin(pin);
+    }
+  };
+
   return (
     <div className="flex ml-48">
       <div className="flex flex-col bg-white">
@@ -27,11 +42,13 @@ const PinForm = ({ onPinDataChange }) => {
           autoComplete="off"
         >
           <TextField
-            id="pin1"
+            id="pin"
             label="pin 번호 입력"
             variant="outlined"
-            value={pinData.pin1} // TextField의 값으로 pinData 객체의 pin1을 사용
-            onChange={handleChange('pin1')} // 값이 변경될 때마다 handleChange를 호출
+            value={pin}
+            onChange={handlePinChange}
+            error={!!error}
+            helperText={error ? error : ''}
           />
         </Box>
         <Box
@@ -43,11 +60,13 @@ const PinForm = ({ onPinDataChange }) => {
           autoComplete="off"
         >
           <TextField
-            id="pin2"
+            id="pinCheck"
             label="pin 번호 다시 입력"
             variant="outlined"
-            value={pinData.pin2}
-            onChange={handleChange('pin2')}
+            value={pinCheck}
+            onChange={handlePinCheckChange}
+            error={!!errorCheck}
+            helperText={errorCheck ? errorCheck : ''}
           />
         </Box>
       </div>
@@ -56,6 +75,6 @@ const PinForm = ({ onPinDataChange }) => {
 };
 
 PinForm.propTypes = {
-  onPinDataChange: PropTypes.func.isRequired,
+  setValidPin: PropTypes.func.isRequired,
 };
 export default PinForm;
