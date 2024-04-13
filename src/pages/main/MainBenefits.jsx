@@ -16,9 +16,9 @@ const MainBenefits = ({ userMain }) => {
             </div>
           </div>
 
-          <div className="mx-5 flex-end relative top-0 mt-[8rem] self-bottom">
-            <span className="text-5xl font-black text-blue-700 relative right-0">
-              {userMain.benefitAmount}
+          <div className="mx-5 flex-end relative top-0 mt-[8rem] self-bottom right-10">
+            <span className="text-5xl font-black text-blue-700 relative">
+              {userMain.benefitAmount.toLocaleString()}
             </span>
             <span className="text-3xl">원</span>
           </div>
