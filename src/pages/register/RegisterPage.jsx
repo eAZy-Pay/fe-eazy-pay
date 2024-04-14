@@ -8,9 +8,10 @@ import CardAuthenticationForm from './CardAuthenticationForm';
 import PinForm from './PinForm';
 import LoadData from './LoadData';
 import { submitAllData } from '../../apis/RegisterAPI';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
-  const [stepperIndex, setStepperIndex] = useState(0);
+  const [stepperIndex, setStepperIndex] = useState(4);
   const [loading, setLoading] = useState(false); // 로딩 중인 상태에만 true
   const [dataLoaded, setDataLoaded] = useState(false); // 데이터 로드가 완료되면 true
   const [name, setName] = useState('');
@@ -21,6 +22,8 @@ const RegisterPage = () => {
   const [pw, setPw] = useState('');
   const [pin, setPin] = useState('');
 
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수를 가져옵니다.
+
   // 데이터 로딩이 완료되었을 때 loading 변수의 상태를 false로 변경
   const handleDataLoaded = () => {
     setLoading(false);
@@ -29,8 +32,11 @@ const RegisterPage = () => {
 
   // 다음 버튼 클릭 로직
   const handleNext = () => {
+    console.log(`stepperIndex : ${stepperIndex}`);
     if (stepperIndex === 3) {
       regInfoSubmit({ name, birth, phoneNumber, email, id, pw, pin });
+    } else if (stepperIndex === 4) {
+      navigate('/');
     } else {
       setStepperIndex((prevStepperIndex) => prevStepperIndex + 1);
     }
@@ -49,10 +55,10 @@ const RegisterPage = () => {
   // 다음 버튼의 활성화/비활성화 조건 설정. true일 때 비활성화
   const isButtonDisabled = () => {
     if (stepperIndex === 1) {
-      return !(name && birth && phoneNumber && email); // 모든 필드가 비어 있지 않아야 true
+      return !(name && birth && phoneNumber && email);
     }
     if (stepperIndex === 2) {
-      return !(id && pw); // 모든 필드가 비어 있지 않아야 true
+      return !(id && pw);
     }
 
     if (stepperIndex === 3) {
