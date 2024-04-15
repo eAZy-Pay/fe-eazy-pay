@@ -20,13 +20,13 @@ const NavBar = () => {
         <Link to="/card-recommend" className="text-lg md:text-xl font-bold">
           카드추천
         </Link>
-        <Link to="/" className="text-lg md:text-xl font-bold">
+        <Link to="/card-search" className="text-lg md:text-xl font-bold">
           카드검색
         </Link>
-        <Link to="/" className="text-lg md:text-xl font-bold">
-          결제
+        <Link to="/shopping" className="text-lg md:text-xl font-bold">
+          쇼핑
         </Link>
-        <Link to="/" className="text-lg md:text-xl font-bold">
+        <Link to="/mypage" className="text-lg md:text-xl font-bold">
           마이
         </Link>
         <img src={BellIcon} alt="Notifications" className="w-8 h-8" />
