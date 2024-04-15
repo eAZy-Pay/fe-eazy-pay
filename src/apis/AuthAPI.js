@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_LOCAL_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const requestSignIn = async (userName, userPassword) => {
   const queryParams = new URLSearchParams({
