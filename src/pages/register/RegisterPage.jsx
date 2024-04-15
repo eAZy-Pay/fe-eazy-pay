@@ -11,15 +11,15 @@ import { submitAllData } from '../../apis/RegisterAPI';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
-  const [stepperIndex, setStepperIndex] = useState(4);
+  const [stepperIndex, setStepperIndex] = useState(0);
   const [loading, setLoading] = useState(false); // 로딩 중인 상태에만 true
   const [dataLoaded, setDataLoaded] = useState(false); // 데이터 로드가 완료되면 true
   const [name, setName] = useState('');
-  const [birth, setBirth] = useState('');
+  const [birthday, setBirth] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
+  const [password, setPw] = useState('');
   const [pin, setPin] = useState('');
 
   const navigate = useNavigate(); // useNavigate 훅을 사용하여 navigate 함수를 가져옵니다.
@@ -34,7 +34,7 @@ const RegisterPage = () => {
   const handleNext = () => {
     console.log(`stepperIndex : ${stepperIndex}`);
     if (stepperIndex === 3) {
-      regInfoSubmit({ name, birth, phoneNumber, email, id, pw, pin });
+      regInfoSubmit({ name, id, password, email, phoneNumber, birthday, pin });
     } else if (stepperIndex === 4) {
       navigate('/');
     } else {
@@ -45,7 +45,7 @@ const RegisterPage = () => {
   const regInfoSubmit = async () => {
     // API를 호출하고 응답을 처리합니다.
     try {
-      const data = await submitAllData({ name, birth, phoneNumber, email, id, pw, pin });
+      const data = await submitAllData({ name, id, password, email, phoneNumber, birthday, pin });
       console.log('Registration Success:', data);
     } catch (error) {
       console.error('Registration Failed:', error);
@@ -55,10 +55,10 @@ const RegisterPage = () => {
   // 다음 버튼의 활성화/비활성화 조건 설정. true일 때 비활성화
   const isButtonDisabled = () => {
     if (stepperIndex === 1) {
-      return !(name && birth && phoneNumber && email);
+      return !(name && birthday && phoneNumber && email);
     }
     if (stepperIndex === 2) {
-      return !(id && pw);
+      return !(id && password);
     }
 
     if (stepperIndex === 3) {
