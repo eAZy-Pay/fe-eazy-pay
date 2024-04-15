@@ -1,21 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import MainBenefits from './MainBenefits';
-import eazy from '../../assets/eAZyCard.svg';
 import CardCategorySearch from '../recommendation/CardCategorySearch';
-import CardPerfomance from '../main/CardPerformance';
-
-const userMain = {
-  userName: '박선주',
-  images: [
-    eazy,
-    'https://pc.wooricard.com/webcontent/cdPrdImgFileList/2023/7/17/e7b88886-8706-4bfd-be01-29ec5a77fd19.gif',
-    'https://pc.wooricard.com/webcontent/cdPrdImgFileList/2024/2/21/1fa0a89f-0811-43b1-9c24-a4bb8bf750f4.png',
-    'https://pc.wooricard.com/webcontent/cdPrdImgFileList/2023/7/17/bfee31ee-d644-4bc8-bbdb-1a4f78eb231c.gif',
-  ],
-  benefitAmount: 200000,
-};
+import MainBanner from './MainBanner';
 
 const omakase = {
   data: [
@@ -154,27 +141,19 @@ const MainPage = () => {
     setcheckedIndex(seriesIndex);
   };
 
-
-  useEffect(()=>{
-    if (sessionStorage.getItem('user') == null) {
-      navigate('/');
-    }
-  },)
   return (
-    <>
-      <DefaultLayout>
-        <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">eAZy 하게 챙겼어요</div>
-
-        <div className="my-4">
-          <MainBenefits userMain={userMain} />
+    <><div
+          className="cursor-pointer"
+          onClick={() => {
+            sessionStorage.removeItem('user');
+            alert('로그아웃 되었습니다.');
+            navigate('/');
+          }}
+        >
+          로그아웃
         </div>
-
-        <div className="mt-8 text-2xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
-        <div>
-          {userMain.images.map(
-            (image, index) => index !== 0 && <CardPerfomance key={index} image={image} />
-          )}
-        </div>
+      <DefaultLayout banner={<MainBanner />}>
+        
 
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
