@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3030';
+const BASE_URL = import.meta.env.VITE_LOCAL_URL;
 
 export const requestSignIn = async (userName, userPassword) => {
   const queryParams = new URLSearchParams({
