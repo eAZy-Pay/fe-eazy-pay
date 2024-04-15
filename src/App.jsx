@@ -13,9 +13,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<MainPage />} />
         <Route path="/card-recommend" element={<RecommendationPage />} />
-        <Route path="card-search" element={<CardSearchPage />} />
-        <Route path="shopping" element={<ShoppingPage />} />
-        <Route path="mypage" element={<MyPage />} />
+        <Route path="/card-search" element={<CardSearchPage />} />
+        <Route path="/shopping" element={<ShoppingPage />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </Router>
   );
