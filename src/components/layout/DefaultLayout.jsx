@@ -1,11 +1,11 @@
 import NavBar from './NavBar';
 import PropTypes from 'prop-types';
 
-const DefaultLayout = ({ children, banner = <></> }) => {
+const DefaultLayout = ({ children, banner = <></>, showNavBar = true }) => {
   return (
     <div className="flex flex-col items-center w-screen">
       <div className="flex flex-col w-full max-w-screen-xl">
-        <NavBar />
+        {showNavBar && <NavBar />}
         {banner}
         <div>{children}</div>
       </div>
@@ -16,6 +16,7 @@ const DefaultLayout = ({ children, banner = <></> }) => {
 DefaultLayout.propTypes = {
   children: PropTypes.node.isRequired,
   banner: PropTypes.node,
+  showNavBar: PropTypes.bool,
 };
 
 export default DefaultLayout;

@@ -142,19 +142,18 @@ const MainPage = () => {
   };
 
   return (
-    <><div
-          className="cursor-pointer"
-          onClick={() => {
-            sessionStorage.removeItem('user');
-            alert('로그아웃 되었습니다.');
-            navigate('/');
-          }}
-        >
-          로그아웃
-        </div>
+    <>
+      <div
+        className="cursor-pointer"
+        onClick={() => {
+          sessionStorage.removeItem('user');
+          alert('로그아웃 되었습니다.');
+          navigate('/');
+        }}
+      >
+        로그아웃
+      </div>
       <DefaultLayout banner={<MainBanner />}>
-        
-
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
         <CardCategorySearch
