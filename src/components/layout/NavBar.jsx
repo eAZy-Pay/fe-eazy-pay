@@ -1,10 +1,16 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import DropdownMenu from './DropDownMenu';
 
 import MainLogo from '../../assets/mainLogo.svg';
 import MenuIcon from '../../assets/menuIcon.svg';
 import BellIcon from '../../assets/bellIcon.svg';
 
 const NavBar = () => {
+  // 드롭다운바 열림/닫힘 상태 관리
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <div className="flex w-full h-20 items-center">
       <Link to="/">
@@ -21,10 +27,18 @@ const NavBar = () => {
           결제
         </Link>
         <Link to="/" className="text-lg md:text-xl font-bold">
-          문의
+          마이
         </Link>
         <img src={BellIcon} alt="Notifications" className="w-8 h-8" />
-        <img src={MenuIcon} alt="Menu" className="w-8 h-8" />
+        <div className="relative">
+          <img
+            src={MenuIcon}
+            alt="Menu"
+            className="w-8 h-8 cursor-pointer"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          />
+          <DropdownMenu isOpen={isDropdownOpen} />
+        </div>
       </div>
     </div>
   );
