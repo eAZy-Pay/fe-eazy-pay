@@ -8,6 +8,7 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
   const [id, setLocalId] = useState('');
   const [pw, setPwLocal] = useState('');
   const [checkPw, setCheckPw] = useState('');
+  const [successId, setSuccessId] = useState('');
   const [errorId, setErrorId] = useState('');
   const [errorPw, setErrorPw] = useState('');
   const [errorCheckPw, setErrorCheckPw] = useState('');
@@ -16,7 +17,7 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
     const newId = event.target.value;
     setLocalId(newId);
     if (newId.length < 2) {
-      setErrorId('이름은 2글자 이상이어야 합니다');
+      setErrorId('아이디는 2글자 이상이어야 합니다');
     } else {
       setErrorId('');
     }
@@ -82,13 +83,13 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
               variant="outlined"
               onChange={handleIdChange}
               error={!!errorId}
-              helperText={errorId ? errorId : ''}
+              helperText={errorId || successId}
             />
           </Box>
           <button
             className="py-1 px-4 bg-blue-100 text-[#808388] font-semibold rounded-lg 
           hover:bg-blue-300 transition duration-300"
-            onClick={() => checkId(id, setId)}
+            onClick={() => checkId(id, setId, setSuccessId, setErrorId)}
           >
             중복 확인
           </button>
