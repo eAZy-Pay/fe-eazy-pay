@@ -55,6 +55,7 @@ const RecommendationPage = () => {
           description="검색하러 가기"
           imageSrc={SearchImg}
         />
+        <CategoryCards categoryCards={categoryCards} />
       </DefaultLayout>
     </>
   );

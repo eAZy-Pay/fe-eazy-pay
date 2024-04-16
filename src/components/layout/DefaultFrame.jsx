@@ -20,8 +20,8 @@ const DefaultFrame = ({ children, boxShadow = true, className }) => {
 
 DefaultFrame.propTypes = {
   children: PropTypes.node.isRequired,
-  boxShadow: PropTypes.bool.isRequired,
-  className: PropTypes.string.isRequired,
+  boxShadow: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default DefaultFrame;
