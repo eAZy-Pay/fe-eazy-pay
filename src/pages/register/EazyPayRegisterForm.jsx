@@ -2,9 +2,10 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { checkId } from '../../apis/CheckId';
 
 const EazyPayRegisterForm = ({ setId, setPw }) => {
-  // 다음 버튼을 비활성화, pw1 == pw2 같을 때, id가 있을 때, pw 제한이 다 맞을 때 활성화
+  const [id, setLocalId] = useState('');
   const [pw, setPwLocal] = useState('');
   const [checkPw, setCheckPw] = useState('');
   const [errorId, setErrorId] = useState('');
@@ -12,12 +13,12 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
   const [errorCheckPw, setErrorCheckPw] = useState('');
 
   const handleIdChange = (event) => {
-    const id = event.target.value;
-    if (id.length < 2) {
-      // setErrorName('이름은 2글자 이상이어야 합니다');
+    const newId = event.target.value;
+    setLocalId(newId);
+    if (newId.length < 2) {
+      setErrorId('이름은 2글자 이상이어야 합니다');
     } else {
       setErrorId('');
-      setId(id);
     }
   };
 
@@ -66,23 +67,32 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
   return (
     <div className="flex ml-48">
       <div className="flex flex-col bg-white">
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '30ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="id"
-            label="아이디"
-            variant="outlined"
-            onChange={handleIdChange}
-            error={!!errorId}
-            helperText={errorId ? errorId : ''}
-          />
-        </Box>
+        <div className="flex items-center space-x-2 my-1">
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '30ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="id"
+              label="아이디"
+              variant="outlined"
+              onChange={handleIdChange}
+              error={!!errorId}
+              helperText={errorId ? errorId : ''}
+            />
+          </Box>
+          <button
+            className="py-1 px-4 bg-blue-100 text-[#808388] font-semibold rounded-lg 
+          hover:bg-blue-300 transition duration-300"
+            onClick={() => checkId(id, setId)}
+          >
+            중복 확인
+          </button>
+        </div>
 
         <Box
           component="form"
@@ -127,10 +137,6 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
         {/* 
         <div className="flex flex-col items-center space-y-4 mb-6">
           <p className="text-xs text-black">아이디와 생년월일은 비밀번호로 사용할 수 없어요</p>
-        </div>
-
-        <div className="flex flex-col items-center space-y-4 mb-6">
-          <p className="text-base text-[#f00]">다른 아이디를 입력해주세요</p>
         </div> */}
       </div>
     </div>
