@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import CreditCard from '../../components/card/CreditCard';
 
 const CardCategorySearch = ({
-  data,
+  categories,
   categoryCards,
   handleLegendClick,
   checkedIndex,
@@ -51,7 +51,7 @@ const CardCategorySearch = ({
   return (
     <>
       <div className="flex gap-4 text-2xl font-bold text-left mt-8 mb-4">
-        {data.map((item, index) => makeSelectCategory(index, item.categoryName))}
+        {categories.map((item, index) => makeSelectCategory(index, item.categoryName))}
       </div>
       {makeRecommendation()}
     </>
@@ -59,7 +59,7 @@ const CardCategorySearch = ({
 };
 
 CardCategorySearch.propTypes = {
-  data: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   categoryCards: PropTypes.array.isRequired,
   handleLegendClick: PropTypes.func.isRequired,
   checkedIndex: PropTypes.number.isRequired,
