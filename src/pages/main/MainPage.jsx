@@ -138,7 +138,7 @@ const MainPage = () => {
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
         <HashTagSearch
-          hashtags={omakase.data}
+          tags={omakase.data}
           checkedIndex={checkedIndex}
           setCheckedIndex={setcheckedIndex}
         />
