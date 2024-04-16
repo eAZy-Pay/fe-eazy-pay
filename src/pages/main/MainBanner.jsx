@@ -34,7 +34,7 @@ const MainBanner = () => {
     } else {
       navigate('/');
     }
-  }, []);
+  }, [navigate]);
   return (
     <>
       {/* 로그인 상태인 경우 */}
