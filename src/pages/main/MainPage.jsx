@@ -157,7 +157,7 @@ const MainPage = () => {
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
         <CardCategorySearch
-          data={omakase.data}
+          categorys={omakase.data}
           categoryCards={omakase.data[checkedIndex].cards}
           handleLegendClick={handleLegendClick}
           checkedIndex={checkedIndex}
