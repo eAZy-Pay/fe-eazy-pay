@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import eazy from '../../assets/eAZyCard.svg';
 import OverlappedCard from '../../assets/overlappedCard.png';
 import MainBenefits from './MainBenefits';
@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { getMainBanner } from '../../apis/CardAPI';
 
 const MainBanner = () => {
+  const navigate = useNavigate();
   const [userMain, setUserMain] = useState({
     userName: '김이지',
     images: [eazy],
@@ -30,8 +31,10 @@ const MainBanner = () => {
           cards: res.cards,
         }));
       });
+    } else {
+      navigate('/');
     }
-  }, []);
+  }, [navigate]);
   return (
     <>
       {/* 로그인 상태인 경우 */}
