@@ -1,10 +1,10 @@
-//simport React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileIcon from '../../assets/profileIcon.svg';
 import CardIcon from '../../assets/cardIcon.svg';
 import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
+import PropTypes from 'prop-types';
 
 const DropdownMenu = ({ isOpen }) => {
   return (

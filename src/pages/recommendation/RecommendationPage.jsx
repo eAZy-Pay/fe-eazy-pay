@@ -41,7 +41,7 @@ const RecommendationPage = () => {
         }
       >
         <CardCategorySearch
-          data={monthlyFor6}
+          categorys={monthlyFor6}
           categoryCards={categoryCards}
           handleLegendClick={handleLegendClick}
           checkedIndex={checkedIndex}
