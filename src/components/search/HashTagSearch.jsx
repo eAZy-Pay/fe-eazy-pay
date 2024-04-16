@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 /**
+
  * 해시태그 검색 Component
  *
  * @param {Array} tags - 해시태그 목록

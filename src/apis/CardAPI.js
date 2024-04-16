@@ -4,3 +4,15 @@ export const getCategoryCards = async (categoryId) => {
   const response = await fetch(`${BASE_URL}/api/cards?category_id=${categoryId}`);
   return await response.json();
 };
+
+export const getMainBanner = async (userId) => {
+  const requestBody = JSON.stringify(userId);
+  const response = await fetch(`${BASE_URL}/api/cards/main-banner`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: requestBody,
+  });
+  return await response.json();
+};
