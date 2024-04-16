@@ -28,7 +28,7 @@ const LoginPage = () => {
       } else if (response.status === 'OK') {
         const signedUser = {
           uid: response.uid,
-          userName: response.userName,
+          userName: response.name,
           isAdmin: response.isAdmin,
         };
         sessionStorage.setItem('user', JSON.stringify(signedUser));
