@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import CardCategorySearch from '../recommendation/CardCategorySearch';
+import HashTagSearch from '../../components/search/HashTagSearch';
+import CategoryCards from '../../components/category/CategoryCards';
 import MainBanner from './MainBanner';
 
 const omakase = {
@@ -132,14 +133,6 @@ const omakase = {
 const MainPage = () => {
   const navigate = useNavigate();
   const [checkedIndex, setcheckedIndex] = useState(0);
-  const handleLegendClick = (seriesIndex) => {
-    // if (checkedIndex === seriesIndex) {
-    //   setcheckedIndex(-1);
-    // } else {
-    //   setcheckedIndex(seriesIndex);
-    // }
-    setcheckedIndex(seriesIndex);
-  };
 
   return (
     <>
@@ -156,11 +149,13 @@ const MainPage = () => {
       <DefaultLayout banner={<MainBanner />}>
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
-        <CardCategorySearch
-          categories={omakase.data}
-          categoryCards={omakase.data[checkedIndex].cards}
-          handleLegendClick={handleLegendClick}
+        <HashTagSearch
+          hashtags={omakase.data}
           checkedIndex={checkedIndex}
+          setCheckedIndex={setcheckedIndex}
+        />
+        <CategoryCards
+          categoryCards={omakase.data[checkedIndex].cards}
           maxColumn={5}
           maxRow={1}
           showInfo={false}
