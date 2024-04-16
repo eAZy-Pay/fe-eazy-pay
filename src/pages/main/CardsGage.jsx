@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const CardsGage = ({ color, amount = 0, total = 1 }) => {
+const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' ' }) => {
   const [width, setWidth] = useState('0%'); // 초기 width 상태를 0%로 설정
 
   useEffect(() => {
@@ -14,11 +14,11 @@ const CardsGage = ({ color, amount = 0, total = 1 }) => {
   }, [amount, total]);
 
   return (
-    <div className="flex items-center ml-36 space-x-4 w-[378px]">
-      <div className="w-full h-[1.5rem] rounded-[1.7rem] bg-[#115]/40 overflow-hidden relative">
+    <div className={`flex justify-center items-center ${margin} space-x-4 w-[23.6rem]`}>
+      <div className={`${width} h-[1.5em] rounded-[1.7em] bg-[#115]/40 overflow-hidden relative`}>
         {/* 계산된 백분율을 가로 길이로 설정 */}
         <div
-          className="h-full rounded-[1.7rem] absolute bottom-0 left-0"
+          className="h-full rounded-[1.7em] absolute bottom-0 left-0"
           style={{
             width: width,
             backgroundColor: color,
@@ -34,6 +34,8 @@ CardsGage.propTypes = {
   color: PropTypes.string.isRequired, // 'color' prop이 반드시 문자열이어야 함을 지정합니다.
   amount: PropTypes.number.isRequired, // 'amount' prop이 반드시 숫자여야 함을 지정합니다.
   total: PropTypes.number.isRequired, // 'total' prop이 반드시 숫자여야 함을 지정합니다.
+  width: PropTypes.string.isRequired, // 'width' prop이 문자열이어야 함을 지정합니다.
+  margin: PropTypes.string.isRequired, // 'margin' prop이 문자열이어야 함을 지정합니다.
 };
 
 export default CardsGage;
