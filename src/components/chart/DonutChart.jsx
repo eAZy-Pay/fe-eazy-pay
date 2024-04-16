@@ -105,6 +105,9 @@ const DonutChart = ({ data, handleLegendClick, checkedIndex }) => {
     credits: {
       enabled: false,
     },
+    accessibility: {
+      enabled: false, // 접근성 기능 비활성화
+    },
   };
 
   return (
