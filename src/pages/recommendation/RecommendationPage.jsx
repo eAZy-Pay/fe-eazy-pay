@@ -7,6 +7,8 @@ import useCategoryCards from '../../hooks/useCategoryCards';
 import useUserMonthlyFor6 from '../../hooks/useUserMonthlyFor6';
 import HashTagSearch from '../../components/search/HashTagSearch';
 import CategoryCards from '../../components/category/CategoryCards';
+import SearchImg from '../../assets/searchImg.png';
+import Banner from '../../components/Banner';
 
 const RecommendationPage = () => {
   const [checkedIndex, setcheckedIndex] = useState(0);
@@ -42,11 +44,17 @@ const RecommendationPage = () => {
         }
       >
         <HashTagSearch
-          hashtags={monthlyFor6}
+          tags={monthlyFor6}
           checkedIndex={checkedIndex}
           setCheckedIndex={setcheckedIndex}
         />
         <CategoryCards categoryCards={categoryCards} />
+        <Banner
+          to={'/card-search'}
+          title="찾으시는 카드가 없나요?"
+          description="검색하러 가기"
+          imageSrc={SearchImg}
+        />
       </DefaultLayout>
     </>
   );
