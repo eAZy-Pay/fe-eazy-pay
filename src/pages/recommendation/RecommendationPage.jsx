@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import CardCategorySearch from './CardCategorySearch';
 import DonutChart from '../../components/chart/DonutChart';
 import MainDashBoard from '../../components/layout/MainDashBoard';
 import useCategoryCards from '../../hooks/useCategoryCards';
 import useUserMonthlyFor6 from '../../hooks/useUserMonthlyFor6';
+import HashTagSearch from '../../components/search/HashTagSearch';
+import CategoryCards from '../../components/category/CategoryCards';
 
 const RecommendationPage = () => {
   const [checkedIndex, setcheckedIndex] = useState(0);
@@ -40,12 +41,12 @@ const RecommendationPage = () => {
           />
         }
       >
-        <CardCategorySearch
-          categorys={monthlyFor6}
-          categoryCards={categoryCards}
-          handleLegendClick={handleLegendClick}
+        <HashTagSearch
+          hashtags={monthlyFor6}
           checkedIndex={checkedIndex}
+          setCheckedIndex={setcheckedIndex}
         />
+        <CategoryCards categoryCards={categoryCards} />
       </DefaultLayout>
     </>
   );
