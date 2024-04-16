@@ -50,6 +50,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     const email = event.target.value;
     setEmail(email);
     if (!email.includes('@' && '.')) {
+      // 정규식 - 알파벳최소1글자 + @ + 알파벳최소1글자 + . + 알파벳최소1글자 로 변경!!
       setErrorEmail('정확한 이메일 주소를 입력해주세요');
     } else {
       setErrorEmail('');

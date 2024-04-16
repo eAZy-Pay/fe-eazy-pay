@@ -34,7 +34,7 @@ const RegisterPage = () => {
   const handleNext = () => {
     console.log(`stepperIndex : ${stepperIndex}`);
     if (stepperIndex === 3) {
-      regInfoSubmit({ name, id, password, email, phoneNumber, birthday, pin });
+      regInfoSubmit();
     } else if (stepperIndex === 4) {
       navigate('/');
     } else {
@@ -45,8 +45,8 @@ const RegisterPage = () => {
   const regInfoSubmit = async () => {
     // API를 호출하고 응답을 처리합니다.
     try {
-      const data = await submitAllData({ name, id, password, email, phoneNumber, birthday, pin });
-      console.log('Registration Success:', data);
+      await submitAllData({ name, id, password, email, phoneNumber, birthday, pin });
+      setStepperIndex(4);
     } catch (error) {
       console.error('Registration Failed:', error);
     }
