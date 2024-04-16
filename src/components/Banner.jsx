@@ -37,4 +37,13 @@ Banner.defaultProps = {
   imageAlt: 'Banner Image',
 };
 
+Banner.propTypes = {
+  to: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  imageSrc: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string,
+  bgColor: PropTypes.string,
+};
+
 export default Banner;
