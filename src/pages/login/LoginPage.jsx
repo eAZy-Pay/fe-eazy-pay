@@ -20,7 +20,6 @@ const LoginPage = () => {
   const requestLogin = async (e) => {
     e.preventDefault();
     await requestSignIn(userName, userPassword).then((response) => {
-      console.log(response); // 이 부분을 추가해서 실제 응답을 확인해보자
       if (response.status === 'UNAUTHORIZED') {
         setErrorMessage('유효하지 않은 사용자 이름 또는 비밀번호입니다.');
         setUserName('');
