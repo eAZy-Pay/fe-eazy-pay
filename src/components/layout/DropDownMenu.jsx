@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ProfileIcon from '../../assets/profileIcon.svg';
 import CardIcon from '../../assets/cardIcon.svg';
 import LogoutIcon from '../../assets/logoutIcon.svg';
