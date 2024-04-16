@@ -1,5 +1,5 @@
 // import React from "react"; // React 17 이전의 경우 필요
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const CardsGage = ({ color, amount = 0, total = 1 }) => {
@@ -12,7 +12,6 @@ const CardsGage = ({ color, amount = 0, total = 1 }) => {
     const animationTimeout = setTimeout(() => setWidth(`${percentage}%`), 0);
     return () => clearTimeout(animationTimeout);
   }, [amount, total]);
-
 
   return (
     <div className="flex items-center ml-36 space-x-4 w-[378px]">
