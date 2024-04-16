@@ -7,12 +7,11 @@ export const requestSignIn = async (userName, userPassword) => {
   }).toString();
 
   const data = (
-    await fetch(`${BASE_URL}/login`, {
-      method: 'POST',
+    await fetch(`${BASE_URL}/login?${queryParams}`, {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
-      body: queryParams,
     })
   ).json();
   return data;
