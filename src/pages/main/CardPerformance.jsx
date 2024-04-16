@@ -16,11 +16,11 @@ const UserMainComponent = ({ image }) => {
         <RotatedCard image={image} />
         <div className="flex flex-col items-center gap-8">
           <div className="flex">
-            <CardsGage color="#f79042" amount={ben_amount} total={ben_total} />
+            <CardsGage color="#f79042" amount={ben_amount} total={ben_total} margin="ml-36" />
             <CardLetter color="#f79042" label="혜택" amount={ben_amount} total={ben_total} />
           </div>
           <div className="flex">
-            <CardsGage color="#70a6e8" amount={per_amount} total={per_total} />
+            <CardsGage color="#70a6e8" amount={per_amount} total={per_total} margin="ml-36" />
             <CardLetter color="#70a6e8" label="실적" amount={per_amount} total={per_total} />
           </div>
         </div>

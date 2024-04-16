@@ -1,9 +1,9 @@
 // import React from "react";
 import PropTypes from 'prop-types';
 
-const CardLetter = ({ color, label, amount, total }) => {
+const CardLetter = ({ color = '', label = '', amount = 0, total = 0 }) => {
   return (
-    <div className="ml-8">
+    <div className="ml-8 flex justify-center">
       <div className="flex items-start">
         <div className="font-semibold text-[#bfbdbd] mr-4">
           <div
