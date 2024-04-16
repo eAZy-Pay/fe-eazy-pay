@@ -8,7 +8,7 @@ export const checkId = async (id, setId) => {
     if (response.status === 200) {
       setId(id);
       alert('이 아이디를 사용할 수 있어요');
-    } else if (response.status === 555) {
+    } else if (response.status === 409) {
       alert('이미 사용 중인 아이디예요');
     }
   } catch (error) {
