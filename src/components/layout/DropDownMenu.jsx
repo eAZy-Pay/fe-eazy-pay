@@ -19,8 +19,8 @@ const DropdownMenu = ({ isOpen }) => {
           <>
             <div className="cursor-pointer flex justify-center py-6 gap-4">
               <img src={ProfileIcon} alt="Profile Icon" />
-              <div className="flex items-center text-3xl text-left">
-                {JSON.parse(sessionStorage.getItem('user')).userName} 님
+              <div className="flex items-center text-xl text-left">
+                {JSON.parse(user).userName} 님
               </div>
             </div>
             <hr className="bg-gray-300 w-[85%] mb-3 " />
