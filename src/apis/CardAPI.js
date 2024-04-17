@@ -14,5 +14,11 @@ export const getMainBanner = async (userId) => {
     },
     body: requestBody,
   });
+
+  return await response.json();
+};
+
+export const getCardsLikeName = async (cardName) => {
+  const response = await fetch(`${BASE_URL}/api/cards?name=${cardName}`);
   return await response.json();
 };
