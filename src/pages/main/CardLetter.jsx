@@ -7,7 +7,7 @@ const CardLetter = ({ color = '', label = '', amount = 0, total = 0 }) => {
       <div className="flex items-start">
         <div className="font-semibold text-[#bfbdbd] mr-4">
           <div
-            className="w-[44px] h-[34px] text-2xl"
+            className=" text-2xl"
             style={{
               color: color,
             }}

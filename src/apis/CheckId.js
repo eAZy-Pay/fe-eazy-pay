@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const checkId = async (id, setId, setSuccessId, setErrorId) => {
   try {
-    const response = await fetch(`${BASE_URL}/api/checkid?id=${id}`);
+    const response = await fetch(`${BASE_URL}/api/register/checkid?id=${id}`);
     if (response.status === 200) {
       setId(id);
       setSuccessId('사용 가능한 아이디예요!');

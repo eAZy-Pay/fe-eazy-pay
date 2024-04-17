@@ -13,8 +13,11 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
 
   const handleNameChange = (event) => {
     const name = event.target.value;
+    const isValid = /^[a-zA-Z가-힣0-9]+$/.test(name);
     if (name.length < 2) {
-      setErrorName('이름은 2글자 이상이어야 합니다');
+      setErrorName('이름은 2글자 이상으로 적어주세요');
+    } else if (!isValid) {
+      setErrorName('특수문자, 공백을 포함할 수 없어요');
     } else {
       setErrorName('');
       setName(name);
