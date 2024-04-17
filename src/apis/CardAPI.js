@@ -7,7 +7,7 @@ export const getCategoryCards = async (categoryId) => {
 
 export const getMainBanner = async (userId) => {
   const requestBody = JSON.stringify(userId);
-  const response = await fetch(`${BASE_URL}/api/cards/simple-benefit-dashboard`, {
+  const response = await fetch(`${BASE_URL}/api/cards/simple-user-card-benefit-performance`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
