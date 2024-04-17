@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // LoadData 컴포넌트에 onLoadingComplete props 추가
 const LoadData = ({ onLoadingComplete }) => {
-  const [localloading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     // 시뮬레이션을 위한 타이머 설정
     const timer = setTimeout(() => {
@@ -17,7 +17,7 @@ const LoadData = ({ onLoadingComplete }) => {
   return (
     <div className="flex ml-56">
       <div className="flex flex-col items-center justify-center h-full">
-        {localloading ? (
+        {loading ? (
           <>
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
             <h2 className="text-xl text-slate-700 mt-8">데이터를 불러오는 중입니다...</h2>
