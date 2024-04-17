@@ -14,14 +14,13 @@ const BlockTagSearch = ({ tags, checkedIndex, setCheckedIndex }) => {
   const makeSelectBlockTag = (index, tag) => {
     const handleClick = () => setCheckedIndex(index);
     const isSelected = index === checkedIndex;
-    const textStyle = isSelected ? {} : { color: '#e2e2e2' };
+    const className = isSelected ? 'bg-[#93C5FD]' : 'bg-blue-100 rounded-lg hover:bg-blue-300';
 
     return (
       <div
-        className="flex items-center justify-center bg-blue-100 rounded-lg p-4 cursor-pointer"
+        className={`flex items-center justify-center rounded-lg p-4 cursor-pointer bg-blue-100 ${className}`}
         key={tag}
         onClick={handleClick}
-        style={textStyle}
       >
         <p className="text-xl text-center text-black">{tag}</p>
       </div>

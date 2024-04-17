@@ -15,10 +15,10 @@ const HashTagSearch = ({ tags, checkedIndex, setCheckedIndex }) => {
   const makeSelectHashTag = (index, tag) => {
     const handleClick = () => setCheckedIndex(index);
     const isSelected = index === checkedIndex;
-    const textStyle = isSelected ? {} : { color: '#e2e2e2' };
+    const className = isSelected ? '' : 'text-gray-300 hover:text-gray-500';
 
     return (
-      <div key={tag} onClick={handleClick} className="cursor-pointer" style={textStyle}>
+      <div key={tag} onClick={handleClick} className={`p-2 cursor-pointer ${className}`}>
         #{tag}
       </div>
     );
