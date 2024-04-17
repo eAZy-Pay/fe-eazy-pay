@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import HashTagSearch from '../../components/search/HashTagSearch';
 import CategoryCards from '../../components/category/CategoryCards';
@@ -131,21 +130,10 @@ const omakase = {
 };
 
 const MainPage = () => {
-  const navigate = useNavigate();
   const [checkedIndex, setcheckedIndex] = useState(0);
 
   return (
     <>
-      <div
-        className="cursor-pointer"
-        onClick={() => {
-          sessionStorage.removeItem('user');
-          alert('로그아웃 되었습니다.');
-          navigate('/');
-        }}
-      >
-        로그아웃
-      </div>
       <DefaultLayout banner={<MainBanner />}>
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 

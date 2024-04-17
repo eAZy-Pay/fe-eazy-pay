@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import SearchImg from '../../assets/searchImg.png';
-import useCategoryCards from '../../hooks/useCategoryCards';
+import { getCardsLikeName, getCategoryCards } from '../../apis/CardAPI';
 import BlockTagSearch from '../../components/search/BlockTagSearch';
 import CategoryCards from '../../components/category/CategoryCards';
 import Banner from '../../components/Banner';
@@ -24,20 +24,51 @@ const CardSearchPage = () => {
   const [checkedIndex, setcheckedIndex] = useState(0);
   const categoryId = categories[checkedIndex]?.uid;
   const [searchText, setSearchText] = useState('');
+  const [categoryCards, setCategoryCards] = useState([]);
+
+  const handleSearch = () => {
+    if (searchText === '') {
+      return;
+    }
+    // sql injection 방지
+    const regExp = /[`~!@#$%^&*|\\';:/?]/gi;
+    if (regExp.test(searchText)) {
+      alert('특수문자는 입력할 수 없습니다.');
+      return;
+    }
+    getCardsLikeName(searchText).then(setCategoryCards);
+  };
+
+  useEffect(() => {
+    getCategoryCards(categoryId).then(setCategoryCards);
+  }, [categoryId]);
+
+  // 엔터키 입력 시 검색
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <DefaultLayout>
       <p className="text-4xl text-left font-bold">eAZy가 카드를 찾아드릴게요</p>
 
-      <div className="flex items-center justify-center bg-blue-200/50 rounded-lg p-2 my-6 w-full h-20">
-        <img src={SearchImg} alt="Search" className="w-16 h-16 object-cover mx-4" />
+      <div className="flex items-center justify-center bg-blue-200/50 rounded-lg py-2 px-8 my-6 w-full h-20 text-lg font-bold hover:bg-blue-200">
         <input
           type="text"
           placeholder="카드 이름을 입력해주세요"
-          className="flex items-center justify-center w-full h-full object-cover mr-4 bg-transparent outline-none text-lg"
+          className="flex items-center justify-center w-full h-full object-cover mr-4 bg-transparent outline-none text-lg font-bold"
           value={searchText} // value 입력 시 React의 state를 통해 관리가 됨
           onChange={(e) => setSearchText(e.target.value)}
+          onKeyPress={handleKeyPress} // 엔터키 입력 시 검색
         />
+        <div
+          onClick={handleSearch}
+          className="flex items-center justify-center w-20 h-20 cursor-pointer"
+        >
+          <img src={SearchImg} alt="Search" className="w-16 h-16 object-cover mx-4" />
+        </div>
       </div>
       <div className="my-6 text-3xl font-bold">어떤 카드를 찾으시나요?</div>
       <BlockTagSearch
@@ -46,7 +77,12 @@ const CardSearchPage = () => {
         setCheckedIndex={setcheckedIndex}
       />
       <div className="my-6 text-3xl font-bold">검색 결과</div>
-      <CategoryCards categoryCards={useCategoryCards(categoryId)} maxColumn={4} maxRow={3} />
+      {categoryCards.length ? (
+        <CategoryCards categoryCards={categoryCards} maxColumn={4} maxRow={3} />
+      ) : (
+        <div className="text-2xl text-center my-6">검색 결과가 없습니다.</div>
+      )}
+
       <Banner
         to={'/card-recommend'}
         title="어떤 카드를 골라야할지 고민이신가요?"

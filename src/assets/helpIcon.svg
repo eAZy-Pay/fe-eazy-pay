@@ -3,7 +3,7 @@
   height="48"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
-  preserveAspectRatio="none"
+  viewBox="-3 -5 46 46"
 >
   <path
     d="M8 12C8 10.8954 8.89543 10 10 10H30C31.1046 10 32 10.8954 32 12C32 13.1046 31.1046 14 30 14H10C8.89543 14 8 13.1046 8 12Z"
