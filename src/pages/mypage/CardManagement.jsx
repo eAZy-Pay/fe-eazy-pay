@@ -37,14 +37,14 @@ const CardManagement = ({ images }) => {
             <CardLetter color="#f79042" label="총 혜택" amount={ben_amount} total={ben_total} />
           </div>
         </DefaultFrame>
-        {/* 이지카드 총 혜택 */}
+        {/* 카드관리 */}
         <div className="text-2xl self-left flex items-center mx-6 my-10">카드 관리</div>
         <div className="flex flex-col w-full">
           {images.map(
             (image, index) =>
               index !== 0 && (
                 <DefaultFrame key={index} className="flex mx-6 mb-11 max-w-[32rem]">
-                  <RotatedCard image={image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
+                  < RotatedCard image={image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
                   <div className="flex flex-col justify-center gap-4">
                     <CardsGage
                       color="#f79042"
@@ -63,8 +63,8 @@ const CardManagement = ({ images }) => {
               )
           )}
         </div>
-      </DefaultFrame>
-    </div>
+      </DefaultFrame >
+    </div >
   );
 };
 

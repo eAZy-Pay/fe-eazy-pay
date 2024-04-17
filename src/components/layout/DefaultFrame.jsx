@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const DefaultFrame = ({ children, boxShadow = true, className }) => {
+const DefaultFrame = ({ children, className, boxShadow = true }) => {
   return (
     <>
       <div
@@ -8,7 +8,7 @@ const DefaultFrame = ({ children, boxShadow = true, className }) => {
         style={{
           backgroundColor: '#ffffff',
           boxShadow: boxShadow
-            ? '0px 6px 10px 4px rgba(0,0,0,0.15), 0px 2px 3px 0 rgba(0,0,0,0.3)'
+            ? '0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)'
             : 'none',
         }}
       >
