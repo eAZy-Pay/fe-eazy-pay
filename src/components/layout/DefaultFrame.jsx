@@ -4,7 +4,7 @@ const DefaultFrame = ({ children, boxShadow = true, className }) => {
   return (
     <>
       <div
-        className={`w-full rounded-2xl p-4 bg-white border-2 border-[#e2e2e2] ${className} `}
+        className={`w-full rounded-2xl p-4 bg-white border-2 border-[#e2e2e2] ${className}`}
         style={{
           backgroundColor: '#ffffff',
           boxShadow: boxShadow
