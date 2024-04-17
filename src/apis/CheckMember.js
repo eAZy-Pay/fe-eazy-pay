@@ -9,7 +9,7 @@ export const checkMember = async (name, phoneNumber, setMemberValid) => {
     );
     if (response.status === 200) {
       setMemberValid(true);
-    } else if (response.status === 409) {
+    } else if (response.status === 404) {
       setMemberValid(false);
     }
   } catch (error) {

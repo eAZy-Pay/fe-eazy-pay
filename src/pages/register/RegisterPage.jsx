@@ -95,7 +95,7 @@ const RegisterPage = () => {
           )}
           {/* 회원 인증 api 보내서 
           200 ok 응답 받으면 상태를 true로 바꿔서 LoadData 보여주고
-          409 응답 받으면 상태를 false로 바꾸고 notLoadData 보여주기 */}
+          404 응답 받으면 상태를 false로 바꾸고 notLoadData 보여주기 */}
           {stepperIndex === 2 &&
             (memberValid ? <LoadData onLoadingComplete={handleDataLoaded} /> : <NotLoadData />)}
           {stepperIndex === 3 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
