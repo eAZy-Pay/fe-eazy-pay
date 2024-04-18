@@ -44,7 +44,7 @@ const CardManagement = ({ images }) => {
             (image, index) =>
               index !== 0 && (
                 <DefaultFrame key={index} className="flex mx-6 mb-11 max-w-[32rem]">
-                  < RotatedCard image={image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
+                  <RotatedCard image={image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
                   <div className="flex flex-col justify-center gap-4">
                     <CardsGage
                       color="#f79042"
@@ -63,8 +63,8 @@ const CardManagement = ({ images }) => {
               )
           )}
         </div>
-      </DefaultFrame >
-    </div >
+      </DefaultFrame>
+    </div>
   );
 };
 
