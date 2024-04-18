@@ -6,16 +6,16 @@ import TextField from '@mui/material/TextField';
 const PinForm = ({ setValidPin }) => {
   const [pin, setPin] = useState('');
   const [pinCheck, setPinCheck] = useState('');
-  const [error, setError] = useState('');
+  const [errorPin, setErrorPin] = useState('');
   const [errorCheck, setErrorCheck] = useState('');
 
   const handlePinChange = (event) => {
     const newPin = event.target.value;
     setPin(newPin);
     if (newPin.length !== 6) {
-      setError('pin 번호를 6자리로 입력해주세요');
+      setErrorPin('pin 번호를 6자리로 입력해주세요');
     } else {
-      setError('');
+      setErrorPin('');
     }
   };
 
@@ -47,8 +47,8 @@ const PinForm = ({ setValidPin }) => {
             variant="outlined"
             value={pin}
             onChange={handlePinChange}
-            error={!!error}
-            helperText={error ? error : ''}
+            error={!!errorPin}
+            helperText={errorPin ? errorPin : ''}
           />
         </Box>
         <Box
