@@ -2,32 +2,16 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import FaqBlock from './FaqBlock';
 import Banner from '../../components/Banner';
 import WriteImg from '../../assets/writeImg.png';
-
+import { useState, useEffect } from 'react';
+import { requestFaqData } from '../../apis/FaqAPI';
 const FaqPage = () => {
-  const faqs = [
-    {
-      title: '질문1',
-      answer: '답변111111',
-    },
-    {
-      title: '질문2',
-      answer:
-        '답변22222lkhuigbibvyuvbㅇ랑러ㅣㅏㅇㄹㅇㄴㄹㅇㄴㄹㅇㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹㄴㅇ내라ㅔㅐㅇ나레ㅐㅏㅊ,ㄴ애ㅔㅏ레ㅐㄴ알ㅊ,ㅔㄴ앵랑라ㅔㅇㄴ라ㅔ앤라ㅔㅐㅇ나레ㅐㄴ아uyhvuyvuyhvuvouyyyyyyyyyyigiugiuggugiuyvbyutft2',
-    },
-    {
-      title: '이지카드의 결제 알고리즘은 어떻게 되나요?',
-      answer:
-        '매번 결제 시 보유 카드 중 최대의 혜택을 볼 수 있는 카드를 선택하도록 되어있습니다.',
-    },
-    {
-      title: '질문3',
-      answer: '답변222222',
-    },
-    {
-      title: '질문4',
-      answer: '답변222222',
-    },
-  ];
+  const [faqs, setFaqs] = useState([]);
+
+  useEffect(() => {
+    requestFaqData().then((data) => {
+      setFaqs(data);
+    });
+  }, []);
 
   return (
     <DefaultLayout>
