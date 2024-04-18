@@ -13,15 +13,15 @@ const MainBanner = () => {
     userName: user ? JSON.parse(user).userName : 'OOO',
     images: [eazy],
     benefitAmount: 0,
-    cards: [],
+    cards: [], //1개월 카드 혜택 실적, 카드상품정보
   });
   useEffect(() => {
     if (user) {
       // 로그인 되어있는 경우
       getMainBanner(JSON.parse(user).uid).then((res) => {
         const tmp = [eazy];
-        res.cards.forEach((card) => {
-          tmp.push(card.image);
+        res.cards.forEach((cardObj) => {
+          tmp.push(cardObj.card.image);
         });
         setUserMain((prev) => ({
           ...prev,
