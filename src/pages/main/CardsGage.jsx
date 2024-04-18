@@ -31,11 +31,11 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
 };
 
 CardsGage.propTypes = {
-  color: PropTypes.string.isRequired, // 'color' prop이 반드시 문자열이어야 함을 지정합니다.
-  amount: PropTypes.number.isRequired, // 'amount' prop이 반드시 숫자여야 함을 지정합니다.
-  total: PropTypes.number.isRequired, // 'total' prop이 반드시 숫자여야 함을 지정합니다.
-  width: PropTypes.string, // 'width' prop이 문자열이어야 함을 지정합니다.
-  margin: PropTypes.string.isRequired, // 'margin' prop이 문자열이어야 함을 지정합니다.
+  color: PropTypes.string.isRequired,
+  amount: PropTypes.number,
+  total: PropTypes.number,
+  width: PropTypes.string,
+  margin: PropTypes.string,
 };
 
 export default CardsGage;

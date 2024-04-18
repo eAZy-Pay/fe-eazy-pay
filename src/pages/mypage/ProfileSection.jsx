@@ -21,7 +21,7 @@ const ProfileSection = ({ name }) => (
 );
 
 ProfileSection.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
 };
 
 export default ProfileSection;

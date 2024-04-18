@@ -3,7 +3,7 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import ProfileSection from './ProfileSection';
 import RecentTransactions from './RecentTransactions';
 import AvailableFunds from './AvailableFunds';
-import CardManagement from './CardManagement'; // 카드 관리 섹션 컴포넌트
+import CardManagement from './CardManagement';
 import eazy from '../../assets/eAZyCard.svg';
 
 const userMain = {

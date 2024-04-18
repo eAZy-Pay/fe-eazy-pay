@@ -37,18 +37,18 @@ const RecentTransactions = ({ transactions }) => (
 RecentTransactions.propTypes = {
   transactions: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      amount: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      amount: PropTypes.string,
+      date: PropTypes.string,
     })
   ).isRequired,
 };
 
 TransactionItem.propTypes = {
   transaction: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    amount: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    amount: PropTypes.string,
+    date: PropTypes.string,
   }).isRequired,
 };
 

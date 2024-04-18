@@ -27,10 +27,10 @@ const CardLetter = ({ color = '', label = '', amount = 0, total = 0 }) => {
 };
 
 CardLetter.propTypes = {
-  color: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  color: PropTypes.string,
+  label: PropTypes.string,
+  amount: PropTypes.number,
+  total: PropTypes.number,
 };
 
 export default CardLetter;
