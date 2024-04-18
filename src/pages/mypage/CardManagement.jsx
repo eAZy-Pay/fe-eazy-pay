@@ -3,7 +3,7 @@ import DefaultFrame from '../../components/layout/DefaultFrame';
 import RotatedCard from '../../components/card/RotatedCard';
 import CardsGage from '../main/CardsGage';
 import CardLetter from '../main/CardLetter';
-import ArrowIcon from './ArrowIcon';
+import arrowIcon from '../../assets/arrowIcon.svg';
 import eazy from '../../assets/eAZyCard.svg';
 import PropTypes from 'prop-types';
 
@@ -15,17 +15,17 @@ const CardManagement = ({ images }) => {
   return (
     <div className="flex-grow p-4">
       <DefaultFrame boxShadow={false}>
-        <div className=" flex justify-between items-center text-2xl ">
-          <h2 className="text-2xl font-extrabold ml-6 mr-1 my-4">내 카드 관리</h2>
-          <ArrowIcon />
+        <div className=" flex justify-between items-center text-2xl">
+          <h2 className="ml-6 mr-1 my-4 text-2xl font-extrabold">내 카드 관리</h2>
+          <img src={arrowIcon} alt="ArrowIcon" className="ml-1" />
           {/* 카드 편집 버튼 */}
-          <div className="w-32 h-10 mr-8 rounded-xl border-2 border-gray-200 flex justify-center items-center ml-auto shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-            <div className="text-xl text-center">카드 편집</div>
+          <div className="flex justify-center items-center mr-8 rounded-xl border-2 border-gray-200 w-32 h-10 ml-auto shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+            <div className="text-center text-xl">카드 편집</div>
           </div>
         </div>
         {/* 이지카드 총 혜택 */}
-        <div className="text-2xl mx-6 my-10">총 혜택</div>
-        <DefaultFrame className="flex m-6 max-w-[32rem]">
+        <div className="mx-6 my-10 text-2xl">총 혜택</div>
+        <DefaultFrame className="flex max-w-[32rem] m-6">
           <img
             src={eazy}
             alt="Eazy Image"
@@ -38,12 +38,12 @@ const CardManagement = ({ images }) => {
           </div>
         </DefaultFrame>
         {/* 카드관리 */}
-        <div className="text-2xl self-left flex items-center mx-6 my-10">카드 관리</div>
+        <div className="flex items-center self-left mx-6 my-10 text-2xl">카드 관리</div>
         <div className="flex flex-col w-full">
           {images.map(
             (image, index) =>
               index !== 0 && (
-                <DefaultFrame key={index} className="flex mx-6 mb-11 max-w-[32rem]">
+                <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
                   <RotatedCard image={image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
                   <div className="flex flex-col justify-center gap-4">
                     <CardsGage

@@ -1,6 +1,6 @@
 import React from 'react';
 import DefaultFrame from '../../components/layout/DefaultFrame';
-import ArrowIcon from './ArrowIcon';
+import arrowIcon from '../../assets/arrowIcon.svg';
 import PropTypes from 'prop-types';
 
 const TransactionItem = ({ transaction }) => (
@@ -20,7 +20,7 @@ const RecentTransactions = ({ transactions }) => (
     <div className=" flex justify-between items-center text-2xl font-extrabold mx-6 my-4">
       최근 이용내역
       <div className="flex">
-        <ArrowIcon />
+        <img src={arrowIcon} alt="ArrowIcon" />
       </div>
     </div>
     {transactions.slice(0, 5).map((transaction, index) => (
