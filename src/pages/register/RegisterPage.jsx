@@ -7,11 +7,11 @@ import EazyPayRegisterForm from './EazyPayRegisterForm';
 import CardAuthenticationForm from './CardAuthenticationForm';
 import PinForm from './PinForm';
 import LoadData from './LoadData';
+import RegisterComplete from './RegisterComplete';
 import { submitAllData } from '../../apis/RegisterAPI';
 import { useNavigate } from 'react-router-dom';
 import { checkMember } from '../../apis/CheckMember';
 import NotLoadData from './NotLoadData';
-
 const RegisterPage = () => {
   const [stepperIndex, setStepperIndex] = useState(0);
   const [loading, setLoading] = useState(false); // 로딩 중인 상태에만 true
@@ -41,8 +41,10 @@ const RegisterPage = () => {
     }
     if (stepperIndex === 3) {
       regInfoSubmit();
-    } else if (stepperIndex === 4) {
+    } else if (stepperIndex === 5 && memberValid) {
       navigate('/');
+    } else if (stepperIndex === 5 && !memberValid) {
+      navigate('/card-recommend');
     } else {
       setStepperIndex((prevStepperIndex) => prevStepperIndex + 1);
     }
@@ -75,7 +77,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <DefaultLayout>
+    <DefaultLayout showNavBar={false}>
       <div className="w-full h-full flex flex-col items-center justify-center bg-white p-10">
         <img src={MainLogo} className="mb-1" />
         <p className="text-base font-semibold text-slate-600 mb-10">
@@ -100,16 +102,23 @@ const RegisterPage = () => {
             (memberValid ? <LoadData onLoadingComplete={handleDataLoaded} /> : <NotLoadData />)}
           {stepperIndex === 3 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
           {stepperIndex === 4 && <PinForm setValidPin={setPin} />}
+          {stepperIndex === 5 && <RegisterComplete memberValid={memberValid} />}
         </div>
 
         {/*  로딩 중이 아닐 때만 버튼을 렌더링 */}
-        {!loading && (dataLoaded || stepperIndex < 5) && (
+        {!loading && (dataLoaded || stepperIndex < 6) && (
           <button
             className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
             onClick={handleNext}
             disabled={isButtonDisabled()}
           >
-            {stepperIndex === 4 ? '가입' : '다음'}
+            {stepperIndex === 4
+              ? '가입'
+              : stepperIndex === 5
+                ? memberValid
+                  ? '홈'
+                  : '카드 추천받기'
+                : '다음'}
           </button>
         )}
       </div>
