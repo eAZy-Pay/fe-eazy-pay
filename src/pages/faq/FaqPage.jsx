@@ -3,12 +3,12 @@ import FaqBlock from './FaqBlock';
 import Banner from '../../components/Banner';
 import WriteImg from '../../assets/writeImg.png';
 import { useState, useEffect } from 'react';
-import { requestFaqData } from '../../apis/FaqAPI';
+import { getFaqData } from '../../apis/FaqAPI';
 const FaqPage = () => {
   const [faqs, setFaqs] = useState([]);
 
   useEffect(() => {
-    requestFaqData().then((data) => {
+    getFaqData().then((data) => {
       setFaqs(data);
     });
   }, []);
