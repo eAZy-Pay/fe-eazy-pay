@@ -5,10 +5,10 @@ const MainBenefits = ({ userMain }) => {
   return (
     <>
       <div>
-        <div className="relative flex justify-between">
+        <div className="flex justify-between relative">
           <div className="flex self-start">
             <OverlappedCards images={userMain.images} />
-            <div className="mx-5 text-2xl">
+            <div className="text-2xl mx-5">
               <div>
                 <span className="text-3xl font-bold">{userMain.userName}</span>님이
               </div>
@@ -16,7 +16,7 @@ const MainBenefits = ({ userMain }) => {
             </div>
           </div>
 
-          <div className="mx-5 flex-end relative top-0 mt-[8rem] self-bottom right-10">
+          <div className="flex-end relative mx-5 mt-[8rem] self-bottom right-10">
             <span className="text-5xl font-black text-blue-700 relative">
               {userMain.benefitAmount.toLocaleString()}
             </span>
