@@ -4,21 +4,29 @@
 
 @font-face {
   font-family: 'NanumSquare';
-  src: url(./assets/fonts/NanumSquareB.ttf);
+  src: url(./assets/fonts/NanumSquareB.ttf) format('truetype');
+  /* 볼드체 폰트 */
+  font-weight: 700;
+  /* 볼드체의 폰트 두께 값을 700으로 설정 */
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url(./assets/fonts/NanumSquareEB.ttf) format('truetype');
+  /* extra bold 폰트 파일 경로 확인 필요 */
+  font-weight: 800;
+  /* extra bold 폰트 두께 값을 800으로 설정 */
   unicode-range: U+AC00-D7A3;
 }
 
 @font-face {
   font-family: 'noto-sans';
-  src: url(./assets/fonts/NotoSans-Regular.ttf);
+  src: url(./assets/fonts/NotoSans-Regular.ttf) format('truetype');
   unicode-range: U+0020-007E;
 }
 
 body {
-  font-family: Arial, sans-serif;
-}
-
-body * {
   font-family: 'NanumSquare', 'noto-sans', Arial, sans-serif;
 }
 

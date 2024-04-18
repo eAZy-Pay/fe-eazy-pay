@@ -5,7 +5,7 @@ const OverlappedCards = ({ images }) => {
   return (
     <>
       <div
-        className="w-[18.5em] h-[13em] z-10 relative"
+        className="flex w-[18.5em] h-[13em] z-10 relative ml-12"
         onPointerEnter={() => {
           setMove(1);
         }}
@@ -15,7 +15,7 @@ const OverlappedCards = ({ images }) => {
       >
         {images.map((image, index) => (
           <img
-            className="absolute"
+            className="absolute h-[18.5em] "
             style={{
               zIndex: `${-1 * index}`,
               transform: `translateX(${15.5 + index * move}em) translateY(${index * move}em) rotate(90deg)`,

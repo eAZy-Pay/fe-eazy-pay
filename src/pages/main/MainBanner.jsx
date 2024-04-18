@@ -8,25 +8,24 @@ import { getMainBanner } from '../../apis/CardAPI';
 
 const MainBanner = () => {
   const navigate = useNavigate();
+  const user = sessionStorage.getItem('user');
   const [userMain, setUserMain] = useState({
-    userName: '김이지',
+    userName: user ? JSON.parse(user).userName : 'OOO',
     images: [eazy],
     benefitAmount: 0,
-    cards: [],
+    cards: [], //1개월 카드 혜택 실적, 카드상품정보
   });
-
   useEffect(() => {
-    if (sessionStorage.getItem('user')) {
-      getMainBanner(JSON.parse(sessionStorage.getItem('user')).uid).then((res) => {
-        console.log(res);
+    if (user) {
+      // 로그인 되어있는 경우
+      getMainBanner(JSON.parse(user).uid).then((res) => {
         const tmp = [eazy];
-        res.cards.forEach((card) => {
-          tmp.push(card.image);
+        res.cards.forEach((cardObj) => {
+          tmp.push(cardObj.card.image);
         });
         setUserMain((prev) => ({
           ...prev,
           benefitAmount: res.benefitAmount,
-          userName: res.userName,
           images: tmp,
           cards: res.cards,
         }));
@@ -34,11 +33,12 @@ const MainBanner = () => {
     } else {
       navigate('/');
     }
-  }, [navigate]);
+  }, [navigate, user]);
+
   return (
     <>
       {/* 로그인 상태인 경우 */}
-      {sessionStorage.getItem('user') ? (
+      {user ? (
         userMain.cards.length ? (
           <>
             <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">eAZy 하게 챙겼어요</div>

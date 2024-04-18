@@ -1,13 +1,13 @@
 // import React from "react";
 import PropTypes from 'prop-types';
 
-const CardLetter = ({ color, label, amount, total }) => {
+const CardLetter = ({ color = '', label = '', amount = 0, total = 0 }) => {
   return (
-    <div className="ml-8">
+    <div className="flex justify-center ml-8">
       <div className="flex items-start">
-        <div className="font-semibold text-[#bfbdbd] mr-4">
+        <div className="mr-4 font-semibold text-[#bfbdbd]">
           <div
-            className="w-[44px] h-[34px] text-2xl"
+            className=" text-2xl"
             style={{
               color: color,
             }}
@@ -27,10 +27,10 @@ const CardLetter = ({ color, label, amount, total }) => {
 };
 
 CardLetter.propTypes = {
-  color: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  color: PropTypes.string,
+  label: PropTypes.string,
+  amount: PropTypes.number,
+  total: PropTypes.number,
 };
 
 export default CardLetter;
