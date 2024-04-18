@@ -5,7 +5,7 @@ const OverlappedCards = ({ images }) => {
   return (
     <>
       <div
-        className="w-[18.5em] h-[13em] z-10 relative"
+        className="flex w-[18.5em] h-[13em] z-10 relative ml-12"
         onPointerEnter={() => {
           setMove(1);
         }}
