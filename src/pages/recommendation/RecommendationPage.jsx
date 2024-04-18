@@ -42,6 +42,7 @@ const RecommendationPage = () => {
             }
           />
         }
+        bannerFull={true}
       >
         <HashTagSearch
           tags={monthlyFor6}
