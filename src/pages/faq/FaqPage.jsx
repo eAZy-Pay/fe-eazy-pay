@@ -18,7 +18,7 @@ const FaqPage = () => {
       <div className="w-full text-3xl font-extrabold mb-4">FAQ</div>
       <div className="w-full text-2xl font-extrabold mb-4">eAZy가 도와드릴게요!</div>
       <div className="flex justify-center">
-        <div className="w-full columns-2 py-4">
+        <div className="w-full grid grid-cols-2 gap-4 py-4">
           {/*Object.keys(faqs).length 사용하여 faqs가 비어 있는 객체인지 확인 */}
           {Object.keys(faqs).length > 0 ? (
             faqs.map((faq, index) => (
