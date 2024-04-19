@@ -8,10 +8,16 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
   const formattedDate =
     paymentDate.substring(0, 10).replace(/-/g, '.') + ' ' + paymentDate.substring(11, 16);
 
+  // 이름이 일정 길이를 초과할 경우 축약
+  const maxStoreNameLength = 10;
+  const displayStoreName = storeName.length > maxStoreNameLength
+    ? storeName.substring(0, maxStoreNameLength) + '..'
+    : storeName;
+
   return (
     <>
       <div className="flex justify-between font-extrabold">
-        <span>{storeName}</span>
+        <span>{displayStoreName}</span>
         <span>{paymentAmount.toLocaleString()}원</span>
         <></>
       </div>
