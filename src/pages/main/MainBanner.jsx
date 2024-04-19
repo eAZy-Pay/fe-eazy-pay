@@ -31,7 +31,7 @@ const MainBanner = () => {
         }));
       });
     } else {
-      navigate('/');
+      navigate('/'); // 드롭다운 메뉴 로그아웃 시 새로고침
     }
   }, [navigate, user]);
 
