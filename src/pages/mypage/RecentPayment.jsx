@@ -3,7 +3,7 @@ import DefaultFrame from '../../components/layout/DefaultFrame';
 import arrowIcon from '../../assets/arrowIcon.svg';
 import PropTypes from 'prop-types';
 
-const PaymentItem = ({ paymentDate, paymentAmount, storeCode }) => {
+const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
   // ISO 문자열을 받아서 'yyyy.MM.dd HH:mm' 형식으로 변환
   const formattedDate =
     paymentDate.substring(0, 10).replace(/-/g, '.') + ' ' + paymentDate.substring(11, 16);
@@ -11,7 +11,7 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeCode }) => {
   return (
     <>
       <div className="flex justify-between font-extrabold">
-        <span>{storeCode}</span>
+        <span>{storeName}</span>
         <span>{paymentAmount.toLocaleString()}원</span>
         <></>
       </div>
@@ -28,12 +28,12 @@ const RecentPayment = ({ transactions = [] }) => (
         <img src={arrowIcon} alt="Arrow Icon" />
       </div>
     </div>
-    {transactions.slice(0, 5).map((transaction, index) => (
+    {transactions.slice(0, 4).map((transaction, index) => (
       <React.Fragment key={index}>
         <div className="flex flex-col p-6 text-lg gap-1">
           <PaymentItem {...transaction} />
         </div>
-        {index !== transactions.slice(0, 5).length - 1 && <hr className="mx-6" />}
+        {index !== transactions.slice(0, 4).length - 1 && <hr className="mx-6" />}
       </React.Fragment>
     ))}
   </DefaultFrame>
@@ -44,7 +44,7 @@ RecentPayment.propTypes = {
     PropTypes.shape({
       paymentDate: PropTypes.string,
       paymentAmount: PropTypes.number,
-      storeCode: PropTypes.string,
+      storeName: PropTypes.string,
     })
   ),
 };
@@ -52,7 +52,7 @@ RecentPayment.propTypes = {
 PaymentItem.propTypes = {
   paymentDate: PropTypes.string,
   paymentAmount: PropTypes.number,
-  storeCode: PropTypes.string,
+  storeName: PropTypes.string,
 };
 
 export default RecentPayment;

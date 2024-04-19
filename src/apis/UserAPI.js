@@ -1,8 +1,8 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // 사용자 마이페이지 정보를 가져오는 API 함수
-const getPaymentHistoryData = async (userId) => {
-  const url = `${BASE_URL}/api/user-cards/payments-upto4?user_id=${userId}`;
+const getPaymentHistoryData = async (userId, limit) => {
+  const url = `${BASE_URL}/api/payment-history?user_id=${userId}&limit=${limit}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {

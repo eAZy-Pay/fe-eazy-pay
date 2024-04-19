@@ -35,7 +35,7 @@ const MyPage = () => {
       const fetchData = async () => {
         try {
           const uid = JSON.parse(user).uid;
-          const data = await getPaymentHistoryData(uid);
+          const data = await getPaymentHistoryData(uid, 4);
           setUserMain((prev) => ({
             ...prev,
             transactions: data,
