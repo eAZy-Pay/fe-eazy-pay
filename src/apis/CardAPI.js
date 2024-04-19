@@ -6,14 +6,9 @@ export const getCategoryCards = async (categoryId) => {
 };
 
 export const getMainBanner = async (userId) => {
-  const requestBody = JSON.stringify(userId);
-  const response = await fetch(`${BASE_URL}/api/cards/simple-user-card-benefit-performance`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: requestBody,
-  });
+  const response = await fetch(
+    `${BASE_URL}/api/cards/simple-user-card-benefit-performance?user_id=${userId}`
+  );
 
   return await response.json();
 };
