@@ -11,9 +11,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const user = sessionStorage.getItem('user');
     if (sessionStorage.getItem('user') !== null) {
       alert('이미 로그인된 상태입니다.');
-      navigate('/');
+      JSON.parse(user).isAdmin ? navigate('/admin') : navigate('/');
     }
   }, [navigate]);
 
@@ -32,7 +33,7 @@ const LoginPage = () => {
           isAdmin: response.isAdmin,
         };
         sessionStorage.setItem('user', JSON.stringify(signedUser));
-        navigate('/');
+        signedUser.isAdmin ? navigate('/admin') : navigate('/');
       }
     });
   };

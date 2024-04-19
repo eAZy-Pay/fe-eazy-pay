@@ -5,7 +5,6 @@ import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
 import LoginIcon from '../../assets/loginIcon.svg';
 import PropTypes from 'prop-types';
-
 const DropdownMenu = ({ isOpen }) => {
   const navigate = useNavigate();
   const user = sessionStorage.getItem('user');
