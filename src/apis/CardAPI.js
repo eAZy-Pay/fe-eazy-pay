@@ -22,3 +22,8 @@ export const getCardsLikeName = async (cardName) => {
   const response = await fetch(`${BASE_URL}/api/cards?name=${cardName}`);
   return await response.json();
 };
+
+export const getCardById = async (cardId) => {
+  const response = await fetch(`${BASE_URL}/api/cards/${cardId}`);
+  return await response.json();
+};
