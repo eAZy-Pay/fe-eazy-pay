@@ -32,7 +32,6 @@ const RecommendationPage = () => {
             name="천지민"
             // title="<div className='text-2xl font-bold text-left mt-8 mb-4 ml-4'><div> </>"
             // title="님의 6개월 간 소비 내역으로 카드를 추천드릴게요"
-            bgColor="#F4F7FC"
             chart={
               <DonutChart
                 data={monthlyFor6}
@@ -42,7 +41,7 @@ const RecommendationPage = () => {
             }
           />
         }
-        bannerFull={true}
+        bannerClassName={'py-14 bg-[#F4F7FC]'}
       >
         <HashTagSearch
           tags={monthlyFor6}

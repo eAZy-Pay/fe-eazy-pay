@@ -1,7 +1,7 @@
 import NavBar from './NavBar';
 import PropTypes from 'prop-types';
 
-const DefaultLayout = ({ children, banner, showNavBar, bannerFull }) => {
+const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
   return (
     <div className="flex flex-col items-center w-full ">
       {showNavBar && (
@@ -9,10 +9,10 @@ const DefaultLayout = ({ children, banner, showNavBar, bannerFull }) => {
           <NavBar />
         </div>
       )}
-      {bannerFull ? (
-        <div className="w-full py-4">{banner}</div>
-      ) : (
-        <div className="w-full max-w-screen-xl py-4">{banner}</div>
+      {banner && (
+        <div className={`flex justify-center items-center w-full ${bannerClassName}`}>
+          <div className="w-full max-w-screen-xl">{banner}</div>
+        </div>
       )}
       <div className="flex flex-col w-full max-w-screen-xl">
         <div>{children}</div>
@@ -22,14 +22,15 @@ const DefaultLayout = ({ children, banner, showNavBar, bannerFull }) => {
 };
 
 DefaultLayout.defaultProps = {
-  banner: <></>,
+  banner: null,
   showNavBar: true,
-  bannerFull: false,
+  bannerClassName: '',
 };
 
 DefaultLayout.propTypes = {
   children: PropTypes.node.isRequired,
   banner: PropTypes.node,
+  bannerClassName: PropTypes.string,
   showNavBar: PropTypes.bool,
 };
 
