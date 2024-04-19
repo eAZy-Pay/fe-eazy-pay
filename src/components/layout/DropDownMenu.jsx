@@ -5,9 +5,10 @@ import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
 import LoginIcon from '../../assets/loginIcon.svg';
 import PropTypes from 'prop-types';
+import secureLocalStorage from 'react-secure-storage';
 const DropdownMenu = ({ isOpen }) => {
   const navigate = useNavigate();
-  const user = sessionStorage.getItem('user');
+  const user = secureLocalStorage.getItem('user');
   return (
     <>
       <div
@@ -56,7 +57,7 @@ const DropdownMenu = ({ isOpen }) => {
             <div
               className="cursor-pointer flex justify-center p-3 gap-4"
               onClick={() => {
-                sessionStorage.removeItem('user');
+                secureLocalStorage.removeItem('user');
                 alert('로그아웃 되었습니다.');
                 navigate('/');
               }}

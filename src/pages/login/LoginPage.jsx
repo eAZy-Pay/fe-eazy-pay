@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout.jsx';
 import mainLogo from '../../assets/mainLogo.svg';
 import { getSignIn } from '../../apis/AuthAPI.js';
-
+import secureLocalStorage from 'react-secure-storage';
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -11,8 +11,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = sessionStorage.getItem('user');
-    if (sessionStorage.getItem('user') !== null) {
+    const user = secureLocalStorage.getItem('user');
+    if (user !== null) {
       alert('이미 로그인된 상태입니다.');
       JSON.parse(user).isAdmin ? navigate('/admin') : navigate('/');
     }
@@ -31,8 +31,9 @@ const LoginPage = () => {
           uid: response.uid,
           userName: response.name,
           isAdmin: response.isAdmin,
+          timestamp: new Date(),
         };
-        sessionStorage.setItem('user', JSON.stringify(signedUser));
+        secureLocalStorage.setItem('user', JSON.stringify(signedUser));
         signedUser.isAdmin ? navigate('/admin') : navigate('/');
       }
     });

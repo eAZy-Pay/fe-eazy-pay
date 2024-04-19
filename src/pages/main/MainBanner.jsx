@@ -5,10 +5,10 @@ import MainBenefits from './MainBenefits';
 import CardPerfomance from './CardPerformance';
 import { useEffect, useState } from 'react';
 import { getMainBanner } from '../../apis/CardAPI';
-
+import secureLocalStorage from 'react-secure-storage';
 const MainBanner = () => {
   const navigate = useNavigate();
-  const user = sessionStorage.getItem('user');
+  const user = secureLocalStorage.getItem('user');
   const [userMain, setUserMain] = useState({
     userName: user ? JSON.parse(user).userName : 'OOO',
     images: [eazy],
