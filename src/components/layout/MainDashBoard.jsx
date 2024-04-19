@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DefaultFrame from './DefaultFrame';
 
-const MainDashBoard = ({ bgColor, chart }) => {
+const MainDashBoard = ({ chart, bgColor }) => {
   return (
     <div className="flex flex-col w-full items-center" style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col w-[1200px]">
@@ -19,9 +19,13 @@ const MainDashBoard = ({ bgColor, chart }) => {
   );
 };
 
+MainDashBoard.defaultProps = {
+  bgColor: '',
+};
+
 MainDashBoard.propTypes = {
-  bgColor: PropTypes.string.isRequired,
   chart: PropTypes.node.isRequired,
+  bgColor: PropTypes.string,
 };
 
 export default MainDashBoard;
