@@ -88,8 +88,8 @@ const MainBanner = () => {
               로그인 하면 얼마나 혜택을 받을 수 있는지 알 수 있어요
             </div>
             <Link to="/login">
-              <div className="mt-[1rem] mx-auto w-[13rem] py-3 rounded-[20px] bg-[#1d92e9] text-2xl text-center text-white">
-                로그인 하기
+              <div className="mt-[1rem] mx-auto px-8 py-3 rounded-[20px] bg-[#1d92e9] text-2xl text-center text-white">
+                로그인
               </div>
             </Link>
           </div>

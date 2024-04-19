@@ -31,8 +31,7 @@ const DropdownMenu = ({ isOpen }) => {
               <div
                 className="flex items-center text-lg text-left"
                 onClick={() => navigate('/login')}
-              >
-                로그인이 필요합니다.
+              >로그인
               </div>
             </div>
             <hr className="bg-gray-300 w-[85%] mb-3 " />
@@ -64,21 +63,6 @@ const DropdownMenu = ({ isOpen }) => {
               {/*서버 세션 발급 확장성을 위해 Link 태그로 나뒀습니다.*/}
               <img className="w-[2em]" src={LogoutIcon} alt="Logout Icon" />
               <Link className="flex items-center text-lg text-left">로그아웃</Link>
-            </div>
-          </>
-        )}
-
-        {!user && (
-          <>
-            <hr className="bg-gray-300 w-[85%] mt-5" />
-            <div className="cursor-pointer flex justify-center gap-4 my-4">
-              <img className="w-[2em]" src={LoginIcon} alt="Profile Icon" />
-              <div
-                className="flex items-center text-lg text-left"
-                onClick={() => navigate('/login')}
-              >
-                로그인 하기
-              </div>
             </div>
           </>
         )}
