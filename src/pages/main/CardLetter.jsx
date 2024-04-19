@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const CardLetter = ({ color = '', label = '', amount = 0, total = 0 }) => {
   return (
-    <div className="ml-8 flex justify-center">
+    <div className="flex justify-center ml-8">
       <div className="flex items-start">
-        <div className="font-semibold text-[#bfbdbd] mr-4">
+        <div className="mr-4 font-semibold text-[#bfbdbd]">
           <div
             className=" text-2xl"
             style={{
@@ -27,10 +27,10 @@ const CardLetter = ({ color = '', label = '', amount = 0, total = 0 }) => {
 };
 
 CardLetter.propTypes = {
-  color: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  color: PropTypes.string,
+  label: PropTypes.string,
+  amount: PropTypes.number,
+  total: PropTypes.number,
 };
 
 export default CardLetter;

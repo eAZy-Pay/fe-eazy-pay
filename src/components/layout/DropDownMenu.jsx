@@ -5,7 +5,6 @@ import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
 import LoginIcon from '../../assets/loginIcon.svg';
 import PropTypes from 'prop-types';
-
 const DropdownMenu = ({ isOpen }) => {
   const navigate = useNavigate();
   const user = sessionStorage.getItem('user');
@@ -47,7 +46,7 @@ const DropdownMenu = ({ isOpen }) => {
         </div>
         <div className="cursor-pointer flex justify-center p-3 gap-4">
           <img className="inset-0" src={HelpIcon} alt="Help Icon" />
-          <Link to="/help" className="flex items-center text-3xl text-left">
+          <Link to="/faq" className="flex items-center text-3xl text-left">
             문의하기
           </Link>
         </div>

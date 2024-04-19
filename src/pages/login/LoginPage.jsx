@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout.jsx';
 import mainLogo from '../../assets/mainLogo.svg';
-import { requestSignIn } from '../../apis/AuthAPI.js';
+import { getSignIn } from '../../apis/AuthAPI.js';
 
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
@@ -11,15 +11,16 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const user = sessionStorage.getItem('user');
     if (sessionStorage.getItem('user') !== null) {
       alert('이미 로그인된 상태입니다.');
-      navigate('/');
+      JSON.parse(user).isAdmin ? navigate('/admin') : navigate('/');
     }
   }, [navigate]);
 
   const requestLogin = async (e) => {
     e.preventDefault();
-    await requestSignIn(userName, userPassword).then((response) => {
+    await getSignIn(userName, userPassword).then((response) => {
       if (response.status === 'UNAUTHORIZED') {
         setErrorMessage('유효하지 않은 사용자 이름 또는 비밀번호입니다.');
         setUserName('');
@@ -32,7 +33,7 @@ const LoginPage = () => {
           isAdmin: response.isAdmin,
         };
         sessionStorage.setItem('user', JSON.stringify(signedUser));
-        navigate('/');
+        signedUser.isAdmin ? navigate('/admin') : navigate('/');
       }
     });
   };
