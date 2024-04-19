@@ -3,7 +3,6 @@ import ProfileIcon from '../../assets/profileIcon.svg';
 import CardIcon from '../../assets/cardIcon.svg';
 import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
-import LoginIcon from '../../assets/loginIcon.svg';
 import PropTypes from 'prop-types';
 import secureLocalStorage from 'react-secure-storage';
 import { sessionValidationCheck } from '../../utils/sessionMiddleware';
@@ -31,7 +30,8 @@ const DropdownMenu = ({ isOpen }) => {
               <div
                 className="flex items-center text-lg text-left"
                 onClick={() => navigate('/login')}
-              >로그인
+              >
+                로그인
               </div>
             </div>
             <hr className="bg-gray-300 w-[85%] mb-3 " />

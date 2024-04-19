@@ -1,13 +1,14 @@
 import secureLocalStorage from 'react-secure-storage';
 export const sessionValidationCheck = () => {
   const storage = secureLocalStorage.getItem('user');
-  if (storage
-  ){
+  if (storage) {
     const session = JSON.parse(storage);
-    if(session.uid !== undefined &&
+    if (
+      session.uid !== undefined &&
       session.userName !== undefined &&
       session.isAdmin !== undefined &&
-      session.timestamp !== undefined){
+      session.timestamp !== undefined
+    ) {
       const currentTime = Date.now();
       const timeElapsed = currentTime - new Date(session.timestamp); // 로그인으로부터 시간 차이 계산
       // 30분(1800000밀리초)이 지났는지 확인
