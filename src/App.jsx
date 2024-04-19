@@ -6,7 +6,7 @@ import MainPage from './pages/main/MainPage';
 import CardSearchPage from './pages/search/CardSearchPage';
 import MyPage from './pages/mypage/MyPage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
-
+import FaqPage from './pages/faq/FaqPage';
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
         <Route path="shopping" element={<ShoppingPage />} />
         <Route path="mypage" element={<MyPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/faq" element={<FaqPage />} />
       </Routes>
     </Router>
   );
