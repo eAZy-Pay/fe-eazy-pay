@@ -19,7 +19,7 @@ const AvailableFunds = ({ funds, totalLimit, usedAmount }) => (
   <DefaultFrame boxShadow={false}>
     <div className="flex items-center justify-between px-6 py-4">
       <h2 className="text-2xl font-extrabold">이용가능금액</h2>
-      <ArrowIcon />
+      <img src={arrowIcon} alt="Arrow Icon" />
     </div>
     <div className="px-6">
       <span className="text-3xl font-extrabold">{funds}원</span>
