@@ -7,6 +7,8 @@ import CardSearchPage from './pages/search/CardSearchPage';
 import MyPage from './pages/mypage/MyPage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
 import FaqPage from './pages/faq/FaqPage';
+import CardDetailPage from './pages/card/CardDetailPage';
+
 function App() {
   return (
     <Router>
@@ -14,11 +16,12 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<MainPage />} />
         <Route path="/card-recommend" element={<RecommendationPage />} />
-        <Route path="card-search" element={<CardSearchPage />} />
-        <Route path="shopping" element={<ShoppingPage />} />
-        <Route path="mypage" element={<MyPage />} />
+        <Route path="/card-search" element={<CardSearchPage />} />
+        <Route path="/shopping" element={<ShoppingPage />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="/card-detail/:id" element={<CardDetailPage />} />
       </Routes>
     </Router>
   );
