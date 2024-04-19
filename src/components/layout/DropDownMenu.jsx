@@ -6,9 +6,10 @@ import HelpIcon from '../../assets/helpIcon.svg';
 import LoginIcon from '../../assets/loginIcon.svg';
 import PropTypes from 'prop-types';
 import secureLocalStorage from 'react-secure-storage';
+import { sessionValidationCheck } from '../../utils/sessionMiddleware';
 const DropdownMenu = ({ isOpen }) => {
   const navigate = useNavigate();
-  const user = secureLocalStorage.getItem('user');
+  const user = sessionValidationCheck();
   return (
     <>
       <div
@@ -19,9 +20,7 @@ const DropdownMenu = ({ isOpen }) => {
           <>
             <div className="cursor-pointer flex justify-center py-6 gap-4">
               <img src={ProfileIcon} alt="Profile Icon" />
-              <div className="flex items-center text-xl text-left">
-                {JSON.parse(user).userName} 님
-              </div>
+              <div className="flex items-center text-xl text-left">{user.userName} 님</div>
             </div>
             <hr className="bg-gray-300 w-[85%] mb-3 " />
           </>

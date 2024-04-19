@@ -5,20 +5,23 @@ import MainBenefits from './MainBenefits';
 import CardPerfomance from './CardPerformance';
 import { useEffect, useState } from 'react';
 import { getMainBanner } from '../../apis/CardAPI';
-import secureLocalStorage from 'react-secure-storage';
+import { sessionValidationCheck } from '../../utils/sessionMiddleware';
 const MainBanner = () => {
   const navigate = useNavigate();
-  const user = secureLocalStorage.getItem('user');
-  const [userMain, setUserMain] = useState({
-    userName: user ? JSON.parse(user).userName : 'OOO',
-    images: [eazy],
-    benefitAmount: 0,
-    cards: [], //1개월 카드 혜택 실적, 카드상품정보
-  });
+  const user = sessionValidationCheck();
+  const [userMain, setUserMain] = useState(
+    {
+      userName: user ? user.userName : 'OOO',
+      images: [eazy],
+      benefitAmount: 0,
+      cards: [], //1개월 카드 혜택 실적, 카드상품정보
+    },
+    []
+  );
   useEffect(() => {
     if (user) {
       // 로그인 되어있는 경우
-      getMainBanner(JSON.parse(user).uid).then((res) => {
+      getMainBanner(user.uid).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
           tmp.push(cardObj.card.image);
@@ -33,7 +36,7 @@ const MainBanner = () => {
     } else {
       navigate('/'); // 드롭다운 메뉴 로그아웃 시 새로고침
     }
-  }, [navigate, user]);
+  }, [navigate]);
 
   return (
     <>
