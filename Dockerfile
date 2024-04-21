@@ -28,7 +28,7 @@ COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 # 빌드 결과물을 nginx 서버로 복사
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# 80 포트를 열고 nginx 실행
-EXPOSE 80
+# 8080 포트를 열고 nginx 실행
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
