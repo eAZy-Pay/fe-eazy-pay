@@ -2,6 +2,7 @@ import React from 'react';
 import DefaultFrame from '../../components/layout/DefaultFrame';
 import arrowIcon from '../../assets/arrowIcon.svg';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
   // ISO 문자열을 받아서 'yyyy.MM.dd HH:mm' 형식으로 변환
@@ -10,9 +11,10 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
 
   // 이름이 일정 길이를 초과할 경우 축약
   const maxStoreNameLength = 10;
-  const displayStoreName = storeName.length > maxStoreNameLength
-    ? storeName.substring(0, maxStoreNameLength) + '..'
-    : storeName;
+  const displayStoreName =
+    storeName.length > maxStoreNameLength
+      ? storeName.substring(0, maxStoreNameLength) + '..'
+      : storeName;
 
   return (
     <>
@@ -28,12 +30,12 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
 
 const RecentPayment = ({ transactions = [] }) => (
   <DefaultFrame boxShadow={false}>
-    <div className="flex justify-between items-center text-2xl font-extrabold mx-6 my-4">
+    <Link to="/mypage/payment" className="flex justify-between items-center text-2xl font-extrabold mx-6 my-4">
       최근 이용내역
       <div className="flex">
         <img src={arrowIcon} alt="Arrow Icon" />
       </div>
-    </div>
+    </Link>
     {transactions.slice(0, 4).map((transaction, index) => (
       <React.Fragment key={index}>
         <div className="flex flex-col p-6 text-lg gap-1">

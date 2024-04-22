@@ -8,6 +8,8 @@ import MyPage from './pages/mypage/MyPage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
 import FaqPage from './pages/faq/FaqPage';
 import CardDetailPage from './pages/card/CardDetailPage';
+import ManageMyInformation from './pages/mypage/ManageMyInformation';
+import MonthlyPayment from './pages/mypage/MonthlyPayment';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/card-search" element={<CardSearchPage />} />
         <Route path="/shopping" element={<ShoppingPage />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/manage" element={<ManageMyInformation />} />
+        <Route path="/mypage/payment" element={<MonthlyPayment />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/card-detail/:id" element={<CardDetailPage />} />
