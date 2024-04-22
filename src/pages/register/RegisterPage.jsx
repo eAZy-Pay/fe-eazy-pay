@@ -24,6 +24,10 @@ const RegisterPage = () => {
   const [pin, setPin] = useState('');
   const navigate = useNavigate();
 
+  const handleLogoClick = () => {
+    navigate('/'); // 로고를 클릭하면 '/'로 이동
+  };
+
   // 다음 버튼 클릭 로직
   const handleNext = () => {
     console.log(`stepperIndex : ${stepperIndex}`); // 추후 로그 삭제
@@ -75,10 +79,12 @@ const RegisterPage = () => {
   return (
     <DefaultLayout showNavBar={false}>
       <div className="w-full h-full flex flex-col items-center justify-center bg-white p-10">
-        <img src={MainLogo} className="mb-1" />
-        <p className="text-base font-semibold text-slate-600 mb-10">
-          세상에서 가장 쉽고 편리한 결제
-        </p>
+        <div onClick={handleLogoClick} className="cursor-pointer">
+          <img src={MainLogo} className="mb-1" />
+          <p className="text-base font-semibold text-slate-600 mb-10">
+            세상에서 가장 쉽고 편리한 결제
+          </p>
+        </div>
         <div className="flex items-start w-full">
           <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
 
