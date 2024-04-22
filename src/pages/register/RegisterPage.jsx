@@ -29,8 +29,7 @@ const RegisterPage = () => {
   // 다음 버튼 클릭 로직
   const handleNext = () => {
     console.log(`stepperIndex : ${stepperIndex}`); // 추후 로그 삭제
-    if (stepperIndex === 1) {
-    } else if (stepperIndex === 3) {
+    if (stepperIndex === 3) {
       regInfoSubmit();
     } else if (stepperIndex === 4) {
       navigate('/');
@@ -94,7 +93,7 @@ const RegisterPage = () => {
           )}
 
           {stepperIndex === 2 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
-          {stepperIndex === 3 && <PinForm setValidPin={setPin} />}
+          {stepperIndex === 3 && <PinForm setValidPin={setPin} setStepperIndex={setStepperIndex} />}
           {stepperIndex === 4 && <RegisterComplete />}
         </div>
 
