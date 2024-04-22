@@ -13,26 +13,30 @@ const QnaPage = () => {
         user_id: 56,
         date: '2024-04-22',
         title: '제목',
-        content: '내용',
+        content: '내용dddddddddddddddddddd ndddd\r\nddddddddㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdd',
         is_answered: true,
-        answer: '네, 답변해드렸습니다~',
+        writer: '김이지',
       },
       {
         uid: 2,
         user_id: 56,
         date: '2024-04-22',
         title: '제목2',
-        content: '내용2',
+        content: '내용2ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
         is_answered: false,
-        answer: '네, 답변해드렸습니다~',
+        writer: '김이지2',
       },
     ]);
   }, []);
 
   return (
     <DefaultLayout>
-      <div className="w-full text-3xl font-extrabold mb-4">FAQ</div>
-      <div className="w-full text-2xl font-extrabold mb-4">eAZy가 도와드릴게요!</div>
+        <div className='flex'>
+      <div className="mt-[5rem] w-full text-3xl font-extrabold mb-4">QnA</div>
+        <div className="mt-[5rem] w-[15rem] mx-auto py-3 px-auto rounded-[20px] bg-[#1d92e9] text-2xl text-center self-bottom text-white">
+            QnA작성하기
+      </div>
+        </div>
       <div className="flex justify-center">
         <div className="w-full py-4">
           {Object.keys(qnas).length > 0 ? (
