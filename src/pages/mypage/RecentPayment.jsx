@@ -10,9 +10,10 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
 
   // 이름이 일정 길이를 초과할 경우 축약
   const maxStoreNameLength = 10;
-  const displayStoreName = storeName.length > maxStoreNameLength
-    ? storeName.substring(0, maxStoreNameLength) + '..'
-    : storeName;
+  const displayStoreName =
+    storeName.length > maxStoreNameLength
+      ? storeName.substring(0, maxStoreNameLength) + '..'
+      : storeName;
 
   return (
     <>

@@ -1,7 +1,8 @@
 import { PropTypes } from 'prop-types';
 import answeredIcon from '../../assets/answeredIcon.png';
 import notAnsweredIcon from '../../assets/notAnsweredIcon.png';
-const QnaBlock = ({ title, date, content, is_answered, writer }) => {
+const QnaBlock = ({ title, date, content, isAnswered, userName }) => {
+  const writer = userName;
   return (
     <div className="p-7 bg-[#f2f6fc] rounded-lg drop-shadow-sm ">
       <div className="text-2xl">{title}</div>
@@ -18,15 +19,15 @@ const QnaBlock = ({ title, date, content, is_answered, writer }) => {
         <div className="text-lg my-4">{writer}</div>
 
         <div className="flex ml-auto">
-          {is_answered ? (
+          {isAnswered ? (
             <>
               <div className="self-center mx-1 text-nowrap">답변 완료</div>{' '}
               <img src={answeredIcon} alt="답변완료" />{' '}
             </>
           ) : (
             <>
-              <div className="self-center mx-1 text-nowrap">답변 없음</div>{' '}
-              <img src={notAnsweredIcon} alt="답변미완료" />{' '}
+              <div className="self-center mx-1 text-nowrap">답변 대기</div>{' '}
+              <img src={notAnsweredIcon} alt="답변대기" />{' '}
             </>
           )}
         </div>
@@ -37,10 +38,11 @@ const QnaBlock = ({ title, date, content, is_answered, writer }) => {
 
 QnaBlock.propTypes = {
   date: PropTypes.string.isRequired,
-  content: PropTypes.string,
+  content: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  is_answered: PropTypes.boolean,
-  writer: PropTypes.string.isRequired,
+  isAnswered: PropTypes.bool.isRequired,
+  userId: PropTypes.number,
+  userName: PropTypes.string.isRequired,
   answer: PropTypes.string,
 };
 

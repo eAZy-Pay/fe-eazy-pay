@@ -4,45 +4,30 @@ import WriteImg from '../../assets/writeImg.png';
 import { useState, useEffect } from 'react';
 import QnaBlock from './QnaBlock';
 import QnaDetail from './QnaDetail';
-
+import { getQna } from '../../apis/QnaAPI';
 const QnaPage = () => {
   const [qnas, setQnas] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => {
+  const openModal = (qna) => {
+    setSelectedQna(qna); // 선택된 QnaBlock의 정보를 상태에 설정
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
+    setSelectedQna(null);
     setIsModalOpen(false);
   };
+  const [selectedQna, setSelectedQna] = useState(null); // 선택된 QnaBlock의 정보를 유지하기 위한 상태
 
   useEffect(() => {
-    setQnas([
-      {
-        uid: 1,
-        user_id: 56,
-        date: '2024-04-22',
-        title: '제목',
-        content: '내용dddddddddddddddddddd ndddd\r\nddddddddㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdd',
-        is_answered: true,
-        writer: '김이지',
-      },
-      {
-        uid: 2,
-        user_id: 56,
-        date: '2024-04-22',
-        title: '제목2',
-        content:
-          '내용2ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
-        is_answered: false,
-        writer: '김이지2',
-      },
-    ]);
+    getQna().then((res) => {
+      setQnas(res);
+    });
   }, []);
 
   return (
     <DefaultLayout>
-      {isModalOpen && <QnaDetail onClose={closeModal} />}
+      {isModalOpen && <QnaDetail onClose={closeModal} setQnas={setQnas} {...selectedQna} />}
       <div className="flex">
         <div className="mt-[5rem] w-full text-3xl font-extrabold mb-4">QnA</div>
         <div
@@ -58,7 +43,14 @@ const QnaPage = () => {
         <div className="w-full py-4">
           {Object.keys(qnas).length > 0 ? (
             qnas.map((qna, index) => (
-              <div onClick={openModal} key={index} className="break-inside-avoid my-4">
+              <div
+                onClick={() => {
+                  openModal(qna);
+                  setSelectedQna(qna);
+                }}
+                key={index}
+                className="break-inside-avoid my-4"
+              >
                 <QnaBlock {...qna} />
               </div>
             ))
