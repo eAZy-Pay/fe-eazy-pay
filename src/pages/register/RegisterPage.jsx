@@ -9,12 +9,10 @@ import PinForm from './PinForm';
 import RegisterComplete from './RegisterComplete';
 import { submitAllData } from '../../apis/RegisterAPI';
 import { useNavigate } from 'react-router-dom';
-import { checkMember } from '../../apis/CheckMember';
 const RegisterPage = () => {
   const [stepperIndex, setStepperIndex] = useState(0);
   const [checkBox1, setCheckBox1] = useState(false);
   const [checkBox2, setCheckBox2] = useState(false);
-  const [memberValid, setMemberValid] = useState(''); // 처음에 빈 문자열, 회원 인증이 완료되면 true 또는 false
   const [name, setName] = useState('');
   const [birthday, setBirth] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -32,16 +30,10 @@ const RegisterPage = () => {
   const handleNext = () => {
     console.log(`stepperIndex : ${stepperIndex}`); // 추후 로그 삭제
     if (stepperIndex === 1) {
-      // 회원 인증 API 호출
-      checkMember(name, phoneNumber, setMemberValid);
-      //
-    }
-    if (stepperIndex === 3) {
+    } else if (stepperIndex === 3) {
       regInfoSubmit();
-    } else if (stepperIndex === 5 && memberValid) {
+    } else if (stepperIndex === 4) {
       navigate('/');
-    } else if (stepperIndex === 5 && !memberValid) {
-      navigate('/card-recommend');
     } else {
       setStepperIndex((prevStepperIndex) => prevStepperIndex + 1);
     }
@@ -65,13 +57,9 @@ const RegisterPage = () => {
     if (stepperIndex === 1) {
       return !(name && birthday && phoneNumber && email);
     }
-    if (stepperIndex === 3) {
-      return !(id && password);
-    }
-
-    if (stepperIndex === 4) {
-      return pin.length !== 6;
-    }
+    // if (stepperIndex === 3) {
+    //   return !(id && password);
+    // }
 
     return false;
   };
@@ -107,7 +95,7 @@ const RegisterPage = () => {
 
           {stepperIndex === 2 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
           {stepperIndex === 3 && <PinForm setValidPin={setPin} />}
-          {stepperIndex === 4 && <RegisterComplete memberValid={memberValid} />}
+          {stepperIndex === 4 && <RegisterComplete />}
         </div>
 
         <button
@@ -115,15 +103,8 @@ const RegisterPage = () => {
           onClick={handleNext}
           disabled={isButtonDisabled()}
         >
-          {stepperIndex === 4
-            ? '가입'
-            : stepperIndex === 5
-              ? memberValid
-                ? '홈'
-                : '카드 추천받기'
-              : '다음'}
+          {stepperIndex === 3 ? '가입' : stepperIndex === 4 ? '홈' : '다음'}
         </button>
-        {/* )} */}
       </div>
     </DefaultLayout>
   );
