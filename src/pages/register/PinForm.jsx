@@ -75,14 +75,10 @@ const PinForm = ({ setValidPin, setStepperIndex }) => {
   };
 
   // 모달 열기/닫기 함수
-  // const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
 
   return (
     <div>
-      {/* <div onClick={openModal} className="cursor-pointer">
-      </div> */}
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
