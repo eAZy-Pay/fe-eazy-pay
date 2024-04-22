@@ -15,7 +15,7 @@ const UserMainComponent = ({ card }) => {
   return (
     <>
       <div className="flex items-center justify-center">
-        <RotatedCard image={card.card.image} />
+        <RotatedCard image={card.card.image} style={{ width: '157.71px', height: '251.98px' }} />
         <div className="flex flex-col items-center gap-8">
           <div className="flex">
             <CardsGage

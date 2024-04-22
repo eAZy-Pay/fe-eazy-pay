@@ -12,7 +12,7 @@ const DonutChart = ({ data, handleLegendClick, checkedIndex }) => {
       width: 1100,
     },
     title: {
-      text: '월 평군 금액',
+      text: '월 평균 금액',
     },
     plotOptions: {
       pie: {

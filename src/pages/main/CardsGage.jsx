@@ -14,8 +14,8 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
   }, [amount, total]);
 
   return (
-    <div className={`flex justify-center items-center ${margin} space-x-4 w-[23.6rem]`}>
-      <div className={`${width} h-[1.5em] rounded-[1.7em] bg-[#115]/40 overflow-hidden relative`}>
+    <div className={`flex justify-center items-center space-x-4 w-[23.6rem] ${margin}`}>
+      <div className={`rounded-[1.7em] bg-[#115]/40 overflow-hidden relative h-[1.5em]  ${width}`}>
         {/* 계산된 백분율을 가로 길이로 설정 */}
         <div
           className="h-full rounded-[1.7em] absolute bottom-0 left-0"
@@ -31,11 +31,11 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
 };
 
 CardsGage.propTypes = {
-  color: PropTypes.string.isRequired, // 'color' prop이 반드시 문자열이어야 함을 지정합니다.
-  amount: PropTypes.number.isRequired, // 'amount' prop이 반드시 숫자여야 함을 지정합니다.
-  total: PropTypes.number.isRequired, // 'total' prop이 반드시 숫자여야 함을 지정합니다.
-  width: PropTypes.string, // 'width' prop이 문자열이어야 함을 지정합니다.
-  margin: PropTypes.string.isRequired, // 'margin' prop이 문자열이어야 함을 지정합니다.
+  color: PropTypes.string.isRequired,
+  amount: PropTypes.number,
+  total: PropTypes.number,
+  width: PropTypes.string,
+  margin: PropTypes.string,
 };
 
 export default CardsGage;

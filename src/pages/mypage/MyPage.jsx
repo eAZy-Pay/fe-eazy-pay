@@ -3,7 +3,7 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import ProfileSection from './ProfileSection';
 import RecentTransactions from './RecentTransactions';
 import AvailableFunds from './AvailableFunds';
-import CardManagement from './CardManagement'; // 카드 관리 섹션 컴포넌트
+import CardManagement from './CardManagement';
 import eazy from '../../assets/eAZyCard.svg';
 
 const userMain = {
@@ -28,7 +28,7 @@ const userMain = {
 const MyPage = () => (
   <DefaultLayout>
     <div className="flex justify-between h-auto pt-14">
-      <div className="flex flex-col gap-10 w-1/2 p-4">
+      <div className="flex flex-col w-1/2   gap-10 p-4">
         <ProfileSection name={userMain.userName} />
         <RecentTransactions transactions={userMain.transactions} />
         <AvailableFunds
