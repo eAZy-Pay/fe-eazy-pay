@@ -49,7 +49,7 @@ const QnaPage = () => {
                   setSelectedQna(qna);
                 }}
                 key={index}
-                className="break-inside-avoid my-4"
+                className="break-inside-avoid my-4 "
               >
                 <QnaBlock {...qna} />
               </div>

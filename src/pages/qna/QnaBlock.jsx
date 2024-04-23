@@ -4,7 +4,7 @@ import notAnsweredIcon from '../../assets/notAnsweredIcon.png';
 const QnaBlock = ({ title, date, content, isAnswered, userName }) => {
   const writer = userName;
   return (
-    <div className="p-7 bg-[#f2f6fc] rounded-lg drop-shadow-sm ">
+    <div className="p-7 bg-[#f2f6fc] rounded-lg drop-shadow-sm transition-all duration-300 hover:bg-gray-300 hover:text-gray-200">
       <div className="text-2xl">{title}</div>
       <div
         className="text-lg my-4 mx-3

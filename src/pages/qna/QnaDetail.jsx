@@ -31,13 +31,15 @@ const QnaDetail = ({
   }, []);
   return (
     <>
-      <div className="bg-white rounded-md shadow-md p-4 mb-4 relative">
+    <div className='fixed z-50 inset-0 flex justify-center items-center bg-black bg-opacity-50 backdrop-blur-md'>
+
+      <div className="w-[50rem] py-8 bg-white rounded-md shadow-md p-4 mb-4 relative">
         <img
           src={closeIcon}
           alt="Close"
           className="absolute top-2 right-2 cursor-pointer"
           onClick={onClose}
-        />
+          />
         <div className="mx-[5rem]">
           <div className="mt-[5rem] flex justify-between items-center mb-4">
             <h2 className="text-2xl font-bold mr-3">Q.</h2>
@@ -60,11 +62,11 @@ const QnaDetail = ({
           <p className="text-gray-700 mb-4 p-5">{content}</p>
           {user &&
             userId == user.uid && ( //로그인 후 본인이어야 수정 및 삭제
-              <div className="flex justify-between">
+            <div className="flex justify-between">
                 <button
                   onClick={onDelete}
                   className="ml-auto bg-red-500 text-white px-4 py-2 rounded-md mr-2"
-                >
+                  >
                   삭제
                 </button>
                 <button onClick={onEdit} className="bg-blue-500 text-white px-4 py-2 rounded-md">
@@ -80,6 +82,7 @@ const QnaDetail = ({
           </div>
         </div>
       </div>
+</div>
     </>
   );
 };
