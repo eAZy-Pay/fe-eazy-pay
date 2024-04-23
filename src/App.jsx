@@ -7,8 +7,9 @@ import CardSearchPage from './pages/search/CardSearchPage';
 import MyPage from './pages/mypage/MyPage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
 import FaqPage from './pages/faq/FaqPage';
+import QnaPage from './pages/qna/QnaPage';
+import QnaWritePage from './pages/qna/QnaWritePage';
 import CardDetailPage from './pages/card/CardDetailPage';
-
 function App() {
   return (
     <Router>
@@ -21,6 +22,8 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="/qna" element={<QnaPage />} />
+        <Route path="/qna-write" element={<QnaWritePage />} />
         <Route path="/card-detail/:id" element={<CardDetailPage />} />
       </Routes>
     </Router>

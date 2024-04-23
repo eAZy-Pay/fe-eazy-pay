@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const CreditCard = ({ card, showName, showInfo, useLink, sclae }) => {
+const CreditCard = ({ card, showName, showInfo, useLink, scale }) => {
   const cardContent = (
     <>
       <img
         className={`w-[157.71px] h-[251.98px] ${useLink ? 'hover:translate-y-2' : ''}`}
         src={card.image}
         alt="Credit Card"
-        style={{ transform: `scale(${sclae / 100})` }}
+        style={{ transform: `scale(${scale / 100})` }}
       />
       {showName && <div className="text-lg font-bold text-black">{card.name}</div>}
       {showInfo && <div className="text-base font-bold text-black">{card.info}</div>}
@@ -46,6 +46,6 @@ CreditCard.propTypes = {
   showName: PropTypes.bool,
   showInfo: PropTypes.bool,
   useLink: PropTypes.bool,
-  sclae: PropTypes.number,
+  scale: PropTypes.number,
 };
 export default CreditCard;
