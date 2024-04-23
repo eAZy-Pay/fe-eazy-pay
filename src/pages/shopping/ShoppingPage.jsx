@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
+import secureLocalStorage from 'react-secure-storage';
+import { checkPin } from '../../apis/CheckPinAPI';
 
 const PaymentModal = ({ isOpen, closeModal }) => {
+  const [message, setMessage] = useState('PIN 번호를 입력해주세요');
   const [pin, setPin] = useState(''); // 현재 입력 중인 PIN
   const [keypadNumbers, setKeypadNumbers] = useState([]); // 키패드 번호
   const [pinStatus, setPinStatus] = useState([false, false, false, false, false, false]); // 동그라미 상태
@@ -19,7 +23,7 @@ const PaymentModal = ({ isOpen, closeModal }) => {
   }, []);
 
   // 핀번호 입력 처리
-  const handleKeyClick = (number) => {
+  const handleKeyClick = async (number) => {
     if (pin.length < 6) {
       const newPin = pin + number;
       setPin(newPin);
@@ -28,7 +32,24 @@ const PaymentModal = ({ isOpen, closeModal }) => {
       setPinStatus(updatedStatus); // 동그라미 상태 업데이트
 
       if (newPin.length === 6) {
-        closeModal(); // 모달 닫기
+        const storage = secureLocalStorage.getItem('user');
+        if (storage) {
+          const userUid = JSON.parse(storage).uid;
+
+          try {
+            await checkPin(userUid, newPin); // 서버에 uid와 pin 번호 전송
+            // 성공적으로 확인되면 결제 완료
+            closeModal();
+            //
+            // TODO: 결제 완료 페이지로 이동. 결제가 완료된 것을 어떻게 시각화?
+            //
+          } catch (error) {
+            setMessage('pin 번호가 올바르지 않습니다. 다시 입력하세요.');
+            setPinStatus([false, false, false, false, false, false]);
+            setPin('');
+            shuffleKeypad();
+          }
+        }
       }
     }
   };
@@ -65,7 +86,7 @@ const PaymentModal = ({ isOpen, closeModal }) => {
         },
       }}
     >
-      <h2 className="text-center">PIN 번호를 입력해주세요</h2>
+      {message && <p className="text-center">{message}</p>}
       <div className="flex justify-center mb-4">
         {pinStatus.map((status, idx) => (
           <div
@@ -131,6 +152,11 @@ const ShoppingPage = () => {
       <PaymentModal isOpen={isModalOpen} closeModal={closeModal} />
     </DefaultLayout>
   );
+};
+
+PaymentModal.propTypes = {
+  isOpen: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default ShoppingPage;
