@@ -23,6 +23,10 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
     }
   };
 
+  const handleIdBlur = () => {
+    checkId(id, setId, setSuccessId, setErrorId);
+  };
+
   const validatePassword = (password) => {
     const specialChars = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>?]+/;
     const numericChars = /[0-9]/;
@@ -82,17 +86,11 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
               label="아이디"
               variant="outlined"
               onChange={handleIdChange}
+              onBlur={handleIdBlur} // 포커스를 잃을 때 중복 확인
               error={!!errorId}
               helperText={errorId || successId}
             />
           </Box>
-          <button
-            className="py-1 px-4 bg-blue-100 text-[#808388] font-semibold rounded-lg 
-          hover:bg-blue-300 transition duration-300"
-            onClick={() => checkId(id, setId, setSuccessId, setErrorId)}
-          >
-            중복 확인
-          </button>
         </div>
 
         <Box
