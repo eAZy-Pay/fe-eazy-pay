@@ -6,11 +6,11 @@ import DropdownMenu from './DropDownMenu';
 import MainLogo from '../../assets/mainLogo.svg';
 import MenuIcon from '../../assets/menuIcon.svg';
 import BellIcon from '../../assets/bellIcon.svg';
-
+import { sessionValidationCheck } from '../../utils/sessionMiddleware';
 const NavBar = () => {
   // 드롭다운바 열림/닫힘 상태 관리
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  sessionValidationCheck(); //라우팅마다 세션 유효검사
   return (
     <div className="flex w-full h-20 items-center">
       <Link to="/">
