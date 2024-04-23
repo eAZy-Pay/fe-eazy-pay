@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import { getQna, putQna } from '../../apis/QnaAPI';
+import { getQna, putQna, postQna } from '../../apis/QnaAPI';
 import { sessionValidationCheck } from '../../utils/sessionMiddleware';
 const QnaWritePage = () => {
   const [qna, setQna] = useState();
   const [user, setUser] = useState(sessionValidationCheck());
 
-  const submitHandler = () => {
-    if(qna.uid){
+  const submitHandler = (e) => {
+    e.preventDefault(); // submit 새로고침 막기
+    if (qna.uid) {// 수정
       putQna(qna);
-    }else{
-      putQna({...qna, date:new Date()})
+    } else { // 등록
+      qna.userId = user.uid;
+      postQna(qna);
     }
+    window.location.href = '/qna';
   };
+
   const cancleHandler = () => {
     confirm('작성을 취소하시겠습니까?\n작성중인 내용은 저장되지 않습니다.')
       ? (window.location.href = '/qna')
@@ -64,7 +68,7 @@ const QnaWritePage = () => {
                 id="title"
                 className="text-2xl font-bold w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 placeholder="제목을 입력하세요"
-                value={qna? qna.title : ''}
+                value={qna ? qna.title : ''}
                 onChange={(e) => {
                   setQna((prev) => ({
                     ...prev,
@@ -86,7 +90,7 @@ const QnaWritePage = () => {
                 className="text-2xl font-bold w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 rows="6"
                 placeholder="내용을 입력하세요"
-                value={qna? qna.content: ''}
+                value={qna ? qna.content : ''}
                 onChange={(e) =>
                   setQna((prev) => ({
                     ...prev,

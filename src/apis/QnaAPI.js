@@ -42,3 +42,17 @@ export const putQna = async (bodyObj) => {
   ).json();
   return data;
 };
+
+// Qna 게시글 수정 요청
+export const postQna = async (bodyObj) => {
+  const data = (
+    await fetch(`${BASE_URL}/api/qnas`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bodyObj),
+    })
+  ).json();
+  return data;
+};
