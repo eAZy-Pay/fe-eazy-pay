@@ -7,6 +7,7 @@ import CardSearchPage from './pages/search/CardSearchPage';
 import MyPage from './pages/mypage/MyPage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
 import ShoppingDetail from './pages/shopping/ShoppingDetail';
+import ShoppingComplete from './pages/shopping/ShoppingComplete';
 import FaqPage from './pages/faq/FaqPage';
 import QnaPage from './pages/qna/QnaPage';
 import QnaWritePage from './pages/qna/QnaWritePage';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/card-search" element={<CardSearchPage />} />
         <Route path="/shopping" element={<ShoppingPage />} />
         <Route path="/shopping/detail" element={<ShoppingDetail />} />
+        <Route path="/shopping/complete" element={<ShoppingComplete />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/faq" element={<FaqPage />} />

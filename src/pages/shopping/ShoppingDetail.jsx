@@ -4,9 +4,11 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import secureLocalStorage from 'react-secure-storage';
 import { checkPin } from '../../apis/AuthAPI';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { paymentInfo } from '../../apis/PaymentInfoAPI';
 
-const PaymentModal = ({ isOpen, closeModal }) => {
+const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeName }) => {
+  const navigate = useNavigate();
   const [message, setMessage] = useState('PIN 번호를 입력해주세요');
   const [pin, setPin] = useState(''); // 현재 입력 중인 PIN
   const [keypadNumbers, setKeypadNumbers] = useState([]); // 키패드 번호
@@ -28,6 +30,7 @@ const PaymentModal = ({ isOpen, closeModal }) => {
     if (pin.length < 6) {
       const newPin = pin + number;
       setPin(newPin);
+      console.log(newPin);
 
       const updatedStatus = pinStatus.map((status, idx) => (idx < newPin.length ? true : false));
       setPinStatus(updatedStatus); // 동그라미 상태 업데이트
@@ -39,17 +42,20 @@ const PaymentModal = ({ isOpen, closeModal }) => {
 
           try {
             await checkPin(userUid, newPin); // 서버에 uid와 pin 번호 전송
+            console.log('pin 번호 확인 완료'); // TODO: 콘솔 로그 제거
             //  200 ok 받으면 id, price 넘겨주는 api 실행
-            // try {
-            //   await paymentInfo(userUid, categoryId, price); // 서버에 userUid, categoryId, price 전송
-            // } catch (error) {
-            //   console.error(error);
-            // }
+            try {
+              const response = await paymentInfo(userUid, categoryId, price, storeCode, storeName);
+              const jsonResponse = await response.json();
 
-            closeModal();
-            //
-            // TODO: 결제 완료 페이지로 이동.
-            //
+              closeModal();
+
+              navigate('/shopping/complete', {
+                state: jsonResponse, // 응답 데이터를 상태 객체로 전달
+              });
+            } catch (error) {
+              console.error(error);
+            }
           } catch (error) {
             setMessage('pin 번호가 올바르지 않습니다. 다시 입력하세요.');
             setPinStatus([false, false, false, false, false, false]);
@@ -83,6 +89,7 @@ const PaymentModal = ({ isOpen, closeModal }) => {
       isOpen={isOpen}
       appElement={document.getElementById('root')}
       onRequestClose={closeModal}
+      // categoryId={categoryId}
       contentLabel="Payment PIN"
       style={{
         content: {
@@ -134,7 +141,9 @@ const PaymentModal = ({ isOpen, closeModal }) => {
 const ShoppingDetail = () => {
   const { search } = useLocation(); // 쿼리 파라미터 읽기
   const queryParams = new URLSearchParams(search); // 쿼리 파라미터 파싱
-  const categoryId = queryParams.get('id');
+  const categoryId = queryParams.get('categoryId');
+  const storeCode = queryParams.get('storeCode');
+  const storeName = queryParams.get('storeName');
   const image = queryParams.get('image');
   const name = queryParams.get('name');
   const price = queryParams.get('price');
@@ -156,11 +165,18 @@ const ShoppingDetail = () => {
           <p>상품명 : {name}</p>
           <p>가격 : {price}</p>
           <button className="bg-gray-300 text-black py-2 px-4 mt-4 rounded-lg" onClick={openModal}>
-            eAZy 페이로 결제
+            eAZy pay로 결제
           </button>
         </div>
       </div>
-      <PaymentModal isOpen={isModalOpen} closeModal={closeModal} />
+      <PaymentModal
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        categoryId={categoryId}
+        price={price}
+        storeCode={storeCode}
+        storeName={storeName}
+      />
     </DefaultLayout>
   );
 };
@@ -168,6 +184,10 @@ const ShoppingDetail = () => {
 PaymentModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
+  categoryId: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  storeCode: PropTypes.string.isRequired,
+  storeName: PropTypes.string.isRequired,
 };
 
 export default ShoppingDetail;
