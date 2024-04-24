@@ -11,6 +11,9 @@ import FaqPage from './pages/faq/FaqPage';
 import QnaPage from './pages/qna/QnaPage';
 import QnaWritePage from './pages/qna/QnaWritePage';
 import CardDetailPage from './pages/card/CardDetailPage';
+import ManageMyInformation from './pages/mypage/ManageMyInformation';
+import MonthlyPayment from './pages/mypage/MonthlyPayment';
+
 function App() {
   return (
     <Router>
@@ -22,6 +25,8 @@ function App() {
         <Route path="/shopping" element={<ShoppingPage />} />
         <Route path="/shopping/detail" element={<ShoppingDetail />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/manage" element={<ManageMyInformation />} />
+        <Route path="/mypage/payment" element={<MonthlyPayment />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/qna" element={<QnaPage />} />
