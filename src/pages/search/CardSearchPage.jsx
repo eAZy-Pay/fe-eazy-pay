@@ -36,11 +36,11 @@ const CardSearchPage = () => {
       alert('특수문자는 입력할 수 없습니다.');
       return;
     }
-    getCardsLikeName(searchText).then(setCategoryCards);
+    getCardsLikeName(searchText).then((res) => setCategoryCards(res.content));
   };
 
   useEffect(() => {
-    getCategoryCards(categoryId).then(setCategoryCards);
+    getCategoryCards(categoryId).then((res) => setCategoryCards(res.content));
   }, [categoryId]);
 
   // 엔터키 입력 시 검색
@@ -77,7 +77,7 @@ const CardSearchPage = () => {
         setCheckedIndex={setcheckedIndex}
       />
       <div className="my-6 text-3xl font-bold">검색 결과</div>
-      {categoryCards.length ? (
+      {categoryCards?.length ? (
         <CategoryCards categoryCards={categoryCards} maxColumn={4} maxRow={3} />
       ) : (
         <div className="text-2xl text-center my-6">검색 결과가 없습니다.</div>
