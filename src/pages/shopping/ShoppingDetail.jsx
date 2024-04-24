@@ -30,7 +30,7 @@ const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeN
     if (pin.length < 6) {
       const newPin = pin + number;
       setPin(newPin);
-      console.log(newPin);
+      console.log(newPin); // TODO: 콘솔 로그 제거
 
       const updatedStatus = pinStatus.map((status, idx) => (idx < newPin.length ? true : false));
       setPinStatus(updatedStatus); // 동그라미 상태 업데이트
@@ -44,18 +44,56 @@ const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeN
             await checkPin(userUid, newPin); // 서버에 uid와 pin 번호 전송
             console.log('pin 번호 확인 완료'); // TODO: 콘솔 로그 제거
             //  200 ok 받으면 id, price 넘겨주는 api 실행
-            try {
-              const response = await paymentInfo(userUid, categoryId, price, storeCode, storeName);
-              const jsonResponse = await response.json();
 
-              closeModal();
+            ////////////////////////////////////////////////
+            // 더미 Json data 넘겨주기
+            const originalAmount = 10000;
+            const paidAmount = 8500;
+            const discount = 1500;
+            const cardName = '정석정석';
+            const cardImage =
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx8ny-OtWRahC7nMfUzYMaQuDqYumdHgPppQ&usqp=CAU';
 
-              navigate('/shopping/complete', {
-                state: jsonResponse, // 응답 데이터를 상태 객체로 전달
-              });
-            } catch (error) {
-              console.error(error);
-            }
+            // JavaScript 객체 생성
+            const jsonObject = {
+              originalAmount: originalAmount,
+              paidAmount: paidAmount,
+              discount: discount,
+              cardName: cardName,
+              cardImage: cardImage,
+            };
+
+            // JSON 문자열로 변환
+            const dummyJsonResponse = JSON.stringify(jsonObject);
+            navigate('/shopping/complete', {
+              state: dummyJsonResponse, // 응답 데이터를 상태 객체로 전달
+            });
+
+            //
+            //
+            //
+            //
+            //
+            // try {
+            //   const response = await paymentInfo(userUid, categoryId, price, storeCode, storeName);
+            //   const jsonResponse = await response.json();
+
+            //   closeModal();
+
+            //   navigate('/shopping/complete', {
+            //     state: jsonResponse, // 응답 데이터를 상태 객체로 전달
+            //   });
+            // } catch (error) {
+            //   console.error(error);
+            // }
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
           } catch (error) {
             setMessage('pin 번호가 올바르지 않습니다. 다시 입력하세요.');
             setPinStatus([false, false, false, false, false, false]);
