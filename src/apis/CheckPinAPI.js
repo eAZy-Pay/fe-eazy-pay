@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const checkPin = async (uid, pin) => {
-  const response = await fetch(`${BASE_URL}/api/shopping/checkpin`, {
+  const response = await fetch(`${BASE_URL}/api/checkpin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
