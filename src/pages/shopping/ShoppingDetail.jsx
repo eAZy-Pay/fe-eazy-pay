@@ -81,6 +81,7 @@ const PaymentModal = ({ isOpen, closeModal }) => {
   return (
     <Modal
       isOpen={isOpen}
+      appElement={document.getElementById('root')}
       onRequestClose={closeModal}
       contentLabel="Payment PIN"
       style={{
@@ -165,7 +166,7 @@ const ShoppingDetail = () => {
 };
 
 PaymentModal.propTypes = {
-  isOpen: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 
