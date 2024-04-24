@@ -9,11 +9,12 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
   const formattedDate =
     paymentDate.substring(0, 10).replace(/-/g, '.') + ' ' + paymentDate.substring(11, 16);
 
-
   return (
     <>
       <div className="flex justify-between font-extrabold">
-        <span className='max-w-[150px] flex-grow overflow-hidden text-ellipsis whitespace-nowrap'>{storeName}</span>
+        <span className="max-w-[150px] flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+          {storeName}
+        </span>
         <span>{paymentAmount.toLocaleString()}원</span>
         <></>
       </div>

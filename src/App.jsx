@@ -13,6 +13,7 @@ import QnaWritePage from './pages/qna/QnaWritePage';
 import CardDetailPage from './pages/card/CardDetailPage';
 import ManageMyInformation from './pages/mypage/ManageMyInformation';
 import MonthlyPayment from './pages/mypage/MonthlyPayment';
+import ManageMyCard from './pages/mypage/ManageMyCard';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/manage" element={<ManageMyInformation />} />
         <Route path="/mypage/payment" element={<MonthlyPayment />} />
+        <Route path="/mypage/card-management" element={<ManageMyCard />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/qna" element={<QnaPage />} />
