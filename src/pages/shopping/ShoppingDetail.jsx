@@ -147,6 +147,7 @@ const ShoppingDetail = () => {
           <img src={image} alt="Example" className="w-100 h-100" />
         </div>
         <div className="w-2/4 flex flex-col items-start bg-gray-100 p-4 rounded-lg">
+          <p>category id : {id}</p>
           <p>상품명 : {name}</p>
           <p>가격 : {price}</p>
           <button className="bg-gray-300 text-black py-2 px-4 mt-4 rounded-lg" onClick={openModal}>

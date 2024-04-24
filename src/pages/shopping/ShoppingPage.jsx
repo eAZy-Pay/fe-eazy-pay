@@ -1,6 +1,6 @@
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Card = ({ id, image, category, name, price }) => {
   const navigate = useNavigate();
@@ -106,6 +106,14 @@ const ShoppingPage = () => {
       </div>
     </DefaultLayout>
   );
+};
+
+Card.propTypes = {
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
 };
 
 export default ShoppingPage;
