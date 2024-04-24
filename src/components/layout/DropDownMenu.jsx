@@ -4,11 +4,10 @@ import CardIcon from '../../assets/cardIcon.svg';
 import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
 import PropTypes from 'prop-types';
-import secureLocalStorage from 'react-secure-storage';
-import { sessionValidationCheck } from '../../utils/sessionMiddleware';
+import { getUserSession, logout } from '../../utils/authUtils';
 const DropdownMenu = ({ isOpen }) => {
   const navigate = useNavigate();
-  const user = sessionValidationCheck();
+  const user = getUserSession();
   return (
     <>
       <div
@@ -55,9 +54,7 @@ const DropdownMenu = ({ isOpen }) => {
             <div
               className="cursor-pointer flex justify-center p-3 gap-4"
               onClick={() => {
-                secureLocalStorage.removeItem('user');
-                alert('로그아웃 되었습니다.');
-                navigate('/');
+                logout();
               }}
             >
               {/*서버 세션 발급 확장성을 위해 Link 태그로 나뒀습니다.*/}
