@@ -36,7 +36,7 @@ const MainBanner = () => {
     } else {
       navigate('/'); // 드롭다운 메뉴 로그아웃 시 새로고침
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   return (
     <>

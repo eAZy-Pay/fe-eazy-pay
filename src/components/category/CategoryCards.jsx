@@ -23,7 +23,7 @@ const CategoryCards = ({ categoryCards, maxColumn, maxRow, showInfo }) => {
       recommendationGroups.push(
         <div className="flex justify-center gap-x-10 mt-8" key={i}>
           {group.map((card, index) => (
-            <CreditCard key={index} card={{ ...card, uid: index }} showInfo={showInfo} />
+            <CreditCard key={index} card={card} showInfo={showInfo} />
           ))}
         </div>
       );

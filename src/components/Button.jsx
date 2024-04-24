@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-export const Button = ({ onClick, buttonText, isDeleteButton, width, height }) => {
+export const Button = ({ onClick, buttonText, isDeleteButton, width, height, textSize }) => {
   const deleteButtonStyle = 'bg-[#ffdddf] text-[#e44545] hover:shadow-lg';
   const createButtonStyle = 'bg-[#d0e6ff] text-[#2563eb] hover:shadow-lg';
   return (
     <button
-      className={`${width + ' ' + height} rounded-md font-extrabold text-sm ${
+      className={`${width + ' ' + height} rounded-md font-extrabold ${textSize} ${
         isDeleteButton ? deleteButtonStyle : createButtonStyle
       }`}
       onClick={onClick}
@@ -19,6 +19,7 @@ Button.defaultProps = {
   isDeleteButton: false,
   width: 'w-24',
   height: 'h-9',
+  textSize: 'text-base',
 };
 
 Button.propTypes = {
@@ -27,4 +28,5 @@ Button.propTypes = {
   isDeleteButton: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
+  textSize: PropTypes.string,
 };
