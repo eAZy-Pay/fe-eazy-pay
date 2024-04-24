@@ -3,7 +3,7 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import secureLocalStorage from 'react-secure-storage';
-import { checkPin } from '../../apis/CheckPinAPI';
+import { checkPin } from '../../apis/AuthAPI';
 import { useLocation } from 'react-router-dom';
 
 const PaymentModal = ({ isOpen, closeModal }) => {
@@ -39,12 +39,16 @@ const PaymentModal = ({ isOpen, closeModal }) => {
 
           try {
             await checkPin(userUid, newPin); // 서버에 uid와 pin 번호 전송
-            //
-            //  TODO: 200 ok 받으면 id, price 넘겨주는 api 실행
-            //
+            //  200 ok 받으면 id, price 넘겨주는 api 실행
+            // try {
+            //   await paymentInfo(userUid, categoryId, price); // 서버에 userUid, categoryId, price 전송
+            // } catch (error) {
+            //   console.error(error);
+            // }
+
             closeModal();
             //
-            // TODO: 결제 완료 페이지로 이동. 결제가 완료된 것을 어떻게 시각화?
+            // TODO: 결제 완료 페이지로 이동.
             //
           } catch (error) {
             setMessage('pin 번호가 올바르지 않습니다. 다시 입력하세요.');
@@ -129,7 +133,7 @@ const PaymentModal = ({ isOpen, closeModal }) => {
 const ShoppingDetail = () => {
   const { search } = useLocation(); // 쿼리 파라미터 읽기
   const queryParams = new URLSearchParams(search); // 쿼리 파라미터 파싱
-  const id = queryParams.get('id');
+  const categoryId = queryParams.get('id');
   const image = queryParams.get('image');
   const name = queryParams.get('name');
   const price = queryParams.get('price');
@@ -147,7 +151,7 @@ const ShoppingDetail = () => {
           <img src={image} alt="Example" className="w-100 h-100" />
         </div>
         <div className="w-2/4 flex flex-col items-start bg-gray-100 p-4 rounded-lg">
-          <p>category id : {id}</p>
+          <p>category id : {categoryId}</p>
           <p>상품명 : {name}</p>
           <p>가격 : {price}</p>
           <button className="bg-gray-300 text-black py-2 px-4 mt-4 rounded-lg" onClick={openModal}>
