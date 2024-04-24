@@ -35,9 +35,10 @@ div {
 }
 
 .bold-hr {
-  border: 1.5px solid black; /* 2픽셀 굵기의 검은색 실선으로 설정합니다. */
+  border: 1.5px solid black;
+  /* 2픽셀 굵기의 검은색 실선으로 설정합니다. */
 }
 
 .bold-hr2 {
-  border: 1.5px solid rgba(0, 0, 0, 0.4); 
+  border: 1.5px solid rgba(0, 0, 0, 0.4);
 }

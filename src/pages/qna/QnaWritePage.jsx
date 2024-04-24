@@ -8,9 +8,11 @@ const QnaWritePage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault(); // submit 새로고침 막기
-    if (qna.uid) {// 수정
+    if (qna.uid) {
+      // 수정
       putQna(qna);
-    } else { // 등록
+    } else {
+      // 등록
       qna.userId = user.uid;
       postQna(qna);
     }
