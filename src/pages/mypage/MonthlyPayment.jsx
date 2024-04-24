@@ -7,6 +7,7 @@ import {
   getPaymentHistoryForMonth,
   getTotalAmountForMonth,
 } from '../../apis/UserAPI';
+import { sessionValidationCheck } from '../../utils/sessionMiddleware';
 
 const ITEMS_PER_PAGE = 10;
 const currentMonth = new Date().getMonth() + 1;
@@ -24,7 +25,8 @@ const MonthlyPayment = () => {
     const fetchData = async () => {
       try {
         // 사용자 정보 가져오는 코드 추가
-        const uid = JSON.parse(sessionStorage.getItem('user'))?.uid;
+        const user = sessionValidationCheck();
+        const uid = user.uid;
         const offset = (currentPage - 1) * ITEMS_PER_PAGE;
         const data = await getPaymentHistoryData(
           uid,

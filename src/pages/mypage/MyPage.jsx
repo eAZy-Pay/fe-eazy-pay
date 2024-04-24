@@ -7,6 +7,7 @@ import AvailableFunds from './AvailableFunds';
 import CardManagement from './CardManagement';
 import eazy from '../../assets/eAZyCard.svg';
 import { getPaymentHistoryData } from '../../apis/UserAPI';
+import { sessionValidationCheck } from '../../utils/sessionMiddleware';
 
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
@@ -30,14 +31,14 @@ const MyPage = () => {
   });
 
   useEffect(() => {
-    const user = sessionStorage.getItem('user');
+    const user = sessionValidationCheck();
     if (!user) {
       // 사용자 정보가 없으면,
       navigate('/login'); // 로그인 페이지로 리다이렉트합니다.
     } else {
       const fetchData = async () => {
         try {
-          const uid = JSON.parse(user).uid;
+          const uid = user.uid;
           const data = await getPaymentHistoryData(uid, currentYear, currentMonth, 0, 4);
           if (!Array.isArray(data)) {
             throw new Error('Fetched data is not an array');
