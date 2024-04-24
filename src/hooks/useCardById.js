@@ -5,7 +5,7 @@ const useCardById = (id) => {
   const [cardWithBenefit, setCardWithBenefit] = useState(null);
 
   useEffect(() => {
-    if (id !== undefined || id < 1) {
+    if (id !== undefined || id > 0) {
       getCardById(id).then(setCardWithBenefit);
     }
   }, [id]);
