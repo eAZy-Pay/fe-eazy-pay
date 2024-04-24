@@ -6,7 +6,10 @@ import RecentPayment from './RecentPayment';
 import AvailableFunds from './AvailableFunds';
 import CardManagement from './CardManagement';
 import eazy from '../../assets/eAZyCard.svg';
-import getPaymentHistoryData from '../../apis/UserAPI';
+import { getPaymentHistoryData } from '../../apis/UserAPI';
+
+const currentMonth = new Date().getMonth() + 1;
+const currentYear = new Date().getFullYear();
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -35,7 +38,10 @@ const MyPage = () => {
       const fetchData = async () => {
         try {
           const uid = JSON.parse(user).uid;
-          const data = await getPaymentHistoryData(uid, 4);
+          const data = await getPaymentHistoryData(uid, currentYear, currentMonth, 0, 4);
+          if (!Array.isArray(data)) {
+            throw new Error('Fetched data is not an array');
+          }
           setUserMain((prev) => ({
             ...prev,
             transactions: data,
