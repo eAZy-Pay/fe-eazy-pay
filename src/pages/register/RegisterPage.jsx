@@ -7,7 +7,6 @@ import EazyPayRegisterForm from './EazyPayRegisterForm';
 import CardAuthenticationForm from './CardAuthenticationForm';
 import PinForm from './PinForm';
 import RegisterComplete from './RegisterComplete';
-import { submitAllData } from '../../apis/RegisterAPI';
 import { useNavigate } from 'react-router-dom';
 const RegisterPage = () => {
   const [stepperIndex, setStepperIndex] = useState(0);
@@ -19,7 +18,6 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [id, setId] = useState('');
   const [password, setPw] = useState('');
-  const [pin, setPin] = useState('');
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -28,34 +26,22 @@ const RegisterPage = () => {
 
   // 다음 버튼 클릭 로직
   const handleNext = () => {
-    console.log(`stepperIndex : ${stepperIndex}`); // 추후 로그 삭제
-    if (stepperIndex === 3) {
-      regInfoSubmit();
-    } else if (stepperIndex === 4) {
+    console.log(`stepperIndex : ${stepperIndex}`); // TODO: 추후 로그 삭제
+    if (stepperIndex === 4) {
       navigate('/');
     } else {
       setStepperIndex((prevStepperIndex) => prevStepperIndex + 1);
     }
   };
 
-  const regInfoSubmit = async () => {
-    // API를 호출하고 응답을 처리합니다.
-    try {
-      await submitAllData({ name, id, password, email, phoneNumber, birthday, pin });
-      setStepperIndex(4);
-    } catch (error) {
-      console.error('Registration Failed:', error);
-    }
-  };
-
   // 다음 버튼의 활성화/비활성화 조건 설정. true일 때 비활성화
   const isButtonDisabled = () => {
-    if (stepperIndex === 0) {
-      return !(checkBox1 && checkBox2);
-    }
-    if (stepperIndex === 1) {
-      return !(name && birthday && phoneNumber && email);
-    }
+    // if (stepperIndex === 0) { //TODO: 페이지 완성하면 주석 해제
+    //   return !(checkBox1 && checkBox2);
+    // }
+    // if (stepperIndex === 1) {
+    //   return !(name && birthday && phoneNumber && email);
+    // }
     // if (stepperIndex === 3) {
     //   return !(id && password);
     // }
@@ -93,7 +79,17 @@ const RegisterPage = () => {
           )}
 
           {stepperIndex === 2 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
-          {stepperIndex === 3 && <PinForm setValidPin={setPin} setStepperIndex={setStepperIndex} />}
+          {stepperIndex === 3 && (
+            <PinForm
+              setStepperIndex={setStepperIndex}
+              name={name}
+              id={id}
+              password={password}
+              email={email}
+              phoneNumber={phoneNumber}
+              birthday={birthday}
+            />
+          )}
           {stepperIndex === 4 && <RegisterComplete />}
         </div>
 

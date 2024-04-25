@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import { submitAllData } from '../../apis/RegisterAPI';
 
 // 모달 창 안에 핀번호 입력 폼 및 키패드
-const PinForm = ({ setValidPin, setStepperIndex }) => {
+const PinForm = ({ setStepperIndex, name, id, password, email, phoneNumber, birthday }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [pin, setPin] = useState(''); // 현재 입력 중인 핀번호
   const [storedPin, setStoredPin] = useState(null); // 저장된 PIN
@@ -27,35 +28,39 @@ const PinForm = ({ setValidPin, setStepperIndex }) => {
     shuffleKeypad(); // 처음 키패드를 섞음
   }, []);
 
-  // 핀 입력 처리
-  const handleKeyClick = (number) => {
-    if (pin.length < 6) {
-      const newPin = pin + number; // 새로운 PIN 추가
-      setPin(newPin); // 현재 입력된 핀번호 업데이트
-
-      const updatedStatus = pinStatus.map((status, idx) => (idx < newPin.length ? true : false));
-      setPinStatus(updatedStatus); // 동그라미 표시 업데이트
-
-      if (newPin.length === 6) {
-        if (storedPin === null) {
-          setStoredPin(newPin); // 첫 번째 PIN 저장
-          setMessage('PIN 번호 확인을 위해 다시 입력해주세요'); // 메시지 업데이트
-          setPin(''); // 핀번호 초기화
-          setPinStatus([false, false, false, false, false, false]); // 동그라미 초기화
-          shuffleKeypad(); // 키패드를 다시 섞음
-        } else if (storedPin === newPin) {
-          setValidPin(newPin); // 입력된 PIN이 저장된 PIN과 일치하면
-          setStepperIndex(4); // 다음 스텝으로 이동하고
-          closeModal(); // 모달 닫기
-        } else {
-          setMessage('PIN 번호가 일치하지 않습니다. 다시 입력해주세요'); // 메시지 업데이트
-          setPin(''); // 핀번호 초기화
-          setPinStatus([false, false, false, false, false, false]); // 동그라미 초기화
-          shuffleKeypad(); // 키패드를 다시 섞음
-        }
-      }
+  const regInfoSubmit = async () => {
+    try {
+      await submitAllData({ name, id, password, email, phoneNumber, birthday, pin });
+      setStepperIndex(4);
+    } catch (error) {
+      console.error('Registration Failed:', error);
     }
   };
+
+  const handleKeyClick = (number) => {
+    const updatedPin = pin + number; // 현재 입력된 PIN에 숫자 추가
+    if (updatedPin.length <= 6) {
+      setPin(updatedPin); // PIN 업데이트
+      const updatedStatus = pinStatus.map((status, idx) => idx < updatedPin.length);
+      setPinStatus(updatedStatus); // 동그라미 표시 업데이트
+    }
+  };
+
+  useEffect(() => {
+    if (pin.length === 6 && storedPin === null) {
+      // 첫 번째 입력 완료
+      setStoredPin(pin);
+      setMessage('PIN 번호 확인을 위해 다시 입력해주세요');
+      setPin(''); // 핀 초기화
+      setPinStatus([false, false, false, false, false, false]); // 동그라미 초기화
+      shuffleKeypad(); // 키패드 다시 섞기
+    } else if (pin.length === 6 && storedPin === pin) {
+      // 두 번째 입력이 일치하면
+      regInfoSubmit(); // 데이터 제출
+      setStepperIndex(4);
+      closeModal(); // 모달 닫기
+    }
+  }, [pin]); // 핀 상태가 변경될 때마다 확인
 
   // 핀번호 삭제 함수
   const deletePin = () => {
@@ -75,7 +80,10 @@ const PinForm = ({ setValidPin, setStepperIndex }) => {
   };
 
   // 모달 열기/닫기 함수
-  const closeModal = () => setModalIsOpen(false);
+  const closeModal = () => {
+    // regInfoSubmit();
+    setModalIsOpen(false);
+  };
 
   return (
     <div>
@@ -94,7 +102,7 @@ const PinForm = ({ setValidPin, setStepperIndex }) => {
           },
         }}
       >
-        <h2 className="text-center">{message}</h2> {/* 메시지 상태 */}
+        <h2 className="text-center">{message}</h2>
         <div className="flex justify-center mb-4">
           {pinStatus.map((status, idx) => (
             <div
@@ -133,8 +141,14 @@ const PinForm = ({ setValidPin, setStepperIndex }) => {
 };
 
 PinForm.propTypes = {
-  setValidPin: PropTypes.func.isRequired,
+  // setValidPin: PropTypes.func.isRequired,
   setStepperIndex: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phoneNumber: PropTypes.string.isRequired,
+  birthday: PropTypes.string.isRequired,
 };
 
 export default PinForm;
