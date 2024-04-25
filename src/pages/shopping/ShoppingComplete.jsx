@@ -62,18 +62,20 @@ const ShoppingComplete = () => {
           {/* 결제 정보 */}
           <div className="flex flex-col mt-4">
             {' '}
-            {/* flex-col로 세로 정렬 */}
-            <div className="flex ">
-              {' '}
-              {/* 원을 같은 축에 맞추기 위한 수평 정렬 */}
-              <p className="flex justify-end ml-20 w-20 text-gray-500 line-through">
-                {stateData.originalAmount}{' '}
-              </p>
-              <span className="ml-1">원</span> {/* '원' 텍스트를 별도로 배치 */}
-            </div>
+            {/* 할인받은 금액이 있을 때만 원래 가격을 보여줌 */}
+            {stateData.discount !== 0 && (
+              <div className="flex ">
+                {' '}
+                <p className="flex justify-end ml-20 w-20 text-gray-500 line-through">
+                  {stateData.originalAmount}
+                  {' 원'}
+                </p>
+              </div>
+            )}
             <div className="flex">
-              <p className="flex justify-end ml-20 w-20 font-bold">{stateData.paidAmount}</p>
-              <span className="ml-1">원 </span>
+              <p className="flex justify-end ml-20 w-20 font-bold">
+                {stateData.paidAmount} {' 원'}
+              </p>
               <span className="ml-1 text-bold"> 결제했어요!</span>
             </div>
           </div>

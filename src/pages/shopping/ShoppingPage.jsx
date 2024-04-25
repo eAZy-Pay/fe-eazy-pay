@@ -38,7 +38,7 @@ const ShoppingPage = () => {
         'https://images.samsung.com/kdp/goods/2024/03/25/6d6d8342-0187-46d7-96d8-60b48fb93332.png?$SRP_PRD_THUM_GRID_PNG$',
       category: '생활/주거',
       name: '삼성 노트북 8',
-      price: '1,500,000 원',
+      price: '5000',
     },
     {
       categoryId: '2',
@@ -48,7 +48,7 @@ const ShoppingPage = () => {
         'https://shop-phinf.pstatic.net/20240229_222/1709172376739WuEoG_JPEG/15774861547537251_1271033337.jpg?type=m510',
       category: '슈퍼/마트',
       name: '햇반',
-      price: '20000 원',
+      price: '20000',
     },
     {
       categoryId: '3',
@@ -58,7 +58,7 @@ const ShoppingPage = () => {
         'https://mblogthumb-phinf.pstatic.net/MjAyMDAyMTVfMTIg/MDAxNTgxNjkzNDQ2NzMx.vhiF13ju44Uzte_mHUxRF5t6PQrz14xwOSZd7wj2SHUg.FUd6Jet1mSLGGPp4jc4s8L0LcXjPi_TIvsVksTo8tMUg.JPEG.webkim/1581693449488.jpg?type=w800',
       category: '외식',
       name: '스팸김밥',
-      price: '3000 원',
+      price: '3000',
     },
     {
       categoryId: '4',
@@ -68,7 +68,7 @@ const ShoppingPage = () => {
         'https://i.namu.wiki/i/2IwI0O1V9wmYmZYzixR6Nmg2qgNvDeJ93bovlg5yaHTo-8LIsgo2jKVrxgtzc88eRgTVXX79Y-3eK6ctZ8wvbw.webp',
       category: '의료',
       name: '알보칠',
-      price: '700 원',
+      price: '700',
     },
     {
       categoryId: '5',
@@ -77,7 +77,7 @@ const ShoppingPage = () => {
       image: 'https://maninstore.co.kr/web/product/big/202402/401540336184fbd064d6d188c60715ca.jpg',
       category: '패션',
       name: '블랙 비건 레더 자켓',
-      price: '89000 원',
+      price: '89000',
     },
     {
       categoryId: '6',
@@ -86,7 +86,7 @@ const ShoppingPage = () => {
       image: '',
       category: '숙박/여행',
       name: '캐나다 패키지 여행 9박 10일',
-      price: '23095000 원',
+      price: '23095000',
     },
     {
       categoryId: '7',
@@ -95,7 +95,7 @@ const ShoppingPage = () => {
       image: '',
       category: '문화/취미',
       name: '봄내음 꽃다발 당일배송',
-      price: '39000 원',
+      price: '39000',
     },
     {
       categoryId: '8',
@@ -104,7 +104,7 @@ const ShoppingPage = () => {
       image: '',
       category: '자동차',
       name: '주유상품권 30L',
-      price: '50000 원',
+      price: '50000',
     },
   ];
 
