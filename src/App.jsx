@@ -62,6 +62,14 @@ function App() {
               </AuthRequiredPage>
             }
           />
+          <Route
+            path="/mypage/card-managment"
+            element={
+              <AuthRequiredPage>
+                <ManageMyCard />
+              </AuthRequiredPage>
+            }
+          />
 
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/faq" element={<FaqPage />} />
