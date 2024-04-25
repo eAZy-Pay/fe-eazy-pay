@@ -17,6 +17,7 @@ import MonthlyPayment from './pages/mypage/MonthlyPayment';
 import AdminCardPage from './pages/admin/AdminCardPage';
 import AuthRequiredPage from './pages/AuthRequiredPage';
 import CardApply from './pages/card/CardApply';
+import ShoppingComplete from './pages/shopping/ShoppingComplete';
 
 export const ModalContext = createContext();
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/card-search" element={<CardSearchPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="/shopping/detail" element={<ShoppingDetail />} />
+          <Route path="/shopping/complete" element={<ShoppingComplete />} />
           <Route
             path="/mypage"
             element={
