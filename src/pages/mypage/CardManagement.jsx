@@ -8,14 +8,10 @@ import eazy from '../../assets/eAZyCard.svg';
 import PropTypes from 'prop-types';
 
 const CardManagement = ({ cards = [], amount = 0 }) => {
-  if (!Array.isArray(cards)) { // 배열이 아니면 기본값으로 설정
+  if (!Array.isArray(cards)) {
+    // 배열이 아니면 기본값으로 설정
     cards = [];
   }
-
-  const ben_amount = 15323; // 받은 혜택
-  const ben_total = 50000; // 총 혜택
-
-
 
   return (
     <div className="flex-grow p-4">
@@ -38,35 +34,35 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
             style={{ transform: 'rotate(90deg)', maxWidth: '5.75rem', height: 'auto' }}
           />
           <div className="flex flex-col justify-center gap-4">
-            <CardsGage color="#f79042" amount={ben_amount} total={ben_total} width="w-3/4" />
-            <CardLetter color="#f79042" label="총 혜택" amount={ben_amount} total={ben_total} />
+            <CardsGage color="#f79042" amount={amount} total={amount} width="w-3/4" />
+            <CardLetter color="#f79042" label="총 혜택" amount={amount} total={amount} />
           </div>
         </DefaultFrame>
         {/* 카드관리 */}
         <div className="flex items-center self-left mx-6 my-10 text-2xl">카드 관리</div>
         <div className="flex flex-col w-full">
-          {cards.map(
-            (card, index) =>
-            (
-              <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
-                <RotatedCard image={card.card.image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
-                <div className="flex flex-col justify-center gap-4">
-                  <CardsGage
-                    color="#f79042"
-                    amount={card.benefitAmount}
-                    total={card.card.benefitLimit}
-                    width="w-3/4"
-                  />
-                  <CardLetter
-                    color="#f79042"
-                    label="혜택"
-                    amount={card.benefitAmount}
-                    total={card.card.benefitLimit}
-                  />
-                </div>
-              </DefaultFrame>
-            )
-          )}
+          {cards.map((card, index) => (
+            <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
+              <RotatedCard
+                image={card.card.image}
+                style={{ maxWidth: '5.75rem', height: 'auto' }}
+              />
+              <div className="flex flex-col justify-center gap-4">
+                <CardsGage
+                  color="#f79042"
+                  amount={card.benefitAmount}
+                  total={card.card.benefitLimit}
+                  width="w-3/4"
+                />
+                <CardLetter
+                  color="#f79042"
+                  label="혜택"
+                  amount={card.benefitAmount}
+                  total={card.card.benefitLimit}
+                />
+              </div>
+            </DefaultFrame>
+          ))}
         </div>
       </DefaultFrame>
     </div>

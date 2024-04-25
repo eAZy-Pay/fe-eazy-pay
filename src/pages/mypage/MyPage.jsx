@@ -6,6 +6,7 @@ import RecentPayment from './RecentPayment';
 import AvailableFunds from './AvailableFunds';
 import CardManagement from './CardManagement';
 import { getPaymentHistoryData } from '../../apis/UserAPI';
+import { getMainBanner } from '../../apis/MainAPI';
 import { getUserSession } from '../../utils/authUtils';
 
 const currentMonth = new Date().getMonth() + 1;
@@ -21,6 +22,7 @@ const MyPage = () => {
     availableFunds: 0,
     totalLimit: 0,
     usedAmount: 0,
+    benefitAmount: 0,
   });
 
   useEffect(() => {
@@ -42,8 +44,8 @@ const MyPage = () => {
           const cards = Array.isArray(mainBanner.cards) ? mainBanner.cards : [];
           const usedAmount = cards.reduce((total, card) => total + card.useAmount, 0);
 
-
           setUserMain((prev) => ({
+            ...prev,
             name,
             transactions: Array.isArray(data) ? data : [],
             cards,
@@ -70,7 +72,7 @@ const MyPage = () => {
               usedAmount={userMain.usedAmount}
             />
           </div>
-          <CardManagement cards={userMain.cards} amount={userMain.usedAmount} />
+          <CardManagement cards={userMain.cards} amount={userMain.benefitAmount} />
         </div>
       </DefaultLayout>
     </>
