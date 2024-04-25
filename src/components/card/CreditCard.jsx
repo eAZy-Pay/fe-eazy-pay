@@ -5,7 +5,7 @@ const CreditCard = ({ card, showName, showInfo, useLink, scale }) => {
   const cardContent = (
     <>
       <img
-        className={`w-[157.71px] h-[251.98px] ${useLink ? 'hover:translate-y-2' : ''}`}
+        className={`w-[157.71px] h-[251.98px] ${useLink ? 'hover:translate-y-[-1.5rem]' : ''}`}
         src={card.image}
         alt="Credit Card"
         style={{ transform: `scale(${scale / 100})` }}

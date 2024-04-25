@@ -5,10 +5,10 @@ import MainBenefits from './MainBenefits';
 import CardPerfomance from './CardPerformance';
 import { useEffect, useState } from 'react';
 import { getMainBanner } from '../../apis/CardAPI';
-import { sessionValidationCheck } from '../../utils/sessionMiddleware';
+import { getUserSession } from '../../utils/authUtils';
 const MainBanner = () => {
   const navigate = useNavigate();
-  const user = sessionValidationCheck();
+  const user = getUserSession();
   const [userMain, setUserMain] = useState(
     {
       userName: user ? user.userName : 'OOO',

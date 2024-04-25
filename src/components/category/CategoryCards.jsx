@@ -10,7 +10,9 @@ import CreditCard from '../../components/card/CreditCard';
  *
  * @returns {JSX.Element} 카테고리 카드 목록
  */
-const CategoryCards = ({ categoryCards, maxColumn = 3, maxRow = 2, showInfo = true }) => {
+const CategoryCards = ({ categoryCards, maxColumn, maxRow, showInfo }) => {
+  if (!categoryCards) return null;
+
   const makeRecommendation = () => {
     const recommendationGroups = [];
     // 추천 카드 최대 maxRow * maxColumn 개수만큼만 보여줌
@@ -21,7 +23,7 @@ const CategoryCards = ({ categoryCards, maxColumn = 3, maxRow = 2, showInfo = tr
       recommendationGroups.push(
         <div className="flex justify-center gap-x-10 mt-8" key={i}>
           {group.map((card, index) => (
-            <CreditCard key={index} card={{ ...card, uid: index }} showInfo={showInfo} />
+            <CreditCard key={index} card={card} showInfo={showInfo} />
           ))}
         </div>
       );
@@ -30,6 +32,12 @@ const CategoryCards = ({ categoryCards, maxColumn = 3, maxRow = 2, showInfo = tr
   };
 
   return <>{makeRecommendation()}</>;
+};
+
+CategoryCards.defaultProps = {
+  maxColumn: 3,
+  maxRow: 2,
+  showInfo: true,
 };
 
 CategoryCards.propTypes = {

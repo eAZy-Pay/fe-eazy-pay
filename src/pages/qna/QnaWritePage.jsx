@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import { getQna, putQna, postQna } from '../../apis/QnaAPI';
-import { sessionValidationCheck } from '../../utils/sessionMiddleware';
+import { getUserSession } from '../../utils/authUtils';
 const QnaWritePage = () => {
   const [qna, setQna] = useState();
-  const [user, setUser] = useState(sessionValidationCheck());
+  const user = getUserSession();
 
   const submitHandler = (e) => {
     e.preventDefault(); // submit 새로고침 막기
@@ -26,7 +26,6 @@ const QnaWritePage = () => {
   };
 
   useEffect(() => {
-    setUser(sessionValidationCheck());
     if (user) {
       const urlParams = new URLSearchParams(window.location.search);
       const uid = urlParams.get('uid');
@@ -50,7 +49,7 @@ const QnaWritePage = () => {
       window.location.href = '/qna';
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   return (
     <>

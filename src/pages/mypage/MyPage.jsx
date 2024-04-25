@@ -6,8 +6,7 @@ import RecentPayment from './RecentPayment';
 import AvailableFunds from './AvailableFunds';
 import CardManagement from './CardManagement';
 import { getPaymentHistoryData } from '../../apis/UserAPI';
-import { sessionValidationCheck } from '../../utils/sessionMiddleware';
-import { getMainBanner } from '../../apis/CardAPI';
+import { getUserSession } from '../../utils/authUtils';
 
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
@@ -25,7 +24,7 @@ const MyPage = () => {
   });
 
   useEffect(() => {
-    const user = sessionValidationCheck();
+    const user = getUserSession();
     if (!user) {
       // 사용자 정보가 없으면,
       navigate('/login'); // 로그인 페이지로 리다이렉트합니다.

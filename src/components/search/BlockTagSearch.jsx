@@ -14,11 +14,11 @@ const BlockTagSearch = ({ tags, checkedIndex, setCheckedIndex }) => {
   const makeSelectBlockTag = (index, tag) => {
     const handleClick = () => setCheckedIndex(index);
     const isSelected = index === checkedIndex;
-    const className = isSelected ? 'bg-[#93C5FD]' : 'bg-blue-100 rounded-lg hover:bg-blue-300';
+    const className = isSelected ? 'bg-blue-400' : 'bg-blue-100 rounded-lg hover:bg-blue-300';
 
     return (
       <div
-        className={`flex items-center justify-center rounded-lg p-4 cursor-pointer bg-blue-100 ${className}`}
+        className={`flex items-center justify-center rounded-lg p-4 cursor-pointer ${className}`}
         key={tag}
         onClick={handleClick}
       >

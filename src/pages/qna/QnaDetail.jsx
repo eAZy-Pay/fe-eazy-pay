@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import closeIcon from '../../assets/closeIcon.png';
 import PropTypes from 'prop-types';
-import { sessionValidationCheck } from '../../utils/sessionMiddleware';
+import { getUserSession } from '../../utils/authUtils';
 import { deleteQna } from '../../apis/QnaAPI';
 const QnaDetail = ({
   onClose,
@@ -25,10 +24,9 @@ const QnaDetail = ({
     //writePage에서 uid로 해당 uid의 게시글을 조회하고 내용에 따라 writePage의 text가 채워짐
     window.location.href = `/qna-write?uid=${uid}`;
   };
-  const [user, setUser] = useState();
-  useEffect(() => {
-    setUser(sessionValidationCheck());
-  }, []);
+
+  const user = getUserSession();
+
   return (
     <>
       <div className="fixed z-50 inset-0 flex justify-center items-center bg-black bg-opacity-50 backdrop-blur-md">

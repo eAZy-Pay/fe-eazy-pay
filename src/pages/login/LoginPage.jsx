@@ -4,7 +4,7 @@ import DefaultLayout from '../../components/layout/DefaultLayout.jsx';
 import mainLogo from '../../assets/mainLogo.svg';
 import { getSignIn } from '../../apis/AuthAPI.js';
 import secureLocalStorage from 'react-secure-storage';
-import { sessionValidationCheck } from '../../utils/sessionMiddleware.js';
+import { getUserSession } from '../../utils/authUtils.js';
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -12,10 +12,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = sessionValidationCheck();
+    const user = getUserSession();
     if (user) {
       alert('이미 로그인된 상태입니다.');
-      user.isAdmin ? navigate('/admin') : navigate('/');
+      user.isAdmin ? navigate('/admin/card') : navigate('/');
     }
   }, [navigate]);
 
@@ -35,7 +35,7 @@ const LoginPage = () => {
           timestamp: new Date(),
         };
         secureLocalStorage.setItem('user', JSON.stringify(signedUser));
-        signedUser.isAdmin ? navigate('/admin') : navigate('/');
+        signedUser.isAdmin ? navigate('/admin/card') : navigate('/');
       }
     });
   };
