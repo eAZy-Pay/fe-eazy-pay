@@ -34,6 +34,13 @@ const RegisterPage = () => {
     }
   };
 
+  const handleBack = () => {
+    console.log(`stepperIndex : ${stepperIndex}`); // TODO: 추후 로그 삭제
+    if (stepperIndex > 0) {
+      setStepperIndex((prevStepperIndex) => prevStepperIndex - 1);
+    }
+  };
+
   // 다음 버튼의 활성화/비활성화 조건 설정. true일 때 비활성화
   const isButtonDisabled = () => {
     // if (stepperIndex === 0) { //TODO: 페이지 완성하면 주석 해제
@@ -93,13 +100,33 @@ const RegisterPage = () => {
           {stepperIndex === 4 && <RegisterComplete />}
         </div>
 
-        <button
-          className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
-          onClick={handleNext}
-          disabled={isButtonDisabled()}
-        >
-          {stepperIndex === 3 ? '가입' : stepperIndex === 4 ? '홈' : '다음'}
-        </button>
+        {stepperIndex !== 4 ? (
+          <div className="flex space-x-4">
+            <button
+              className="w-20 py-2 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-600 transition duration-300"
+              onClick={handleBack}
+              disabled={stepperIndex === 0}
+            >
+              이전
+            </button>
+            <button
+              className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+              onClick={handleNext}
+              disabled={isButtonDisabled()}
+            >
+              {stepperIndex === 3 ? '가입' : '다음'}
+            </button>
+          </div>
+        ) : (
+          <div className="flex justify-center">
+            <button
+              className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+              onClick={handleNext}
+            >
+              홈
+            </button>
+          </div>
+        )}
       </div>
     </DefaultLayout>
   );

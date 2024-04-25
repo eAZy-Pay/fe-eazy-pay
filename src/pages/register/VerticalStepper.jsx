@@ -13,10 +13,10 @@ const steps = [
     label: '약관에 동의해주세요',
   },
   {
-    label: '우리카드 회원 인증을 해주세요',
+    label: '기본 정보를 입력해주세요',
   },
   {
-    label: '이지페이에 가입해주세요',
+    label: '아이디와 비밀번호를 입력해주세요',
   },
   {
     label: 'pin 번호를 등록해주세요',
@@ -24,18 +24,6 @@ const steps = [
 ];
 
 export default function VerticalLinearStepper({ activeStep, setActiveStep }) {
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper activeStep={activeStep} orientation="vertical">
@@ -50,28 +38,12 @@ export default function VerticalLinearStepper({ activeStep, setActiveStep }) {
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                    {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                  </Button>
-                  <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-                    Back
-                  </Button>
-                </div>
-              </Box>
+              <Box sx={{ mb: 2 }}></Box>
             </StepContent>
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you are finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
-        </Paper>
-      )}
+      {activeStep === steps.length && <Paper square elevation={0} sx={{ p: 3 }}></Paper>}
     </Box>
   );
 }
