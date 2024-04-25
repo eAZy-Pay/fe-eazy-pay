@@ -3,18 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../components/layout/DefaultLayout.jsx';
 import mainLogo from '../../assets/mainLogo.svg';
 import { getSignIn } from '../../apis/AuthAPI.js';
-
+import secureLocalStorage from 'react-secure-storage';
+import { getUserSession } from '../../utils/authUtils.js';
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [error, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = sessionStorage.getItem('user');
-    if (sessionStorage.getItem('user') !== null) {
+    const user = getUserSession();
+    if (user) {
       alert('이미 로그인된 상태입니다.');
-      JSON.parse(user).isAdmin ? navigate('/admin') : navigate('/');
+      user.isAdmin ? navigate('/admin/card') : navigate('/');
     }
   }, [navigate]);
 
@@ -31,20 +32,21 @@ const LoginPage = () => {
           uid: response.uid,
           userName: response.name,
           isAdmin: response.isAdmin,
+          timestamp: new Date(),
         };
-        sessionStorage.setItem('user', JSON.stringify(signedUser));
-        signedUser.isAdmin ? navigate('/admin') : navigate('/');
+        secureLocalStorage.setItem('user', JSON.stringify(signedUser));
+        signedUser.isAdmin ? navigate('/admin/card') : navigate('/');
       }
     });
   };
   return (
     <>
       <DefaultLayout showNavBar={false}>
-        <div>
+        <div className="sm:h-screen">
           <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <img className="mx-auto h-10 w-auto" src={mainLogo} alt="Your Company" />
-              <p className="text-xs text-center">세상에서 가장 쉽고 편리한 결제</p>
+              <img className="mx-auto h-[3.5rem] w-auto" src={mainLogo} alt="Your Company" />
+              <p className="text-slate-600 text-lg text-center ">세상에서 가장 쉽고 편리한 결제</p>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -99,19 +101,19 @@ const LoginPage = () => {
                 </div>
 
                 <div>
-                  <div className="h-[25px] mt-[10px] text-[#dc2626] text-center">{error}</div>
+                  <div className="my-5 text-[#dc2626] text-center">{errorMessage}</div>
                   <button
                     type="submit"
                     className="flex w-full justify-center bg-blue-600 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Log in
+                    로그인
                   </button>
                 </div>
               </form>
 
               <div className="flex justify-center m-3">
                 <div className="mx-2">
-                  <a href="#" className="mt-10 text-center text-sm text-gray-800">
+                  <a href="#" className="mt-10 text-center text-sm text-gray-500">
                     비밀번호 찾기
                   </a>
                 </div>
@@ -123,7 +125,7 @@ const LoginPage = () => {
                 </div>
 
                 <div className="mx-2">
-                  <a href="#" className="mt-10 text-center text-sm text-gray-500">
+                  <a href="/register" className="mt-10 text-center text-sm text-gray-800">
                     회원가입
                   </a>
                 </div>

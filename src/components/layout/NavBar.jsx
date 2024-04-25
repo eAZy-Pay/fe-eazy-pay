@@ -6,7 +6,6 @@ import DropdownMenu from './DropDownMenu';
 import MainLogo from '../../assets/mainLogo.svg';
 import MenuIcon from '../../assets/menuIcon.svg';
 import BellIcon from '../../assets/bellIcon.svg';
-
 const NavBar = () => {
   // 드롭다운바 열림/닫힘 상태 관리
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

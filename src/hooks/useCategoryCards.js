@@ -11,7 +11,7 @@ const useCategoryCards = (categoryId) => {
     }
   }, [categoryId]);
 
-  return categoryCards;
+  return categoryCards?.content;
 };
 
 export default useCategoryCards;
