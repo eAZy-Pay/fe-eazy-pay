@@ -38,7 +38,7 @@ CreditCard.defaultProps = {
 
 CreditCard.propTypes = {
   card: PropTypes.shape({
-    uid: PropTypes.number.isRequired,
+    uid: PropTypes.number,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,

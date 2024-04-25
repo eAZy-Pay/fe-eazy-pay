@@ -21,7 +21,7 @@ const MainBanner = () => {
   useEffect(() => {
     if (user) {
       // 로그인 되어있는 경우
-      getMainBanner(user.uid).then((res) => {
+      getMainBanner(user.uid, 3).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
           tmp.push(cardObj.card.image);
