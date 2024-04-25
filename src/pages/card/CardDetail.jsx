@@ -3,7 +3,7 @@ import CreditCard from '../../components/card/CreditCard';
 import GetCategoryIcon from '../../utils/GetCategoryIcon';
 
 const CardDetail = ({ card, benefitList }) => {
-  const makeBenefitRow = (categoryId, categoryName, benefitRate, index) => (
+  const makeBenefitRow = (categoryName, benefitRate, index) => (
     <div className="flex w-full my-1" key={index}>
       <div className="flex justify-between items-center w-full text-3xl font-semibold">
         <div className="flex items-center">
@@ -32,19 +32,9 @@ const CardDetail = ({ card, benefitList }) => {
             <div className="w-full text-2xl font-medium">{card.info}</div>
             <div className="flex flex-col items-baseline mt-4">
               {isAllCategory
-                ? makeBenefitRow(
-                    benefitList[0].categoryId,
-                    '모든 카테고리',
-                    benefitList[0].benefitRate,
-                    0
-                  )
+                ? makeBenefitRow('모든', benefitList[0].benefitRate, 0)
                 : benefitList.map((benefit, index) =>
-                    makeBenefitRow(
-                      benefit.categoryId,
-                      benefit.categoryName,
-                      benefit.benefitRate,
-                      index
-                    )
+                    makeBenefitRow(benefit.categoryName, benefit.benefitRate, index)
                   )}
             </div>
           </div>
@@ -55,7 +45,7 @@ const CardDetail = ({ card, benefitList }) => {
           <button
             className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white"
             type="button"
-            onClick={() => window.open(card.applicationUrl, '_blank')}
+            onClick={() => window.open(`/card-applicant/${card.uid}`, '_blank')}
           >
             카드 신청
           </button>
@@ -74,7 +64,6 @@ CardDetail.propTypes = {
     performance: PropTypes.number.isRequired,
     benefitLimit: PropTypes.number.isRequired,
     info: PropTypes.string.isRequired,
-    applicationUrl: PropTypes.string.isRequired,
   }).isRequired,
   benefitList: PropTypes.arrayOf(
     PropTypes.shape({
