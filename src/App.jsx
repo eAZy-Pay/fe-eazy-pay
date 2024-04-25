@@ -17,8 +17,8 @@ import ManageMyInformation from './pages/mypage/ManageMyInformation';
 import MonthlyPayment from './pages/mypage/MonthlyPayment';
 import AdminCardPage from './pages/admin/AdminCardPage';
 import AuthRequiredPage from './pages/AuthRequiredPage';
-import CardApply from './pages/card/CardApply';
 import ManageMyCard from './pages/mypage/ManageMyCard';
+import CardApplyPage from './pages/card/CardApplyPage';
 
 export const ModalContext = createContext();
 
@@ -99,7 +99,7 @@ function App() {
             path="/card-applicant/:id"
             element={
               <AuthRequiredPage>
-                <CardApply />
+                <CardApplyPage />
               </AuthRequiredPage>
             }
           />

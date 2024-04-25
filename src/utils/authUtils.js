@@ -18,6 +18,11 @@ export const isValidSession = (session) => {
       secureLocalStorage.removeItem('user');
       return false; // 만료된 세션
     }
+
+    // 세션 유효 시간 갱신
+    session.timestamp = new Date();
+    secureLocalStorage.setItem('user', JSON.stringify(session));
+
     return true; // 유효한 세션
   }
   return false; // 세션이 없거나 필드가 유효하지 않음
@@ -38,4 +43,12 @@ export const logout = () => {
   secureLocalStorage.removeItem('user');
   alert('로그아웃 되었습니다.');
   window.location.reload();
+};
+
+export const refreshSession = () => {
+  const user = getUserSession();
+  if (user) {
+    user.timestamp = new Date();
+    secureLocalStorage.setItem('user', JSON.stringify(user));
+  }
 };
