@@ -1,7 +1,8 @@
 // import React from 'react';
+import DefaultLayout from '../../components/layout/DefaultLayout';
 
 const ManageMyCard = () => {
-  return <div>{/* Your code goes here */}</div>;
+  return <DefaultLayout>dd</DefaultLayout>;
 };
 
 export default ManageMyCard;

@@ -6,6 +6,7 @@ import CardLetter from '../main/CardLetter';
 import arrowIcon from '../../assets/arrowIcon.svg';
 import eazy from '../../assets/eAZyCard.svg';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const CardManagement = ({ cards = [], amount = 0 }) => {
   if (!Array.isArray(cards)) {
@@ -16,14 +17,15 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
   return (
     <div className="flex-grow p-4">
       <DefaultFrame boxShadow={false}>
-        <div className=" flex justify-between items-center text-2xl">
-          <h2 className="ml-6 mr-1 my-4 text-2xl font-extrabold">내 카드 관리</h2>
-          <img src={arrowIcon} alt="ArrowIcon" className="ml-1" />
-          {/* 카드 편집 버튼 */}
-          <div className="flex justify-center items-center mr-8 rounded-xl border-2 border-gray-200 w-32 h-10 ml-auto shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-            <div className="text-center text-xl">카드 편집</div>
+        <Link
+          to="/mypage/card-management"
+          className="flex justify-between items-center text-2xl font-extrabold mx-6 my-4"
+        >
+          내 카드 관리
+          <div className="flex">
+            <img src={arrowIcon} alt="Arrow Icon" />
           </div>
-        </div>
+        </Link>
         {/* 이지카드 총 혜택 */}
         <div className="mx-6 my-10 text-2xl">총 혜택</div>
         <DefaultFrame className="flex max-w-[32rem] m-6">

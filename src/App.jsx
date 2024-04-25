@@ -61,7 +61,7 @@ function App() {
             }
           />
           <Route
-            path="/mypage/card-managment"
+            path="/mypage/card-management"
             element={
               <AuthRequiredPage>
                 <ManageMyCard />

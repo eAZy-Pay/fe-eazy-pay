@@ -44,12 +44,19 @@ const MyPage = () => {
           const cards = Array.isArray(mainBanner.cards) ? mainBanner.cards : [];
           const usedAmount = cards.reduce((total, card) => total + card.useAmount, 0);
 
+          const benefitAmount = mainBanner?.benefitAmount || 0;
+          const totalLimit = mainBanner?.totalPaymentLimit || 0;
+          const availableFunds = totalLimit - usedAmount;
+
           setUserMain((prev) => ({
             ...prev,
             name,
-            transactions: Array.isArray(data) ? data : [],
             cards,
+            transactions: Array.isArray(data) ? data : [],
+            availableFunds,
+            totalLimit,
             usedAmount,
+            benefitAmount,
           }));
         } catch (error) {
           console.error('Failed to load user data:', error);
