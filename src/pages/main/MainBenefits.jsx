@@ -6,7 +6,7 @@ const MainBenefits = ({ userMain }) => {
     <>
       <div>
         <div className="flex justify-between relative">
-          <div className="flex self-start ml-[3rem]">
+          <div className="flex self-start">
             <OverlappedCards images={userMain.images} />
             <div className="text-2xl mx-5">
               <div>

@@ -5,23 +5,20 @@ import MainBenefits from './MainBenefits';
 import CardPerfomance from './CardPerformance';
 import { useEffect, useState } from 'react';
 import { getMainBanner } from '../../apis/CardAPI';
-import { getUserSession } from '../../utils/authUtils';
+
 const MainBanner = () => {
   const navigate = useNavigate();
-  const user = getUserSession();
-  const [userMain, setUserMain] = useState(
-    {
-      userName: user ? user.userName : 'OOO',
-      images: [eazy],
-      benefitAmount: 0,
-      cards: [], //1개월 카드 혜택 실적, 카드상품정보
-    },
-    []
-  );
+  const user = sessionStorage.getItem('user');
+  const [userMain, setUserMain] = useState({
+    userName: user ? JSON.parse(user).userName : 'OOO',
+    images: [eazy],
+    benefitAmount: 0,
+    cards: [], //1개월 카드 혜택 실적, 카드상품정보
+  });
   useEffect(() => {
     if (user) {
       // 로그인 되어있는 경우
-      getMainBanner(user.uid, 3).then((res) => {
+      getMainBanner(JSON.parse(user).uid).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
           tmp.push(cardObj.card.image);
@@ -36,7 +33,7 @@ const MainBanner = () => {
     } else {
       navigate('/'); // 드롭다운 메뉴 로그아웃 시 새로고침
     }
-  }, [navigate]);
+  }, [navigate, user]);
 
   return (
     <>
@@ -44,14 +41,14 @@ const MainBanner = () => {
       {user ? (
         userMain.cards.length ? (
           <>
-            <div className="mt-[5rem] mb-8 text-4xl font-bold self-left">eAZy 하게 챙겼어요</div>
+            <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">eAZy 하게 챙겼어요</div>
             <div className="my-4">
               <MainBenefits userMain={userMain} />
             </div>
-            <div className="mt-8 text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
+            <div className="mt-8 text-2xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
             <div>
               {userMain.cards.map((card, index) => (
-                <CardPerfomance key={index} {...card} />
+                <CardPerfomance key={index} card={card} />
               ))}
             </div>
           </>
@@ -71,8 +68,8 @@ const MainBanner = () => {
                 </Link>
               </div>
               <img src={OverlappedCard} alt="Card" className="w-auto h-auto" />
-              <div className="absolute right-10 bottom-5">
-                <div className="flex-end relative">
+              <div className="absolute right-0 bottom-5">
+                <div className="mr-[15rem] flex-end relative">
                   <span className="text-5xl font-black text-blue-700 relative">???</span>
                   <span className="text-3xl">원</span>
                 </div>
@@ -82,20 +79,20 @@ const MainBanner = () => {
         )
       ) : (
         /* 비로그인 상태인 경우 */
-        <div className="p-8 relative">
+        <div className="p-3 relative">
           <div className="flex justify-center items-center flex-col absolute z-10 inset-0 bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm">
             <div className="mx-auto mt-4 bottom-1/2 text-center text-3xl ">
-              로그인 하시면 받은 혜택을 보여드릴게요
+              로그인 하면 얼마나 혜택을 받을 수 있는지 알 수 있어요
             </div>
             <Link to="/login">
-              <div className="mt-[1rem] mx-auto px-8 py-3 rounded-[20px] bg-[#1d92e9] text-2xl text-center text-white">
-                로그인
+              <div className="mt-[1rem] mx-auto w-[13rem] py-3 rounded-[20px] bg-[#1d92e9] text-2xl text-center text-white">
+                로그인 하기
               </div>
             </Link>
           </div>
           <img src={OverlappedCard} alt="Card" className="w-auto h-auto" />
-          <div className="absolute right-10 bottom-5">
-            <div className="flex-end relative">
+          <div className="absolute right-0 bottom-5">
+            <div className="mr-[15rem] flex-end relative">
               <span className="text-5xl font-black text-blue-700 relative">???</span>
               <span className="text-3xl">원</span>
             </div>

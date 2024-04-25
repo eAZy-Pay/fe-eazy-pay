@@ -1,12 +1,17 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CardDetail from './CardDetail';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import useCardById from '../../hooks/useCardById';
+import { getCardById } from '../../apis/CardAPI';
 import DefaultFrame from '../../components/layout/DefaultFrame';
 
 const CardDetailPage = () => {
   const { id } = useParams();
-  const cardWithBenefit = useCardById(id);
+  const [cardWithBenefit, setCardWithBenefit] = useState(null);
+
+  useEffect(() => {
+    getCardById(id).then(setCardWithBenefit);
+  }, [id]);
 
   if (!cardWithBenefit) {
     return <div>Loading...</div>;

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import CreditCard from '../../components/card/CreditCard';
 import GetCategoryIcon from '../../utils/GetCategoryIcon';
 
-const CardDetail = ({ card, benefitList, showApplyButton }) => {
-  const makeBenefitRow = (categoryName, benefitRate, index) => (
+const CardDetail = ({ card, benefitList }) => {
+  const makeBenefitRow = (categoryId, categoryName, benefitRate, index) => (
     <div className="flex w-full my-1" key={index}>
       <div className="flex justify-between items-center w-full text-3xl font-semibold">
         <div className="flex items-center">
@@ -32,33 +32,37 @@ const CardDetail = ({ card, benefitList, showApplyButton }) => {
             <div className="w-full text-2xl font-medium">{card.info}</div>
             <div className="flex flex-col items-baseline mt-4">
               {isAllCategory
-                ? makeBenefitRow('모든', benefitList[0].benefitRate, 0)
+                ? makeBenefitRow(
+                    benefitList[0].categoryId,
+                    '모든 카테고리',
+                    benefitList[0].benefitRate,
+                    0
+                  )
                 : benefitList.map((benefit, index) =>
-                    makeBenefitRow(benefit.categoryName, benefit.benefitRate, index)
+                    makeBenefitRow(
+                      benefit.categoryId,
+                      benefit.categoryName,
+                      benefit.benefitRate,
+                      index
+                    )
                   )}
             </div>
           </div>
         </div>
       </div>
-      {showApplyButton && (
-        <div className="flex space-x-4 mb-6 text-sm font-medium">
-          <div className="flex-auto flex space-x-4">
-            <button
-              className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white"
-              type="button"
-              onClick={() => window.location.replace(`/card-applicant/${card.uid}`)}
-            >
-              카드 신청
-            </button>
-          </div>
+      <div className="flex space-x-4 mb-6 text-sm font-medium">
+        <div className="flex-auto flex space-x-4">
+          <button
+            className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white"
+            type="button"
+            onClick={() => window.open(card.applicationUrl, '_blank')}
+          >
+            카드 신청
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
-};
-
-CardDetail.defaultProps = {
-  showApplyButton: true,
 };
 
 CardDetail.propTypes = {
@@ -70,6 +74,7 @@ CardDetail.propTypes = {
     performance: PropTypes.number.isRequired,
     benefitLimit: PropTypes.number.isRequired,
     info: PropTypes.string.isRequired,
+    applicationUrl: PropTypes.string.isRequired,
   }).isRequired,
   benefitList: PropTypes.arrayOf(
     PropTypes.shape({
@@ -78,7 +83,6 @@ CardDetail.propTypes = {
       benefitRate: PropTypes.number.isRequired,
     })
   ).isRequired,
-  showApplyButton: PropTypes.bool,
 };
 
 export default CardDetail;

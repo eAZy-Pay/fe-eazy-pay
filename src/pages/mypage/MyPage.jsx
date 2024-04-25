@@ -5,58 +5,40 @@ import ProfileSection from './ProfileSection';
 import RecentPayment from './RecentPayment';
 import AvailableFunds from './AvailableFunds';
 import CardManagement from './CardManagement';
-import { getPaymentHistoryData } from '../../apis/UserAPI';
-import { getMainBanner } from '../../apis/CardAPI';
-import { getUserSession } from '../../utils/authUtils';
-
-const currentMonth = new Date().getMonth() + 1;
-const currentYear = new Date().getFullYear();
+import eazy from '../../assets/eAZyCard.svg';
+import getPaymentHistoryData from '../../apis/UserAPI';
 
 const MyPage = () => {
   const navigate = useNavigate();
 
   const [userMain, setUserMain] = useState({
-    name: '',
-    cards: [],
+    name: '천지민',
+    images: [
+      eazy,
+      'https://pc.wooricard.com/webcontent/cdPrdImgFileList/2023/7/17/e7b88886-8706-4bfd-be01-29ec5a77fd19.gif',
+      'https://pc.wooricard.com/webcontent/cdPrdImgFileList/2024/2/21/1fa0a89f-0811-43b1-9c24-a4bb8bf750f4.png',
+      'https://pc.wooricard.com/webcontent/cdPrdImgFileList/2023/7/17/bfee31ee-d644-4bc8-bbdb-1a4f78eb231c.gif',
+    ],
     transactions: [],
-    availableFunds: 0,
-    totalLimit: 0,
-    usedAmount: 0,
-    benefitAmount: 0,
+    benefitAmount: 200000,
+    availableFunds: 3000000,
+    totalLimit: 5000000,
+    usedAmount: 2000000,
   });
 
   useEffect(() => {
-    const user = getUserSession();
+    const user = sessionStorage.getItem('user');
     if (!user) {
       // 사용자 정보가 없으면,
       navigate('/login'); // 로그인 페이지로 리다이렉트합니다.
     } else {
       const fetchData = async () => {
         try {
-          const uid = user.uid;
-          const name = user.userName;
-
-          const [data, mainBanner] = await Promise.all([
-            getPaymentHistoryData(uid, currentYear, currentMonth, 0, 4),
-            getMainBanner(uid, 1),
-          ]);
-
-          const cards = Array.isArray(mainBanner.cards) ? mainBanner.cards : [];
-          const usedAmount = cards.reduce((total, card) => total + card.useAmount, 0);
-
-          const benefitAmount = mainBanner?.benefitAmount || 0;
-          const totalLimit = mainBanner?.totalPaymentLimit || 0;
-          const availableFunds = totalLimit - usedAmount;
-
+          const uid = JSON.parse(user).uid;
+          const data = await getPaymentHistoryData(uid, 4);
           setUserMain((prev) => ({
             ...prev,
-            name,
-            cards,
-            transactions: Array.isArray(data) ? data : [],
-            availableFunds,
-            totalLimit,
-            usedAmount,
-            benefitAmount,
+            transactions: data,
           }));
         } catch (error) {
           console.error('Failed to load user data:', error);
@@ -79,7 +61,7 @@ const MyPage = () => {
               usedAmount={userMain.usedAmount}
             />
           </div>
-          <CardManagement cards={userMain.cards} amount={userMain.benefitAmount} />
+          <CardManagement images={userMain.images} />
         </div>
       </DefaultLayout>
     </>

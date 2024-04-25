@@ -1,11 +1,7 @@
-import { useContext } from 'react';
 import NavBar from './NavBar';
 import PropTypes from 'prop-types';
-import { ModalContext } from '../../App';
-import Modal from './Modal';
 
 const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
-  const { modal } = useContext(ModalContext);
   return (
     <div className="flex flex-col items-center w-full ">
       {showNavBar && (
@@ -13,9 +9,6 @@ const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
           <NavBar />
         </div>
       )}
-
-      {modal.isOpen && <Modal></Modal>}
-
       {banner && (
         <div className={`flex justify-center items-center w-full ${bannerClassName}`}>
           <div className="w-full max-w-screen-xl">{banner}</div>

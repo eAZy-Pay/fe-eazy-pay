@@ -1,7 +1,7 @@
+// import React from 'react';
 import DefaultFrame from '../../components/layout/DefaultFrame';
 import ProfileImage from '../../assets/profileImage.png';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 const ProfileSection = ({ name }) => (
   <DefaultFrame boxShadow={false}>
@@ -12,12 +12,9 @@ const ProfileSection = ({ name }) => (
         <div className="text-2xl">님</div>
       </div>
       <div className="flex items-end ml-auto">
-        <Link
-          to="/mypage/manage"
-          className="flex justify-center items-center w-32 h-10 rounded-xl border-2 border-gray-200 shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-        >
+        <div className="flex justify-center items-center w-32 h-10 rounded-xl border-2 border-gray-200 shadow-md hover:shadow-lg transition duration-300 ease-in-out">
           <div className="text-xl text-center">내 정보 관리</div>
-        </Link>
+        </div>
       </div>
     </div>
   </DefaultFrame>

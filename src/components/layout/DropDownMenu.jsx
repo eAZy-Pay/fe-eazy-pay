@@ -3,11 +3,11 @@ import ProfileIcon from '../../assets/profileIcon.svg';
 import CardIcon from '../../assets/cardIcon.svg';
 import LogoutIcon from '../../assets/logoutIcon.svg';
 import HelpIcon from '../../assets/helpIcon.svg';
+import LoginIcon from '../../assets/loginIcon.svg';
 import PropTypes from 'prop-types';
-import { getUserSession, logout } from '../../utils/authUtils';
 const DropdownMenu = ({ isOpen }) => {
   const navigate = useNavigate();
-  const user = getUserSession();
+  const user = sessionStorage.getItem('user');
   return (
     <>
       <div
@@ -18,7 +18,9 @@ const DropdownMenu = ({ isOpen }) => {
           <>
             <div className="cursor-pointer flex justify-center py-6 gap-4">
               <img src={ProfileIcon} alt="Profile Icon" />
-              <div className="flex items-center text-xl text-left">{user.userName} 님</div>
+              <div className="flex items-center text-xl text-left">
+                {JSON.parse(user).userName} 님
+              </div>
             </div>
             <hr className="bg-gray-300 w-[85%] mb-3 " />
           </>
@@ -30,7 +32,7 @@ const DropdownMenu = ({ isOpen }) => {
                 className="flex items-center text-lg text-left"
                 onClick={() => navigate('/login')}
               >
-                로그인
+                로그인이 필요합니다.
               </div>
             </div>
             <hr className="bg-gray-300 w-[85%] mb-3 " />
@@ -54,12 +56,29 @@ const DropdownMenu = ({ isOpen }) => {
             <div
               className="cursor-pointer flex justify-center p-3 gap-4"
               onClick={() => {
-                logout();
+                sessionStorage.removeItem('user');
+                alert('로그아웃 되었습니다.');
+                navigate('/');
               }}
             >
               {/*서버 세션 발급 확장성을 위해 Link 태그로 나뒀습니다.*/}
               <img className="w-[2em]" src={LogoutIcon} alt="Logout Icon" />
               <Link className="flex items-center text-lg text-left">로그아웃</Link>
+            </div>
+          </>
+        )}
+
+        {!user && (
+          <>
+            <hr className="bg-gray-300 w-[85%] mt-5" />
+            <div className="cursor-pointer flex justify-center gap-4 my-4">
+              <img className="w-[2em]" src={LoginIcon} alt="Profile Icon" />
+              <div
+                className="flex items-center text-lg text-left"
+                onClick={() => navigate('/login')}
+              >
+                로그인 하기
+              </div>
             </div>
           </>
         )}

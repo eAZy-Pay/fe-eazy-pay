@@ -9,7 +9,6 @@ import HashTagSearch from '../../components/search/HashTagSearch';
 import CategoryCards from '../../components/category/CategoryCards';
 import SearchImg from '../../assets/searchImg.png';
 import Banner from '../../components/Banner';
-import { getUserSession } from '../../utils/authUtils';
 
 const RecommendationPage = () => {
   const [checkedIndex, setcheckedIndex] = useState(0);
@@ -24,23 +23,15 @@ const RecommendationPage = () => {
   const monthlyFor6 = useUserMonthlyFor6(2);
   const categoryId = monthlyFor6[checkedIndex]?.categoryId;
   const categoryCards = useCategoryCards(categoryId);
-  const user = getUserSession();
 
   return (
     <>
       <DefaultLayout
         banner={
           <MainDashBoard
-            title={
-              <>
-                <div className="text-3xl flex justify-between items-center mt-8 mb-4 mr-2">
-                  {user?.userName}
-                </div>
-                <p className="text-2xl text-left mt-8 mb-4">
-                  님의 6개월 간 소비 내역 월평균 금액입니다.{' '}
-                </p>
-              </>
-            }
+            name="천지민"
+            // title="<div className='text-2xl font-bold text-left mt-8 mb-4 ml-4'><div> </>"
+            // title="님의 6개월 간 소비 내역으로 카드를 추천드릴게요"
             chart={
               <DonutChart
                 data={monthlyFor6}
@@ -57,7 +48,7 @@ const RecommendationPage = () => {
           checkedIndex={checkedIndex}
           setCheckedIndex={setcheckedIndex}
         />
-        <CategoryCards categoryCards={categoryCards || []} />
+        <CategoryCards categoryCards={categoryCards} />
         <Banner
           to={'/card-search'}
           title="찾으시는 카드가 없나요?"

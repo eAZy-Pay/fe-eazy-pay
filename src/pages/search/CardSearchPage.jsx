@@ -36,11 +36,11 @@ const CardSearchPage = () => {
       alert('특수문자는 입력할 수 없습니다.');
       return;
     }
-    getCardsLikeName(searchText).then((res) => setCategoryCards(res.content));
+    getCardsLikeName(searchText).then(setCategoryCards);
   };
 
   useEffect(() => {
-    getCategoryCards(categoryId).then((res) => setCategoryCards(res.content));
+    getCategoryCards(categoryId).then(setCategoryCards);
   }, [categoryId]);
 
   // 엔터키 입력 시 검색
@@ -52,7 +52,7 @@ const CardSearchPage = () => {
 
   return (
     <DefaultLayout>
-      <p className="mt-[5rem] text-4xl text-left font-bold">eAZy가 카드를 찾아드릴게요</p>
+      <p className="text-4xl text-left font-bold">eAZy가 카드를 찾아드릴게요</p>
 
       <div className="flex items-center justify-center bg-blue-200/50 rounded-lg py-2 px-8 my-6 w-full h-20 text-lg font-bold hover:bg-blue-200">
         <input
@@ -77,7 +77,7 @@ const CardSearchPage = () => {
         setCheckedIndex={setcheckedIndex}
       />
       <div className="my-6 text-3xl font-bold">검색 결과</div>
-      {categoryCards?.length ? (
+      {categoryCards.length ? (
         <CategoryCards categoryCards={categoryCards} maxColumn={4} maxRow={3} />
       ) : (
         <div className="text-2xl text-center my-6">검색 결과가 없습니다.</div>
