@@ -2,11 +2,7 @@
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import arrowIconThin from '../../assets/arrowIconThin.svg';
 import { useEffect, useState } from 'react';
-import {
-  getPaymentHistoryData,
-  getPaymentHistoryForMonth,
-  getTotalAmountForMonth,
-} from '../../apis/UserAPI';
+import { getPaymentHistoryForMonth, getPaymentHistoryData } from '../../apis/UserAPI';
 import { getUserSession } from '../../utils/authUtils';
 
 const ITEMS_PER_PAGE = 10;
@@ -35,13 +31,16 @@ const MonthlyPayment = () => {
           offset,
           ITEMS_PER_PAGE
         );
-        const total = (await getPaymentHistoryForMonth(uid, selectedYear, selectedMonth)) || 0; // 해당 달 총 건수 가져오기
-        const totalAmount = (await getTotalAmountForMonth(uid, selectedYear, selectedMonth)) || 0; // 총 이용금액 가져오기
+        const { totalPaymentCount, totalPaymentAmount } = await getPaymentHistoryForMonth(
+          uid,
+          selectedYear,
+          selectedMonth
+        );
 
         if (Array.isArray(data)) {
           setTransactions(data);
-          setTotal(total);
-          setTotalAmount(totalAmount);
+          setTotal(totalPaymentCount);
+          setTotalAmount(totalPaymentAmount);
         } else {
           console.error('Expected an array, but got something else.');
         }
