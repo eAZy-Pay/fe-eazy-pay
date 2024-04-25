@@ -65,9 +65,11 @@ const RegisterPage = () => {
             세상에서 가장 쉽고 편리한 결제
           </p>
         </div>
-        <div className="flex items-start w-full">
+        {/* stepperIndex가 0일 때와 1~4일 때의 높이 조정 */}
+        <div className={`flex items-start w-full ${stepperIndex === 0 ? '' : 'h-64'}`}>
+          {' '}
+          {/* 조건에 따라 높이 설정 */}
           <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
-
           {stepperIndex === 0 && (
             <AgreementForm
               checkBox1={checkBox1}
@@ -84,7 +86,6 @@ const RegisterPage = () => {
               setEmail={setEmail}
             />
           )}
-
           {stepperIndex === 2 && <EazyPayRegisterForm setId={setId} setPw={setPw} />}
           {stepperIndex === 3 && (
             <PinForm
@@ -99,34 +100,37 @@ const RegisterPage = () => {
           )}
           {stepperIndex === 4 && <RegisterComplete />}
         </div>
-
-        {stepperIndex !== 4 ? (
-          <div className="flex space-x-4">
-            <button
-              className="w-20 py-2 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-600 transition duration-300"
-              onClick={handleBack}
-              disabled={stepperIndex === 0}
-            >
-              이전
-            </button>
-            <button
-              className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
-              onClick={handleNext}
-              disabled={isButtonDisabled()}
-            >
-              {stepperIndex === 3 ? '가입' : '다음'}
-            </button>
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <button
-              className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
-              onClick={handleNext}
-            >
-              홈
-            </button>
-          </div>
-        )}
+        {/* 동일한 정렬 및 패딩을 사용해 버튼 위치 고정 */}
+        <div className="flex justify-center space-x-4 pt-14">
+          {' '}
+          {stepperIndex !== 4 ? (
+            <div className="flex justify-center items-center space-x-4">
+              <button
+                className="w-20 py-2 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-600 transition duration-300"
+                onClick={handleBack}
+                disabled={stepperIndex === 0}
+              >
+                이전
+              </button>
+              <button
+                className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+                onClick={handleNext}
+                disabled={isButtonDisabled()}
+              >
+                {stepperIndex === 3 ? '가입' : '다음'}
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center">
+              <button
+                className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+                onClick={handleNext}
+              >
+                홈
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </DefaultLayout>
   );

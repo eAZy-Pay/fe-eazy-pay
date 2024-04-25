@@ -72,7 +72,7 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
   return (
     <div className="flex ml-48">
       <div className="flex flex-col bg-white">
-        <div className="flex items-center space-x-2 my-1">
+        <div className="flex items-center space-x-2 mt-5">
           <Box
             component="form"
             sx={{

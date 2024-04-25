@@ -86,7 +86,7 @@ const AgreementForm = ({ checkBox1, setCheckBox1, checkBox2, setCheckBox2 }) => 
         <div className="flex justify-center">
           <img
             src="image-path.png"
-            className="w-[305px] h-[146px] border border-black mb-14"
+            className="w-[305px] h-[146px] border border-black"
             alt="약관 설명 이미지"
           />
         </div>
