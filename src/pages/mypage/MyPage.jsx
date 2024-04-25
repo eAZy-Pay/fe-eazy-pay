@@ -6,7 +6,7 @@ import RecentPayment from './RecentPayment';
 import AvailableFunds from './AvailableFunds';
 import CardManagement from './CardManagement';
 import { getPaymentHistoryData } from '../../apis/UserAPI';
-import { getMainBanner } from '../../apis/MainAPI';
+import { getMainBanner } from '../../apis/CardAPI';
 import { getUserSession } from '../../utils/authUtils';
 
 const currentMonth = new Date().getMonth() + 1;

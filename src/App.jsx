@@ -17,9 +17,8 @@ import MonthlyPayment from './pages/mypage/MonthlyPayment';
 import AdminCardPage from './pages/admin/AdminCardPage';
 import AuthRequiredPage from './pages/AuthRequiredPage';
 import CardApply from './pages/card/CardApply';
-
-export const ModalContext = createContext();
 import ManageMyCard from './pages/mypage/ManageMyCard';
+export const ModalContext = createContext();
 
 function App() {
   const [modal, setModal] = useState({
@@ -58,6 +57,14 @@ function App() {
             element={
               <AuthRequiredPage>
                 <MonthlyPayment />
+              </AuthRequiredPage>
+            }
+          />
+          <Route
+            path="/mypage/card-managment"
+            element={
+              <AuthRequiredPage>
+                <ManageMyCard />
               </AuthRequiredPage>
             }
           />
@@ -104,23 +111,6 @@ function App() {
           />
         </Routes>
       </ModalContext.Provider>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<MainPage />} />
-        <Route path="/card-recommend" element={<RecommendationPage />} />
-        <Route path="/card-search" element={<CardSearchPage />} />
-        <Route path="/shopping" element={<ShoppingPage />} />
-        <Route path="/shopping/detail" element={<ShoppingDetail />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/manage" element={<ManageMyInformation />} />
-        <Route path="/mypage/payment" element={<MonthlyPayment />} />
-        <Route path="/mypage/card-management" element={<ManageMyCard />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/faq" element={<FaqPage />} />
-        <Route path="/qna" element={<QnaPage />} />
-        <Route path="/qna-write" element={<QnaWritePage />} />
-        <Route path="/card-detail/:id" element={<CardDetailPage />} />
-      </Routes>
     </Router>
   );
 }
