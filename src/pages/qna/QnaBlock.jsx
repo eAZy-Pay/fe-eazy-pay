@@ -14,7 +14,7 @@ const QnaBlock = ({ title, date, content, isAnswered, userName }) => {
         {content}
       </div>
 
-      <div className="flex mx-3 flex justify-between">
+      <div className="flex mx-3 justify-between">
         <div className="text-lg my-4 mx-2">{date}</div>
         <div className="text-lg my-4">{writer}</div>
 

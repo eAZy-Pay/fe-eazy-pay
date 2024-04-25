@@ -58,10 +58,7 @@ const QnaWritePage = () => {
           <h2 className="text-2xl font-bold mb-4">게시글 등록</h2>
           <form onSubmit={submitHandler}>
             <div className="mb-4">
-              <label
-                htmlFor="title"
-                className="text-2xl font-bold block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="title" className="text-2xl font-bold block text-gray-700 mb-2">
                 제목
               </label>
               <input
@@ -80,10 +77,7 @@ const QnaWritePage = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="content"
-                className="text-2xl font-bold block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="content" className="text-2xl font-bold block text-gray-700 mb-2">
                 내용
               </label>
               <textarea
