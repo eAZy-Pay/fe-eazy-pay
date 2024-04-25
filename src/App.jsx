@@ -8,6 +8,7 @@ import CardSearchPage from './pages/search/CardSearchPage';
 import MyPage from './pages/mypage/MyPage';
 import ShoppingPage from './pages/shopping/ShoppingPage';
 import ShoppingDetail from './pages/shopping/ShoppingDetail';
+import ShoppingComplete from './pages/shopping/ShoppingComplete';
 import FaqPage from './pages/faq/FaqPage';
 import QnaPage from './pages/qna/QnaPage';
 import QnaWritePage from './pages/qna/QnaWritePage';
@@ -18,6 +19,7 @@ import AdminCardPage from './pages/admin/AdminCardPage';
 import AuthRequiredPage from './pages/AuthRequiredPage';
 import CardApply from './pages/card/CardApply';
 import ManageMyCard from './pages/mypage/ManageMyCard';
+
 export const ModalContext = createContext();
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
           <Route path="/card-search" element={<CardSearchPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="/shopping/detail" element={<ShoppingDetail />} />
+          <Route path="/shopping/complete" element={<ShoppingComplete />} />
           <Route
             path="/mypage"
             element={
