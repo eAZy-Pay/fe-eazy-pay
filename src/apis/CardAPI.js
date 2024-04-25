@@ -56,3 +56,14 @@ export const updateCard = async (card) => {
   });
   return await response.json();
 };
+
+export const getHighlightedCardByEventCategory = async (eventCategoryId) => {
+  if (!eventCategoryId) {
+    return [];
+  }
+
+  const response = await fetch(
+    `${BASE_URL}/api/cards/highlighted?event_category_id=${eventCategoryId}`
+  );
+  return await response.json();
+};
