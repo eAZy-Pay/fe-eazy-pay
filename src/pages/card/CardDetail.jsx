@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import CreditCard from '../../components/card/CreditCard';
 import GetCategoryIcon from '../../utils/GetCategoryIcon';
 
-const CardDetail = ({ card, benefitList }) => {
+const CardDetail = ({ card, benefitList, showApplyButton }) => {
   const makeBenefitRow = (categoryName, benefitRate, index) => (
     <div className="flex w-full my-1" key={index}>
       <div className="flex justify-between items-center w-full text-3xl font-semibold">
@@ -40,19 +40,25 @@ const CardDetail = ({ card, benefitList }) => {
           </div>
         </div>
       </div>
-      <div className="flex space-x-4 mb-6 text-sm font-medium">
-        <div className="flex-auto flex space-x-4">
-          <button
-            className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white"
-            type="button"
-            onClick={() => window.open(`/card-applicant/${card.uid}`, '_blank')}
-          >
-            카드 신청
-          </button>
+      {showApplyButton && (
+        <div className="flex space-x-4 mb-6 text-sm font-medium">
+          <div className="flex-auto flex space-x-4">
+            <button
+              className="h-10 px-6 font-semibold rounded-md bg-blue-500 text-white"
+              type="button"
+              onClick={() => window.location.replace(`/card-applicant/${card.uid}`)}
+            >
+              카드 신청
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
+};
+
+CardDetail.defaultProps = {
+  showApplyButton: true,
 };
 
 CardDetail.propTypes = {
@@ -72,6 +78,7 @@ CardDetail.propTypes = {
       benefitRate: PropTypes.number.isRequired,
     })
   ).isRequired,
+  showApplyButton: PropTypes.bool,
 };
 
 export default CardDetail;
