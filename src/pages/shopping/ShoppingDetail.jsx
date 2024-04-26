@@ -6,6 +6,7 @@ import secureLocalStorage from 'react-secure-storage';
 import { checkPin } from '../../apis/AuthAPI';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { paymentInfo } from '../../apis/PaymentInfoAPI';
+import mainLogo from '../../assets/mainLogo.svg';
 
 const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeName }) => {
   const navigate = useNavigate();
@@ -170,17 +171,113 @@ const ShoppingDetail = () => {
 
   return (
     <DefaultLayout>
-      <div className="flex justify-between p-6">
-        <div className="w-2/4 flex justify-center">
-          <img src={image} alt="Example" className="w-100 h-100" />
+      <div className="flex justify-between py-4">
+        <div className=" flex w-1/2 justify-center">
+          <div className="flex items-center">
+            <img src={image} alt="Example" className="object-cover h-[26rem] w-[26rem]" />
+          </div>
         </div>
-        <div className="w-2/4 flex flex-col items-start bg-gray-100 p-4 rounded-lg">
-          <p>category id : {categoryId}</p>
-          <p>상품명 : {name}</p>
-          <p>가격 : {price}</p>
-          <button className="bg-gray-300 text-black py-2 px-4 mt-4 rounded-lg" onClick={openModal}>
-            eAZy pay로 결제
-          </button>
+        {/* 오른쪽 상품 정보 영역 */}
+        <div className="flex w-1/2">
+          <div className="w-3/4 flex flex-col items-start mx-4 bg-gray-50 p-6 rounded-lg shadow-lg">
+            {' '}
+            <div className="flex flex-col w-full">
+              <p className="my-6 text-3xl font-semibold text-gray-800">{storeName}</p>{' '}
+              <p className="my-6 text-2xl font-semibold text-gray-800">{name}</p>{' '}
+              <div className="flex flex-col items-end justify-end  bg-gray-50 p-6">
+                <p className="text-2xl  text-gray-600">결제 금액</p>
+                <p className="mt-6 text-2xl text-gray-500">{price}원</p>
+              </div>
+              <button
+                className="mt-2 mb-6 text-lg bg-blue-100 text-gray-600 py-2 rounded-lg hover:bg-blue-200 transition duration-300"
+                onClick={openModal}
+              >
+                <img src={mainLogo} alt="Main Logo" className="inline-block h-10 w-20 mr-3" />
+                결제
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* 스케치 영역 */}
+      <div className="blur-[2px] my-14">
+        <div class="border-b border-gray-200 dark:border-gray-700">
+          <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+            <li class="me-2">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
+              >
+                <svg
+                  className="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+                </svg>
+                Profile
+              </a>
+            </li>
+            <li className="me-2">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group"
+                aria-current="page"
+              >
+                <svg
+                  className="w-4 h-4 me-2 text-blue-600 dark:text-blue-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 18"
+                >
+                  <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+                </svg>
+                Dashboard
+              </a>
+            </li>
+            <li className="me-2">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
+              >
+                <svg
+                  className="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M5 11.424V1a1 1 0 1 0-2 0v10.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.228 3.228 0 0 0 0-6.152ZM19.25 14.5A3.243 3.243 0 0 0 17 11.424V1a1 1 0 0 0-2 0v10.424a3.227 3.227 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.243 3.243 0 0 0 2.25-3.076Zm-6-9A3.243 3.243 0 0 0 11 2.424V1a1 1 0 0 0-2 0v1.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0V8.576A3.243 3.243 0 0 0 13.25 5.5Z" />
+                </svg>
+                Settings
+              </a>
+            </li>
+            <li className="me-2">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
+              >
+                <svg
+                  className="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 18 20"
+                >
+                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+                </svg>
+                Contacts
+              </a>
+            </li>
+            <li>
+              <a className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">
+                Disabled
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <PaymentModal

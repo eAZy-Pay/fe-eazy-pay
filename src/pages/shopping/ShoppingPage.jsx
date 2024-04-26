@@ -47,7 +47,7 @@ const ShoppingPage = () => {
       image:
         'https://shop-phinf.pstatic.net/20240229_222/1709172376739WuEoG_JPEG/15774861547537251_1271033337.jpg?type=m510',
       category: '슈퍼/마트',
-      name: '햇반',
+      name: '햇반 24개입',
       price: '20000',
     },
     {
@@ -83,7 +83,8 @@ const ShoppingPage = () => {
       categoryId: '6',
       storeCode: '060000160001',
       storeName: '우리여행사',
-      image: '',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtbzgr9P93ojweefXCBj_Pf0LKUo47C2NL6w&usqp=CAU',
       category: '숙박/여행',
       name: '캐나다 패키지 여행 9박 10일',
       price: '23095000',
@@ -92,7 +93,8 @@ const ShoppingPage = () => {
       categoryId: '7',
       storeCode: '070000210001',
       storeName: '우리꽃집',
-      image: '',
+      image:
+        'https://lh3.googleusercontent.com/proxy/PrNC_yO9G9zArPa5EHNZCbqQPNChCV2sWzJxMq4PYY9YJIsl5pp3_fugnuqz4tfxbkfjPccEERX0pDEnBjRdxBrONobRZf6VY_cKHQTMSYP1b52FdIL9',
       category: '문화/취미',
       name: '봄내음 꽃다발 당일배송',
       price: '39000',
@@ -101,7 +103,8 @@ const ShoppingPage = () => {
       categoryId: '8',
       storeCode: '080000220001',
       storeName: '상암주유소',
-      image: '',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR12127bfgvUkLqQT2-ZuJoJFVErExsxVjQWZBXGNhjRKz9uTlOaFPi98_fGCwZiIUgvsU&usqp=CAU',
       category: '자동차',
       name: '주유상품권 30L',
       price: '50000',
