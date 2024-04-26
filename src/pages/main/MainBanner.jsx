@@ -21,14 +21,14 @@ const MainBanner = () => {
   useEffect(() => {
     if (user) {
       // 로그인 되어있는 경우
-      getMainBanner(user.uid, 3).then((res) => {
+      getMainBanner(user.uid, 1, 4).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
           tmp.push(cardObj.card.image);
         });
         setUserMain((prev) => ({
           ...prev,
-          benefitAmount: res.benefitAmount,
+          benefitAmount: res.totalBenefitAmount,
           images: tmp,
           cards: res.cards,
         }));

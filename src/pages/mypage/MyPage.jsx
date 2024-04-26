@@ -20,9 +20,9 @@ const MyPage = () => {
     cards: [],
     transactions: [],
     availableFunds: 0,
-    totalLimit: 0,
-    usedAmount: 0,
-    benefitAmount: 0,
+    totalPayemntLimit: 0,
+    totalUsedAmount: 0,
+    totalBenefitAmount: 0,
   });
 
   useEffect(() => {
@@ -38,15 +38,15 @@ const MyPage = () => {
 
           const [data, mainBanner] = await Promise.all([
             getPaymentHistoryData(uid, currentYear, currentMonth, 0, 4),
-            getMainBanner(uid, 1),
+            getMainBanner(uid, 1, 0),
           ]);
 
           const cards = Array.isArray(mainBanner.cards) ? mainBanner.cards : [];
-          const usedAmount = cards.reduce((total, card) => total + card.useAmount, 0);
 
-          const benefitAmount = mainBanner?.benefitAmount || 0;
-          const totalLimit = mainBanner?.totalPaymentLimit || 0;
-          const availableFunds = totalLimit - usedAmount;
+          const availableFunds = mainBanner?.availableFunds || 0;
+          const totalUsedAmount = mainBanner?.totalUsedAmount || 0;
+          const totalBenefitAmount = mainBanner?.benefitAmount || 0;
+          const totalPaymentLimit = mainBanner?.totalPaymentLimit || 0;
 
           setUserMain((prev) => ({
             ...prev,
@@ -54,9 +54,9 @@ const MyPage = () => {
             cards,
             transactions: Array.isArray(data) ? data : [],
             availableFunds,
-            totalLimit,
-            usedAmount,
-            benefitAmount,
+            totalPaymentLimit,
+            totalUsedAmount,
+            totalBenefitAmount,
           }));
         } catch (error) {
           console.error('Failed to load user data:', error);
@@ -75,11 +75,11 @@ const MyPage = () => {
             <RecentPayment transactions={userMain.transactions} />
             <AvailableFunds
               funds={userMain.availableFunds}
-              totalLimit={userMain.totalLimit}
-              usedAmount={userMain.usedAmount}
+              totalLimit={userMain.totalPaymentLimit}
+              usedAmount={userMain.totalUsedAmount}
             />
           </div>
-          <CardManagement cards={userMain.cards} amount={userMain.benefitAmount} />
+          <CardManagement cards={userMain.cards} amount={userMain.totalBenefitAmount} />
         </div>
       </DefaultLayout>
     </>
