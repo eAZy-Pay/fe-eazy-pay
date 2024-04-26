@@ -22,7 +22,7 @@ const steps = [
   },
 ];
 
-export default function VerticalLinearStepper({ activeStep, setActiveStep }) {
+export default function VerticalLinearStepper({ activeStep }) {
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper activeStep={activeStep} orientation="vertical">
@@ -49,5 +49,5 @@ export default function VerticalLinearStepper({ activeStep, setActiveStep }) {
 
 VerticalLinearStepper.propTypes = {
   activeStep: PropTypes.number.isRequired,
-  setActiveStep: PropTypes.func.isRequired,
+  setActiveStep: PropTypes.func,
 };
