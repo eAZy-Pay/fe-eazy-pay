@@ -9,26 +9,37 @@ import { paymentInfo } from '../../apis/PaymentInfoAPI';
 
 const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeName }) => {
   const navigate = useNavigate();
-  const [message, setMessage] = useState('PIN 번호를 입력해주세요');
+  const [message, setMessage] = useState('');
+  const [wrongPinMessage, setWrongPinMessage] = useState('');
   const [pin, setPin] = useState(''); // 현재 입력 중인 PIN
   const [keypadNumbers, setKeypadNumbers] = useState([]); // 키패드 번호
   const [pinStatus, setPinStatus] = useState([false, false, false, false, false, false]); // 동그라미 상태
 
   // 키패드 번호 섞기
   const shuffleKeypad = () => {
-    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     const shuffledNumbers = numbers.sort(() => Math.random() - 0.5);
-    setKeypadNumbers(shuffledNumbers);
+    setKeypadNumbers(
+      shuffledNumbers.slice(0, 9).concat(['전체삭제', ...shuffledNumbers.slice(9), '삭제'])
+    );
   };
-
   useEffect(() => {
-    shuffleKeypad(); // 처음 모달이 열리면 키패드 번호를 섞음
-  }, []);
+    if (isOpen) {
+      shuffleKeypad(); // 모달이 열릴 때마다 키패드 번호를 섞음
+      setPin(''); // PIN 리셋
+      setPinStatus([false, false, false, false, false, false]); // 동그라미 상태 리셋
+      setMessage('PIN 번호를 입력해주세요');
+    }
+  }, [isOpen]);
 
   // 핀번호 입력 처리
-  const handleKeyClick = async (number) => {
-    if (pin.length < 6) {
-      const newPin = pin + number;
+  const handleKeyClick = async (label) => {
+    if (label === '삭제') {
+      deletePin();
+    } else if (label === '전체삭제') {
+      clearPin();
+    } else if (pin.length < 6) {
+      const newPin = pin + label;
       setPin(newPin);
       console.log(newPin); // TODO: 콘솔 로그 제거
 
@@ -57,16 +68,8 @@ const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeN
             } catch (error) {
               console.error(error);
             }
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
           } catch (error) {
-            setMessage('pin 번호가 올바르지 않습니다. 다시 입력하세요.');
+            setWrongPinMessage('pin 번호가 올바르지 않습니다. 다시 입력하세요.');
             setPinStatus([false, false, false, false, false, false]);
             setPin('');
             shuffleKeypad();
@@ -98,51 +101,51 @@ const PaymentModal = ({ isOpen, closeModal, categoryId, price, storeCode, storeN
       isOpen={isOpen}
       appElement={document.getElementById('root')}
       onRequestClose={closeModal}
-      // categoryId={categoryId}
       contentLabel="Payment PIN"
       style={{
         content: {
-          width: '30rem',
-          height: '30rem',
+          width: '22rem',
+          height: '28rem',
           top: '40%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
         },
       }}
     >
-      {message && <p className="text-center">{message}</p>}
-      <div className="flex justify-center mb-4">
+      {/* 작은 폰트로 메시지 출력 */}
+      {wrongPinMessage && (
+        <>
+          <h2 className="mt-8 text-center text-xl">{message}</h2>
+          <p className="mt-1 mb-5 text-sm text-center text-red-700">{wrongPinMessage}</p>
+        </>
+      )}
+      {wrongPinMessage === '' && (
+        <>
+          <h2 className="my-8 text-center text-xl">{message}</h2>
+        </>
+      )}
+      <div className="flex justify-center">
         {pinStatus.map((status, idx) => (
           <div
             key={idx}
-            className={`w-6 h-6 rounded-full mx-1 ${status ? 'bg-gray-800' : 'bg-gray-300'}`}
+            className={`w-6 h-6 rounded-full mx-1 ${status ? 'bg-gray-800' : 'bg-neutral-200'}`}
           />
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-3 justify-center">
-        {keypadNumbers.map((number) => (
+      <div className="grid grid-cols-3 gap-0 mt-12">
+        {keypadNumbers.map((label) => (
           <button
-            key={number}
-            className="border border-gray-400 p-3"
-            onClick={() => handleKeyClick(number)}
+            key={label}
+            className={`p-3 font-bold ${
+              label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-2xl'
+            }`}
+            onClick={() => handleKeyClick(label)}
           >
-            {number}
+            {label}
           </button>
         ))}
       </div>
-      <div className="flex justify-between mt-4">
-        <button className="bg-red-500 text-white p-2" onClick={deletePin}>
-          한 글자 지우기
-        </button>
-        <button className="bg-red-700 text-white p-2" onClick={clearPin}>
-          전체 삭제
-        </button>
-      </div>
-      <div className="text-center mt-4">
-        <button className="bg-blue-500 text-white p-2" onClick={closeModal}>
-          닫기
-        </button>
-      </div>
+      <div className="text-center mt-4"></div>
     </Modal>
   );
 };
