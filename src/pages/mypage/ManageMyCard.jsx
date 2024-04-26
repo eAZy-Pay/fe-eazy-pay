@@ -44,16 +44,25 @@ const ManageMyCard = () => {
 
   const linkedCards = (cards, gap) => (
     <div className={`flex justify-center ${gap}`}>
-      {cards.map(({ card }, index) => (
-        <div key={index} style={{ width: '12.5rem' }}>
-          <div className="flex flex-col items-center">
-            <img src={card.image} style={{ maxWidth: '7rem', height: 'auto' }} className="rotate-90" />
-            <div className="text-lg" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {card.name}
+      {cards
+        .filter(({ linkEazy }) => linkEazy) // linkEazy가 true인 카드만 필터링
+        .map(({ card }, index) => (
+          <div key={index} style={{ width: '12.5rem' }}>
+            <div className="flex flex-col items-center">
+              <img
+                src={card.image}
+                style={{ maxWidth: '7rem', height: 'auto' }}
+                className="rotate-90"
+              />
+              <div
+                className="text-lg"
+                style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+              >
+                {card.name}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 
@@ -79,7 +88,7 @@ const ManageMyCard = () => {
                   to="/mypage/manage/link-eazy"
                   className="flex justify-center items-center w-60 h-12 rounded-xl border-2 border-gray-200 shadow-md hover:shadow-lg transition duration-300 ease-in-out"
                 >
-                  <div className="text-xl text-center">eAZy 연동 카드 관리</div>
+                  <div className="text-xl text-center">eAZy 카드 연동 관리</div>
                 </Link>
               </div>
               {userCards.length >= 5 ? (
@@ -139,9 +148,9 @@ const ManageMyCard = () => {
           })}
           <div
             style={{ width: '39.25rem', cursor: 'pointer' }} // 마지막에 카드 추가를 위한 공간 추가
-          // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
+            // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
           >
-            <DefaultFrame className="flex justify-center h-[277.2px] ">
+            <DefaultFrame className="flex justify-center h-[304.83px] ">
               <div className="flex flex-col justify-center items-center gap-3 ">
                 <img src={plusIcon} alt="Plus Icon" />
                 <div className="text-2xl">새로운 카드를 추가해 보세요!</div>
@@ -149,7 +158,7 @@ const ManageMyCard = () => {
             </DefaultFrame>
           </div>
         </div>
-      </DefaultLayout >
+      </DefaultLayout>
     </>
   );
 };
