@@ -29,7 +29,7 @@ const AgreementForm = ({ checkBox1, setCheckBox1, checkBox2, setCheckBox2 }) => 
   };
 
   return (
-    <div className="flex ml-36">
+    <div className="flex">
       <div className="flex flex-col">
         <div className="flex items-center mb-8">
           <input

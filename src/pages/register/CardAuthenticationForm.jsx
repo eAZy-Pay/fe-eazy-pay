@@ -62,7 +62,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
   };
 
   return (
-    <div className="flex ml-48">
+    <div className="flex">
       <div className="flex flex-col bg-white">
         <Box
           component="form"

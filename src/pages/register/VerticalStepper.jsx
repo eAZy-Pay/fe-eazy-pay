@@ -49,5 +49,5 @@ export default function VerticalLinearStepper({ activeStep }) {
 
 VerticalLinearStepper.propTypes = {
   activeStep: PropTypes.number.isRequired,
-  setActiveStep: PropTypes.func,
+  setActiveStep: PropTypes.func.isRequired,
 };
