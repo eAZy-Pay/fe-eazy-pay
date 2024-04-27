@@ -30,7 +30,6 @@ const MainPage = () => {
       getCardsSummary(userId, 1, 4).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
-          tmp.push(cardObj.card.image);
           if (cardObj.linkEazy) {
             // linkEazy가 true인 카드만 추가
             tmp.push(cardObj.card.image);
