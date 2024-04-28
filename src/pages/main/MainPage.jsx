@@ -62,10 +62,13 @@ const MainPage = () => {
         {user ? (
           userMain.cards.length ? (
             <>
-              <div className="mt-[5rem] mb-8 text-4xl font-bold self-left">eAZy 하게 챙겼어요</div>
-              <div className="my-4">
+              <div className="flex flex-col w-full py-10 bg-[#F4F7FC]">
+                <div className="mt-[3rem] mb-[3rem] text-4xl font-bold self-left">
+                  eAZy 하게 챙겼어요
+                </div>
                 <MainBenefits userMain={userMain} />
               </div>
+
               <div className="mt-8 text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
               <div>
                 {userMain.cards.map((card, index) => (
