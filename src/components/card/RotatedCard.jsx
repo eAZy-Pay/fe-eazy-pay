@@ -10,7 +10,7 @@ const RotatedCard = ({ image, style }) => {
 };
 
 RotatedCard.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   style: PropTypes.object,
 };
 

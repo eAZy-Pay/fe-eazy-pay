@@ -19,6 +19,7 @@ import AdminCardPage from './pages/admin/AdminCardPage';
 import AuthRequiredPage from './pages/AuthRequiredPage';
 import ManageMyCard from './pages/mypage/ManageMyCard';
 import CardApplyPage from './pages/card/CardApplyPage';
+import ManageLinkEazy from './pages/mypage/ManageLinkEazy';
 
 export const ModalContext = createContext();
 
@@ -52,6 +53,14 @@ function App() {
             element={
               <AuthRequiredPage>
                 <ManageMyInformation />
+              </AuthRequiredPage>
+            }
+          />
+          <Route
+            path="/mypage/manage/link-eazy"
+            element={
+              <AuthRequiredPage>
+                <ManageLinkEazy />
               </AuthRequiredPage>
             }
           />
