@@ -3,8 +3,6 @@ import CreditCard from '../../components/card/CreditCard';
 import BenefitRow from './BenefitRow';
 
 const CardDetail = ({ card, benefitList, showApplyButton }) => {
-
-
   // 모든 카테고리에서 적립 가능한 카드인지 확인
   const isAllCategory =
     benefitList.length > 8 &&
@@ -20,10 +18,20 @@ const CardDetail = ({ card, benefitList, showApplyButton }) => {
             <div className="w-full text-2xl font-medium">{card.info}</div>
             <div className="flex flex-col items-baseline mt-4">
               {isAllCategory ? (
-                <BenefitRow key="all" categoryName="모든" benefitRate={benefitList[0].benefitRate} index={0} />
+                <BenefitRow
+                  key="all"
+                  categoryName="모든"
+                  benefitRate={benefitList[0].benefitRate}
+                  index={0}
+                />
               ) : (
                 benefitList.map((benefit, index) => (
-                  <BenefitRow key={index} categoryName={benefit.categoryName.toString()} benefitRate={benefit.benefitRate} index={index} />
+                  <BenefitRow
+                    key={index}
+                    categoryName={benefit.categoryName.toString()}
+                    benefitRate={benefit.benefitRate}
+                    index={index}
+                  />
                 ))
               )}
             </div>
