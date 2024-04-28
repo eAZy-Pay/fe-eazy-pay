@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 const Card = ({ categoryId, storeCode, storeName, image, category, name, price }) => {
   const navigate = useNavigate();
 
+  const formattedPrice = new Intl.NumberFormat().format(price); // 가격을 세 자리마다 쉼표로 구분하여 형식화
+
   const handleCardClick = () => {
     const queryParams = new URLSearchParams({
       categoryId,
@@ -23,7 +25,9 @@ const Card = ({ categoryId, storeCode, storeName, image, category, name, price }
       <div className="p-4">
         <h3 className="text-lg font-bold">{category}</h3>
         <p className="text-sm text-gray-500">{name}</p>
-        <p className="text-sm font-bold mt-2">{price}</p>
+        <div className="flex justify-end mt-2">
+          <p className="text-sm font-bold">{formattedPrice} 원</p>
+        </div>
       </div>
     </div>
   );
@@ -94,7 +98,7 @@ const ShoppingPage = () => {
       storeCode: '070000210001',
       storeName: '우리꽃집',
       image:
-        'https://lh3.googleusercontent.com/proxy/PrNC_yO9G9zArPa5EHNZCbqQPNChCV2sWzJxMq4PYY9YJIsl5pp3_fugnuqz4tfxbkfjPccEERX0pDEnBjRdxBrONobRZf6VY_cKHQTMSYP1b52FdIL9',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFTsR43gi-yG1jUkna7gx54kWWjye_o7lj2g&usqp=CAU',
       category: '문화/취미',
       name: '봄내음 꽃다발 당일배송',
       price: '39000',
