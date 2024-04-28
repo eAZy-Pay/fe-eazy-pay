@@ -1,21 +1,9 @@
 import PropTypes from 'prop-types';
 import CreditCard from '../../components/card/CreditCard';
-import GetCategoryIcon from '../../utils/GetCategoryIcon';
+import BenefitRow from './BenefitRow';
 
 const CardDetail = ({ card, benefitList, showApplyButton }) => {
-  const makeBenefitRow = (categoryName, benefitRate, index) => (
-    <div className="flex w-full my-1" key={index}>
-      <div className="flex justify-between items-center w-full text-3xl font-semibold">
-        <div className="flex items-center">
-          <GetCategoryIcon categoryName={categoryName} />
-          <div className="mx-2 w-40 text-center">{categoryName}</div>
-          <div className="mx-2">{`카테고리에서`}</div>
-          <div className="mx-2 w-16 text-center">{`${benefitRate}%`}</div>
-          <div className="font-semibold">{`할인`}</div>
-        </div>
-      </div>
-    </div>
-  );
+
 
   // 모든 카테고리에서 적립 가능한 카드인지 확인
   const isAllCategory =
@@ -31,11 +19,13 @@ const CardDetail = ({ card, benefitList, showApplyButton }) => {
             <h1 className="text-5xl font-semibold">{card.name}</h1>
             <div className="w-full text-2xl font-medium">{card.info}</div>
             <div className="flex flex-col items-baseline mt-4">
-              {isAllCategory
-                ? makeBenefitRow('모든', benefitList[0].benefitRate, 0)
-                : benefitList.map((benefit, index) =>
-                    makeBenefitRow(benefit.categoryName, benefit.benefitRate, index)
-                  )}
+              {isAllCategory ? (
+                <BenefitRow key="all" categoryName="모든" benefitRate={benefitList[0].benefitRate} index={0} />
+              ) : (
+                benefitList.map((benefit, index) => (
+                  <BenefitRow key={index} categoryName={benefit.categoryName.toString()} benefitRate={benefit.benefitRate} index={index} />
+                ))
+              )}
             </div>
           </div>
         </div>

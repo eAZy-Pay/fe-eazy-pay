@@ -10,9 +10,9 @@ export const getCategoryCards = async (categoryId) => {
   return await response.json();
 };
 
-export const getMainBanner = async (userId, month) => {
+export const getCardsSummary = async (userId, month, count) => {
   const response = await fetch(
-    `${BASE_URL}/api/cards/simple-user-card-benefit-performance?user_id=${userId}&month=${month}`
+    `${BASE_URL}/api/cards/summary?user_id=${userId}&month=${month}&count=${count}`
   );
 
   return await response.json();

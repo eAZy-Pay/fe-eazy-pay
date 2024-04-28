@@ -27,7 +27,7 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
           </div>
         </Link>
         {/* 이지카드 총 혜택 */}
-        <div className="mx-6 my-10 text-2xl">총 혜택</div>
+        <div className="mx-6 my-10 text-2xl">eAZy 카드</div>
         <DefaultFrame className="flex max-w-[32rem] m-6">
           <img
             src={eazy}

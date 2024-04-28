@@ -9,8 +9,8 @@ import OverlappedCard from '../../assets/overlappedCard.png';
 import MainBenefits from './MainBenefits';
 import CardPerfomance from './CardPerformance';
 import { useEffect, useState } from 'react';
-import { getMainBanner } from '../../apis/CardAPI';
 import { getUserSession } from '../../utils/authUtils';
+import { getCardsSummary } from '../../apis/CardAPI';
 const MainPage = () => {
   const user = getUserSession();
   const [userId] = useState(user ? user.uid : '');
@@ -27,16 +27,19 @@ const MainPage = () => {
   useEffect(() => {
     if (userId) {
       // 로그인 되어있는 경우
-      getMainBanner(userId, 3).then((res) => {
+      getCardsSummary(userId, 1, 4).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
-          tmp.push(cardObj.card.image);
+          if (cardObj.linkEazy) {
+            // linkEazy가 true인 카드만 추가
+            tmp.push(cardObj.card.image);
+          }
         });
         setUserMain((prev) => ({
           ...prev,
-          benefitAmount: res.benefitAmount,
+          benefitAmount: res.totalBenefitAmount,
           images: tmp,
-          cards: res.cards,
+          cards: res.cards.filter((cardObj) => cardObj.linkEazy),
         }));
       });
     } else {
