@@ -26,6 +26,7 @@ const MainBenefits = ({ userMain }) => {
 
   return (
     <>
+      
       <div className="mb-3">
         <div className="flex flex-row justify-between relative">
           <div className={`ml-[3em]`}>
@@ -33,7 +34,6 @@ const MainBenefits = ({ userMain }) => {
           </div>
 
           <div className="text-2xl z-50">
-            <div className="bg-white rounded-md px-5 py-3 shadow">
               <span className="text-3xl font-bold">{userMain.userName}</span>님께서
               <span className="font-extrabold mx-3">이달 받은 혜택</span>
               {Data.categoryDatas.map((categoryData, index) => (
@@ -46,7 +46,7 @@ const MainBenefits = ({ userMain }) => {
                 </div>
               )}
             </div>
-          </div>
+
           <img className="ml-auto" src={arrowIcon}></img>
           <img src={arrowIcon}></img>
 

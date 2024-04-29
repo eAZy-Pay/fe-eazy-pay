@@ -11,6 +11,7 @@ import CardPerfomance from './CardPerformance';
 import { useEffect, useState } from 'react';
 import { getUserSession } from '../../utils/authUtils';
 import { getCardsSummary } from '../../apis/CardAPI';
+import DefaultFrame from '../../components/layout/DefaultFrame';
 const MainPage = () => {
   const user = getUserSession();
   const [userId] = useState(user ? user.uid : '');
@@ -57,24 +58,19 @@ const MainPage = () => {
 
   return (
     <>
-      <DefaultLayout>
-        {/* 로그인 상태인 경우 */}
-        {user ? (
+      <DefaultLayout banner={
+        /* 로그인 상태인 경우 */
+        user ? (
           userMain.cards.length ? (
             <>
-              <div className="flex flex-col w-full py-10 bg-[#F4F7FC]">
+  
+              <DefaultFrame>
                 <div className="mt-[3rem] mb-[3rem] text-4xl font-bold self-left">
                   eAZy 하게 챙겼어요
                 </div>
                 <MainBenefits userMain={userMain} />
-              </div>
+              </DefaultFrame>
 
-              <div className="mt-8 text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
-              <div>
-                {userMain.cards.map((card, index) => (
-                  <CardPerfomance key={index} {...card} />
-                ))}
-              </div>
             </>
           ) : (
             //로그인 되었지만 발급된 우리카드가 하나도 없는 상태인 경우
@@ -122,7 +118,21 @@ const MainPage = () => {
               </div>
             </div>
           </div>
-        )}
+        )
+      } bannerClassName={'py-14 bg-[#F4F7FC]'}>
+        
+
+        {user &&
+        <>
+        <div className="mt-8 text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
+              <div>
+                {userMain.cards.map((card, index) => (
+                  <CardPerfomance key={index} {...card} />
+                ))}
+              </div>
+       
+        </>
+            }
 
         <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
 
