@@ -66,7 +66,10 @@ const MainPage = () => {
               <div className="my-4">
                 <MainBenefits userMain={userMain} />
               </div>
-              <div className="mt-8 text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
+              <div className="flex mt-12 gap-3">
+                <div className="text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
+                <div className="flex items-end text-gray-500">(이번 달 기준)</div>
+              </div>
               <div>
                 {userMain.cards.map((card, index) => (
                   <CardPerfomance key={index} {...card} />

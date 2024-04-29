@@ -14,9 +14,9 @@ const UserMainComponent = ({ benefitAmount, useAmount, card }) => {
 */
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center px-12">
         <RotatedCard image={card.image} style={{ width: '157.71px', height: '251.98px' }} />
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col gap-8">
           <div className="flex">
             <CardsGage
               color="#f79042"
@@ -26,14 +26,20 @@ const UserMainComponent = ({ benefitAmount, useAmount, card }) => {
             />
             <CardLetter
               color="#f79042"
-              label="혜택"
+              label="받은 혜택"
               amount={benefitAmount}
               total={card.benefitLimit}
             />
+            <div></div>
           </div>
           <div className="flex">
             <CardsGage color="#70a6e8" amount={useAmount} total={card.performance} margin="ml-36" />
-            <CardLetter color="#70a6e8" label="실적" amount={useAmount} total={card.performance} />
+            <CardLetter
+              color="#70a6e8"
+              label="채운 실적"
+              amount={useAmount}
+              total={card.performance}
+            />
           </div>
         </div>
       </div>
