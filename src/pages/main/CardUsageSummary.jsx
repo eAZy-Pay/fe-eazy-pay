@@ -1,30 +1,19 @@
 import DefaultFrame from '../../components/layout/DefaultFrame';
 import CategoryBenefit from './CategoryBenefit';
 import OverlappedCards from '../../components/card/OverlappedCards';
+import { getCardUsageSummary } from '../../apis/CardAPI';
 import PropTypes from 'prop-types';
-const CardUsageSummary = ({ userMain }) => {
-  const cardUsageSummary = {
-    categoryDatas: [
-      {
-        categoryName: '생활/주거',
-        benefitAmount: 2000,
-      },
-      {
-        categoryName: '생활/주거',
-        benefitAmount: 2000,
-      },
-      {
-        categoryName: '생활/주거',
-        benefitAmount: 2000,
-      },
-      {
-        categoryName: 'other',
-        benefitAmount: 2000,
-      },
-    ],
-    annualFee: 39800,
-    benefitOfYear: 15000,
-  };
+import { useEffect, useState } from 'react';
+const CardUsageSummary = ({ userMain, userId }) => {
+  const [summary, setSummary] = useState({});
+  useEffect(() => {
+    if (userId) {
+      getCardUsageSummary(userId).then((response) => {
+        if(response.data){
+        setSummary(response.data);}
+      });
+    }
+  }, [userId]);
 
   return (
     <>
@@ -40,17 +29,21 @@ const CardUsageSummary = ({ userMain }) => {
         </div>
         <DefaultFrame className={'py-[3rem] px-[3rem]'}>
           <div className="flex flex-col justify-between text-4xl font-bold ">
-            <div className="text-3xl flex flex-col gap-4 items-end mr-auto">
-              {cardUsageSummary.categoryDatas.map((categoryData, index) => (
-                <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
-              ))}
+            <div className="text-3xl flex flex-col gap-4 items-start mr-auto">
+              { summary.categoryBenefitAmount && summary.benefitOfMonth?
+                summary.categoryBenefitAmount.map((categoryData, index) => (
+                     <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
+                )): "이번 달 혜택 내역이 없습니다."// '올해 혜택받은 내역이 없습니다'
+                
+              }
+              {!summary && "정보를 불러올 수 없습니다."}
             </div>
 
             <div className="ml-auto flex items-end">
               <span className="text-2xl mr-2">이번 달</span>
               <div className="text-3xl mr-[1rem]">총 혜택</div>
               <div className="text-5xl font-black text-blue-700">
-                {userMain.benefitAmount.toLocaleString()}
+                {summary.benefitOfMonth ? summary.benefitOfMonth.toLocaleString() : 0}
               </div>
               <div className="text-3xl">원</div>
               {/* <div className="text-2xl ml-auto ">받았어요</div> */}
@@ -64,7 +57,7 @@ const CardUsageSummary = ({ userMain }) => {
 
 CardUsageSummary.propTypes = {
   userMain: PropTypes.object.isRequired,
-  cardUsageSummary: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default CardUsageSummary;

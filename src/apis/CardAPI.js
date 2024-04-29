@@ -18,6 +18,11 @@ export const getCardsSummary = async (userId, month, count) => {
   return await response.json();
 };
 
+export const getCardUsageSummary = async (userId) => {
+  const response = await fetch(`${BASE_URL}/api/user/card-usage-summary?user_id=${userId}`);
+  return await response.json();
+};
+
 export const getCardsLikeName = async (cardName) => {
   const response = await fetch(`${BASE_URL}/api/cards?name=${cardName}`);
   return await response.json();

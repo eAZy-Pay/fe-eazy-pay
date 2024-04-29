@@ -65,7 +65,7 @@ const MainPage = () => {
           user ? (
             userMain.cards.length ? (
               //로그인 되었고 연결된 우리카드가 있는 경우
-              <CardUsageSummary userMain={userMain} />
+              <CardUsageSummary userMain={userMain} userId={userId} />
             ) : (
               //로그인 되었지만 연결된 우리카드가 하나도 없는 상태인 경우
               <NoLinkedCard />
