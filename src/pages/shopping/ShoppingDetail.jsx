@@ -7,6 +7,8 @@ import { checkPin } from '../../apis/AuthAPI';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { paymentInfo } from '../../apis/PaymentInfoAPI';
 import mainLogo from '../../assets/mainLogo.svg';
+import inequityLeftIcon from '../../assets/inequityLeftIcon.svg';
+import inequityRightIcon from '../../assets/inequityRightIcon.svg';
 
 const PaymentModal = ({
   isOpen,
@@ -23,6 +25,7 @@ const PaymentModal = ({
   const [pin, setPin] = useState(''); // 현재 입력 중인 PIN
   const [keypadNumbers, setKeypadNumbers] = useState([]); // 키패드 번호
   const [pinStatus, setPinStatus] = useState([false, false, false, false, false, false]); // 동그라미 상태
+  const [isEnteringPin, setIsEnteringPin] = useState(false);
 
   // 키패드 번호 섞기
   const shuffleKeypad = () => {
@@ -111,6 +114,10 @@ const PaymentModal = ({
     setPinStatus([false, false, false, false, false, false]); // 동그라미 초기화
   };
 
+  const handleEnteringPin = () => {
+    setIsEnteringPin(true);
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -127,40 +134,89 @@ const PaymentModal = ({
         },
       }}
     >
-      {/* 작은 폰트로 메시지 출력 */}
-      {wrongPinMessage && (
+      {isEnteringPin ? (
         <>
-          <h2 className="mt-8 text-center text-xl">{message}</h2>
-          <p className="mt-1 mb-5 text-sm text-center text-red-700">{wrongPinMessage}</p>
+          {wrongPinMessage ? (
+            // pin 번호 틀렸을 때 빨간 글씨 메시지를 추가적으로 출력
+            <>
+              <h2 className="mt-8 text-center text-xl">{message}</h2>
+              <p className="mt-1 mb-5 text-sm text-center text-red-700">{wrongPinMessage}</p>
+            </>
+          ) : (
+            <>
+              <h2 className="mt-8 text-center text-xl">{message}</h2>
+            </>
+          )}
+          <div className="flex justify-center">
+            {pinStatus.map((status, idx) => (
+              <div
+                key={idx}
+                className={`w-6 h-6 rounded-full mx-1 ${status ? 'bg-gray-800' : 'bg-neutral-200'}`}
+              />
+            ))}
+          </div>
+          <div className="grid grid-cols-3 gap-0 mt-12">
+            {keypadNumbers.map((label) => (
+              <button
+                key={label}
+                className={`p-3 font-bold ${
+                  label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-2xl'
+                }`}
+                onClick={() => handleKeyClick(label)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          {' '}
+          <div className="flex flex-col justify-center items-center p-4">
+            <div className="flex justify-between items-center w-3/4">
+              <img
+                src={inequityLeftIcon}
+                alt="Left"
+                className="w-10 h-10 object-cover opacity-60"
+              />
+              <img
+                src="card-image-url.png"
+                alt="Credit Card"
+                className="w-34 h-20 object-cover border-blue-600 border-2"
+              />
+              <img
+                src={inequityRightIcon}
+                alt="Right"
+                className="w-10 h-10 object-cover opacity-60"
+              />
+            </div>
+            <div className="flex flex-col items-center my-6">
+              <p className="text-base text-gray-700 mb-1">eAZy 카드가 추천하는 카드는</p>
+              <p className="text-base font-extrabold text-gray-700 ">무슨무슨 나야나 카드</p>
+            </div>
+
+            <div className="flex flex-col w-full">
+              <div className="flex justify-between items-baseline">
+                <p className="text-lg font-semibold text-gray-600 ">최종 결제 금액</p>
+                <p className="text-3xl font-bold text-blue-600">{formattedPrice} 원</p>
+              </div>
+
+              <div className="flex justify-between items-baseline mt-2">
+                <p className="text-lg text-gray-600">예상 혜택</p>
+                <p className="text-2xl font-bold text-gray-900 ml-2">0 원</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center p-4">
+            <button
+              className="text-lg bg-blue-100 text-gray-600 py-2 rounded-lg hover:bg-blue-200 transition duration-300"
+              onClick={handleEnteringPin}
+            >
+              결제
+            </button>
+          </div>
         </>
       )}
-      {wrongPinMessage === '' && (
-        <>
-          <h2 className="my-8 text-center text-xl">{message}</h2>
-        </>
-      )}
-      <div className="flex justify-center">
-        {pinStatus.map((status, idx) => (
-          <div
-            key={idx}
-            className={`w-6 h-6 rounded-full mx-1 ${status ? 'bg-gray-800' : 'bg-neutral-200'}`}
-          />
-        ))}
-      </div>
-      <div className="grid grid-cols-3 gap-0 mt-12">
-        {keypadNumbers.map((label) => (
-          <button
-            key={label}
-            className={`p-3 font-bold ${
-              label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-2xl'
-            }`}
-            onClick={() => handleKeyClick(label)}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-      <div className="text-center mt-4"></div>
     </Modal>
   );
 };
