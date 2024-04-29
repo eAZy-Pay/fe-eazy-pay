@@ -5,7 +5,7 @@ const CategoryBenefit = ({ categoryName, benefitAmount, rank }) => {
   return rank == 4 ? (
     <div className="flex py-1 space-x-2">
       그 외 카테고리 {benefitAmount.toLocaleString()}
-      <span className='ml-2'>원</span>
+      <span className="ml-2">원</span>
     </div>
   ) : (
     <div className="flex py-1 space-x-2">

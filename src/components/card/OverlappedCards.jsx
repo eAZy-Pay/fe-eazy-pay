@@ -13,7 +13,7 @@ const OverlappedCards = ({ images }) => {
     <>
       <div
         className={`flex w-[18.5em] h-[13em] z-10 relative ml-12`}
-        style={{marginRight: `${images.length * 0.5}em`, }}
+        style={{ marginRight: `${images.length * 0.5}em` }}
         onPointerEnter={() => {
           setMove(1);
         }}

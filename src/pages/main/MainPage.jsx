@@ -26,7 +26,7 @@ const MainPage = () => {
     []
   );
 
-  const Data = {
+  const CardUsageSummary = {
     categoryDatas: [
       {
         categoryName: '생활/주거',
@@ -41,10 +41,10 @@ const MainPage = () => {
         benefitAmount: 2000,
       },
       {
+        categoryName: 'other',
         benefitAmount: 2000,
       },
     ],
-    other: 1000,
     annualFee: 39800,
     benefitOfYear: 15000,
   };
@@ -101,7 +101,7 @@ const MainPage = () => {
                   <DefaultFrame className={'py-[3rem] px-[3rem] z-50'}>
                     <div className="flex flex-col justify-between text-4xl font-bold ">
                       <div className="text-3xl flex flex-col gap-4 items-end mr-auto">
-                        {Data.categoryDatas.map((categoryData, index) => (
+                        {CardUsageSummary.categoryDatas.map((categoryData, index) => (
                           <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
                         ))}
                       </div>
