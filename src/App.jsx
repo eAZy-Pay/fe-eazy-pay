@@ -20,6 +20,7 @@ import AuthRequiredPage from './pages/AuthRequiredPage';
 import ManageMyCard from './pages/mypage/ManageMyCard';
 import CardApplyPage from './pages/card/CardApplyPage';
 import ManageLinkEazy from './pages/mypage/ManageLinkEazy';
+import SelectedCard from './pages/mypage/SelectedCard';
 
 export const ModalContext = createContext();
 
@@ -57,14 +58,6 @@ function App() {
             }
           />
           <Route
-            path="/mypage/manage/link-eazy"
-            element={
-              <AuthRequiredPage>
-                <ManageLinkEazy />
-              </AuthRequiredPage>
-            }
-          />
-          <Route
             path="/mypage/payment"
             element={
               <AuthRequiredPage>
@@ -77,6 +70,22 @@ function App() {
             element={
               <AuthRequiredPage>
                 <ManageMyCard />
+              </AuthRequiredPage>
+            }
+          />
+          <Route
+            path="/mypage/card-management/link-eazy"
+            element={
+              <AuthRequiredPage>
+                <ManageLinkEazy />
+              </AuthRequiredPage>
+            }
+          />
+          <Route
+            path="/mypage/card-management/selected-card"
+            element={
+              <AuthRequiredPage>
+                <SelectedCard />
               </AuthRequiredPage>
             }
           />

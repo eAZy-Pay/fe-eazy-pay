@@ -71,3 +71,50 @@ export const checkUserCard = async (userId, cardId) => {
     throw error;
   }
 };
+
+export const deleteUserCard = async (userCardId) => {
+  const response = await fetch(`${BASE_URL}/api/user/card?userCardId=${userCardId}`, {
+    method: 'DELETE',
+  });
+  return response;
+};
+
+export const updateUserCardValid = async (userCardId) => {
+  const response = await fetch(`${BASE_URL}/api/user/card/toggle-valid/${userCardId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return await response.json();
+};
+
+export const updateUserCardLinkEazy = async (userCardId) => {
+  const response = await fetch(`${BASE_URL}/api/user/card/toggle-link/${userCardId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return await response.json();
+};
+
+export const updateUserCardPaymentLimit = async (userCardId, paymentLimit) => {
+  const response = await fetch(`${BASE_URL}/api/user/card/toggle-payment-limit/${userCardId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ paymentLimit }), // JSON으로 전송
+  });
+  if (response.ok) {
+    try {
+      return await response.json(); // JSON 응답 처리
+    } catch (error) {
+      const text = await response.text(); // JSON 파싱 실패 시 텍스트 처리
+      return { message: text }; // 텍스트를 JSON으로 래핑
+    }
+  } else {
+    throw new Error('Error while updating payment limit'); // 오류 처리
+  }
+};
