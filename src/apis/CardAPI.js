@@ -10,11 +10,18 @@ export const getCategoryCards = async (categoryId) => {
   return await response.json();
 };
 
+// 사용자가 가진 카드 정보 조회 (count: 조회할 카드 개수 / count=0: 모든 카드 조회)
 export const getCardsSummary = async (userId, month, count) => {
   const response = await fetch(
     `${BASE_URL}/api/cards/summary?user_id=${userId}&month=${month}&count=${count}`
   );
 
+  return await response.json();
+};
+
+// uid로 카드정보 조회
+export const getUserCardByUid = async (uid) => {
+  const response = await fetch(`${BASE_URL}/api/user/select-card?uid=${uid}`);
   return await response.json();
 };
 

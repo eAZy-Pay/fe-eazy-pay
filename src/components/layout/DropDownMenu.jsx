@@ -16,10 +16,12 @@ const DropdownMenu = ({ isOpen }) => {
       >
         {user ? (
           <>
-            <div className="cursor-pointer flex justify-center py-6 gap-4">
-              <img src={ProfileIcon} alt="Profile Icon" />
-              <div className="flex items-center text-xl text-left">{user.userName} 님</div>
-            </div>
+            <Link to="/mypage/manage">
+              <div className="cursor-pointer flex justify-center py-6 gap-4">
+                <img src={ProfileIcon} alt="Profile Icon" />
+                <div className="flex items-center text-xl text-left">{user.userName} 님</div>
+              </div>
+            </Link>
             <hr className="bg-gray-300 w-[85%] mb-3 " />
           </>
         ) : (
@@ -38,7 +40,7 @@ const DropdownMenu = ({ isOpen }) => {
         )}
         <div className="cursor-pointer flex justify-center p-3 gap-4">
           <img src={CardIcon} alt="Card Icon" />
-          <Link to="/profile" className="flex items-center text-3xl text-left">
+          <Link to="/mypage/card-management" className="flex items-center text-3xl text-left">
             카드관리
           </Link>
         </div>

@@ -28,42 +28,46 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
         </Link>
         {/* 이지카드 총 혜택 */}
         <div className="mx-6 my-10 text-2xl">eAZy 카드</div>
-        <DefaultFrame className="flex max-w-[32rem] m-6">
-          <img
-            src={eazy}
-            alt="Eazy Image"
-            className="ml-9"
-            style={{ transform: 'rotate(90deg)', maxWidth: '5.75rem', height: 'auto' }}
-          />
-          <div className="flex flex-col justify-center gap-4">
-            <CardsGage color="#f79042" amount={amount} total={amount} width="w-3/4" />
-            <CardLetter color="#f79042" label="총 혜택" amount={amount} total={amount} />
-          </div>
-        </DefaultFrame>
+        <Link to="/mypage/card-management/link-eazy">
+          <DefaultFrame className="flex max-w-[32rem] m-6">
+            <img
+              src={eazy}
+              alt="Eazy Image"
+              className="ml-9"
+              style={{ transform: 'rotate(90deg)', maxWidth: '5.75rem', height: 'auto' }}
+            />
+            <div className="flex flex-col justify-center gap-4">
+              <CardsGage color="#f79042" amount={amount} total={amount} width="w-3/4" />
+              <CardLetter color="#f79042" label="총 혜택" amount={amount} total={amount} />
+            </div>
+          </DefaultFrame>
+        </Link>
         {/* 카드관리 */}
         <div className="flex items-center self-left mx-6 my-10 text-2xl">카드 관리</div>
         <div className="flex flex-col w-full">
           {cards.map((card, index) => (
-            <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
-              <RotatedCard
-                image={card.card.image}
-                style={{ maxWidth: '5.75rem', height: 'auto' }}
-              />
-              <div className="flex flex-col justify-center gap-4">
-                <CardsGage
-                  color="#f79042"
-                  amount={card.benefitAmount}
-                  total={card.card.benefitLimit}
-                  width="w-3/4"
+            <Link  to={`/mypage/card-management/selected-card`} state={card.uid} key={card.uid}>
+              <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
+                <RotatedCard
+                  image={card.card.image}
+                  style={{ maxWidth: '5.75rem', height: 'auto' }}
                 />
-                <CardLetter
-                  color="#f79042"
-                  label="혜택"
-                  amount={card.benefitAmount}
-                  total={card.card.benefitLimit}
-                />
-              </div>
-            </DefaultFrame>
+                <div className="flex flex-col justify-center gap-4">
+                  <CardsGage
+                    color="#f79042"
+                    amount={card.benefitAmount}
+                    total={card.card.benefitLimit}
+                    width="w-3/4"
+                  />
+                  <CardLetter
+                    color="#f79042"
+                    label="혜택"
+                    amount={card.benefitAmount}
+                    total={card.card.benefitLimit}
+                  />
+                </div>
+              </DefaultFrame>
+            </Link>
           ))}
         </div>
       </DefaultFrame>
