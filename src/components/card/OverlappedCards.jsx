@@ -12,11 +12,8 @@ const OverlappedCards = ({ images }) => {
   return (
     <>
       <div
-        // .toFixed(1) 를 써서 소수점을  절삭, 동작을 안함. html에 속성은 잘 적용되고 있음.. 그래서 MainPage에서 겹치는 부분을 z-index 맨 위로 올림
-        className={`flex w-[18.5em] h-[13em] z-10 relative ml-12 mr-[${move * images.length}em] mb-[${move * images.length}em]`}
-        style={{
-          transition: 'margin-right 0.3s ease', // 부드러운 이동을 위한 transition 추가
-        }}
+        className={`flex w-[18.5em] h-[13em] z-10 relative ml-12`}
+        style={{marginRight: `${images.length * 0.5}em`, }}
         onPointerEnter={() => {
           setMove(1);
         }}
