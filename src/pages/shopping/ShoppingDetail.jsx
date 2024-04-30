@@ -7,8 +7,9 @@ import { checkPin } from '../../apis/AuthAPI';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { paymentInfo } from '../../apis/PaymentInfoAPI';
 import mainLogo from '../../assets/mainLogo.svg';
-import inequityLeftIcon from '../../assets/inequityLeftIcon.svg';
-import inequityRightIcon from '../../assets/inequityRightIcon.svg';
+import { getSortedValidCards } from '../../apis/UserAPI';
+import { getUserSession } from '../../utils/authUtils';
+import Slider2 from '../../components/slider/Slider2';
 
 const PaymentModal = ({
   isOpen,
@@ -26,6 +27,57 @@ const PaymentModal = ({
   const [keypadNumbers, setKeypadNumbers] = useState([]); // 키패드 번호
   const [pinStatus, setPinStatus] = useState([false, false, false, false, false, false]); // 동그라미 상태
   const [isEnteringPin, setIsEnteringPin] = useState(false);
+  const user = getUserSession();
+  const userId = user?.uid;
+  const [cards, setCards] = useState([]); // 유저의 카드 목록
+  const [contents, setContents] = useState([]);
+  const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
+  // const [str, setStr] = useState('str before setting');
+  // const [selectedCardName, setSelectedCardName] = useState('selectedCardName before setting');
+
+  const makeContents = (cards) => {
+    setContents(
+      cards.map((card, index) => (
+        <div key={index} className="flex flex-col items-center justify-center gap-2">
+          <p>{card.cardName}</p>
+          <img
+            className="w-[90px] h-[130px]"
+            key={card.cardId}
+            src={card.image}
+            alt={card.cardName}
+          />
+        </div>
+      ))
+    );
+  };
+
+  // useEffect(() => {
+  //   getSortedValidCards(userId).then((response) => {
+  //     makeContents(response);
+  //     setCards(response);
+  //   });
+  // }, [userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getSortedValidCards(userId);
+        console.log('getSortedValidCards response data:', data); // TODO: 추후 로그 삭제
+        makeContents(data);
+        setCards(data);
+        console.log(cards);
+        setRecommendedCardName(data[0].cardName);
+      } catch (error) {
+        console.error('Error fetching or parsing sorted valid cards data:', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  useEffect(() => {
+    console.log(`Current Recommended Card: ${recommendedCardName}`); // TODO: 추후 로그 삭제
+  }, [recommendedCardName]);
 
   // 키패드 번호 섞기
   const shuffleKeypad = () => {
@@ -37,10 +89,12 @@ const PaymentModal = ({
   };
   useEffect(() => {
     if (isOpen) {
+      setIsEnteringPin(false); // 모달이 열릴 때마다 모달의 첫 화면으로 돌아감
       shuffleKeypad(); // 모달이 열릴 때마다 키패드 번호를 섞음
       setPin(''); // PIN 리셋
       setPinStatus([false, false, false, false, false, false]); // 동그라미 상태 리셋
       setMessage('PIN 번호를 입력해주세요');
+      setWrongPinMessage('');
     }
   }, [isOpen]);
 
@@ -144,7 +198,7 @@ const PaymentModal = ({
             </>
           ) : (
             <>
-              <h2 className="mt-8 text-center text-xl">{message}</h2>
+              <h2 className="mt-8 mb-4 text-center text-xl">{message}</h2>
             </>
           )}
           <div className="flex justify-center">
@@ -174,25 +228,13 @@ const PaymentModal = ({
           {' '}
           <div className="flex flex-col justify-center items-center p-4">
             <div className="flex justify-between items-center w-3/4">
-              <img
-                src={inequityLeftIcon}
-                alt="Left"
-                className="w-10 h-10 object-cover opacity-60"
-              />
-              <img
-                src="card-image-url.png"
-                alt="Credit Card"
-                className="w-34 h-20 object-cover border-blue-600 border-2"
-              />
-              <img
-                src={inequityRightIcon}
-                alt="Right"
-                className="w-10 h-10 object-cover opacity-60"
-              />
+              <Slider2 Contents={contents} className="w-full" />
+              {/* <Slider2 Contents={cards} setSelectedCardName={setSelectedCardName} /> */}
             </div>
-            <div className="flex flex-col items-center my-6">
+            {/* <p className="border-lime-700 border-2 w-full">{str}</p> */}
+            <div className="flex flex-col items-center mt-6 mb-3">
               <p className="text-base text-gray-700 mb-1">eAZy 카드가 추천하는 카드는</p>
-              <p className="text-base font-extrabold text-gray-700 ">무슨무슨 나야나 카드</p>
+              <p className="text-base font-extrabold text-gray-700 ">{recommendedCardName}</p>
             </div>
 
             <div className="flex flex-col w-full">
@@ -207,7 +249,7 @@ const PaymentModal = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center p-4">
+          <div className="flex flex-col justify-center">
             <button
               className="text-lg bg-blue-100 text-gray-600 py-2 rounded-lg hover:bg-blue-200 transition duration-300"
               onClick={handleEnteringPin}

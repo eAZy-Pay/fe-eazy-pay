@@ -47,7 +47,11 @@ const ShoppingComplete = () => {
           <div className="">
             <p className="text-base font-bold">{productName}에 딱 맞는</p>
             <p className="text-lg font-bold">{parsedResponse.cardName} 카드로</p>
-            <img src={parsedResponse.cardImage} alt="카드 이미지" className="w-32 h-20  mx-auto" />
+            <img
+              src={parsedResponse.cardImage}
+              alt="카드 이미지"
+              className="mt-3 w-32 h-20 mx-auto"
+            />
           </div>
 
           {/* 결제 정보 */}
@@ -70,9 +74,9 @@ const ShoppingComplete = () => {
               <span className="ml-1"> 결제했어요!</span>
             </div>
           </div>
-          <div className="mt-2">
+          <div className="flex flex-col justify-center mt-4">
             <button
-              className="bg-gray-300 text-black py-2 px-4 mt-4 rounded"
+              className="text-lg bg-blue-100 text-gray-600 py-2 rounded-lg hover:bg-blue-200 transition duration-300"
               onClick={handleCloseModal}
             >
               확인
