@@ -46,7 +46,7 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
         <div className="flex items-center self-left mx-6 my-10 text-2xl">카드 관리</div>
         <div className="flex flex-col w-full">
           {cards.map((card, index) => (
-            <Link  to={`/mypage/card-management/selected-card`} state={card.uid} key={card.uid}>
+            <Link to={`/mypage/card-management/selected-card`} state={card.uid} key={card.uid}>
               <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
                 <RotatedCard
                   image={card.card.image}

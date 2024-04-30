@@ -19,6 +19,11 @@ export const getCardsSummary = async (userId, month, count) => {
   return await response.json();
 };
 
+export const getCardUsageSummary = async (userId) => {
+  const response = await fetch(`${BASE_URL}/api/user/card-usage-summary?user_id=${userId}`);
+  return await response.json();
+};
+
 // uid로 카드정보 조회
 export const getUserCardByUid = async (uid) => {
   const response = await fetch(`${BASE_URL}/api/user/select-card?uid=${uid}`);
