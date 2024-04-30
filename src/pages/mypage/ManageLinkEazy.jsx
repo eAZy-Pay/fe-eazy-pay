@@ -3,9 +3,10 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import { useEffect, useState } from 'react';
 import { getCardsSummary } from '../../apis/CardAPI';
 import { getUserSession } from '../../utils/authUtils';
+import { updateUserCardLinkEazy } from '../../apis/UserAPI';
 import PropTypes from 'prop-types';
 
-const CardDisplay = ({ title, cardCount, userCards, update }) => (
+const CardDisplay = ({ title, cardCount, userCards, update, onUpdate }) => (
   <>
     <h2 className="mt-28 mb-4 ml-28 text-3xl font-bold">{title}</h2>
     <div className="flex flex-col items-center">
@@ -16,7 +17,7 @@ const CardDisplay = ({ title, cardCount, userCards, update }) => (
       </div>
       <hr className="bold-hr2 w-5/6" />
       <div className="flex flex-col items-center w-5/6">
-        {userCards.map(({ card, num }, index) => {
+        {userCards.map(({ card, num, uid }, index) => {
           const lastFourDigits = num.slice(-4);
           const maskedNum = lastFourDigits.replace(/\d(?=\d{0}$)/, '*');
 
@@ -32,8 +33,8 @@ const CardDisplay = ({ title, cardCount, userCards, update }) => (
                 </div>
                 <div className="flex items-end ml-auto">
                   <button
-                    to="/mypage/manage"
                     className="flex justify-center items-center w-32 h-10 rounded-xl border-2 border-gray-200 shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+                    onClick={() => onUpdate(uid)}
                   >
                     <div className="text-xl text-center">{update}</div>
                   </button>
@@ -53,6 +54,7 @@ CardDisplay.propTypes = {
   cardCount: PropTypes.number,
   userCards: PropTypes.array,
   update: PropTypes.string.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 function ManageLinkEazy() {
@@ -80,6 +82,27 @@ function ManageLinkEazy() {
     fetchData();
   }, []);
 
+  const handleUpdate = async (cardUid) => {
+    console.log('Updating card link status for UID:', cardUid); // 로그 추가
+    try {
+      await updateUserCardLinkEazy(cardUid);
+      console.log('Card link status updated successfully'); // 성공 로그
+      const user = getUserSession();
+      const uid = user.uid;
+      const cardsSummary = await getCardsSummary(uid, 1, 0); // 카드 목록 다시 가져오기
+      const cards = Array.isArray(cardsSummary.cards) ? cardsSummary.cards : [];
+
+      // 다시 카드 분류
+      const linkedCards = cards.filter((card) => card.linkEazy);
+      const unlinkedCards = cards.filter((card) => !card.linkEazy);
+
+      setLinkedCards(linkedCards);
+      setUnlinkedCards(unlinkedCards);
+    } catch (error) {
+      console.error('Failed to update card link status:', error);
+    }
+  };
+
   return (
     <DefaultLayout>
       <h2 className="mt-28 ml-28 text-4xl font-extrabold">eAZy 카드 연동 관리</h2>
@@ -88,12 +111,14 @@ function ManageLinkEazy() {
         cardCount={linkedCards.length}
         userCards={linkedCards}
         update="연동 해제"
+        onUpdate={handleUpdate}
       />
       <CardDisplay
         title="미연동 카드"
         cardCount={unlinkedCards.length}
         userCards={unlinkedCards}
         update="연동하기"
+        onUpdate={handleUpdate}
       />
     </DefaultLayout>
   );

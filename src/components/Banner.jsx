@@ -21,7 +21,7 @@ const Banner = ({ to, title, description, imageSrc, imageAlt, bgColor }) => {
       className={`w-full h-24 flex items-center justify-between rounded-3xl p-4 my-4 cursor-pointer`}
       style={{ backgroundColor: bgColor }}
     >
-      <p className="ml-4 text-2xl text-white">{title}</p>
+      <p className="ml-4 text-3xl text-white">{title}</p>
       <div className="flex items-center">
         <p className="mr-4 text-2xl text-white">{description}</p>
         {imageSrc && (

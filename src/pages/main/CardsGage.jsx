@@ -7,7 +7,12 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
 
   useEffect(() => {
     // 백분율 계산
-    const percentage = total > 0 ? (amount / total) * 100 : 0;
+    let percentage;
+    if (total === 0 || total >= 1000000000) {
+      percentage = (amount / amount) * 100; // 그 외의 경우 정상적으로 백분율 계산
+    } else {
+      percentage = (amount / total) * 100; // 그 외의 경우 정상적으로 백분율 계산
+    }
     const finalWidth = percentage > 100 ? '100%' : `${percentage}%`; // 최종 width 설정
 
     // 마운트 후에 width 상태를 백분율 값으로 변경해 애니메이션 적용
@@ -19,8 +24,8 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
   }, [amount, total]);
 
   return (
-    <div className={`flex justify-center items-center space-x-4 w-[23.6rem] ${margin}`}>
-      <div className={`rounded-[1.7em] bg-[#115]/40 overflow-hidden relative h-[1.5em]  ${width}`}>
+    <div className={`flex justify-center items-center w-[25rem] ${margin}`}>
+      <div className={`rounded-[1.7em] bg-[#115]/20 overflow-hidden relative h-[1.5em]  ${width}`}>
         {/* 계산된 백분율을 가로 길이로 설정 */}
         <div
           className="h-full rounded-[1.7em] absolute bottom-0 left-0"

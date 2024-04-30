@@ -33,7 +33,6 @@ const QnaWritePage = () => {
         getQna(uid).then((res) => {
           if (user.uid == res.userId) {
             // 작성자와 현재 사용자가 일치하는 경우에만 기존 내용 수정
-            console.log(res);
             setQna(res);
           } else {
             alert('작성자만 수정할 수 있습니다.');
@@ -49,7 +48,7 @@ const QnaWritePage = () => {
       window.location.href = '/qna';
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, []);
 
   return (
     <>
