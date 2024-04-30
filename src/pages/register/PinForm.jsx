@@ -35,7 +35,6 @@ const PinForm = ({ setStepperIndex, name, id, password, email, phoneNumber, birt
         birthday,
         pin,
       });
-      setStepperIndex(4);
     } catch (error) {
       console.error('Registration Failed:', error);
     }
@@ -83,6 +82,7 @@ const PinForm = ({ setStepperIndex, name, id, password, email, phoneNumber, birt
       } else if (storedPin === pin) {
         regInfoSubmit();
         closeModal();
+        setStepperIndex(4);
       } else {
         setMessage('PIN번호를 다시 입력해주세요');
         setWrongPinMessage('PIN번호가 일치하지 않아요');

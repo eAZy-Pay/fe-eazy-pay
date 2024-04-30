@@ -69,15 +69,17 @@ const RegisterPage = () => {
           </p>
         </div>
         {/* 가운데 바디 */}
-        <div className="bg-white p-10 w-full">
+        <div className="flex justify-center bg-white p-10 w-full">
           {/* stepperIndex가 0일 때와 1~4일 때의 높이 조정 */}
-          <div
-            className={`flex justify-center pr-[300px] w-full ${stepperIndex === 0 ? '' : 'h-64'}`}
-          >
+          <div className="flex justify-end pr-10 w-1/3">
+            <div className={`hidden md:flex items-center justify-center`}>
+              <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
+            </div>
+          </div>
+          <div className={`flex justify-start w-1/3 ${stepperIndex === 0 ? '' : 'h-64'}`}>
             {' '}
             {/* 조건에 따라 높이 설정 */}
-            <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
-            <div className="ml-20">
+            <div className="flex justify-center w-full items-center">
               {stepperIndex === 0 && (
                 <AgreementForm
                   checkBox1={checkBox1}
@@ -109,6 +111,7 @@ const RegisterPage = () => {
               {stepperIndex === 4 && <RegisterComplete />}
             </div>
           </div>
+          <div className="w-1/3"></div>
           {/* 동일한 정렬 및 패딩을 사용해 버튼 위치 고정 */}
         </div>
         {/* 하단 버튼 */}
@@ -128,7 +131,7 @@ const RegisterPage = () => {
                 onClick={handleNext}
                 disabled={isButtonDisabled()}
               >
-                {stepperIndex === 3 ? '가입' : '다음'}
+                다음
               </button>
             </div>
           ) : (

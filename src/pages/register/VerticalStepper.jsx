@@ -20,6 +20,9 @@ const steps = [
   {
     label: 'pin 번호를 등록해주세요',
   },
+  {
+    label: '회원가입을 완료했어요!',
+  },
 ];
 
 export default function VerticalLinearStepper({ activeStep }) {
@@ -28,11 +31,7 @@ export default function VerticalLinearStepper({ activeStep }) {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
-            <StepLabel
-              optional={
-                index === 3 ? <Typography variant="caption">마지막 단계예요!</Typography> : null
-              }
-            >
+            <StepLabel optional={index === 4 ? <Typography variant="caption"></Typography> : null}>
               {step.label}
             </StepLabel>
             <StepContent>
