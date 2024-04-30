@@ -50,7 +50,7 @@ export const postUserCardApplication = async (cardApplication) => {
 
 // 사용자가 해당 카드를 가지고 있고 사용 가능한지 확인하는 API 함수
 export const checkUserCard = async (userId, cardId) => {
-  const url = `${BASE_URL}/api/user/cards/check?userId=${userId}&cardId=${cardId}`;
+  const url = `${BASE_URL}/api/user/cards/check?user_id=${userId}&card_id=${cardId}`;
 
   try {
     const response = await fetch(url);
@@ -121,16 +121,29 @@ export const updateUserCardPaymentLimit = async (userCardId, paymentLimit) => {
 
 // 유저 카드 전월 실적 충족 여부 조회
 export const getUserCardFulfilled = async (userCardId) => {
-  const response = await fetch(
-    `${BASE_URL}/api/user/card/fulfilled?userCardId=${userCardId}`
-  );
+  const response = await fetch(`${BASE_URL}/api/user/card/fulfilled?userCardId=${userCardId}`);
   return await response.json();
 };
 
 export const getUserInfo = async (userId) => {
-  const response = await fetch(
-    `${BASE_URL}/api/user?userId=${userId}`
-  );
+  const response = await fetch(`${BASE_URL}/api/user?userId=${userId}`);
   return await response.json();
 };
 
+export const getRecommendationCard = async (userId) => {
+  var url = `${BASE_URL}/api/user/recommendation/card`;
+
+  if (userId !== undefined && userId > 0) {
+    url += `?user_id=${userId}`;
+  }
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`); // 상태 체크
+    }
+    return await response.json(); // 응답 데이터 파싱
+  } catch (error) {
+    console.error('Fetching recommendation card data failed:', error);
+    throw error;
+  }
+};
