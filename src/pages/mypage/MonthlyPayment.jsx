@@ -101,14 +101,12 @@ const MonthlyPayment = () => {
     fetchData();
   }, [currentPage, selectedMonth, selectedYear]);
 
-
   const applyDateChanges = (e) => {
     e.stopPropagation(); // 클릭 이벤트 전파 중지
     setSelectedMonth(tempMonth);
     setCurrentYear(tempYear);
-    setDropdownOpen(false);  // 드롭다운 닫기
+    setDropdownOpen(false); // 드롭다운 닫기
   };
-
 
   const loadPreviousMonth = () => {
     // 이전 월로 변경
@@ -134,7 +132,6 @@ const MonthlyPayment = () => {
 
   return (
     <>
-
       <DefaultLayout>
         <h2 className=" my-10 text-4xl font-extrabold">이용대금명세서</h2>
       </DefaultLayout>
@@ -157,7 +154,7 @@ const MonthlyPayment = () => {
                     <h3 className="border-b2 text-[2rem] mb-1">월</h3>
                   </button>
                   <div className="flex relative" onClick={toggleDropdown}>
-                    <div className="flex justify-between items-center cursor-pointer" >
+                    <div className="flex justify-between items-center cursor-pointer">
                       <div className="flex">
                         <h3 className="border-b-2 border-black text-[2rem]">{selectedMonth}</h3>
                         <h3 className="border-b-2 border-black text-[2rem]">월</h3>
@@ -170,15 +167,24 @@ const MonthlyPayment = () => {
                     </div>
 
                     {dropdownOpen && (
-                      <div className="absolute top-full left-0 bg-white border p-2" onClick={(e) => e.stopPropagation()}>
+                      <div
+                        className="absolute top-full left-0 bg-white border p-2"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <select name="year" value={tempYear} onChange={handleSelectChange}>
-                          {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                            <option key={year} value={year}>{year}</option>
-                          ))}
+                          {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i).map(
+                            (year) => (
+                              <option key={year} value={year}>
+                                {year}
+                              </option>
+                            )
+                          )}
                         </select>
                         <select name="month" value={tempMonth} onChange={handleSelectChange}>
                           {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-                            <option key={month} value={month}>{month}</option>
+                            <option key={month} value={month}>
+                              {month}
+                            </option>
                           ))}
                         </select>
                         <button onClick={applyDateChanges}>확인</button>
@@ -224,7 +230,9 @@ const MonthlyPayment = () => {
                 ' ' +
                 transaction.paymentDate.substring(11, 19);
               // num이 undefined가 아니면 마스킹 처리
-              const maskedNum = transaction.cardNum ? transaction.cardNum.slice(-4).replace(/\d(?=\d{0}$)/, '*') : '';
+              const maskedNum = transaction.cardNum
+                ? transaction.cardNum.slice(-4).replace(/\d(?=\d{0}$)/, '*')
+                : '';
               return (
                 <div key={index} className="flex flex-col text-center w-full text-lg">
                   <div className="flex justify-center items-center justify-between my-5">
@@ -246,9 +254,7 @@ const MonthlyPayment = () => {
           </div>
         </div>
         {/* 페이지 이동 */}
-        <div className="flex items-center justify-center mt-4">
-          {renderPageNumbers}
-        </div>
+        <div className="flex items-center justify-center mt-4">{renderPageNumbers}</div>
       </DefaultLayout>
     </>
   );

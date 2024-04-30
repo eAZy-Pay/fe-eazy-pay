@@ -9,8 +9,9 @@ const CardUsageSummary = ({ userMain, userId }) => {
   useEffect(() => {
     if (userId) {
       getCardUsageSummary(userId).then((response) => {
-        if(response.data){
-        setSummary(response.data);}
+        if (response.data) {
+          setSummary(response.data);
+        }
       });
     }
   }, [userId]);
@@ -30,13 +31,14 @@ const CardUsageSummary = ({ userMain, userId }) => {
         <DefaultFrame className={'py-[3rem] px-[3rem]'}>
           <div className="flex flex-col justify-between text-4xl font-bold ">
             <div className="text-3xl flex flex-col gap-4 items-start mr-auto">
-              { summary.categoryBenefitAmount && summary.benefitOfMonth?
-                summary.categoryBenefitAmount.map((categoryData, index) => (
-                     <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
-                )): "이번 달 혜택 내역이 없습니다."// '올해 혜택받은 내역이 없습니다'
-                
+              {
+                summary.categoryBenefitAmount && summary.benefitOfMonth
+                  ? summary.categoryBenefitAmount.map((categoryData, index) => (
+                      <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
+                    ))
+                  : '이번 달 혜택 내역이 없습니다.' // '올해 혜택받은 내역이 없습니다'
               }
-              {!summary && "정보를 불러올 수 없습니다."}
+              {!summary && '정보를 불러올 수 없습니다.'}
             </div>
 
             <div className="ml-auto flex items-end">
