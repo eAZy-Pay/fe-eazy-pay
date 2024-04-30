@@ -14,6 +14,7 @@ import CardsGage from '../main/CardsGage';
 import CardLetter from '../main/CardLetter';
 import Marquee from 'react-fast-marquee';
 
+
 const ManageMyCard = () => {
   const [userCards, setUserCards] = useState([]); // 배열로 초기화
 
@@ -82,7 +83,7 @@ const ManageMyCard = () => {
               <div className="flex justify-between just gap-2">
                 <div className="flex w-full gap-2">
                   <div className="flex items-center text-3xl"> 연동 중인 카드</div>
-                  <img src={infoIcon} alt="Info Icon" />
+                  <img src={infoIcon} alt="Info Icon" className='' />
                 </div>
                 <Link
                   to="/mypage/card-management/link-eazy"
@@ -104,7 +105,7 @@ const ManageMyCard = () => {
 
         <div className="flex justify-between items-center text-2xl mt-16 mb-8">내 카드 관리</div>
         <div className="flex flex-wrap justify-between">
-          {userCards.map(({ card, num, useAmount, paymentLimit, uid }, index) => {
+          {userCards.map(({ card, num, benefitAmount, uid }, index) => {
             // num 문자열에서 마지막 4자리를 추출합니다.
             const lastFourDigits = num.slice(-4);
             // 마지막 4자리를 *로 대체합니다.
@@ -127,15 +128,15 @@ const ManageMyCard = () => {
                         <div className="flex flex-col justify-center items-center gap-5 ml-11">
                           <CardsGage
                             color="#f79042"
-                            amount={useAmount}
-                            total={paymentLimit}
+                            amount={benefitAmount}
+                            total={card.benefitLimit}
                             width="w-3/4"
                           />
                           <CardLetter
                             color="#f79042"
                             label="총 혜택"
-                            amount={useAmount}
-                            total={paymentLimit}
+                            amount={benefitAmount}
+                            total={card.benefitLimit}
                           />
                         </div>
                       </div>
@@ -150,7 +151,7 @@ const ManageMyCard = () => {
           })}
           <div
             style={{ width: '39.25rem', cursor: 'pointer' }} // 마지막에 카드 추가를 위한 공간 추가
-            // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
+          // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
           >
             <Link to="/card-search">
               <DefaultFrame className="flex justify-center h-[304.83px] ">

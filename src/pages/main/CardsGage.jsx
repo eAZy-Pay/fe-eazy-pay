@@ -24,7 +24,7 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
   }, [amount, total]);
 
   return (
-    <div className={`flex justify-center items-center w-[23.6rem] ${margin}`}>
+    <div className={`flex justify-center items-center w-[25rem] ${margin}`}>
       <div className={`rounded-[1.7em] bg-[#115]/20 overflow-hidden relative h-[1.5em]  ${width}`}>
         {/* 계산된 백분율을 가로 길이로 설정 */}
         <div
