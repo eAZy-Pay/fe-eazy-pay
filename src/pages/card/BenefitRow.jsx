@@ -1,10 +1,9 @@
-// import React from 'react';
 import PropTypes from 'prop-types';
 import GetCategoryIcon from '../../utils/GetCategoryIcon';
 
-const BenefitRow = ({ categoryName, benefitRate, className }) => {
+const BenefitRow = ({ categoryName, benefitRate, className, index }) => {
   return (
-    <div className="flex w-full my-1">
+    <div className="flex w-full my-1" key={index}>
       <div
         className={`flex justify-center items-center w-full text-3xl font-semibold ${className}`}
       >

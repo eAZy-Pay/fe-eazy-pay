@@ -42,7 +42,7 @@ export const getUserSession = () => {
 export const logout = () => {
   secureLocalStorage.removeItem('user');
   alert('로그아웃 되었습니다.');
-  window.location.reload();
+  window.location.href = '/login';
 };
 
 export const refreshSession = () => {

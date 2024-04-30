@@ -30,6 +30,7 @@ const CardDetail = ({ card, benefitList, showApplyButton }) => {
                     key={index}
                     categoryName={benefit.categoryName.toString()}
                     benefitRate={benefit.benefitRate}
+                    index={index}
                   />
                 ))
               )}
