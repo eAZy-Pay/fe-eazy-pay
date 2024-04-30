@@ -3,7 +3,7 @@ import RotatedCard from '../../components/card/RotatedCard';
 import CardsGage from './CardsGage';
 import CardLetter from './CardLetter';
 import PropTypes from 'prop-types';
-import { getUserCardFulfilled } from '../../apis/UserCardApi';
+import { getUserCardFulfilled } from '../../apis/UserAPI';
 
 const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
   /* 
