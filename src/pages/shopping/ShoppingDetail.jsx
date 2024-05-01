@@ -30,6 +30,7 @@ const PaymentModal = ({
   const user = getUserSession();
   const userId = user?.uid;
   const [cards, setCards] = useState([]); // 유저의 카드 목록
+  console.log('삭제 예정' + cards);
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
   const [activeIndex, setActiveIndex] = useState(0);
@@ -61,10 +62,10 @@ const PaymentModal = ({
     const fetchData = async () => {
       try {
         const data = await getSortedValidCards(userId);
-        console.log('getSortedValidCards response data:', data); // TODO: 추후 로그 삭제
+        // console.log('getSortedValidCards response data:', data); // TODO: 추후 로그 삭제
         makeContents(data);
         setCards(data);
-        console.log(cards);
+        // console.log(cards);
         setRecommendedCardName(data[0].cardName);
       } catch (error) {
         console.error('Error fetching or parsing sorted valid cards data:', error);
@@ -75,7 +76,7 @@ const PaymentModal = ({
   }, [userId]);
 
   useEffect(() => {
-    console.log(`Current Recommended Card: ${recommendedCardName}`); // TODO: 추후 로그 삭제
+    // console.log(`Current Recommended Card: ${recommendedCardName}`); // TODO: 추후 로그 삭제
   }, [recommendedCardName]);
 
   // 키패드 번호 섞기
@@ -106,7 +107,7 @@ const PaymentModal = ({
     } else if (pin.length < 6) {
       const newPin = pin + label;
       setPin(newPin);
-      console.log(newPin); // TODO: 콘솔 로그 제거
+      // console.log(newPin); // TODO: 콘솔 로그 제거
 
       const updatedStatus = pinStatus.map((status, idx) => (idx < newPin.length ? true : false));
       setPinStatus(updatedStatus); // 동그라미 상태 업데이트
@@ -118,18 +119,18 @@ const PaymentModal = ({
 
           try {
             await checkPin(userUid, newPin); // 서버에 uid와 pin 번호 전송
-            console.log('pin 번호 확인 완료'); // TODO: 콘솔 로그 제거
+            // console.log('pin 번호 확인 완료'); // TODO: 콘솔 로그 제거
             const userId = userUid;
 
             try {
               const price = Number(formattedPrice.replace(/,/g, ''));
-              console.log(`price: ${price}`); // TODO: 콘솔 로그 제거
+              // console.log(`price: ${price}`); // TODO: 콘솔 로그 제거
               const response = await paymentInfo(userId, categoryId, price, storeCode, storeName);
-              console.log(response); // TODO: 콘솔 로그 제거
+              // console.log(response); // TODO: 콘솔 로그 제거
 
               closeModal();
 
-              console.log(`ShoppingDetail에서 productName: ${productName}`); // TODO: 콘솔 로그 제거
+              // console.log(`ShoppingDetail에서 productName: ${productName}`); // TODO: 콘솔 로그 제거
               navigate('/shopping/complete', {
                 state: {
                   response: JSON.stringify(response), // 응답 데이터를 상태 객체로 전달
@@ -285,7 +286,7 @@ const ShoppingDetail = () => {
 
   return (
     <DefaultLayout>
-      <div className="flex justify-between py-4">
+      <div className="flex justify-between py-4 my-4">
         <div className=" flex w-1/2 justify-center">
           <div className="flex items-center">
             <img src={image} alt="Example" className="object-cover h-[26rem] w-[26rem]" />

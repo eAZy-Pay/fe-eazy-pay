@@ -82,7 +82,8 @@ const SelectedCard = () => {
           navigate('/mypage/card-management');
           break;
         default:
-          console.log(`Unknown action: ${modalContent.actionType}`);
+          // console.log(`Unknown action: ${modalContent.actionType}`);
+          break;
       }
       // 성공 시 모달을 닫습니다.
       closeModal();

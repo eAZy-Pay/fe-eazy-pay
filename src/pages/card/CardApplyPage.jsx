@@ -52,6 +52,7 @@ const CardApplyPage = () => {
             postUserCardApplication({ userId: user.uid, cardId: id }).then((response) => {
               if (response?.message) {
                 alert(response.message);
+                window.location.href = '/';
               } else if (response?.error) {
                 alert(response.error);
               } else {

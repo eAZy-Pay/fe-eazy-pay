@@ -48,7 +48,6 @@ const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
               ))}
           </ul>
         </div>
-        <p className="text-center my-2 invisible">현재 인덱스:</p>
         <div
           className="absolute left-0 flex items-center justify-between w-full h-0 px-4 top-1/2 "
           data-glide-el="controls"
