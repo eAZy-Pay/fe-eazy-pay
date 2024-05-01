@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { checkId } from '../../apis/CheckIdAPI';
+import { checkId } from '../../apis/CheckId';
 
 const EazyPayRegisterForm = ({ setId, setPw }) => {
   const [id, setLocalId] = useState('');
@@ -70,9 +70,9 @@ const EazyPayRegisterForm = ({ setId, setPw }) => {
   };
 
   return (
-    <div className="flex ml-48">
+    <div className="flex">
       <div className="flex flex-col bg-white">
-        <div className="flex items-center space-x-2 my-1">
+        <div className="flex items-center space-x-2 mt-5">
           <Box
             component="form"
             sx={{
