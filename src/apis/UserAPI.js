@@ -152,21 +152,18 @@ export const getRecommendationCard = async (userId) => {
   }
 };
 
-export const getSortedValidCards = async (userId) => {
-  var url = `${BASE_URL}/api/user/sorted-valid-cards`;
+// userId, categoryId, price를 인자로 받아서 결제 추천 카드 리스트를 반환하는 API 함수
+export const getPayRecommendationCards = async (userId, categoryId, price) => {
+  const response = await fetch(`${BASE_URL}/api/pay/recommendation-list`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId, categoryId, price }),
+  });
 
-  if (userId !== undefined && userId > 0) {
-    url += `?user_id=${userId}`;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
-  console.log(url);
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`); // 상태 체크
-    }
-    return await response.json(); // 응답 데이터 파싱
-  } catch (error) {
-    console.error('Fetching sorted valid cards data failed:', error);
-    throw error;
-  }
+  return await response.json();
 };

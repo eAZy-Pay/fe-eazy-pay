@@ -7,7 +7,8 @@ import { checkPin } from '../../apis/AuthAPI';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { paymentInfo } from '../../apis/PaymentInfoAPI';
 import mainLogo from '../../assets/mainLogo.svg';
-import { getSortedValidCards } from '../../apis/UserAPI';
+// import { getSortedValidCards } from '../../apis/UserAPI';
+import { getPayRecommendationCards } from '../../apis/UserAPI';
 import { getUserSession } from '../../utils/authUtils';
 import Slider from '../../components/slider/Slider';
 
@@ -43,7 +44,7 @@ const PaymentModal = ({
           <img
             className="w-[90px] h-[130px]"
             key={card.cardId}
-            src={card.image}
+            src={card.cardImage}
             alt={card.cardName}
           />
         </div>
@@ -61,7 +62,8 @@ const PaymentModal = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getSortedValidCards(userId);
+        const price = Number(formattedPrice.replace(/,/g, ''));
+        const data = await getPayRecommendationCards(userId, categoryId, price);
         // console.log('getSortedValidCards response data:', data); // TODO: 추후 로그 삭제
         makeContents(data);
         setCards(data);
@@ -76,7 +78,7 @@ const PaymentModal = ({
   }, [userId]);
 
   useEffect(() => {
-    // console.log(`Current Recommended Card: ${recommendedCardName}`); // TODO: 추후 로그 삭제
+    console.log(`Current Recommended Card: ${recommendedCardName}`); // TODO: 추후 로그 삭제
   }, [recommendedCardName]);
 
   // 키패드 번호 섞기
