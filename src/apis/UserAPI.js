@@ -126,12 +126,10 @@ export const updateUserCardPaymentLimit = async (userCardId, paymentLimit) => {
 // 유저 카드 전월 실적 충족 여부 조회
 export const getUserCardFulfilled = async (userCardId) => {
   const response = await fetch(`${BASE_URL}/api/user/card/fulfilled?userCardId=${userCardId}`);
-  const response = await fetch(`${BASE_URL}/api/user/card/fulfilled?userCardId=${userCardId}`);
   return await response.json();
 };
 
 export const getUserInfo = async (userId) => {
-  const response = await fetch(`${BASE_URL}/api/user?userId=${userId}`);
   const response = await fetch(`${BASE_URL}/api/user?userId=${userId}`);
   return await response.json();
 };
