@@ -130,7 +130,7 @@ export const getUserCardFulfilled = async (userCardId) => {
 };
 
 export const getUserInfo = async (userId) => {
-  const response = await fetch(`${BASE_URL}/api/user?userId=${userId}`);
+  const response = await fetch(`${BASE_URL}/api/user?user_id=${userId}`);
   return await response.json();
 };
 
