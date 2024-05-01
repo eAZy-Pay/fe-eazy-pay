@@ -11,14 +11,6 @@ const ManageMyInformation = () => {
   // const [PinPasswordOpen, setPinPasswordOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
 
-  const formatBirthday = (birthday) => {
-    if (birthday.length !== 8) return ''; // 날짜 형식이 유효하지 않으면 빈 문자열 반환
-    const year = birthday.slice(0, 4);
-    const month = birthday.slice(4, 6);
-    const day = birthday.slice(6, 8);
-    return `${year}.${month}.${day}`;
-  };
-
   const formatPhoneNumber = (phoneNumber) => {
     if (phoneNumber.length !== 11) return ''; // 전화번호 형식이 유효하지 않으면 빈 문자열 반환
     const areaCode = phoneNumber.slice(0, 3);
@@ -43,7 +35,7 @@ const ManageMyInformation = () => {
         const uid = user.uid;
         const userInfo = await getUserInfo(uid);
 
-        userInfo.birthday = formatBirthday(userInfo.birthday);
+        // userInfo.birthday = formatBirthday(userInfo.birthday);
         userInfo.phoneNumber = formatPhoneNumber(userInfo.phoneNumber);
 
         setUserInfo(userInfo);
