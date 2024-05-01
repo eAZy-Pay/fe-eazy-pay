@@ -76,17 +76,17 @@ function ManageLinkEazy() {
         setLinkedCards(linkedCards); // 연동된 카드 목록 설정
         setUnlinkedCards(unlinkedCards); // 미연동 카드 목록 설정
       } catch (error) {
-        console.error('Failed to load user data:', error);
+        // console.error('Failed to load user data:', error);
       }
     };
     fetchData();
   }, []);
 
   const handleUpdate = async (cardUid) => {
-    console.log('Updating card link status for UID:', cardUid); // 로그 추가
+    // console.log('Updating card link status for UID:', cardUid); // 로그 추가
     try {
       await updateUserCardLinkEazy(cardUid);
-      console.log('Card link status updated successfully'); // 성공 로그
+      // console.log('Card link status updated successfully'); // 성공 로그
       const user = getUserSession();
       const uid = user.uid;
       const cardsSummary = await getCardsSummary(uid, 1, 0); // 카드 목록 다시 가져오기
@@ -99,7 +99,7 @@ function ManageLinkEazy() {
       setLinkedCards(linkedCards);
       setUnlinkedCards(unlinkedCards);
     } catch (error) {
-      console.error('Failed to update card link status:', error);
+      // console.error('Failed to update card link status:', error);
     }
   };
 
