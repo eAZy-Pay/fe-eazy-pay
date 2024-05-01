@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import LeftArrow from '../../assets/leftArrow.svg';
 import RightArrow from '../../assets/rightArrow.svg';
 
-const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
+const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCardId }) => {
   useEffect(() => {
     const checkDOM = setInterval(() => {
       if (document.readyState === 'complete') {
@@ -25,6 +25,7 @@ const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
           if (setActiveIndex) {
             glide.on('move', () => {
               setActiveIndex(glide.index);
+              setCardId(cards[glide.index].cardId);
             });
           }
 
