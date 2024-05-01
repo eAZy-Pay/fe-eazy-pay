@@ -26,12 +26,14 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
 
   const handleBirthChange = (event) => {
     const birth = event.target.value;
+    console.log(`birth: ${birth}`);
     const numericRegex = /^\d+$/;
     if (birth.length < 8 || !numericRegex.test(birth)) {
-      // setErrorBirth('생년월일을 8자리로 입력해주세요');
+      setErrorBirth('생년월일을 8자리로 입력해주세요');
     } else {
       setErrorBirth('');
       setBirth(birth);
+      console.log(`birth: ${birth}`);
     }
   };
 
@@ -87,6 +89,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
             helperText={errorName ? errorName : ''}
           />
         </Box>
+
         <Box
           component="form"
           sx={{
@@ -98,12 +101,12 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
           <TextField
             id="birth"
             label="생년월일"
-            // 클릭시 label이 위로 올라가는 효과 없애기
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-            type="date"
+            // // 클릭시 label이 위로 올라가는 효과 없애기
+            // InputLabelProps={{
+            //   shrink: true,
+            // }}
+            // variant="outlined"
+            // type="text"
             onChange={handleBirthChange}
             error={!!errorBirth}
             helperText={errorBirth ? errorBirth : ''}
