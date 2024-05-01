@@ -92,9 +92,13 @@ const ManageMyCard = () => {
                 </Link>
               </div>
               {userCards.filter(({ linkEazy }) => linkEazy).length > 4 ? (
-                <Marquee className="w-[900px] gap-8" speed={30}>
-                  {linkedCards(userCards.slice(0, 4), gapStyle(userCards.length))}
-                </Marquee>
+
+                <div className='flex justify-center w-[900px]'>
+                  <Marquee className="gap-[2.5rem]" speed={30}>
+                    {linkedCards(userCards.slice(0, 4), gapStyle(userCards.length))}
+                  </Marquee>
+                </div>
+
               ) : (
                 linkedCards(userCards, gapStyle(userCards.length))
               )}
@@ -150,7 +154,7 @@ const ManageMyCard = () => {
           })}
           <div
             style={{ width: '39.25rem', cursor: 'pointer' }} // 마지막에 카드 추가를 위한 공간 추가
-            // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
+          // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
           >
             <Link to="/card-search">
               <DefaultFrame className="flex justify-center h-[304.83px] ">
