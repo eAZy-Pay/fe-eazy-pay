@@ -55,8 +55,8 @@ export const checkUserCard = async (userId, cardId) => {
   try {
     const response = await fetch(url);
 
-    // 사용자가 해당 카드를 가지고 있지 않은 경우 404 에러가 발생
-    if (response.status === 404) {
+    // 사용자가 해당 카드를 가지고 있지 않은 경우 255 반환
+    if (response.status === 255) {
       return null;
     }
 
