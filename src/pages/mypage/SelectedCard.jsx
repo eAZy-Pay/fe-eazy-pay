@@ -37,10 +37,11 @@ const SelectedCard = () => {
     title: '',
     content: '',
     actionType: '',
+    errorMessage: '',
   });
 
   const openModal = (title, content, actionType) => {
-    setModalContent({ isOpen: true, title, content, actionType });
+    setModalContent({ isOpen: true, title, content, actionType, errorMessage: '' });
   };
 
   const closeModal = () => {
@@ -49,6 +50,7 @@ const SelectedCard = () => {
       title: '',
       content: '',
       actionType: '',
+      errorMessage: '',
     });
   };
 
@@ -56,97 +58,41 @@ const SelectedCard = () => {
     try {
       switch (modalContent.actionType) {
         case 'limitChange':
-          setSelectedCard({
-            ...selectedCard,
-            paymentLimit: parseInt(desiredLimit, 10),
-          });
-          // 연결 요청을 서버에 보내기
-          updateUserCardPaymentLimit(selectedCard.uid, parseInt(desiredLimit, 10))
-            .then((response) => {
-              console.log('한도 변경 성공:', response);
-            })
-            .catch((error) => {
-              console.error('한도 변경 실패:', error);
-            });
+          await updateUserCardPaymentLimit(selectedCard.uid, parseInt(desiredLimit, 10));
+          setSelectedCard((prev) => ({ ...prev, paymentLimit: parseInt(desiredLimit, 10) }));
           break;
-
         case 'link':
-          setSelectedCard({
-            ...selectedCard,
-            linkEazy: true,
-          });
-
-          // 연결 요청을 서버에 보내기
-          updateUserCardLinkEazy(selectedCard.uid)
-            .then((response) => {
-              console.log('연동 성공:', response);
-            })
-            .catch((error) => {
-              console.error('연동 실패:', error);
-            });
+          await updateUserCardLinkEazy(selectedCard.uid);
+          setSelectedCard((prev) => ({ ...prev, linkEazy: true }));
           break;
-
         case 'unlink':
-          setSelectedCard({
-            ...selectedCard,
-            linkEazy: false,
-          });
-
-          // 연결 해제 요청을 서버에 보내기
-          updateUserCardLinkEazy(selectedCard.uid)
-            .then((response) => {
-              console.log('연동 해제 성공:', response);
-            })
-            .catch((error) => {
-              console.error('연동 해제 실패:', error);
-            });
+          await updateUserCardLinkEazy(selectedCard.uid);
+          setSelectedCard((prev) => ({ ...prev, linkEazy: false }));
           break;
-
         case 'pause':
-          setSelectedCard((prevCard) => ({
-            ...prevCard,
-            cardValid: false, // 카드 유효성을 false로 설정
-          }));
-
-          // 비활성화 요청을 서버에 보내기
-          updateUserCardValid(selectedCard.uid)
-            .then((response) => {
-              console.log('카드 비활성화 성공:', response);
-            })
-            .catch((error) => {
-              console.error('카드 비활성화 실패:', error);
-            });
+          await updateUserCardValid(selectedCard.uid);
+          setSelectedCard((prev) => ({ ...prev, cardValid: false }));
           break;
-
         case 'unpause':
-          setSelectedCard((prevCard) => ({
-            ...prevCard,
-            cardValid: true, // 카드 유효성을 false로 설정
-          }));
-
-          updateUserCardValid(selectedCard.uid)
-            .then((response) => {
-              console.log('카드 활성화 성공:', response);
-            })
-            .catch((error) => {
-              console.error('카드 활성화 실패:', error);
-            });
+          await updateUserCardValid(selectedCard.uid);
+          setSelectedCard((prev) => ({ ...prev, cardValid: true }));
           break;
-
         case 'delete':
-          // 카드 삭제 후 페이지 이동
           deleteUserCard(selectedCard.uid);
           navigate('/mypage/card-management');
           break;
-
         default:
           console.log(`Unknown action: ${modalContent.actionType}`);
-          break;
       }
+      // 성공 시 모달을 닫습니다.
+      closeModal();
     } catch (error) {
-      console.error('Error during action:', error); // 에러 처리
+      console.error('Action failed:', error);
+      setModalContent((prev) => ({
+        ...prev,
+        errorMessage: error.message,
+      }));
     }
-    closeModal(); // 모달 닫기
   };
 
   const renderCardAction = (imgSrc, text, actionType) => (
