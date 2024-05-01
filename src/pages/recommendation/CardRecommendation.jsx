@@ -7,10 +7,13 @@ import { getUserSession } from '../../utils/authUtils';
 const CardRecommendation = () => {
   const user = getUserSession();
   const recommendationCard = useRecommendationCard(user?.uid || 0);
-  const recommendList = recommendationCard.recommendList;
+  const otherRecommendationCard = useRecommendationCard(0);
+  const recommendList = recommendationCard.recommendList || otherRecommendationCard.recommendList;
   // const userTop3CategoryCardList = recommendationCard?.userTop3CategoryCardList;
-  const userTop3UseAmountCardList = recommendationCard?.userTop3UseAmountCardList;
-  const userTop3CategoryUseAmountList = recommendationCard.userTop3CategoryUseAmountList;
+  const userTop3UseAmountCardList = recommendationCard?.userTop3UseAmountCardList || [];
+  const userTop3CategoryUseAmountList =
+    recommendationCard.userTop3CategoryUseAmountList ||
+    otherRecommendationCard.userTop3CategoryUseAmountList;
   const [contents, setContents] = useState([]);
 
   useEffect(() => {
