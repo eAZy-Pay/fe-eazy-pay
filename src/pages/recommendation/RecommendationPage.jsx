@@ -11,16 +11,18 @@ import CategoryCards from '../../components/category/CategoryCards';
 import SearchImg from '../../assets/searchImg.png';
 import Banner from '../../components/Banner';
 import { getUserSession } from '../../utils/authUtils';
-import LoadingChart from '../../components/chart/LoadingChart';
 import DefaultFrame from '../../components/layout/DefaultFrame';
 import CardRecommendation from './CardRecommendation';
+import PercentileChart from './PercentileChart';
 
 const RecommendationPage = () => {
-  const [checkedIndex, setcheckedIndex] = useState(0);
+  const [checkedIndex, setCheckedIndex] = useState(0);
   const handleLegendClick = (seriesIndex) => {
-    setcheckedIndex(seriesIndex);
+    setCheckedIndex(seriesIndex);
   };
   const [totalAmount, setTotalAmount] = useState(0);
+  const [userTitle, setUserTitle] = useState('');
+  const [userState, setUserState] = useState(2); // 초기 상태는 비로그인 상태로 설정
 
   const user = getUserSession();
   const userId = user?.uid;
@@ -31,81 +33,51 @@ const RecommendationPage = () => {
     monthlyFor6[checkedIndex]?.categoryId || otherMonthlyFor6[checkedIndex]?.categoryId;
   const categoryCards = useCategoryCards(categoryId);
 
-  var percentileGroup = 0;
-  for (let i = 0; i < usageStatics.length; i++) {
-    if (usageStatics[i].useAmount >= totalAmount) {
-      percentileGroup = usageStatics[i].percentile;
-      break;
-    }
-    if (i === usageStatics.length - 1) {
-      percentileGroup = 100;
-    }
-  }
-
-  const upperPercentile = percentileGroup;
-
   useEffect(() => {
+    if (userId) {
+      if (monthlyFor6.length > 0) {
+        setUserState(0); // 로그인하고 사용자 소비 정보가 있을 때
+        setUserTitle(user.userName + '님');
+      } else {
+        setUserState(1); // 로그인했지만 소비 정보가 없을 때
+        setUserTitle(`${usageStatics[0]?.age}세~${usageStatics[0]?.age + 5}세 사용자들`);
+      }
+    } else {
+      setUserState(2); // 로그인하지 않았을 때
+      setUserTitle('우리카드 사용자들');
+    }
+
     if (monthlyFor6.length > 0) {
       const total = monthlyFor6.reduce((acc, cur) => acc + cur.useAmount, 0);
       setTotalAmount(total);
     }
-  }, [monthlyFor6, userId]);
+  }, [monthlyFor6, userId, user, usageStatics]);
 
   return (
     <>
       <DefaultLayout
         banner={
-          <div className="flex gap-4">
-            <DefaultFrame>
-              <div className="flex flex-col w-full h-full items-center justify-between p-4 gap-4">
-                <div className="flex items-center justify-center">
-                  {user ? (
-                    <div className="text-2xl text-center">
-                      <p>{user?.userName}님의 월평균 사용 금액은</p>
-                      <div className="flex items-center justify-center">
-                        <p className="text-4xl font-bold">{totalAmount.toLocaleString()}원</p>
-                        <p className="text-2xl">입니다. </p>
-                      </div>
-                      {/* 상위 몇 %에 속하는지 표시 */}
-                      <p>
-                        상위 <span className="text-4xl font-bold">{upperPercentile}%</span>에
-                        속합니다.
-                      </p>
-                      <p>
-                        {usageStatics[0]?.age}~{usageStatics[0]?.age + 5}세의 중위값은{' '}
-                        {usageStatics
-                          .find((usage) => usage.percentile === 50)
-                          ?.useAmount.toLocaleString()}
-                        원입니다.
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="text-2xl text-center">
-                      <p>사용자들의 중위값은</p>
-                      <div className="flex items-center justify-center">
-                        <p className="text-4xl font-bold">
-                          {usageStatics
-                            .find((usage) => usage.percentile === 50)
-                            ?.useAmount.toLocaleString()}
-                          원
-                        </p>
-                        <p className="text-2xl">입니다. </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {usageStatics.length > 0 ? (
-                  <LoadingChart usageStatics={usageStatics} totalAmount={totalAmount} />
-                ) : null}
+          // 화면 크기가 클때는 flex-row, 작을때는 flex-col 반응형으로 변경
+          <div className="flex flex-col lg:flex-row lg:w-full lg:h-full gap-4 ">
+            <PercentileChart
+              userState={userState}
+              userTitle={userTitle}
+              usageStatics={usageStatics}
+              totalAmount={totalAmount}
+            />
+            <div className="flex flex-col items-center justify-center w-full h-full">
+              <div className="flex w-full justify-start items-center">
+                <div className="text-4xl font-bold mt-8 mb-4 mr-2">eAZy</div>
+                <p className="text-3xl text-left mt-8 mb-4">가 추천해요</p>
               </div>
-            </DefaultFrame>
-            <DefaultFrame>
-              {
-                <div className="flex flex-col w-full h-full items-center justify-between p-4 gap-4">
-                  <CardRecommendation />
-                </div>
-              }
-            </DefaultFrame>
+              <DefaultFrame>
+                {
+                  <div className="flex flex-col w-full items-center justify-between p-4 gap-4 h-[32rem]">
+                    <CardRecommendation />
+                  </div>
+                }
+              </DefaultFrame>
+            </div>
           </div>
         }
         bannerClassName={'py-14 bg-[#F4F7FC]'}
@@ -157,7 +129,7 @@ const RecommendationPage = () => {
         <HashTagSearch
           tags={monthlyFor6}
           checkedIndex={checkedIndex}
-          setCheckedIndex={setcheckedIndex}
+          setCheckedIndex={setCheckedIndex}
         />
         <CategoryCards categoryCards={categoryCards || []} maxColumn={3} maxRow={1} />
         <Banner
