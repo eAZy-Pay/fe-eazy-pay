@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import eAZyCard from '../../assets/eAZyCard.svg';
 
 const ShoppingComplete = () => {
   const location = useLocation(); // 이전 페이지에서 넘어온 상태 데이터 가져오기
-  const { response, productName } = location.state; // 상태에서 변수 추출
+  const { response } = location.state; // 상태에서 변수 추출
 
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(true); // 페이지 로드 시 모달을 자동으로 열기 위해 true로 설정
@@ -28,9 +27,9 @@ const ShoppingComplete = () => {
         appElement={document.getElementById('root')}
         style={{
           content: {
-            width: '22rem',
-            height: '30rem',
-            top: '40%',
+            width: '32rem',
+            height: '42rem',
+            top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
           },
@@ -39,13 +38,7 @@ const ShoppingComplete = () => {
         <div className="text-center">
           <h1 className="text-2xl font-bold">결제 완료</h1>
 
-          <div className="mt-4">
-            <p className="text-base font-bold">이지카드가</p>
-            <img src={eAZyCard} alt="이지카드" className="w-32 h-20 rotate-90 mx-auto" />
-          </div>
-
           <div className="">
-            <p className="text-base font-bold">{productName}에 딱 맞는</p>
             <p className="text-lg font-bold">{parsedResponse.cardName} 카드로</p>
             <img
               src={parsedResponse.cardImage}

@@ -39,13 +39,13 @@ const PaymentModal = ({
     setContents(
       cards.map((card, index) => (
         <div key={index} className="flex flex-col items-center justify-center gap-2">
-          <p>{card.cardName}</p>
           <img
             className="w-[90px] h-[130px]"
             key={card.cardId}
             src={card.cardImage}
             alt={card.cardName}
           />
+          <p>{card.cardName}</p>
         </div>
       ))
     );
@@ -95,7 +95,6 @@ const PaymentModal = ({
     } else if (pin.length < 6) {
       const newPin = pin + label;
       setPin(newPin);
-      // console.log(newPin); // TODO: 콘솔 로그 제거
 
       const updatedStatus = pinStatus.map((status, idx) => (idx < newPin.length ? true : false));
       setPinStatus(updatedStatus); // 동그라미 상태 업데이트
@@ -107,7 +106,6 @@ const PaymentModal = ({
 
           try {
             await checkPin(userUid, newPin); // 서버에 uid와 pin 번호 전송
-            // console.log('pin 번호 확인 완료'); // TODO: 콘솔 로그 제거
             const userId = userUid;
 
             try {
@@ -233,10 +231,7 @@ const PaymentModal = ({
                 setCardId={setCardId}
               />
               <p className=" text-white">{activeIndex}</p>
-              {/* TODO: activeIndex 사용 위한 p 태그. 추후 삭제 예정 */}
             </div>
-            <p>activeIndex: {activeIndex}</p>
-            <p>CardId: {cardId}</p>
 
             <div className="flex flex-col w-full mt-14 mb-6">
               <div className="flex justify-between items-baseline">

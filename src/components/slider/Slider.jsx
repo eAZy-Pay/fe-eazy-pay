@@ -102,6 +102,8 @@ CardRecommendation.propTypes = {
   Contents: propTypes.arrayOf(propTypes.element).isRequired,
   className: propTypes.string,
   setActiveIndex: propTypes.func,
+  cards: propTypes.arrayOf(propTypes.object).isRequired,
+  setCardId: propTypes.func.isRequired,
 };
 
 export default CardRecommendation;
