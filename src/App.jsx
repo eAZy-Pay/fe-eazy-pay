@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecommendationPage from './pages/recommendation/RecommendationPage';
 import LoginPage from './pages/login/LoginPage';
@@ -23,6 +23,7 @@ import ManageLinkEazy from './pages/mypage/ManageLinkEazy';
 import SelectedCard from './pages/mypage/SelectedCard';
 
 export const ModalContext = createContext();
+export const DropdownContext = createContext();
 
 function App() {
   const [modal, setModal] = useState({
@@ -30,107 +31,117 @@ function App() {
     title: '',
     content: '',
   });
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // 드롭다운바 닫힘 상태로 초기화
+  useEffect(() => {
+    setIsDropdownOpen(false);
+  }, []);
+
   return (
     <Router>
       <ModalContext.Provider value={{ modal, setModal }}>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/card-recommend" element={<RecommendationPage />} />
-          <Route path="/card-search" element={<CardSearchPage />} />
-          <Route path="/shopping" element={<ShoppingPage />} />
-          <Route path="/shopping/detail" element={<ShoppingDetail />} />
-          <Route path="/shopping/complete" element={<ShoppingComplete />} />
-          <Route
-            path="/mypage"
-            element={
-              <AuthRequiredPage>
-                <MyPage />
-              </AuthRequiredPage>
-            }
-          />
-          <Route
-            path="/mypage/manage"
-            element={
-              <AuthRequiredPage>
-                <ManageMyInformation />
-              </AuthRequiredPage>
-            }
-          />
-          <Route
-            path="/mypage/payment"
-            element={
-              <AuthRequiredPage>
-                <MonthlyPayment />
-              </AuthRequiredPage>
-            }
-          />
-          <Route
-            path="/mypage/card-management"
-            element={
-              <AuthRequiredPage>
-                <ManageMyCard />
-              </AuthRequiredPage>
-            }
-          />
-          <Route
-            path="/mypage/card-management/link-eazy"
-            element={
-              <AuthRequiredPage>
-                <ManageLinkEazy />
-              </AuthRequiredPage>
-            }
-          />
-          <Route
-            path="/mypage/card-management/selected-card"
-            element={
-              <AuthRequiredPage>
-                <SelectedCard />
-              </AuthRequiredPage>
-            }
-          />
+        <DropdownContext.Provider value={{ isDropdownOpen, setIsDropdownOpen }}>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/card-recommend" element={<RecommendationPage />} />
+            <Route path="/card-search" element={<CardSearchPage />} />
+            <Route path="/shopping" element={<ShoppingPage />} />
+            <Route path="/shopping/detail" element={<ShoppingDetail />} />
+            <Route path="/shopping/complete" element={<ShoppingComplete />} />
+            <Route
+              path="/mypage"
+              element={
+                <AuthRequiredPage>
+                  <MyPage />
+                </AuthRequiredPage>
+              }
+            />
+            <Route
+              path="/mypage/manage"
+              element={
+                <AuthRequiredPage>
+                  <ManageMyInformation />
+                </AuthRequiredPage>
+              }
+            />
+            <Route
+              path="/mypage/payment"
+              element={
+                <AuthRequiredPage>
+                  <MonthlyPayment />
+                </AuthRequiredPage>
+              }
+            />
+            <Route
+              path="/mypage/card-management"
+              element={
+                <AuthRequiredPage>
+                  <ManageMyCard />
+                </AuthRequiredPage>
+              }
+            />
+            <Route
+              path="/mypage/card-management/link-eazy"
+              element={
+                <AuthRequiredPage>
+                  <ManageLinkEazy />
+                </AuthRequiredPage>
+              }
+            />
+            <Route
+              path="/mypage/card-management/selected-card"
+              element={
+                <AuthRequiredPage>
+                  <SelectedCard />
+                </AuthRequiredPage>
+              }
+            />
 
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/faq" element={<FaqPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/faq" element={<FaqPage />} />
 
-          <Route
-            path="/qna"
-            element={
-              <AuthRequiredPage>
-                <QnaPage />
-              </AuthRequiredPage>
-            }
-          />
+            <Route
+              path="/qna"
+              element={
+                <AuthRequiredPage>
+                  <QnaPage />
+                </AuthRequiredPage>
+              }
+            />
 
-          <Route
-            path="/qna-write"
-            element={
-              <AuthRequiredPage>
-                <QnaWritePage />
-              </AuthRequiredPage>
-            }
-          />
+            <Route
+              path="/qna-write"
+              element={
+                <AuthRequiredPage>
+                  <QnaWritePage />
+                </AuthRequiredPage>
+              }
+            />
 
-          <Route path="/card-detail/:id" element={<CardDetailPage />} />
+            <Route path="/card-detail/:id" element={<CardDetailPage />} />
 
-          <Route
-            path="/card-applicant/:id"
-            element={
-              <AuthRequiredPage>
-                <CardApplyPage />
-              </AuthRequiredPage>
-            }
-          />
+            <Route
+              path="/card-applicant/:id"
+              element={
+                <AuthRequiredPage>
+                  <CardApplyPage />
+                </AuthRequiredPage>
+              }
+            />
 
-          <Route
-            path="/admin/card"
-            element={
-              <AuthRequiredPage requiredAdmin={true}>
-                <AdminCardPage />
-              </AuthRequiredPage>
-            }
-          />
-        </Routes>
+            <Route
+              path="/admin/card"
+              element={
+                <AuthRequiredPage requiredAdmin={true}>
+                  <AdminCardPage />
+                </AuthRequiredPage>
+              }
+            />
+          </Routes>
+        </DropdownContext.Provider>
       </ModalContext.Provider>
     </Router>
   );

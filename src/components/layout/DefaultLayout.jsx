@@ -1,30 +1,41 @@
 import { useContext } from 'react';
 import NavBar from './NavBar';
 import PropTypes from 'prop-types';
-import { ModalContext } from '../../App';
+import { ModalContext, DropdownContext } from '../../App';
 import Modal from './Modal';
+import Footer from './Footer';
 
 const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
   const { modal } = useContext(ModalContext);
+  const { setIsDropdownOpen } = useContext(DropdownContext);
+
   return (
-    <div className="flex flex-col items-center w-full ">
+    <>
       {showNavBar && (
-        <div className="w-full max-w-screen-xl">
-          <NavBar />
+        <div className="flex flex-col items-center w-full mt-2">
+          <div className="w-[95%] max-w-screen-xl">
+            <NavBar />
+          </div>
         </div>
       )}
+      <div className="flex flex-col items-center w-full" onClick={() => setIsDropdownOpen(false)}>
+        {modal.isOpen && <Modal></Modal>}
 
-      {modal.isOpen && <Modal></Modal>}
-
-      {banner && (
-        <div className={`flex justify-center items-center w-full ${bannerClassName}`}>
-          <div className="w-full max-w-screen-xl">{banner}</div>
+        {banner && (
+          <div className={`flex justify-center items-center w-full ${bannerClassName}`}>
+            <div className="w-[95%] max-w-screen-xl">{banner}</div>
+          </div>
+        )}
+        <div className="flex flex-col w-[95%] max-w-screen-xl">
+          <div>{children}</div>
         </div>
-      )}
-      <div className="flex flex-col w-full max-w-screen-xl">
-        <div>{children}</div>
+        {showNavBar && (
+          <div className={`flex justify-center items-center w-full mt-16 border-t border-gray-300`}>
+            <Footer />
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

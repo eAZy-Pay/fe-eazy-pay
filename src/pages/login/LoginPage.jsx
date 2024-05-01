@@ -44,7 +44,10 @@ const LoginPage = () => {
       <DefaultLayout showNavBar={false}>
         <div className="sm:h-screen">
           <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <div
+              onClick={() => (window.location.href = '/')}
+              className="sm:mx-auto sm:w-full sm:max-w-sm cursor-pointer"
+            >
               <img className="mx-auto h-[3.5rem] w-auto" src={mainLogo} alt="Your Company" />
               <p className="text-slate-600 text-lg text-center ">세상에서 가장 쉽고 편리한 결제</p>
             </div>
