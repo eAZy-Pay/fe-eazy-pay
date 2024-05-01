@@ -32,7 +32,6 @@ const PaymentModal = ({
   const [cards, setCards] = useState([]); // 유저의 카드 목록
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
-  const [selectedCardName, setSelectedCardName] = useState('selectedCardName before setting');
   const [activeIndex, setActiveIndex] = useState(0);
 
   const makeContents = (cards) => {
@@ -229,6 +228,8 @@ const PaymentModal = ({
           <div className="flex flex-col justify-center items-center p-4">
             <div className="flex justify-between items-center w-3/4">
               <Slider Contents={contents} className="w-full" setActiveIndex={setActiveIndex} />
+              <p className=" text-white">{activeIndex}</p>
+              {/* TODO: activeIndex 사용 위한 p 태그. 추후 삭제 예정 */}
             </div>
             {/* <p className="border-lime-700 border-2 w-full">{str}</p> */}
             <div className="flex flex-col items-center mt-3 mb-3">
