@@ -23,7 +23,8 @@ const RecommendationPage = () => {
   const [totalAmount, setTotalAmount] = useState(0);
 
   const user = getUserSession();
-  const monthlyFor6 = useUserMonthlyFor6({ userId: user?.uid || 0 });
+  const userId = user?.uid;
+  const monthlyFor6 = useUserMonthlyFor6({ userId: userId });
   const usageStatics = useUsageStaticsByUserIdAndDate(user?.uid || 0);
   const otherMonthlyFor6 = useUserMonthlyFor6({ age: usageStatics[0]?.age });
   const categoryId =
@@ -48,7 +49,7 @@ const RecommendationPage = () => {
       const total = monthlyFor6.reduce((acc, cur) => acc + cur.useAmount, 0);
       setTotalAmount(total);
     }
-  }, [monthlyFor6]);
+  }, [monthlyFor6, userId]);
 
   return (
     <>

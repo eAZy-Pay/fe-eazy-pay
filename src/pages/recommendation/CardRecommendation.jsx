@@ -6,7 +6,8 @@ import { getUserSession } from '../../utils/authUtils';
 
 const CardRecommendation = () => {
   const user = getUserSession();
-  const recommendationCard = useRecommendationCard(user?.uid || 0);
+  const userId = user?.uid;
+  const recommendationCard = useRecommendationCard(userId || 0);
   const otherRecommendationCard = useRecommendationCard(0);
   const recommendList = recommendationCard.recommendList || otherRecommendationCard.recommendList;
   // const userTop3CategoryCardList = recommendationCard?.userTop3CategoryCardList;
@@ -87,7 +88,7 @@ const CardRecommendation = () => {
     if (recommendList?.length > 0) {
       makeContents(recommendList);
     }
-  }, [recommendList, userTop3CategoryUseAmountList, userTop3UseAmountCardList?.length]);
+  }, [recommendList, userTop3CategoryUseAmountList, userTop3UseAmountCardList?.length, userId]);
 
   return (
     <>
