@@ -132,13 +132,14 @@ const MonthlyPayment = () => {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout showFooter={false}>
         <h2 className=" my-10 text-4xl font-extrabold">이용대금명세서</h2>
       </DefaultLayout>
 
       <DefaultLayout
         showNavBar={false}
         bannerClassName={'py-4 bg-[#F4F7FC] h-[24rem]'}
+        showFooter={true}
         banner={
           <div
             className="flex flex-col w-full items-center bg-[#F4F7FC]"

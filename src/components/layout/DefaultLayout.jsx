@@ -5,7 +5,7 @@ import { ModalContext, DropdownContext } from '../../App';
 import Modal from './Modal';
 import Footer from './Footer';
 
-const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
+const DefaultLayout = ({ children, banner, bannerClassName, showNavBar, showFooter }) => {
   const { modal } = useContext(ModalContext);
   const { setIsDropdownOpen } = useContext(DropdownContext);
 
@@ -29,7 +29,7 @@ const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
         <div className="flex flex-col w-[95%] max-w-screen-xl">
           <div>{children}</div>
         </div>
-        {showNavBar && (
+        {showFooter && (
           <div className={`flex justify-center items-center w-full mt-16 border-t border-gray-300`}>
             <Footer />
           </div>
@@ -42,6 +42,7 @@ const DefaultLayout = ({ children, banner, bannerClassName, showNavBar }) => {
 DefaultLayout.defaultProps = {
   banner: null,
   showNavBar: true,
+  showFooter: true,
   bannerClassName: '',
 };
 
@@ -50,6 +51,7 @@ DefaultLayout.propTypes = {
   banner: PropTypes.node,
   bannerClassName: PropTypes.string,
   showNavBar: PropTypes.bool,
+  showFooter: PropTypes.bool,
 };
 
 export default DefaultLayout;

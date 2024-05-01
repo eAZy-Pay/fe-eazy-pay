@@ -42,8 +42,8 @@ const DropdownMenu = () => {
           </>
         )}
         <div className="cursor-pointer flex justify-center p-3 gap-4">
-          <img src={CardIcon} alt="Card Icon" />
-          <Link to="/mypage/card-management" className="flex items-center text-3xl text-left">
+          <img src={CardIcon} alt="Card Icon" className='w-[2em]' />
+          <Link to="/mypage/card-management" className="flex items-center text-xl text-left">
             카드관리
           </Link>
         </div>
