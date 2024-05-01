@@ -100,37 +100,36 @@ export const updateUserCardLinkEazy = async (userCardId) => {
 };
 
 export const updateUserCardPaymentLimit = async (userCardId, paymentLimit) => {
-  const response = await fetch(`${BASE_URL}/api/user/card/toggle-payment-limit/${userCardId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ paymentLimit }), // JSON으로 전송
-  });
-  if (response.ok) {
-    try {
-      return await response.json(); // JSON 응답 처리
-    } catch (error) {
-      const text = await response.text(); // JSON 파싱 실패 시 텍스트 처리
-      return { message: text }; // 텍스트를 JSON으로 래핑
+  try {
+    const response = await fetch(`${BASE_URL}/api/user/card/toggle-payment-limit/${userCardId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ paymentLimit }), // JSON으로 전송
+    });
+
+    const result = await response.json(); // JSON 응답 처리
+    if (response.ok) {
+      return result; // 성공 응답 반환
+    } else {
+      // 서버 응답에 에러 메시지가 포함되어 있을 경우, 에러 메시지를 예외로 던짐
+      throw new Error(result.error || 'Error while updating payment limit');
     }
-  } else {
-    throw new Error('Error while updating payment limit'); // 오류 처리
+  } catch (error) {
+    // 네트워크 에러 또는 response.json() 파싱 에러를 처리
+    console.error('Error occurred:', error);
+    throw new Error('Network error or response parsing failed');
   }
 };
 
 // 유저 카드 전월 실적 충족 여부 조회
 export const getUserCardFulfilled = async (userCardId) => {
-  const response = await fetch(
-    `${BASE_URL}/api/user/card/fulfilled?userCardId=${userCardId}`
-  );
+  const response = await fetch(`${BASE_URL}/api/user/card/fulfilled?userCardId=${userCardId}`);
   return await response.json();
 };
 
 export const getUserInfo = async (userId) => {
-  const response = await fetch(
-    `${BASE_URL}/api/user?userId=${userId}`
-  );
+  const response = await fetch(`${BASE_URL}/api/user?userId=${userId}`);
   return await response.json();
 };
-

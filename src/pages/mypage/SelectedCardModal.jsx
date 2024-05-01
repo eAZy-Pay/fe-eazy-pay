@@ -2,7 +2,15 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CloseIcon from '../../assets/close.svg';
 
-const SelectedCardModal = ({ isOpen, title, content, actionType, onConfirm, onClose }) => {
+const SelectedCardModal = ({
+  isOpen,
+  title,
+  content,
+  actionType,
+  onConfirm,
+  onClose,
+  errorMessage,
+}) => {
   const [isVisible, setIsVisible] = useState(isOpen);
 
   useEffect(() => {
@@ -34,6 +42,7 @@ const SelectedCardModal = ({ isOpen, title, content, actionType, onConfirm, onCl
           </button>
         </div>
         <div className="mt-4">{content}</div>
+        {errorMessage && <div className="text-red-500 text-center mt-4">{errorMessage}</div>}
         <div className="flex justify-end gap-5 mt-6">
           <button className="p-3 bg-red-500 text-white rounded-lg" onClick={handleConfirm}>
             예
@@ -54,6 +63,7 @@ SelectedCardModal.propTypes = {
   actionType: PropTypes.string.isRequired,
   onConfirm: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 export default SelectedCardModal;

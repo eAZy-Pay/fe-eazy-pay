@@ -1,10 +1,31 @@
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import arrowIcon from '../../assets/arrowIcon.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getUserSession } from '../../utils/authUtils';
+import { getUserInfo } from '../../apis/UserAPI';
+import UserInfoComponent from './UserInfoComponent';
 
 const ManageMyInformation = () => {
   const [isOpen, setIsOpen] = useState(true); // 기본적으로 펼쳐진 상태
   const [passwordOpen, setpasswordOpen] = useState(false);
+  // const [PinPasswordOpen, setPinPasswordOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+
+  const formatBirthday = (birthday) => {
+    if (birthday.length !== 8) return ''; // 날짜 형식이 유효하지 않으면 빈 문자열 반환
+    const year = birthday.slice(0, 4);
+    const month = birthday.slice(4, 6);
+    const day = birthday.slice(6, 8);
+    return `${year}.${month}.${day}`;
+  };
+
+  const formatPhoneNumber = (phoneNumber) => {
+    if (phoneNumber.length !== 11) return ''; // 전화번호 형식이 유효하지 않으면 빈 문자열 반환
+    const areaCode = phoneNumber.slice(0, 3);
+    const firstPart = phoneNumber.slice(3, 7);
+    const secondPart = phoneNumber.slice(7, 11);
+    return `${areaCode}-${firstPart}-${secondPart}`;
+  };
 
   const toggleSection = () => {
     setIsOpen(!isOpen); // 상태 토글
@@ -13,6 +34,25 @@ const ManageMyInformation = () => {
   const passwordSection = () => {
     setpasswordOpen(!passwordOpen); // 상태 토글
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 사용자 정보 가져오는 코드 추가
+        const user = getUserSession();
+        const uid = user.uid;
+        const userInfo = await getUserInfo(uid);
+
+        userInfo.birthday = formatBirthday(userInfo.birthday);
+        userInfo.phoneNumber = formatPhoneNumber(userInfo.phoneNumber);
+
+        setUserInfo(userInfo);
+      } catch (error) {
+        console.error('Failed to load user data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -33,52 +73,22 @@ const ManageMyInformation = () => {
 
           {isOpen && (
             <div
-              className="flex flex-col justify-center gap-8 h-[35rem] w-5/6 px-40 py-24"
+              className="flex flex-col justify-center gap-8 w-5/6 px-40 py-24"
               style={{ backgroundColor: '#F4F7FC' }}
             >
-              <div className="flex justify-center items-center">
-                <p className="text-2xl">이름</p>
-                <div className="flex justify-start items-center px-4 py-3 ml-[5.5rem] mr-[2.4rem] bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]">천*민</p>
-                </div>
-                <div className="flex justify-center items-center w-[3.875rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
-                  <p className="text-lg">변경</p>
-                </div>
-              </div>
+              <UserInfoComponent category="이름" userInfo={userInfo.name}></UserInfoComponent>
 
-              <div className="flex justify-center items-center">
-                <p className="text-2xl">주소</p>
-                <div className="flex justify-start items-center px-4 py-3 ml-[5.5rem] mr-[2.4rem] bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]">
-                    서울시 성북구 동소문로 ********
-                  </p>
-                </div>
-                <div className="flex justify-center items-center w-[3.875rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
-                  <p className="text-lg">변경</p>
-                </div>
-              </div>
+              <UserInfoComponent
+                category="생년월일"
+                userInfo={userInfo.birthday}
+              ></UserInfoComponent>
 
-              <div className="flex justify-center items-center">
-                <p className="text-2xl">휴대폰번호</p>
-                <div className="flex justify-start items-center px-4 py-3 ml-[1.375rem] mr-[2.4rem] bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]">010-5542-****</p>
-                </div>
-                <div className="flex justify-center items-center w-[3.875rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
-                  <p className="text-lg">변경</p>
-                </div>
-              </div>
+              <UserInfoComponent
+                category="휴대폰번호"
+                userInfo={userInfo.phoneNumber}
+              ></UserInfoComponent>
 
-              <div className="flex justify-center items-center">
-                <p className="text-2xl">이메일</p>
-                <div className="flex justify-start items-center px-4 py-3 ml-[4.125rem] mr-[2.4rem] bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]">
-                    ch*******n76@naver.com
-                  </p>
-                </div>
-                <div className="flex justify-center items-center w-[3.875rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
-                  <p className="text-lg">변경</p>
-                </div>
-              </div>
+              <UserInfoComponent category="이메일" userInfo={userInfo.email}></UserInfoComponent>
             </div>
           )}
 
@@ -89,43 +99,88 @@ const ManageMyInformation = () => {
               <img
                 src={arrowIcon}
                 alt="Arrow Icon"
-                className={`transform ${passwordOpen ? 'rotate-90' : '-rotate-90'}`}
+                className={`transform ${passwordOpen ? '-rotate-90' : 'rotate-90'}`}
               />
             </button>
           </div>
 
           {passwordOpen && (
             <div
-              className="flex flex-col justify-center items-center gap-8 h-[35rem] w-5/6 px-40 py-20"
+              className="flex flex-col gap-8 w-5/6 px-40 py-24 items-center"
               style={{ backgroundColor: '#F4F7FC' }}
             >
-              <div className="flex justify-between items-center w-full">
-                <p className="text-2xl">아이디</p>
-                <div className="flex justify-between items-center px-4 py-3 bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]">cheonjimin76</p>
-                </div>
-              </div>
+              <UserInfoComponent
+                category="아이디"
+                userInfo={userInfo.id}
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
 
-              <div className="flex justify-between items-center w-full">
-                <p className="text-2xl">기존 비밀번호 입력</p>
-                <div className="flex justify-start items-center px-4 py-3 bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]">ㅇ</p>
-                </div>
-              </div>
+              <UserInfoComponent
+                category="기존 비밀번호 입력"
+                userInfo="기존 비밀번호 입력"
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
 
-              <div className="flex justify-between items-center w-full">
-                <p className="text-2xl">새 비밀번호 입력</p>
-                <div className="flex justify-start items-center px-4 py-3 bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]"> ㅇ</p>
-                </div>
-              </div>
+              <UserInfoComponent
+                category="새 비밀번호 입력"
+                userInfo="새 비밀번호 입력"
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
 
-              <div className="flex justify-between items-center w-full">
-                <p className="text-2xl">한 번 더 입력</p>
-                <div className="flex justify-start items-center px-4 py-3 bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd]">
-                  <p className="flex-grow w-[329px] text-base text-[#697077]"> ㅇ</p>
-                </div>
+              <UserInfoComponent
+                category="한 번 더 입력"
+                userInfo="한 번 더 입력"
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
+
+              <div className="flex justify-center items-center w-[6rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
+                <p className="text-lg">변경하기</p>
               </div>
+            </div>
+          )}
+
+          <hr className="bold-hr2 w-5/6" />
+          <div className="flex justify-between items-center w-5/6 text-3xl px-4 my-4">
+            PIN 비밀번호 변경
+            <button onClick={passwordSection}>
+              <img
+                src={arrowIcon}
+                alt="Arrow Icon"
+                className={`transform ${passwordOpen ? '-rotate-90' : 'rotate-90'}`}
+              />
+            </button>
+          </div>
+
+          {passwordOpen && (
+            <div
+              className="flex flex-col gap-16 w-5/6 px-40 py-24 items-center"
+              style={{ backgroundColor: '#F4F7FC' }}
+            >
+              <UserInfoComponent
+                category="기존 PIN 입력"
+                userInfo="기존 PIN 입력"
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
+
+              <UserInfoComponent
+                category="새 PIN 입력"
+                userInfo="새 PIN 입력"
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
+
+              <UserInfoComponent
+                category="한 번 더 입력"
+                userInfo="한 번 더 입력"
+                changeButton={false}
+                passwordSection={true}
+              ></UserInfoComponent>
+
               <div className="flex justify-center items-center w-[6rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
                 <p className="text-lg">변경하기</p>
               </div>
