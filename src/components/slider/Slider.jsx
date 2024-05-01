@@ -23,7 +23,7 @@ const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
             },
           });
           if (setActiveIndex) {
-            glide.on('move', (event) => {
+            glide.on('move', () => {
               setActiveIndex(glide.index);
             });
           }
