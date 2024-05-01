@@ -9,7 +9,7 @@ import { paymentInfo } from '../../apis/PaymentInfoAPI';
 import mainLogo from '../../assets/mainLogo.svg';
 import { getSortedValidCards } from '../../apis/UserAPI';
 import { getUserSession } from '../../utils/authUtils';
-import Slider2 from '../../components/slider/Slider2';
+import Slider from '../../components/slider/Slider';
 
 const PaymentModal = ({
   isOpen,
@@ -32,8 +32,8 @@ const PaymentModal = ({
   const [cards, setCards] = useState([]); // 유저의 카드 목록
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
-  // const [str, setStr] = useState('str before setting');
-  // const [selectedCardName, setSelectedCardName] = useState('selectedCardName before setting');
+  const [selectedCardName, setSelectedCardName] = useState('selectedCardName before setting');
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const makeContents = (cards) => {
     setContents(
@@ -181,7 +181,7 @@ const PaymentModal = ({
       style={{
         content: {
           width: '22rem',
-          height: '28rem',
+          height: '30rem',
           top: '40%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -198,7 +198,7 @@ const PaymentModal = ({
             </>
           ) : (
             <>
-              <h2 className="mt-8 mb-4 text-center text-xl">{message}</h2>
+              <h2 className="my-8 text-center text-xl">{message}</h2>
             </>
           )}
           <div className="flex justify-center">
@@ -228,19 +228,18 @@ const PaymentModal = ({
           {' '}
           <div className="flex flex-col justify-center items-center p-4">
             <div className="flex justify-between items-center w-3/4">
-              <Slider2 Contents={contents} className="w-full" />
-              {/* <Slider2 Contents={cards} setSelectedCardName={setSelectedCardName} /> */}
+              <Slider Contents={contents} className="w-full" setActiveIndex={setActiveIndex} />
             </div>
             {/* <p className="border-lime-700 border-2 w-full">{str}</p> */}
-            <div className="flex flex-col items-center mt-6 mb-3">
+            <div className="flex flex-col items-center mt-3 mb-3">
               <p className="text-base text-gray-700 mb-1">eAZy 카드가 추천하는 카드는</p>
               <p className="text-base font-extrabold text-gray-700 ">{recommendedCardName}</p>
             </div>
 
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full mt-2">
               <div className="flex justify-between items-baseline">
                 <p className="text-lg font-semibold text-gray-600 ">최종 결제 금액</p>
-                <p className="text-3xl font-bold text-blue-600">{formattedPrice} 원</p>
+                <p className="text-2xl font-bold text-blue-600">{formattedPrice} 원</p>
               </div>
 
               <div className="flex justify-between items-baseline mt-2">

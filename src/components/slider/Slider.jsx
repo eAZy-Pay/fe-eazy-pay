@@ -4,14 +4,14 @@ import propTypes from 'prop-types';
 import LeftArrow from '../../assets/leftArrow.svg';
 import RightArrow from '../../assets/rightArrow.svg';
 
-const CardRecommendation = ({ Contents, className }) => {
+const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
   useEffect(() => {
     const checkDOM = setInterval(() => {
       if (document.readyState === 'complete') {
         clearInterval(checkDOM);
         const glideEl = document.querySelector('.glide-05');
         if (glideEl) {
-          new Glide(glideEl, {
+          const glide = new Glide(glideEl, {
             type: 'slider',
             focusAt: 'center',
             perView: 1,
@@ -21,7 +21,15 @@ const CardRecommendation = ({ Contents, className }) => {
                 active: 'bg-slate-900',
               },
             },
-          }).mount();
+          });
+          if (setActiveIndex) {
+            glide.on('move', (event) => {
+              setActiveIndex(glide.index);
+            });
+          }
+
+          // glide 초기화
+          glide.mount();
         }
       }
     }, 100);
@@ -40,6 +48,7 @@ const CardRecommendation = ({ Contents, className }) => {
               ))}
           </ul>
         </div>
+        <p className="text-center my-2 invisible">현재 인덱스:</p>
         <div
           className="absolute left-0 flex items-center justify-between w-full h-0 px-4 top-1/2 "
           data-glide-el="controls"
@@ -83,11 +92,13 @@ const CardRecommendation = ({ Contents, className }) => {
 
 CardRecommendation.defaultProps = {
   className: '',
+  setActiveIndex: null,
 };
 
 CardRecommendation.propTypes = {
   Contents: propTypes.arrayOf(propTypes.element).isRequired,
   className: propTypes.string,
+  setActiveIndex: propTypes.func,
 };
 
 export default CardRecommendation;

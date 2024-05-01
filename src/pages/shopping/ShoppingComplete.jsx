@@ -29,7 +29,7 @@ const ShoppingComplete = () => {
         style={{
           content: {
             width: '22rem',
-            height: '28rem',
+            height: '30rem',
             top: '40%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
