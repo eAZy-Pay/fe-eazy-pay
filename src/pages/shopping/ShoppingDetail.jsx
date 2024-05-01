@@ -29,7 +29,6 @@ const PaymentModal = ({
   const [isEnteringPin, setIsEnteringPin] = useState(false);
   const user = getUserSession();
   const userId = user?.uid;
-  const [cards, setCards] = useState([]); // 유저의 카드 목록
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
   const [activeIndex, setActiveIndex] = useState(0);
