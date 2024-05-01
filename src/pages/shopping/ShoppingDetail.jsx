@@ -180,9 +180,9 @@ const PaymentModal = ({
       contentLabel="Payment PIN"
       style={{
         content: {
-          width: '22rem',
-          height: '30rem',
-          top: '40%',
+          width: '32rem',
+          height: '42rem',
+          top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
         },
@@ -193,15 +193,15 @@ const PaymentModal = ({
           {wrongPinMessage ? (
             // pin 번호 틀렸을 때 빨간 글씨 메시지를 추가적으로 출력
             <>
-              <h2 className="mt-8 text-center text-xl">{message}</h2>
+              <h2 className="mt-8 text-center text-2xl mb-1 font-bold text-gray-800">{message}</h2>
               <p className="mt-1 mb-5 text-sm text-center text-red-700">{wrongPinMessage}</p>
             </>
           ) : (
             <>
-              <h2 className="my-8 text-center text-xl">{message}</h2>
+              <h2 className="my-8 text-center text-2xl mb-1 font-bold text-gray-800">{message}</h2>
             </>
           )}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-10">
             {pinStatus.map((status, idx) => (
               <div
                 key={idx}
@@ -209,12 +209,12 @@ const PaymentModal = ({
               />
             ))}
           </div>
-          <div className="grid grid-cols-3 gap-0 mt-12">
+          <div className="grid grid-cols-3 gap-3 mt-12">
             {keypadNumbers.map((label) => (
               <button
                 key={label}
                 className={`p-3 font-bold ${
-                  label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-2xl'
+                  label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-3xl'
                 }`}
                 onClick={() => handleKeyClick(label)}
               >
@@ -227,35 +227,34 @@ const PaymentModal = ({
         <>
           {' '}
           <div className="flex flex-col justify-center items-center p-4">
+            <div className="flex flex-col items-center mb-3">
+              <p className="text-2xl mb-1 font-bold text-gray-800 ">{recommendedCardName}</p>
+              <p className="mb-7 text-lg text-gray-700 ">카드를 추천해요!</p>
+            </div>
+            {/* Slider  */}
             <div className="flex justify-between items-center w-3/4">
               <Slider Contents={contents} className="w-full" setActiveIndex={setActiveIndex} />
               <p className=" text-white">{activeIndex}</p>
               {/* TODO: activeIndex 사용 위한 p 태그. 추후 삭제 예정 */}
             </div>
-            {/* <p className="border-lime-700 border-2 w-full">{str}</p> */}
-            <div className="flex flex-col items-center mt-3 mb-3">
-              <p className="text-base text-gray-700 mb-1">eAZy 카드가 추천하는 카드는</p>
-              <p className="text-base font-extrabold text-gray-700 ">{recommendedCardName}</p>
-            </div>
 
-            <div className="flex flex-col w-full mt-2">
+            <div className="flex flex-col w-full mt-14 mb-6">
               <div className="flex justify-between items-baseline">
-                <p className="text-lg font-semibold text-gray-600 ">최종 결제 금액</p>
-                <p className="text-2xl font-bold text-blue-600">{formattedPrice} 원</p>
+                <p className="text-xl font-semibold text-gray-600 ">최종 결제 금액</p>
+                <p className="text-3xl font-bold text-blue-600">{formattedPrice} 원</p>
               </div>
-
-              <div className="flex justify-between items-baseline mt-2">
-                <p className="text-lg text-gray-600">예상 혜택</p>
-                <p className="text-2xl font-bold text-gray-900 ml-2">0 원</p>
+              <div className="flex justify-between items-baseline my-4">
+                <p className="text-xl text-gray-600">예상 혜택</p>
+                <p className="text-3xl font-bold text-gray-900 ml-2">0 원</p>
               </div>
             </div>
           </div>
           <div className="flex flex-col justify-center">
             <button
-              className="text-lg bg-blue-100 text-gray-600 py-2 rounded-lg hover:bg-blue-200 transition duration-300"
+              className="text-lg  bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-200 transition duration-300"
               onClick={handleEnteringPin}
             >
-              결제
+              eAZy 결제
             </button>
           </div>
         </>
