@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 const Card = ({ categoryId, storeCode, storeName, image, category, name, price }) => {
   const navigate = useNavigate();
 
+  const formattedPrice = new Intl.NumberFormat().format(price); // 가격을 세 자리마다 쉼표로 구분하여 형식화
+
   const handleCardClick = () => {
     const queryParams = new URLSearchParams({
       categoryId,
@@ -23,7 +25,9 @@ const Card = ({ categoryId, storeCode, storeName, image, category, name, price }
       <div className="p-4">
         <h3 className="text-lg font-bold">{category}</h3>
         <p className="text-sm text-gray-500">{name}</p>
-        <p className="text-sm font-bold mt-2">{price}</p>
+        <div className="flex justify-end mt-2">
+          <p className="text-sm font-bold">{formattedPrice} 원</p>
+        </div>
       </div>
     </div>
   );
@@ -47,7 +51,7 @@ const ShoppingPage = () => {
       image:
         'https://shop-phinf.pstatic.net/20240229_222/1709172376739WuEoG_JPEG/15774861547537251_1271033337.jpg?type=m510',
       category: '슈퍼/마트',
-      name: '햇반',
+      name: '햇반 24개입',
       price: '20000',
     },
     {
@@ -83,7 +87,8 @@ const ShoppingPage = () => {
       categoryId: '6',
       storeCode: '060000160001',
       storeName: '우리여행사',
-      image: '',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtbzgr9P93ojweefXCBj_Pf0LKUo47C2NL6w&usqp=CAU',
       category: '숙박/여행',
       name: '캐나다 패키지 여행 9박 10일',
       price: '23095000',
@@ -92,7 +97,8 @@ const ShoppingPage = () => {
       categoryId: '7',
       storeCode: '070000210001',
       storeName: '우리꽃집',
-      image: '',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFTsR43gi-yG1jUkna7gx54kWWjye_o7lj2g&usqp=CAU',
       category: '문화/취미',
       name: '봄내음 꽃다발 당일배송',
       price: '39000',
@@ -101,7 +107,8 @@ const ShoppingPage = () => {
       categoryId: '8',
       storeCode: '080000220001',
       storeName: '상암주유소',
-      image: '',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR12127bfgvUkLqQT2-ZuJoJFVErExsxVjQWZBXGNhjRKz9uTlOaFPi98_fGCwZiIUgvsU&usqp=CAU',
       category: '자동차',
       name: '주유상품권 30L',
       price: '50000',

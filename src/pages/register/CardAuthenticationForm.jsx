@@ -8,7 +8,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
   const [errorName, setErrorName] = useState('');
   const [errorBirth, setErrorBirth] = useState('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
-  const [phoneNumber, setLocalPhoneNumber] = useState('');
+  const [phoneNumSTR, setPhoneNumSTR] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
 
   const handleNameChange = (event) => {
@@ -28,7 +28,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     const birth = event.target.value;
     const numericRegex = /^\d+$/;
     if (birth.length < 8 || !numericRegex.test(birth)) {
-      setErrorBirth('생년월일을 8자리로 입력해주세요');
+      // setErrorBirth('생년월일을 8자리로 입력해주세요');
     } else {
       setErrorBirth('');
       setBirth(birth);
@@ -37,10 +37,16 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
 
   const handlePhoneNumberChange = (event) => {
     const input = event.target.value;
-    // 숫자 이외의 입력을 제거
     const onlyNums = input.replace(/[^0-9]/g, '');
-    // 상태를 업데이트하되, 유효성 검사는 입력이 11자리일 때만 수행
-    setLocalPhoneNumber(onlyNums); // 항상 상태를 업데이트
+    // 000-0000-0000 형태로 만들기
+    // 글자수가 3, 7, 11일 때 - 추가
+    if (onlyNums.length < 4) {
+      setPhoneNumSTR(onlyNums);
+    } else if (onlyNums.length < 8) {
+      setPhoneNumSTR(`${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`);
+    } else {
+      setPhoneNumSTR(`${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 7)}-${onlyNums.slice(7, 11)}`);
+    }
     if (onlyNums.length === 11) {
       setErrorPhoneNumber(''); // 에러 메시지를 지움
       setPhoneNumber(onlyNums); // 최종 상태를 업데이트
@@ -62,7 +68,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
   };
 
   return (
-    <div className="flex ml-48">
+    <div className="flex">
       <div className="flex flex-col bg-white">
         <Box
           component="form"
@@ -92,7 +98,12 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
           <TextField
             id="birth"
             label="생년월일"
+            // 클릭시 label이 위로 올라가는 효과 없애기
+            InputLabelProps={{
+              shrink: true,
+            }}
             variant="outlined"
+            type="date"
             onChange={handleBirthChange}
             error={!!errorBirth}
             helperText={errorBirth ? errorBirth : ''}
@@ -111,11 +122,8 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
             id="phoneNumber"
             label="휴대폰 번호"
             variant="outlined"
-            value={phoneNumber}
+            value={phoneNumSTR}
             onChange={handlePhoneNumberChange}
-            inputProps={{
-              maxLength: 11,
-            }}
             error={!!errorPhoneNumber}
             helperText={errorPhoneNumber ? errorPhoneNumber : ''}
           />

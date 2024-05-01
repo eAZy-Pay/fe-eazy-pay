@@ -151,3 +151,22 @@ export const getRecommendationCard = async (userId) => {
     throw error;
   }
 };
+
+export const getSortedValidCards = async (userId) => {
+  var url = `${BASE_URL}/api/user/sorted-valid-cards`;
+
+  if (userId !== undefined && userId > 0) {
+    url += `?user_id=${userId}`;
+  }
+  console.log(url);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`); // 상태 체크
+    }
+    return await response.json(); // 응답 데이터 파싱
+  } catch (error) {
+    console.error('Fetching sorted valid cards data failed:', error);
+    throw error;
+  }
+};
