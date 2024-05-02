@@ -55,6 +55,7 @@ const PaymentModal = ({
     const fetchData = async () => {
       try {
         const price = Number(formattedPrice.replace(/,/g, ''));
+        console.log(`categoryId: ${categoryId}, price: ${price}`);
         const data = await getPayRecommendationCards(userId, categoryId, price);
         makeContents(data);
         setCards(data);
@@ -169,58 +170,84 @@ const PaymentModal = ({
       onRequestClose={closeModal}
       contentLabel="Payment PIN"
       style={{
-        content: {
-          width: '32rem',
-          height: '42rem',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        },
+        content: isEnteringPin
+          ? {
+              // 핀번호 입력 모달
+              width: '24rem',
+              height: '28rem',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }
+          : {
+              // 추천 카드 선택 모달
+              width: '32rem',
+              height: '42rem',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            },
       }}
     >
       {isEnteringPin ? (
         <>
+          {/* isEnteringPin이 true이면 핀번호 입력 모달을 렌더링 */}
           {wrongPinMessage ? (
             // pin 번호 틀렸을 때 빨간 글씨 메시지를 추가적으로 출력
             <>
-              <h2 className="mt-8 text-center text-2xl mb-1 font-bold text-gray-800">{message}</h2>
+              <h2 className="mt-8 text-center text-xl mb-1 font-bold text-gray-800">{message}</h2>
               <p className="mt-1 mb-5 text-sm text-center text-red-700">{wrongPinMessage}</p>
             </>
           ) : (
             <>
-              <h2 className="my-8 text-center text-2xl mb-1 font-bold text-gray-800">{message}</h2>
+              <h2 className="my-8 text-center text-xl mb-1 font-bold text-gray-800">{message}</h2>
             </>
           )}
-          <div className="flex justify-center mt-10">
-            {pinStatus.map((status, idx) => (
-              <div
-                key={idx}
-                className={`w-6 h-6 rounded-full mx-1 ${status ? 'bg-gray-800' : 'bg-neutral-200'}`}
-              />
-            ))}
-          </div>
-          <div className="grid grid-cols-3 gap-3 mt-12">
-            {keypadNumbers.map((label) => (
-              <button
-                key={label}
-                className={`p-3 font-bold ${
-                  label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-3xl'
-                }`}
-                onClick={() => handleKeyClick(label)}
-              >
-                {label}
-              </button>
-            ))}
+          <div className="flex flex-col">
+            <div className="flex justify-center mt-10">
+              {pinStatus.map((status, idx) => (
+                <div
+                  key={idx}
+                  className={`w-6 h-6 rounded-full mx-1 ${status ? 'bg-gray-800' : 'bg-neutral-200'}`}
+                />
+              ))}
+            </div>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-3 gap-3 mt-12">
+                {keypadNumbers.map((label) => (
+                  <button
+                    key={label}
+                    className={`p-1 font-bold ${
+                      label === '삭제' || label === '전체삭제' ? 'text-base' : 'text-2xl'
+                    }`}
+                    onClick={() => handleKeyClick(label)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </>
       ) : (
         <>
-          {' '}
-          <div className="flex flex-col justify-center items-center p-4">
-            <div className="flex flex-col items-center mb-3">
-              <p className="text-2xl mb-1 font-bold text-gray-800 ">{recommendedCardName}</p>
-              <p className="mb-7 text-lg text-gray-700 ">카드를 추천해요!</p>
-            </div>
+          {/* isEnteringPin이 false이면 추천 카드 선택 모달을 렌더링 */}
+          <div className="flex flex-col justify-center items-center mt-5 p-4">
+            {activeIndex === 0 ? (
+              <div className="flex flex-col items-center mb-3">
+                <div className="flex flex-row">
+                  <span className="text-lg text-gray-700 font-extrabold">{productName}</span>
+                  <span className="text-lg text-gray-700 ">에 딱 맞는</span>
+                </div>
+                <p className="text-2xl my-1 font-bold text-blue-700 ">{recommendedCardName}</p>
+                <p className="mb-7 text-lg text-gray-700 ">카드를 추천해요!</p>
+              </div>
+            ) : (
+              <iv className="flex flex-col items-center mb-3">
+                <p className="text-2xl mb-1 font-bold text-gray-400 ">{recommendedCardName}</p>
+                <p className="mb-7 text-lg text-gray-300 ">카드를 추천해요!</p>
+              </iv>
+            )}
             {/* Slider  */}
             <div className="flex justify-between items-center w-3/4">
               <Slider
@@ -232,7 +259,6 @@ const PaymentModal = ({
               />
               <p className=" text-white">{activeIndex}</p>
             </div>
-
             <div className="flex flex-col w-full mt-14 mb-6">
               <div className="flex justify-between items-baseline">
                 <p className="text-xl font-semibold text-gray-600 ">최종 결제 금액</p>
@@ -246,7 +272,7 @@ const PaymentModal = ({
           </div>
           <div className="flex flex-col justify-center">
             <button
-              className="text-lg  bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-200 transition duration-300"
+              className="text-lg  bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
               onClick={handleEnteringPin}
             >
               eAZy 결제
@@ -288,7 +314,7 @@ const ShoppingDetail = () => {
         </div>
         {/* 오른쪽 상품 정보 영역 */}
         <div className="flex w-1/2">
-          <div className="w-3/4 flex flex-col items-start mx-4 bg-gray-50 p-6 rounded-lg shadow-lg">
+          <div className="w-3/4 flex flex-col items-start mx-4  p-6 ">
             {' '}
             <div className="flex flex-col w-full">
               <div className="flex flex-col justify-end p-6">
@@ -300,11 +326,10 @@ const ShoppingDetail = () => {
                 <p className="mt-6 text-3xl font-bold text-blue-700">{formattedPrice}원</p>
               </div>
               <button
-                className="mt-2 mb-6 mx-6 text-lg bg-blue-100 text-gray-600 py-2 rounded-lg hover:bg-blue-200 transition duration-300"
+                className="mt-2 mb-6 mx-6 text-lg bg-blue-500 text-gray-200 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
                 onClick={openModal}
               >
-                <img src={mainLogo} alt="Main Logo" className="inline-block h-10 w-20 mr-3" />
-                결제
+                eAZy 결제
               </button>
             </div>
           </div>

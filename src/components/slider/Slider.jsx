@@ -59,14 +59,22 @@ const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCar
             data-glide-dir="<"
             aria-label="prev slide"
           >
-            <img src={LeftArrow} alt="left arrow" className="w-20 h-20" />
+            <img
+              src={LeftArrow}
+              alt="left arrow"
+              className="w-20 h-20 opacity-60 hover:opacity-75"
+            />
           </button>
           <button
             className="inline-flex items-center justify-center w-8 h-8 transition duration-100 bg-white/20 text-slate-700 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
             data-glide-dir=">"
             aria-label="next slide"
           >
-            <img src={RightArrow} alt="right arrow" className="w-20 h-20" />
+            <img
+              src={RightArrow}
+              alt="right arrow"
+              className="w-20 h-20 opacity-60 hover:opacity-75"
+            />
           </button>
         </div>
         {/*    <!-- Indicators --> */}
@@ -84,7 +92,7 @@ const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCar
                 aria-label="goto slide 1"
               >
                 {/* <span className="block w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-700 focus:outline-none"></span> */}
-                <span className="flex  w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-700 focus:outline-none"></span>
+                <span className="flex  w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-300 focus:outline-none"></span>
               </button>
             ))}
         </div>
