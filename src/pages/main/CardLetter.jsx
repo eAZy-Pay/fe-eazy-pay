@@ -17,7 +17,7 @@ const CardLetter = ({
     totalDisplay = '/ 무실적';
     specialStyle = 'text-2xl font-bold text-red-500'; // 무실적인 경우의 스타일
   } else if (total >= 1000000000) {
-    totalDisplay = '/ 제한없음';
+    totalDisplay = '/ 무제한';
     specialStyle = 'text-2xl font-bold text-green-500'; // 제한없음 경우의 스타일
   } else {
     totalDisplay = `/ ${total.toLocaleString()}`; // 숫자 포맷으로 출력

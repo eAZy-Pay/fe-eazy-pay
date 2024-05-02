@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function UserInfoComponent({ userInfo = '', category = '', passwordSection = false }) {
+function UserInfoComponent({
+  userInfo = '',
+  category = '',
+  button = false,
+  passwordSection = false,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPhoneNumber, setEditedPhoneNumber] = useState(userInfo);
 
@@ -77,14 +82,14 @@ function UserInfoComponent({ userInfo = '', category = '', passwordSection = fal
                   취소
                 </button>
               </>
-            ) : (
+            ) : button ? (
               <button
                 onClick={handleEdit}
                 className="w-[3.875rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black text-lg"
               >
                 변경
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       )}
@@ -98,6 +103,7 @@ UserInfoComponent.propTypes = {
   changeButton: PropTypes.bool,
   className: PropTypes.string,
   passwordSection: PropTypes.bool,
+  button: PropTypes.bool,
 };
 
 export default UserInfoComponent;

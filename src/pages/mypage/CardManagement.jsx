@@ -7,12 +7,18 @@ import arrowIcon from '../../assets/arrowIcon.svg';
 import eazy from '../../assets/eAZyCard.svg';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const CardManagement = ({ cards = [], amount = 0 }) => {
   if (!Array.isArray(cards)) {
     // 배열이 아니면 기본값으로 설정
     cards = [];
   }
+
+  const [visibleCards, setVisibleCards] = useState(3); // 초기에 보여질 카드 수
+  const toggleShowCards = () => {
+    setVisibleCards(visibleCards === 3 ? cards.length : 3); // 모든 카드를 보여주거나 줄이기
+  };
 
   return (
     <div className="flex-grow p-4">
@@ -27,7 +33,7 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
           </div>
         </Link>
         {/* 이지카드 총 혜택 */}
-        <div className="mx-6 my-10 text-2xl">eAZy 카드</div>
+        <div className="mx-6 mt-10 mb-6 text-2xl">eAZy 카드</div>
         <Link to="/mypage/card-management/link-eazy">
           <DefaultFrame className="flex max-w-[32rem] m-6">
             <img
@@ -43,9 +49,9 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
           </DefaultFrame>
         </Link>
         {/* 카드관리 */}
-        <div className="flex items-center self-left mx-6 my-10 text-2xl">카드 관리</div>
+        <div className="flex items-center self-left mx-6 mt-10 mb-6 text-2xl">카드 관리</div>
         <div className="flex flex-col w-full">
-          {cards.map((card, index) => (
+          {cards.slice(0, visibleCards).map((card, index) => (
             <Link to={`/mypage/card-management/selected-card`} state={card.uid} key={card.uid}>
               <DefaultFrame key={index} className="flex max-w-[32rem] mx-6 mb-11">
                 <RotatedCard
@@ -61,7 +67,7 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
                   />
                   <CardLetter
                     color="#f79042"
-                    label="혜택"
+                    label="받은 혜택"
                     amount={card.benefitAmount}
                     total={card.card.benefitLimit}
                   />
@@ -69,6 +75,13 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
               </DefaultFrame>
             </Link>
           ))}
+          {cards.length > 3 && (
+            <div className="mt-[27px]">
+              <button onClick={toggleShowCards} className="flex justify-center mx-auto mt-4 text-lg">
+                {visibleCards === 3 ? '더 보기' : '줄이기'}
+              </button>
+            </div>
+          )}
         </div>
       </DefaultFrame>
     </div>
