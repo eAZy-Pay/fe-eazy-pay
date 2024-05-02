@@ -15,9 +15,9 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
         <span className="max-w-[150px] flex-grow overflow-hidden text-ellipsis whitespace-nowrap text-[#444444]">
           {storeName}
         </span>
-        <div className='flex black-text'>
+        <div className="flex black-text">
           <span>{paymentAmount.toLocaleString()}</span>
-          <div className='flex items-center'>원</div>
+          <div className="flex items-center">원</div>
         </div>
         <></>
       </div>
@@ -43,12 +43,12 @@ const RecentPayment = ({ transactions = [] }) => {
           <img src={arrowIcon} alt="Arrow Icon" />
         </div>
       </Link>
-      {transactions.slice(0, 4).map((transaction, index) => (
+      {transactions.slice(0, 5).map((transaction, index) => (
         <React.Fragment key={index}>
           <div className="flex flex-col p-6 text-lg gap-1">
             <PaymentItem {...transaction} />
           </div>
-          {index !== transactions.slice(0, 4).length - 1 && <hr className="mx-6" />}
+          {index !== transactions.slice(0, 5).length - 1 && <hr className="mx-6" />}
         </React.Fragment>
       ))}
     </DefaultFrame>
