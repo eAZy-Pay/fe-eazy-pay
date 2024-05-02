@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
-
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/mainLogo.svg';
 import Card from '../../assets/card.svg';
 import Login from '../../assets/loginIcon.svg';
 import LogOut from '../../assets/logoutIcon.svg';
+import QnA from '../../assets/qnaIcon.svg';
 import { getUserSession, logout } from '../../utils/authUtils';
+import { CurrentPageContext } from '../../App';
 
-const SideBarFull = ({ currentPage }) => {
+const SideBarFull = () => {
   const user = getUserSession();
+  const { currentPage } = useContext(CurrentPageContext);
 
   return (
     <div
@@ -34,6 +37,18 @@ const SideBarFull = ({ currentPage }) => {
             <img src={Card} alt="Card" />
             <div className="flex-grow w-full text-base font-medium text-left text-[#21272a] ml-3">
               카드관리
+            </div>
+          </Link>
+          <Link
+            to="/admin/qna"
+            className={`flex justify-start w-full items-center relative gap-2 px-2 py-3 ${
+              currentPage === 1 ? 'bg-[#f2f4f8]' : ''
+            } border-t border-[#f2f4f8]`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={QnA} alt="Card" />
+            <div className="flex-grow w-full text-base font-medium text-left text-[#21272a] ml-3">
+              QnA 관리
             </div>
           </Link>
         </div>
