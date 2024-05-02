@@ -26,42 +26,43 @@ const QnaPage = () => {
   }, []);
 
   return (
-<>
-<DefaultLayout>
+    <>
+      <DefaultLayout>
+        {isModalOpen && <QnaDetail onClose={closeModal} setQnas={setQnas} {...selectedQna} />}
 
-      {isModalOpen && <QnaDetail onClose={closeModal} setQnas={setQnas} {...selectedQna} />}
-
-      <div className="flex">
-        <div className="mt-[3rem] mb-[3rem] flex w-full text-4xl font-extrabold items-end">QnA</div>
-      </div>
-      <div className="flex justify-center">
-        <div className="w-full py-4">
-          {Object.keys(qnas).length > 0 ? (
-            qnas.map((qna, index) => (
-              <div
-              onClick={() => {
-                openModal(qna);
-                setSelectedQna(qna);
-              }}
-              key={index}
-              className="break-inside-avoid my-4 "
-              >
-                <QnaBlock {...qna} />
-              </div>
-            ))
-          ) : (
-            <div>불러온 정보가 없습니다.</div>
-          )}
+        <div className="flex">
+          <div className="mt-[3rem] mb-[3rem] flex w-full text-4xl font-extrabold items-end">
+            QnA
+          </div>
         </div>
-      </div>
-      <Banner
-        to={'/qna-write'}
-        title="원하시는 답변이 없나요?"
-        description="질문하러 가기"
-        imageSrc={WriteImg}
-      ></Banner>
-    </DefaultLayout>
-  </>
+        <div className="flex justify-center">
+          <div className="w-full py-4">
+            {Object.keys(qnas).length > 0 ? (
+              qnas.map((qna, index) => (
+                <div
+                  onClick={() => {
+                    openModal(qna);
+                    setSelectedQna(qna);
+                  }}
+                  key={index}
+                  className="break-inside-avoid my-4 "
+                >
+                  <QnaBlock {...qna} />
+                </div>
+              ))
+            ) : (
+              <div>불러온 정보가 없습니다.</div>
+            )}
+          </div>
+        </div>
+        <Banner
+          to={'/qna-write'}
+          title="원하시는 답변이 없나요?"
+          description="질문하러 가기"
+          imageSrc={WriteImg}
+        ></Banner>
+      </DefaultLayout>
+    </>
   );
 };
 

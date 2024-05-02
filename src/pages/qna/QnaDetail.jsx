@@ -76,7 +76,7 @@ const QnaDetail = ({
             <hr className="my-3"></hr>
             <div>
               <div className="p-7 bg-slate-100 rounded-lg drop-shadow-sm ">
-                <div className='mr-2 font-bold text-blue-700 text-xl'>A.</div>
+                <div className="mr-2 font-bold text-blue-700 text-xl">A.</div>
                 <div className="text-lg my-4">{answer}</div>
               </div>
             </div>
