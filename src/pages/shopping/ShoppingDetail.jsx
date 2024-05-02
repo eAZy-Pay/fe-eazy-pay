@@ -6,7 +6,6 @@ import secureLocalStorage from 'react-secure-storage';
 import { checkPin } from '../../apis/AuthAPI';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { payRequest } from '../../apis/PayRequestAPI';
-import mainLogo from '../../assets/mainLogo.svg';
 import { getPayRecommendationCards } from '../../apis/UserAPI';
 import { getUserSession } from '../../utils/authUtils';
 import Slider from '../../components/slider/Slider';
