@@ -19,13 +19,16 @@ const CardUsageSummary = ({ userMain, userId }) => {
   return (
     <>
       <div className="text-4xl mb-4 font-bold self-left inline-block">
-        <span className="text-4xl font-extrabold">{userMain.userName}</span>
+        <span className="text-3xl font-extrabold text-main-color">{userMain.userName}</span>
         <span className="text-2xl">님의</span>
-        <span className="text-3xl font-extrabold mx-3">혜택을</span>
-        eAZy 하게 챙겼어요
+        <span className="text-3xl font-extrabold ml-3 text-main-color">혜택</span>
+        <span className="text-2xl mr-3">을</span>
+        <span className="text-3xl font-extrabold">eAZy</span>
+        <span className="text-2xl ">하게 챙겼어요</span>
       </div>
       <div className="flex mb-4">
         <div className={`flex flex-col justify-center`}>
+          {/* TODO: 그림자 추가 */}
           <OverlappedCards images={userMain.images} />
         </div>
         <DefaultFrame className={'py-[3rem] px-[3rem]'}>
@@ -40,10 +43,10 @@ const CardUsageSummary = ({ userMain, userId }) => {
               }
               {!summary && '정보를 불러올 수 없습니다.'}
             </div>
-
-            <div className="ml-auto flex items-end">
-              <span className="text-2xl mr-2">이번 달</span>
-              <div className="text-3xl mr-[1rem]">총 혜택</div>
+            <hr className="border-t-1 border-gray-300 w-full mt-10 mb-5" />
+            <div className="ml-auto flex items-center justify-center">
+              <span className="text-2xl mr-2">이번달</span>
+              <div className="text-2xl mr-[1rem]">총 혜택</div>
               <div className="text-5xl font-black text-blue-700">
                 {summary.benefitOfMonth ? summary.benefitOfMonth.toLocaleString() : 0}
               </div>
