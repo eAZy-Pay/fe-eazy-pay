@@ -12,10 +12,13 @@ const PaymentItem = ({ paymentDate, paymentAmount, storeName }) => {
   return (
     <>
       <div className="flex justify-between font-extrabold">
-        <span className="max-w-[150px] flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+        <span className="max-w-[150px] flex-grow overflow-hidden text-ellipsis whitespace-nowrap text-[#444444]">
           {storeName}
         </span>
-        <span>{paymentAmount.toLocaleString()}원</span>
+        <div className="flex black-text">
+          <span>{paymentAmount.toLocaleString()}</span>
+          <div className="flex items-center">원</div>
+        </div>
         <></>
       </div>
       <div className="text-[#666666]">{formattedDate}</div>
@@ -33,19 +36,19 @@ const RecentPayment = ({ transactions = [] }) => {
     <DefaultFrame boxShadow={false}>
       <Link
         to="/mypage/payment"
-        className="flex justify-between items-center text-2xl font-extrabold mx-6 my-4"
+        className="flex justify-between items-center text-[#444444] text-2xl font-extrabold mx-6 my-4"
       >
         최근 이용내역
         <div className="flex">
           <img src={arrowIcon} alt="Arrow Icon" />
         </div>
       </Link>
-      {transactions.slice(0, 4).map((transaction, index) => (
+      {transactions.slice(0, 5).map((transaction, index) => (
         <React.Fragment key={index}>
           <div className="flex flex-col p-6 text-lg gap-1">
             <PaymentItem {...transaction} />
           </div>
-          {index !== transactions.slice(0, 4).length - 1 && <hr className="mx-6" />}
+          {index !== transactions.slice(0, 5).length - 1 && <hr className="mx-6" />}
         </React.Fragment>
       ))}
     </DefaultFrame>

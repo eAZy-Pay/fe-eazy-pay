@@ -14,7 +14,7 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
   card.performance // 실적 기준
 */
   const [isFulfilled, setIsFulfilled] = useState(false); // 충족 여부
-  const [fulfilledColor, setFulfilledColor] = useState(''); // 기본적으로 회색
+  const [fulfilledColor, setFulfilledColor] = useState('');
 
   useEffect(() => {
     const fetchFulfillment = async () => {
@@ -33,7 +33,8 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
         <div className="flex flex-col gap-8">
           <div className="flex items-center">
             <CardsGage
-              color={fulfilledColor}
+              color="#F79042"
+              fulfilledColor={fulfilledColor}
               amount={benefitAmount}
               total={card.benefitLimit}
               margin="ml-28"

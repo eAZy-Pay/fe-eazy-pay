@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        'main-color': '#4A3AFF',
+      },
       animation: {
         'spin-slow': 'spin-custom 2s linear infinite',
         'appear-slow': 'appear-slow 2.5s ease-in-out',

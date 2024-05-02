@@ -14,7 +14,7 @@ const GetCategoryIcon = ({ categoryName }) => {
     모든: '✨',
   };
 
-  return <div className="w-14 text-center">{categoryIcon[categoryName]}</div>;
+  return categoryIcon[categoryName];
 };
 
 GetCategoryIcon.propTypes = {

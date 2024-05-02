@@ -151,7 +151,9 @@ const MonthlyPayment = () => {
                 <div className="flex justify-between items-center w-full mb-10">
                   <button onClick={loadPreviousMonth} className="flex items-center">
                     <img src={arrowIconThin} alt="Arrow Icon Thin" className="pr-2" />
-                    <h3 className="border-b2 text-[2rem] mb-1">{selectedMonth - 1}</h3>
+                    <h3 className="border-b2 text-[2rem] mb-1">
+                      {selectedMonth === 1 ? 12 : selectedMonth - 1}
+                    </h3>
                     <h3 className="border-b2 text-[2rem] mb-1">월</h3>
                   </button>
                   <div className="flex relative" onClick={toggleDropdown}>
@@ -163,7 +165,7 @@ const MonthlyPayment = () => {
                       <img
                         src={arrowIconThin}
                         alt="Arrow Icon Thin"
-                        className="-rotate-90 ml-3 mr-7"
+                        className="-rotate-90 ml-3 mr-7 h-[25px] w-auto"
                       />
                     </div>
 
@@ -195,7 +197,9 @@ const MonthlyPayment = () => {
                     <h3 className="text-[2rem]">이용금액</h3>
                   </div>
                   <button onClick={loadNextMonth} className="flex items-center">
-                    <h3 className="text-[2rem] mb-1">{selectedMonth + 1}</h3>
+                    <h3 className="text-[2rem] mb-1">
+                      {selectedMonth === 12 ? 1 : selectedMonth + 1}
+                    </h3>
                     <h3 className="text-[2rem] mb-1">월</h3>
                     <img src={arrowIconThin} alt="Arrow Icon Thin" className="rotate-180 pr-2" />
                   </button>

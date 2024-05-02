@@ -75,7 +75,7 @@ const MainPage = () => {
             <NoLoginBanner />
           )
         }
-        bannerClassName={'py-14 bg-[#F4F7FC]'}
+        bannerClassName={'py-14'}
       >
         {user && (
           <>

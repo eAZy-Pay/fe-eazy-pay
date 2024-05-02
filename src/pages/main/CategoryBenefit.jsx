@@ -9,15 +9,15 @@ const CategoryBenefit = ({ categoryName, benefitAmount, rank }) => {
     </div>
   ) : (
     categoryName != '기타' && ( //N등: 기타 0원 방지
-      <div className="flex py-1 space-x-2">
-        <div className="w-[2.5rem]">{RankIcon[rank]}</div>
-        <div className="w-[2.5rem]">
-          <GetCategoryIcon categoryName={categoryName} />
+      <div className="flex justify-between items-center py-1 space-x-2 text-xl w-full">
+        <div className="flex items-center justify-center">
+          <div className="w-[2.5rem] text-4xl text-center">{RankIcon[rank]}</div>
+          <div className="flex justify-center items-center w-[12rem]">
+            <GetCategoryIcon categoryName={categoryName} />
+            {categoryName}
+          </div>
         </div>
-        <div className="w-[9rem] text-center">{categoryName}</div>
-
-        <div className="w-[6rem] text-right">{benefitAmount.toLocaleString()}</div>
-        <div>원</div>
+        <div className="text-right">{benefitAmount.toLocaleString() + '원'}</div>
       </div>
     )
   );
