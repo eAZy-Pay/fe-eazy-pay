@@ -30,7 +30,8 @@ const QnaWritePage = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const uid = urlParams.get('uid');
       if (uid) {
-        getQna(uid).then((res) => {
+        getQna({ uid }).then((res) => {
+          console.log(res);
           if (user.uid == res.userId) {
             // 작성자와 현재 사용자가 일치하는 경우에만 기존 내용 수정
             setQna(res);
