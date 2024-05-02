@@ -78,9 +78,14 @@ const ManageMyInformation = () => {
               <UserInfoComponent
                 category="휴대폰번호"
                 userInfo={userInfo.phoneNumber}
+                button={true}
               ></UserInfoComponent>
 
-              <UserInfoComponent category="이메일" userInfo={userInfo.email}></UserInfoComponent>
+              <UserInfoComponent
+                category="이메일"
+                userInfo={userInfo.email}
+                button={true}
+              ></UserInfoComponent>
             </div>
           )}
 

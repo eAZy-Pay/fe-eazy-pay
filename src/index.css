@@ -28,6 +28,7 @@
 
 body {
   font-family: 'NanumSquare', 'noto-sans', Arial, sans-serif;
+  color: #444444;
 }
 
 div {
@@ -41,4 +42,8 @@ div {
 
 .bold-hr2 {
   border: 1.5px solid rgba(0, 0, 0, 0.4);
+}
+
+.black-text {
+  color: #444444;
 }

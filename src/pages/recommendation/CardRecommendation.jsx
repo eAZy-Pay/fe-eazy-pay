@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import useRecommendationCard from '../../hooks/useRecommendationCard';
-import { Button } from '../../components/Button';
 import Slider from '../../components/slider/Slider';
 import { getUserSession } from '../../utils/authUtils';
+import CardRecommendationItem from './CardRecommendationItem'; // 분리한 컴포넌트 import
 
 const CardRecommendation = () => {
   const user = getUserSession();
@@ -10,7 +10,6 @@ const CardRecommendation = () => {
   const recommendationCard = useRecommendationCard(userId || 0);
   const otherRecommendationCard = useRecommendationCard(0);
   const recommendList = recommendationCard.recommendList || otherRecommendationCard.recommendList;
-  // const userTop3CategoryCardList = recommendationCard?.userTop3CategoryCardList;
   const userTop3UseAmountCardList = recommendationCard?.userTop3UseAmountCardList || [];
   const userTop3CategoryUseAmountList =
     recommendationCard.userTop3CategoryUseAmountList ||
@@ -18,83 +17,21 @@ const CardRecommendation = () => {
   const [contents, setContents] = useState([]);
 
   useEffect(() => {
-    const makeContents = (recommendList) => {
-      setContents(
-        recommendList.map((cardWithBenefit, index) => (
-          <>
-            {userTop3UseAmountCardList?.length > 0 && userTop3CategoryUseAmountList?.length > 0 ? (
-              <div className="flex flex-col items-center justify-center gap-4">
-                <div className="flex flex-col items-center justify-center">
-                  <p className="text-2xl font-bold">
-                    {' '}
-                    3개월간 {userTop3CategoryUseAmountList[index].categoryName}에서{' '}
-                  </p>
-
-                  <p className="text-2xl font-bold">
-                    {' '}
-                    {userTop3CategoryUseAmountList[index].useAmount.toLocaleString()}원을
-                    사용하셨습니다.
-                  </p>
-                  <p className="text-2xl font-bold"> {cardWithBenefit.card.name}</p>
-                  <p className="text-2xl font-bold">카드를 추천합니다.</p>
-                </div>
-                <img
-                  className="w-[157.71px] h-[251.98px]"
-                  key={cardWithBenefit.card.uid}
-                  src={cardWithBenefit.card.image}
-                  alt={cardWithBenefit.card.name}
-                />
-                <div className="mb-10">
-                  <Button
-                    onClick={() => {
-                      window.location.href = `/card-detail/${cardWithBenefit.card.uid}`;
-                    }}
-                    buttonText="자세히 보기"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center gap-4">
-                <div className="flex flex-col items-center justify-center">
-                  <p className="text-2xl font-bold">
-                    {' '}
-                    사용자들이 {userTop3CategoryUseAmountList[index]?.categoryName}에서 많이
-                    사용하는{' '}
-                  </p>
-                  <p className="text-2xl font-bold"> {cardWithBenefit.card.name}</p>
-                  <p className="text-2xl font-bold">카드를 추천합니다.</p>
-                </div>
-                <img
-                  className="w-[157.71px] h-[251.98px]"
-                  key={cardWithBenefit.card.uid}
-                  src={cardWithBenefit.card.image}
-                  alt={cardWithBenefit.card.name}
-                />
-                <div className="mb-10">
-                  <Button
-                    onClick={() => {
-                      window.location.href = `/card-detail/${cardWithBenefit.card.uid}`;
-                    }}
-                    buttonText="자세히 보기"
-                  />
-                </div>
-              </div>
-            )}
-            {/*  */}
-          </>
-        ))
-      );
-    };
     if (recommendList?.length > 0) {
-      makeContents(recommendList);
+      const newContents = recommendList.map((cardWithBenefit, index) => (
+        <CardRecommendationItem
+          key={index}
+          cardWithBenefit={cardWithBenefit}
+          index={index}
+          userTop3UseAmountCardList={userTop3UseAmountCardList}
+          userTop3CategoryUseAmountList={userTop3CategoryUseAmountList}
+        />
+      ));
+      setContents(newContents);
     }
-  }, [recommendList, userTop3CategoryUseAmountList, userTop3UseAmountCardList?.length, userId]);
+  }, [recommendList, userTop3CategoryUseAmountList, userTop3UseAmountCardList, userId]);
 
-  return (
-    <>
-      <Slider Contents={contents} className={'max-w-[400px]'} />
-    </>
-  );
+  return <Slider Contents={contents} className={'max-w-[400px]'} />;
 };
 
 export default CardRecommendation;
