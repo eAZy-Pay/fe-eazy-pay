@@ -13,7 +13,8 @@ import PropType from 'prop-types';
  */
 const PercentileChart = ({ userState, userTitle, usageStatics, totalAmount }) => {
   const [rank, setRank] = useState(0);
-  const [percentileGroup, setPercentileGroup] = useState(0);
+  const [userRank, setUserRank] = useState(0);
+  const [percentileGroup, setPercentileGroup] = useState(100);
   useEffect(() => {
     // totalAmount가 0이 아닐 때만 계산 수행
     var checkBreak = false;
@@ -21,13 +22,15 @@ const PercentileChart = ({ userState, userTitle, usageStatics, totalAmount }) =>
       for (let i = 0; i < usageStatics.length; i++) {
         if (usageStatics[i].useAmount >= totalAmount) {
           setPercentileGroup(usageStatics[i].percentile);
+          setUserRank(usageStatics[i].percentile / 10);
           checkBreak = true;
           break;
         }
       }
       if (checkBreak) {
         // 루프를 완료했지만 해당되는 그룹을 찾지 못한 경우
-        setPercentileGroup(100);
+        setPercentileGroup(0);
+        setUserRank(9);
       }
     } else {
       setRank(5); // totalAmount가 0이면 중간 값으로 설정
@@ -39,35 +42,49 @@ const PercentileChart = ({ userState, userTitle, usageStatics, totalAmount }) =>
   return (
     <div className="flex flex-col items-center justify-start w-full h-full">
       <div className="flex w-full justify-start items-center">
-        <div className="text-4xl mt-8 mb-4 mr-2">{userTitle}</div>
+        <div className="text-4xl mt-8 mb-4 mr-2 text-main-color">{userTitle}</div>
         <p className="text-3xl text-left mt-8 mb-4">의 소비 분석</p>
       </div>
       <DefaultFrame>
         <div className="flex flex-col w-full h-[32rem] items-center justify-between p-4 gap-4">
           <div className="flex justify-start h-full">
-            <div className="flex flex-col items-start justify-start gap-4">
-              <div className="flex text-2xl items-center justify-center gap-4">
-                <div className="flex items-center justify-center gap-1">
-                  <div>상위</div>
-                  <span className="text-4xl font-bold">
+            <div className="flex flex-col items-start justify-start gap-2">
+              <div className="flex text-2xl items-center justify-start">
+                <div className="flex items-center justify-start">
+                  <div className="text-2xl text-main-color">{userTitle}</div>
+                  {userState === 0 ? (
+                    <div className="text-2xl mr-1">은</div>
+                  ) : (
+                    <div className="text-2xl mr-1">의</div>
+                  )}
+                  <div className="text-2xl mr-1">상위</div>
+                  <span className="text-3xl font-bold text-[#FF9169]">
                     {totalAmount ? percentileGroup : rank * 10}%
                   </span>
+                  <div className="text-2xl">는</div>
                 </div>
-                <p className="text-3xl font-bold">
+                <p className="text-2xl mx-1">평균</p>
+                <p className="text-2xl font-bold mr-1">
                   {totalAmount ? totalAmount?.toLocaleString() : otherTotalAmount?.toLocaleString()}
                   원
                 </p>
+                <p className="text-2xl">사용합니다.</p>
               </div>
               {userState === 0 && (
-                <p>
-                  {usageStatics[0]?.age}~{usageStatics[0]?.age + 5}세의 상위 {rank * 10}%의 평균
+                <p className="text-lg text-gray-500">
+                  * {usageStatics[0]?.age}~{usageStatics[0]?.age + 5}세의 상위 {rank * 10}%의 평균
                   소비는 {otherTotalAmount?.toLocaleString()}
                   원입니다.
                 </p>
               )}
             </div>
           </div>
-          {usageStatics.length > 0 ? <BounceChart rank={rank} setRank={setRank} /> : null}
+          {usageStatics.length > 0 ? (
+            <BounceChart
+              rank={totalAmount ? userRank : rank}
+              setRank={totalAmount ? () => {} : setRank}
+            />
+          ) : null}
         </div>
       </DefaultFrame>
     </div>

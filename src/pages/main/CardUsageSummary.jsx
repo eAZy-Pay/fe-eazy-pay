@@ -44,7 +44,7 @@ const CardUsageSummary = ({ userMain, userId }) => {
               {!summary && '정보를 불러올 수 없습니다.'}
             </div>
             <hr className="border-t-1 border-gray-300 w-full mt-10 mb-5" />
-            <div className="ml-auto flex items-end">
+            <div className="ml-auto flex items-center justify-center">
               <span className="text-2xl mr-2">이번달</span>
               <div className="text-2xl mr-[1rem]">총 혜택</div>
               <div className="text-5xl font-black text-blue-700">

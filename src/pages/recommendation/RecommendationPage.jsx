@@ -40,11 +40,11 @@ const RecommendationPage = () => {
         setUserTitle(user.userName + '님');
       } else {
         setUserState(1); // 로그인했지만 소비 정보가 없을 때
-        setUserTitle(`${usageStatics[0]?.age}세~${usageStatics[0]?.age + 5}세 사용자들`);
+        setUserTitle(`${usageStatics[0]?.age}~${usageStatics[0]?.age + 5}세`);
       }
     } else {
       setUserState(2); // 로그인하지 않았을 때
-      setUserTitle('우리카드 사용자들');
+      setUserTitle('사용자들');
     }
 
     if (monthlyFor6.length > 0) {
@@ -67,7 +67,7 @@ const RecommendationPage = () => {
             />
             <div className="flex flex-col items-center justify-center w-full h-full">
               <div className="flex w-full justify-start items-center">
-                <div className="text-4xl font-bold mt-8 mb-4 mr-2">eAZy</div>
+                <div className="text-4xl font-bold mt-8 mb-4 mr-2 text-main-color">eAZy</div>
                 <p className="text-3xl text-left mt-8 mb-4">가 추천해요</p>
               </div>
               <DefaultFrame>
@@ -80,7 +80,7 @@ const RecommendationPage = () => {
             </div>
           </div>
         }
-        bannerClassName={'py-14 bg-[#F4F7FC]'}
+        bannerClassName={'py-14'}
       >
         <MainDashBoard
           title={

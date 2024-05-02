@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './styles.css'; // 애니메이션 스타일을 위한 CSS 파일 임포트
+import Profile from '../../assets/profileImage.png';
 
 const StyledFillingSquares = ({ rank, setRank }) => {
   const baseSize = 2.5; // 각 사각형의 기본 크기
@@ -14,20 +15,17 @@ const StyledFillingSquares = ({ rank, setRank }) => {
 
     if (i === rank) {
       squares.push(
-        <div
-          key={i}
-          className="flex flex-col items-center justify-center mx-1 bounce cursor-pointer"
-        >
-          <div className="w-10 h-10 bg-blue-500 rounded-full"></div>
+        <div key={i} className="flex flex-col items-center justify-center mx-1 cursor-pointer">
+          <img src={Profile} alt="profile" className="w-11 h-11 bounce" />
           <div
             style={{
               width: width,
               height: height,
               borderTopLeftRadius: '1rem',
               borderTopRightRadius: '1rem',
-              borderWidth: '0.5rem',
+              borderWidth: '0.25rem',
               borderBottomWidth: '0',
-              borderColor: 'black',
+              borderColor: '#FF9169',
             }}
           ></div>
         </div>
@@ -42,9 +40,9 @@ const StyledFillingSquares = ({ rank, setRank }) => {
             height: height, // 사각형의 높이
             borderTopLeftRadius: '1rem',
             borderTopRightRadius: '1rem',
-            borderWidth: '0.5rem',
+            borderWidth: '0.25rem',
             borderBottomWidth: '0',
-            borderColor: 'black',
+            borderColor: 'gray',
           }}
           onClick={() => {
             setRank(i);
@@ -71,8 +69,8 @@ const BounceChart = ({ rank, setRank }) => {
         </div>
         <div
           style={{
-            borderWidth: '0.5rem',
-            borderColor: 'black',
+            borderWidth: '0.1rem',
+            borderColor: 'gray',
           }}
         ></div>
       </div>
