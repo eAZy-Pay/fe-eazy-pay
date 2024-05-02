@@ -21,9 +21,9 @@ const DropdownMenu = () => {
           <>
             <Link to="/mypage/manage">
               <div className="cursor-pointer flex justify-center p-3 gap-1">
-                <img src={ProfileImage} alt="Profile Icon" className='w-[3em]' />
-                <div className='flex items-center text-xl text-left gap-1'>
-                  <div className='text-[#4A3AFF]'>{user.userName}</div>
+                <img src={ProfileImage} alt="Profile Icon" className="w-[3em]" />
+                <div className="flex items-center text-xl text-left gap-1">
+                  <div className="text-[#4A3AFF]">{user.userName}</div>
                   <div>님</div>
                 </div>
               </div>
@@ -33,7 +33,7 @@ const DropdownMenu = () => {
         ) : (
           <>
             <div className="cursor-pointer flex justify-center p-3 gap-1">
-              <img src={ProfileImage} alt="Profile Icon" className='w-[3em]' />
+              <img src={ProfileImage} alt="Profile Icon" className="w-[3em]" />
               <div
                 className="flex items-center text-lg text-left"
                 onClick={() => navigate('/login')}

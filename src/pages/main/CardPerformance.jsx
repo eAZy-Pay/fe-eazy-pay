@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
 import RotatedCard from '../../components/card/RotatedCard';
 import CardsGage from './CardsGage';
 import CardLetter from './CardLetter';
 import PropTypes from 'prop-types';
-import { getUserCardFulfilled } from '../../apis/UserAPI';
+import { useFulfillment } from '../../hooks/useFulfillment.js';
 
 const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
   /* 
@@ -13,18 +12,7 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
   useAmount // 사용 금액
   card.performance // 실적 기준
 */
-  const [isFulfilled, setIsFulfilled] = useState(false); // 충족 여부
-  const [fulfilledColor, setFulfilledColor] = useState('');
-
-  useEffect(() => {
-    const fetchFulfillment = async () => {
-      const isFulfilled = await getUserCardFulfilled(uid);
-      setFulfilledColor(isFulfilled ? '' : '#d3d3d3'); // 충족 여부에 따라 색상 업데이트
-      setIsFulfilled(isFulfilled);
-    };
-
-    fetchFulfillment();
-  }, [uid]); // uid가 변경될 때마다 호출
+  const { isFulfilled, fulfilledColor } = useFulfillment(uid);
 
   return (
     <>
