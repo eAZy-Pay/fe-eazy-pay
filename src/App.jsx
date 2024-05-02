@@ -113,6 +113,15 @@ function App() {
             />
 
             <Route
+              path="/myqna"
+              element={
+                <AuthRequiredPage>
+                  <QnaPage/>
+                </AuthRequiredPage>
+              }
+            />
+
+            <Route
               path="/qna-write"
               element={
                 <AuthRequiredPage>
