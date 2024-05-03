@@ -118,11 +118,11 @@ const RecommendationPage = () => {
         />
         {user ? (
           <p className="text-3xl font-bold text-left mt-8 mb-4">
-            자주 사용하시는 카테고리별로 좋은카드 모와드렸어요!
+            자주 사용하시는 카테고리별로 좋은 카드 모아봤어요!
           </p>
         ) : (
           <p className="text-3xl font-bold text-left mt-8 mb-4">
-            사용자들이 자주 사용하는 카테고리별로 좋은카드 모와드렸어요!
+            사용자들이 자주 사용하는 카테고리별로 좋은카드 모아봤어요!
           </p>
         )}
 
