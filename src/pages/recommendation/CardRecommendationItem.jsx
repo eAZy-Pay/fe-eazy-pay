@@ -16,7 +16,7 @@ const CardRecommendationItem = ({
               최근 3개월간 {userTop3CategoryUseAmountList[index].categoryName}에서
             </p>
             <p className="text-2xl font-bold">
-              {userTop3CategoryUseAmountList[index].useAmount.toLocaleString()}원을 사용하셨습니다.
+              {userTop3CategoryUseAmountList[index].useAmount.toLocaleString()}원을 사용했어요
             </p>
           </div>
         ) : (

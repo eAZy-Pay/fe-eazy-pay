@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import LeftArrow from '../../assets/leftArrow.svg';
 import RightArrow from '../../assets/rightArrow.svg';
 
-const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCardId }) => {
+const CardRecommendation = ({ Contents, className, setCurrentIndex }) => {
   useEffect(() => {
     const checkDOM = setInterval(() => {
       if (document.readyState === 'complete') {
@@ -22,12 +22,10 @@ const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCar
               },
             },
           });
-          if (setActiveIndex) {
-            glide.on('move', () => {
-              setActiveIndex(glide.index);
-              setCardId(cards[glide.index].cardId);
-            });
-          }
+
+          glide.on('move', () => {
+            setCurrentIndex && setCurrentIndex(glide.index);
+          });
 
           // glide 초기화
           glide.mount();
@@ -77,10 +75,11 @@ const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCar
             />
           </button>
         </div>
+
         {/*    <!-- Indicators --> */}
         <div
           // className="absolute bottom-0 flex items-center justify-center gap-2"
-          className="absolute bottom-0 flex flex-row gap-0 items-center justify-between w-full"
+          className="absolute bottom-0 flex flex-row gap-0 items-center justify-center w-full"
           data-glide-el="controls[nav]"
         >
           {Contents &&
@@ -92,7 +91,7 @@ const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCar
                 aria-label="goto slide 1"
               >
                 {/* <span className="block w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-700 focus:outline-none"></span> */}
-                <span className="flex  w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-300 focus:outline-none"></span>
+                <span className="flex w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-300 focus:outline-none"></span>
               </button>
             ))}
         </div>
@@ -103,15 +102,13 @@ const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCar
 
 CardRecommendation.defaultProps = {
   className: '',
-  setActiveIndex: null,
+  setCurrentIndex: null,
 };
 
 CardRecommendation.propTypes = {
   Contents: propTypes.arrayOf(propTypes.element).isRequired,
   className: propTypes.string,
-  setActiveIndex: propTypes.func,
-  cards: propTypes.arrayOf(propTypes.object).isRequired,
-  setCardId: propTypes.func.isRequired,
+  setCurrentIndex: propTypes.func,
 };
 
 export default CardRecommendation;

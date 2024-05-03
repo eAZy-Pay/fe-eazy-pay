@@ -71,9 +71,7 @@ const ManageMyInformation = () => {
             <div
               className="flex flex-col justify-center gap-8 w-5/6 px-40 py-24"
               style={{ backgroundColor: '#F4F7FC' }}
-            >
-
-            </div>
+            ></div>
           )}
 
           <hr className="bold-hr2 w-5/6" />
@@ -114,8 +112,6 @@ const ManageMyInformation = () => {
               className="flex flex-col gap-16 w-5/6 px-40 py-24 items-center"
               style={{ backgroundColor: '#F4F7FC' }}
             >
-
-
               <div className="flex justify-center items-center w-[6rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
                 <p className="text-lg">변경하기</p>
               </div>
