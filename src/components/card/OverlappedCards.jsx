@@ -23,13 +23,16 @@ const OverlappedCards = ({ images }) => {
       >
         {images.map((image, index) => (
           <img
-            className="absolute h-[18.5em] "
+            className="absolute h-[18.5em]"
             style={{
               zIndex: `${-1 * index}`,
               transform: `translateX(${15.5 + index * move}em) translateY(${index * move}em) rotate(90deg)`,
               transformOrigin: 'top left',
               cursor: 'pointer',
               transition: `transform ${images.length > 2 ? (move ? 0.1 * index * 1.5 : 0.3) : 0.3}s ${move ? 'ease-out' : 'ease'}`,
+              boxShadow: '2px -2px 5px rgba(0, 0, 0, 0.02)',
+              // 상하(+-) 좌우(+-) (90도 시계방향 회전되 좌우, 상하가 원래와 다름)
+              borderRadius: '7px', // 삐져나오는 카드 테두리 절삭, 둥근 그림자 적용
             }}
             src={image}
             key={index}
