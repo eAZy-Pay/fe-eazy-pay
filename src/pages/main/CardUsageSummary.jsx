@@ -58,7 +58,10 @@ const CardUsageSummary = ({ userMain, userId }) => {
               <hr className="border-1 w-full my-[0.5em]" />
               <div className="flex items-center">
                 <div className="mt-auto mr-auto">
-                  {summary.categoryBenefitAmount && summary.categoryBenefitAmount.length > 3 && (
+                  {summary.categoryBenefitAmount &&
+                  summary.categoryBenefitAmount[summary.categoryBenefitAmount.length - 1]
+                  .benefitAmount > 0 &&
+                  (
                     <div className="flex py-1 text-lg ml-[1em] mr-auto">
                       그 외 카테고리 :{' '}
                       {summary.categoryBenefitAmount[
