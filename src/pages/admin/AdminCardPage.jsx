@@ -5,11 +5,15 @@ import useCards from '../../hooks/useCards';
 
 import AdminDefaultLayout from '../../components/layout/AdminDefaultLayout';
 import CardPostForm from '../../components/forms/CardPostForm';
-import { ModalContext } from '../../App';
+import { ModalContext, CurrentPageContext } from '../../App';
 
 import { Button } from '../../components/Button';
 
 const AdminCardPage = () => {
+  const { setModal } = useContext(ModalContext);
+  const { setCurrentPage } = useContext(CurrentPageContext);
+  setCurrentPage(0);
+
   const [page, setPage] = useState(0);
   const size = 10;
   const { cards, totalPages, fetchCards } = useCards(page, size);
@@ -38,7 +42,6 @@ const AdminCardPage = () => {
 
   const columns = ['이름', '연회비', '혜택한도', '실적기준'];
   const widthList = ['300px', '200px', '200px', '200px'];
-  const { setModal } = useContext(ModalContext);
 
   return (
     <AdminDefaultLayout>

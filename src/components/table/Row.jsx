@@ -5,6 +5,7 @@ import { Button } from '../Button';
 import { ModalContext } from '../../App';
 import CardUpdateForm from '../forms/CardUpdateForm';
 import DeleteForm from '../forms/DeleteForm';
+import QnaAnswerForm from '../forms/QnaAnswerForm';
 
 const Row = ({ id, fetchRows, row, pageName, widthList }) => {
   const makeCell = (row) => {
@@ -19,6 +20,22 @@ const Row = ({ id, fetchRows, row, pageName, widthList }) => {
   };
   const { setModal } = useContext(ModalContext);
 
+  const getEditForm = () => {
+    if (pageName === '카드') {
+      return <CardUpdateForm id={id} fetchCards={fetchRows} />;
+    }
+    if (pageName === 'QnA') {
+      return <QnaAnswerForm id={id} fetchQnas={fetchRows} />;
+    }
+  };
+
+  const getUsage = () => {
+    if (pageName === 'QnA') {
+      return '답변';
+    }
+    return '수정';
+  };
+
   return (
     <>
       <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 overflow-hidden bg-[#ffffff] border border-[#dde1e6]">
@@ -26,12 +43,12 @@ const Row = ({ id, fetchRows, row, pageName, widthList }) => {
           {makeCell(row)}
           <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 w-52 gap-[15px] bg-[#ffffff]">
             <Button
-              buttonText="수정"
+              buttonText={getUsage()}
               onClick={() => {
                 setModal({
                   isOpen: true,
-                  content: <CardUpdateForm id={id} fetchCards={fetchRows} />,
-                  title: pageName + ' 수정',
+                  content: getEditForm(),
+                  title: pageName + ' ' + getUsage(),
                 });
               }}
             />

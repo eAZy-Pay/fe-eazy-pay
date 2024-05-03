@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import answeredIcon from '../../assets/answeredIcon.png';
 import notAnsweredIcon from '../../assets/notAnsweredIcon.png';
-const QnaBlock = ({ title, date, content, isAnswered, userName }) => {
+const QnaBlock = ({ title, date, content, answered, userName }) => {
   const writer = userName;
   return (
     <div className="p-7 bg-[#f2f6fc] rounded-lg drop-shadow-sm transition-all duration-300 hover:bg-gray-300 hover:text-gray-200">
@@ -19,7 +19,7 @@ const QnaBlock = ({ title, date, content, isAnswered, userName }) => {
         <div className="text-lg my-4">{writer}</div>
 
         <div className="flex ml-auto">
-          {isAnswered ? (
+          {answered ? (
             <>
               <div className="self-center mx-1 text-nowrap">답변 완료</div>{' '}
               <img src={answeredIcon} alt="답변완료" />{' '}
@@ -40,7 +40,7 @@ QnaBlock.propTypes = {
   date: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  isAnswered: PropTypes.bool.isRequired,
+  answered: PropTypes.bool.isRequired,
   userId: PropTypes.number,
   userName: PropTypes.string.isRequired,
   answer: PropTypes.string,

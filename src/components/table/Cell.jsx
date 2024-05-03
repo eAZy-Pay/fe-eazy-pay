@@ -5,7 +5,10 @@ const Cell = ({ value, width, bgColor }) => {
     <>
       <div
         className={`flex flex-col justify-center items-start self-stretch flex-grow`}
-        style={{ width: width, backgroundColor: bgColor }}
+        style={{
+          width: width,
+          backgroundColor: bgColor,
+        }}
       >
         <div
           className={`flex justify-start items-center self-stretch flex-grow flex-shrink-0 relative overflow-hidden gap-2 px-3 py-4`}
