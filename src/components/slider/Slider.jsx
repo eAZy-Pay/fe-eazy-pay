@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import LeftArrow from '../../assets/leftArrow.svg';
 import RightArrow from '../../assets/rightArrow.svg';
 
-const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
+const CardRecommendation = ({ Contents, className, setActiveIndex, cards, setCardId }) => {
   useEffect(() => {
     const checkDOM = setInterval(() => {
       if (document.readyState === 'complete') {
@@ -25,6 +25,7 @@ const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
           if (setActiveIndex) {
             glide.on('move', () => {
               setActiveIndex(glide.index);
+              setCardId(cards[glide.index].cardId);
             });
           }
 
@@ -48,39 +49,50 @@ const CardRecommendation = ({ Contents, className, setActiveIndex }) => {
               ))}
           </ul>
         </div>
+        <p className="mt-5 invisible">ㅇ</p>
         <div
-          className="absolute left-0 flex items-center justify-between w-full h-0 px-4 top-1/2 "
+          className="absolute left-0 flex items-center justify-between w-full h-0 px-4 top-1/3 "
           data-glide-el="controls"
         >
           <button
-            className="inline-flex items-center justify-center w-8 h-8 transition duration-300 bg-white/20 text-slate-700 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
+            className="inline-flex items-center justify-center w-8 h-8 transition duration-100 bg-white/20 text-slate-700 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
             data-glide-dir="<"
             aria-label="prev slide"
           >
-            <img src={LeftArrow} alt="left arrow" className="w-20 h-20" />
+            <img
+              src={LeftArrow}
+              alt="left arrow"
+              className="w-20 h-20 opacity-60 hover:opacity-75"
+            />
           </button>
           <button
-            className="inline-flex items-center justify-center w-8 h-8 transition duration-300 bg-white/20 text-slate-700 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
+            className="inline-flex items-center justify-center w-8 h-8 transition duration-100 bg-white/20 text-slate-700 hover:border-slate-900 hover:text-slate-900 focus-visible:outline-none lg:h-12 lg:w-12"
             data-glide-dir=">"
             aria-label="next slide"
           >
-            <img src={RightArrow} alt="right arrow" className="w-20 h-20" />
+            <img
+              src={RightArrow}
+              alt="right arrow"
+              className="w-20 h-20 opacity-60 hover:opacity-75"
+            />
           </button>
         </div>
         {/*    <!-- Indicators --> */}
         <div
-          className="absolute bottom-0 flex items-center justify-center w-full gap-2"
+          // className="absolute bottom-0 flex items-center justify-center gap-2"
+          className="absolute bottom-0 flex flex-row gap-0 items-center justify-between w-full"
           data-glide-el="controls[nav]"
         >
           {Contents &&
             Contents.map((_, index) => (
               <button
                 key={index}
-                className="m-4 group block w-2 h-2 transition-colors duration-300 rounded-full"
+                className="m-2 group block w-2 h-2 transition-colors duration-300 rounded-full"
                 data-glide-dir="=0"
                 aria-label="goto slide 1"
               >
-                <span className="block w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-700 focus:outline-none"></span>
+                {/* <span className="block w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-700 focus:outline-none"></span> */}
+                <span className="flex  w-2 h-2 transition-colors duration-300 rounded-full bg-white/20 ring-1 ring-slate-300 focus:outline-none"></span>
               </button>
             ))}
         </div>
@@ -98,6 +110,8 @@ CardRecommendation.propTypes = {
   Contents: propTypes.arrayOf(propTypes.element).isRequired,
   className: propTypes.string,
   setActiveIndex: propTypes.func,
+  cards: propTypes.arrayOf(propTypes.object).isRequired,
+  setCardId: propTypes.func.isRequired,
 };
 
 export default CardRecommendation;

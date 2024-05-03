@@ -20,8 +20,12 @@ const QnaPage = () => {
   const [selectedQna, setSelectedQna] = useState(null); // 선택된 QnaBlock의 정보를 유지하기 위한 상태
 
   useEffect(() => {
-    getQna().then((res) => {
-      setQnas(res);
+    getQna({
+      page: 0,
+      size: 1000,
+    }).then((res) => {
+      console.log(res);
+      setQnas(res.content);
     });
   }, []);
 

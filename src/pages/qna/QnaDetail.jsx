@@ -8,7 +8,7 @@ const QnaDetail = ({
   title,
   date,
   content,
-  isAnswered,
+  answered,
   userId,
   userName,
   answer,
@@ -41,7 +41,7 @@ const QnaDetail = ({
             <div className="mt-[5rem] flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold mr-3">Q.</h2>
               <h2 className="text-2xl font-bold mr-auto">{title}</h2>
-              {isAnswered ? (
+              {answered ? (
                 <span className="px-2 py-1 bg-green-500 text-white text-sm rounded-md">
                   답변 완료
                 </span>
@@ -92,7 +92,7 @@ QnaDetail.propTypes = {
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  isAnswered: PropTypes.bool.isRequired,
+  answered: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
   answer: PropTypes.string,

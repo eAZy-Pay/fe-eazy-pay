@@ -1,12 +1,21 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const getQna = async (uid) => {
-  const queryParams = new URLSearchParams({
-    uid: uid,
-  }).toString();
-
+export const getQna = async ({ uid, page, size }) => {
+  if (uid !== undefined && uid > 0) {
+    const data = (
+      await fetch(`${BASE_URL}/api/qnas?uid=${uid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    ).json();
+    return data;
+  }
+  page = page || 0;
+  size = size || 10;
   const data = (
-    await fetch(`${BASE_URL}/api/qnas?${uid ? `${queryParams}` : ``}`, {
+    await fetch(`${BASE_URL}/api/qnas?page=${page}&size=${size}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +38,7 @@ export const deleteQna = async (uid) => {
   return data;
 };
 
-// Qna 게시글 수정 요청
+// Qna 게시글 생성 요청
 export const putQna = async (bodyObj) => {
   const data = (
     await fetch(`${BASE_URL}/api/qnas`, {
@@ -43,7 +52,7 @@ export const putQna = async (bodyObj) => {
   return data;
 };
 
-// Qna 게시글 수정 요청
+// Qna 게시글 등록 요청
 export const postQna = async (bodyObj) => {
   const data = (
     await fetch(`${BASE_URL}/api/qnas`, {

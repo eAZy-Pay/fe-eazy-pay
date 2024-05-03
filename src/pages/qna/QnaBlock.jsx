@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import answeredIcon from '../../assets/answeredIcon.png';
 import notAnsweredIcon from '../../assets/notAnsweredIcon.png';
-const QnaBlock = ({ title, date, content, isAnswered, userName }) => {
+const QnaBlock = ({ title, date, content, answered, userName }) => {
   const writer = userName;
   return (
     <div className="p-9 rounded-lg transition-all duration-300 border-[1px] hover:bg-gray-100 ">
@@ -51,7 +51,7 @@ QnaBlock.propTypes = {
   date: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  isAnswered: PropTypes.bool.isRequired,
+  answered: PropTypes.bool.isRequired,
   userId: PropTypes.number,
   userName: PropTypes.string.isRequired,
   answer: PropTypes.string,
