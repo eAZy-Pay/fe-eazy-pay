@@ -3,7 +3,6 @@ import arrowIcon from '../../assets/arrowIcon.svg';
 import { useState, useEffect } from 'react';
 import { getUserSession } from '../../utils/authUtils';
 import { getUserInfo } from '../../apis/UserAPI';
-import UserInfoComponent from './UserInfoComponent';
 import ChangePasswordSection from './ChangePasswordSection';
 
 const ManageMyInformation = () => {
