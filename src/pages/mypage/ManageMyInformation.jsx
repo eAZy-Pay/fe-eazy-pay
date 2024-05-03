@@ -72,24 +72,7 @@ const ManageMyInformation = () => {
               className="flex flex-col justify-center gap-8 w-5/6 px-40 py-24"
               style={{ backgroundColor: '#F4F7FC' }}
             >
-              <UserInfoComponent category="이름" userInfo={userInfo.name}></UserInfoComponent>
 
-              <UserInfoComponent
-                category="생년월일"
-                userInfo={userInfo.birthday}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="휴대폰번호"
-                userInfo={userInfo.phoneNumber}
-                button={true}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="이메일"
-                userInfo={userInfo.email}
-                button={true}
-              ></UserInfoComponent>
             </div>
           )}
 
@@ -131,26 +114,7 @@ const ManageMyInformation = () => {
               className="flex flex-col gap-16 w-5/6 px-40 py-24 items-center"
               style={{ backgroundColor: '#F4F7FC' }}
             >
-              <UserInfoComponent
-                category="기존 PIN 입력"
-                userInfo="기존 PIN 입력"
-                changeButton={false}
-                passwordSection={true}
-              ></UserInfoComponent>
 
-              <UserInfoComponent
-                category="새 PIN 입력"
-                userInfo="새 PIN 입력"
-                changeButton={false}
-                passwordSection={true}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="한 번 더 입력"
-                userInfo="한 번 더 입력"
-                changeButton={false}
-                passwordSection={true}
-              ></UserInfoComponent>
 
               <div className="flex justify-center items-center w-[6rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
                 <p className="text-lg">변경하기</p>
