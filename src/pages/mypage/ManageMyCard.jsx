@@ -152,7 +152,7 @@ const ManageMyCard = () => {
           })}
           <div
             style={{ width: '39.25rem', cursor: 'pointer' }} // 마지막에 카드 추가를 위한 공간 추가
-          // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
+            // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
           >
             <Link to="/card-search">
               <DefaultFrame className="flex justify-center h-[304.83px] ">

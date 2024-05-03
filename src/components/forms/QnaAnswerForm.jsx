@@ -1,3 +1,4 @@
+import { PropTypes } from 'prop-types';
 import { useState, useContext, useEffect } from 'react';
 import { ModalContext } from '../../App';
 import { Button } from '../Button';
@@ -73,6 +74,12 @@ const QnaAnswerForm = ({ id, fetchQnas }) => {
       </div>
     </>
   );
+};
+
+// props validation
+QnaAnswerForm.propTypes = {
+  id: PropTypes.number.isRequired,
+  fetchQnas: PropTypes.func.isRequired,
 };
 
 export default QnaAnswerForm;
