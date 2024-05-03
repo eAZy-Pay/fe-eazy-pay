@@ -2,17 +2,7 @@ import closeIcon from '../../assets/closeIcon.png';
 import PropTypes from 'prop-types';
 import { getUserSession } from '../../utils/authUtils';
 import { deleteQna } from '../../apis/QnaAPI';
-const QnaDetail = ({
-  onClose,
-  uid,
-  title,
-  date,
-  content,
-  answered,
-  userId,
-  userName,
-  answer,
-}) => {
+const QnaDetail = ({ onClose, uid, title, date, content, answered, userId, userName, answer }) => {
   const onDelete = () => {
     if (confirm('정말로 삭제하시겠습니까?')) {
       deleteQna(uid);

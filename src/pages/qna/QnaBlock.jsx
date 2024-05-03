@@ -25,7 +25,7 @@ const QnaBlock = ({ title, date, content, answered, userName }) => {
           <div className="text-md ml-2">{writer}</div>
 
           <div className="flex ml-auto text-md">
-            {isAnswered ? (
+            {answered ? (
               <>
                 <div className="p-2 bg-green-500 text-white text-sm rounded-md self-center">
                   답변 완료

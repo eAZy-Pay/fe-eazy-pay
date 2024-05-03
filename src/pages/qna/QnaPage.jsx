@@ -24,7 +24,6 @@ const QnaPage = () => {
       page: 0,
       size: 1000,
     }).then((res) => {
-      console.log(res);
       setQnas(res.content);
     });
   }, []);
