@@ -13,6 +13,8 @@ import { getCardsSummary } from '../../apis/CardAPI';
 import CardUsageSummary from './CardUsageSummary';
 import NoLinkedCard from './NoLinkedCard';
 import NoLoginBanner from './NoLoginBanner';
+import Banner from '../../components/Banner';
+import RecommedImg from '../../assets/recommendImg.png';
 
 const MainPage = () => {
   const user = getUserSession();
@@ -91,7 +93,14 @@ const MainPage = () => {
           </>
         )}
 
-        <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div>
+        {/* <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div> */}
+        {/* TODO: 이벤크 배너 위치. 임시로 카드 추천 배너를 넣어놨습니다. - by 규리 */}
+        <Banner
+          to={'/card-recommend'}
+          title="어떤 카드를 골라야할지 고민이신가요?"
+          description="내 소비에 맞는 카드 추천 받기"
+          imageSrc={RecommedImg}
+        />
 
         <HashTagSearch
           tags={eventCategories}
