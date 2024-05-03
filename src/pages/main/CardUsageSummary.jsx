@@ -28,7 +28,6 @@ const CardUsageSummary = ({ userMain, userId }) => {
       </div>
       <div className="flex mb-4">
         <div className={`flex flex-col justify-center`}>
-          {/* TODO: 그림자 추가 */}
           <OverlappedCards images={userMain.images} />
         </div>
         <DefaultFrame className={'flex px-[2rem] h-[20rem] '}>
@@ -38,11 +37,9 @@ const CardUsageSummary = ({ userMain, userId }) => {
                 summary.categoryBenefitAmount && summary.benefitOfMonth ? (
                   summary.categoryBenefitAmount.map((categoryData, index) =>
                     index < summary.categoryBenefitAmount.length - 1 ? (
-                      <>
-                        <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
-                      </>
+                      <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
                     ) : (
-                      <></>
+                      <div key={index}></div>
                     )
                   )
                 ) : (
@@ -59,17 +56,16 @@ const CardUsageSummary = ({ userMain, userId }) => {
               <div className="flex items-center">
                 <div className="mt-auto mr-auto">
                   {summary.categoryBenefitAmount &&
-                  summary.categoryBenefitAmount[summary.categoryBenefitAmount.length - 1]
-                  .benefitAmount > 0 &&
-                  (
-                    <div className="flex py-1 text-lg ml-[1em] mr-auto">
-                      그 외 카테고리 :{' '}
-                      {summary.categoryBenefitAmount[
-                        summary.categoryBenefitAmount.length - 1
-                      ].benefitAmount.toLocaleString()}
-                      <span className="ml-2">원</span>
-                    </div>
-                  )}
+                    summary.categoryBenefitAmount[summary.categoryBenefitAmount.length - 1]
+                      .benefitAmount > 0 && (
+                      <div className="flex py-1 text-lg ml-[1em] mr-auto">
+                        그 외 카테고리 :{' '}
+                        {summary.categoryBenefitAmount[
+                          summary.categoryBenefitAmount.length - 1
+                        ].benefitAmount.toLocaleString()}
+                        <span className="ml-2">원</span>
+                      </div>
+                    )}
                 </div>
 
                 <span className="text-xl mr-2">이번달</span>
