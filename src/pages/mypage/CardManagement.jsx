@@ -77,7 +77,10 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
           ))}
           {cards.length > 3 && (
             <div className="mt-[27px]">
-              <button onClick={toggleShowCards} className="flex justify-center mx-auto mt-4 text-lg">
+              <button
+                onClick={toggleShowCards}
+                className="flex justify-center mx-auto mt-4 text-lg"
+              >
                 {visibleCards === 3 ? '더 보기' : '줄이기'}
               </button>
             </div>

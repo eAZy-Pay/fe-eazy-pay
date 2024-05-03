@@ -116,7 +116,7 @@ function App() {
               path="/myqna"
               element={
                 <AuthRequiredPage>
-                  <QnaPage/>
+                  <QnaPage />
                 </AuthRequiredPage>
               }
             />

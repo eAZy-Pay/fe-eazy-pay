@@ -31,27 +31,51 @@ const CardUsageSummary = ({ userMain, userId }) => {
           {/* TODO: 그림자 추가 */}
           <OverlappedCards images={userMain.images} />
         </div>
-        <DefaultFrame className={'py-[3rem] px-[3rem]'}>
-          <div className="flex flex-col justify-between text-4xl font-bold ">
-            <div className="text-3xl flex flex-col gap-4 items-start mr-auto">
+        <DefaultFrame className={'flex px-[2rem] h-[20rem] '}>
+          <div className="flex flex-col text-4xl font-bold w-full ">
+            <div className="text-xl flex flex-row gap-2 w-full h-full justify-center">
               {
-                summary.categoryBenefitAmount && summary.benefitOfMonth
-                  ? summary.categoryBenefitAmount.map((categoryData, index) => (
-                      <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
-                    ))
-                  : '이번 달 혜택 내역이 없습니다.' // '올해 혜택받은 내역이 없습니다'
+                summary.categoryBenefitAmount && summary.benefitOfMonth ? (
+                  summary.categoryBenefitAmount.map((categoryData, index) =>
+                    index < summary.categoryBenefitAmount.length - 1 ? (
+                      <>
+                        <CategoryBenefit {...categoryData} rank={index + 1} key={index} />
+                      </>
+                    ) : (
+                      <></>
+                    )
+                  )
+                ) : (
+                  <div className="my-auto mb-[3em] ml-[1em] text-2xl">
+                    아직 이번 달 혜택 내역이 없습니다.
+                  </div>
+                ) // '착시때문에 왼쪽 마진 추가'
               }
               {!summary && '정보를 불러올 수 없습니다.'}
             </div>
-            <hr className="border-t-1 border-gray-300 w-full mt-10 mb-5" />
-            <div className="ml-auto flex items-center justify-center">
-              <span className="text-2xl mr-2">이번달</span>
-              <div className="text-2xl mr-[1rem]">총 혜택</div>
-              <div className="text-5xl font-black text-blue-700">
-                {summary.benefitOfMonth ? summary.benefitOfMonth.toLocaleString() : 0}
+
+            <div className="flex flex-col mt-auto">
+              <hr className="border-1 w-full my-[0.5em]" />
+              <div className="flex items-center">
+                <div className="mt-auto mr-auto">
+                  {summary.categoryBenefitAmount && summary.categoryBenefitAmount.length > 3 && (
+                    <div className="flex py-1 text-lg ml-[1em] mr-auto">
+                      그 외 카테고리 :{' '}
+                      {summary.categoryBenefitAmount[
+                        summary.categoryBenefitAmount.length - 1
+                      ].benefitAmount.toLocaleString()}
+                      <span className="ml-2">원</span>
+                    </div>
+                  )}
+                </div>
+
+                <span className="text-xl mr-2">이번달</span>
+                <div className="text-xl mr-[1rem]">총 혜택</div>
+                <div className="text-4xl font-black text-blue-700">
+                  {summary.benefitOfMonth ? summary.benefitOfMonth.toLocaleString() : 0}
+                </div>
+                <div className="text-3xl">원</div>
               </div>
-              <div className="text-3xl">원</div>
-              {/* <div className="text-2xl ml-auto ">받았어요</div> */}
             </div>
           </div>
         </DefaultFrame>

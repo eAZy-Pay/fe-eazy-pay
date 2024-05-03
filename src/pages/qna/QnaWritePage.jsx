@@ -53,7 +53,7 @@ const QnaWritePage = () => {
   return (
     <>
       <DefaultLayout>
-        <h2 className="my-[4rem] text-3xl font-extrabold">게시글 등록</h2>
+        <h2 className="my-[4rem] text-3xl font-extrabold">문의글 등록</h2>
         <div className="mx-[4rem] font-bold">
           <form onSubmit={submitHandler}>
             <div className="mb-4">
