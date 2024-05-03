@@ -44,7 +44,7 @@ const RecommendationPage = () => {
       }
     } else {
       setUserState(2); // 로그인하지 않았을 때
-      setUserTitle('사용자들');
+      setUserTitle('우리카드 사용자들');
     }
 
     if (monthlyFor6.length > 0) {
@@ -91,19 +91,17 @@ const RecommendationPage = () => {
                     <div className="text-4xl flex justify-between items-center mt-8 mb-4 mr-2">
                       {user.userName}
                     </div>
-                    <p className="text-3xl text-left mt-8 mb-4">
-                      님의 6개월 간 월평균 사용 금액입니다.{' '}
-                    </p>
+                    <p className="text-3xl text-left mt-8 mb-4">님의 6개월 간 월평균 사용 금액 </p>
                   </>
                 ) : (
                   <p className="text-3xl text-left mt-8 mb-4">
                     {usageStatics[0]?.age}~{usageStatics[0]?.age + 5}세의 사용자들이 6개월 간 월평균
-                    사용 금액입니다.{' '}
+                    사용 했어요{' '}
                   </p>
                 )
               ) : (
                 <p className="text-3xl text-left mt-8 mb-4">
-                  사용자들의 6개월 간 월평균 사용 금액입니다.{' '}
+                  사용자들의 6개월 간 월평균 사용 금액{' '}
                 </p>
               )}
             </>

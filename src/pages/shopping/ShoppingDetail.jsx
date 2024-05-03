@@ -31,8 +31,8 @@ const PaymentModal = ({
   const [cards, setCards] = useState([]); // 유저의 카드 목록
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [cardId, setCardId] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const cardId = cards[currentIndex]?.cardId;
 
   const makeContents = (cards) => {
     setContents(
@@ -54,7 +54,7 @@ const PaymentModal = ({
     const fetchData = async () => {
       try {
         const price = Number(formattedPrice.replace(/,/g, ''));
-        console.log(`categoryId: ${categoryId}, price: ${price}`);
+        // console.log(`categoryId: ${categoryId}, price: ${price}`);
         const data = await getPayRecommendationCards(userId, categoryId, price);
         makeContents(data);
         setCards(data);
@@ -255,8 +255,7 @@ const PaymentModal = ({
                 Contents={contents}
                 className="w-full"
                 cards={cards}
-                setActiveIndex={setActiveIndex}
-                setCardId={setCardId}
+                setCurrentIndex={setCurrentIndex}
               />
             </div>
             <div className="flex flex-col w-full mt-14 mb-6">

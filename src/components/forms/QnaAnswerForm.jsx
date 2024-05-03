@@ -1,4 +1,4 @@
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState, useContext, useEffect } from 'react';
 import { ModalContext } from '../../App';
 import { Button } from '../Button';
