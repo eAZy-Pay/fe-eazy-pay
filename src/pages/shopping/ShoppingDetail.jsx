@@ -32,7 +32,9 @@ const PaymentModal = ({
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const [payback, setPayback] = useState(0);
   const cardId = cards[currentIndex]?.cardId;
+  const payback = cards[currentIndex]?.payback;
 
   const makeContents = (cards) => {
     setContents(
@@ -232,7 +234,7 @@ const PaymentModal = ({
         <>
           {/* isEnteringPin이 false이면 추천 카드 선택 모달을 렌더링 */}
           <div className="flex flex-col justify-center items-center p-4">
-            {activeIndex === 0 ? (
+            {currentIndex === 0 ? (
               <div className="flex w-full mb-10 justify-center items-end ">
                 <div className="h-24 w-full text-center ">
                   <span className="text-lg text-gray-700 font-extrabold">{productName}</span>
@@ -265,7 +267,7 @@ const PaymentModal = ({
               </div>
               <div className="flex justify-between items-baseline my-4">
                 <p className="text-xl text-gray-600">예상 혜택</p>
-                <p className="text-3xl font-bold text-gray-900 ml-2">0 원</p>
+                <p className="text-3xl font-bold text-gray-900 ml-2">{payback} 원</p>
               </div>
             </div>
           </div>
