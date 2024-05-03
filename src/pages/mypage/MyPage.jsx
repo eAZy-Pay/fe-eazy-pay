@@ -45,7 +45,7 @@ const MyPage = () => {
 
           const availableFunds = mainBanner?.availableFunds || 0;
           const totalUsedAmount = mainBanner?.totalUsedAmount || 0;
-          const totalBenefitAmount = mainBanner?.benefitAmount || 0;
+          const totalBenefitAmount = mainBanner?.totalBenefitAmount || 0;
           const totalPaymentLimit = mainBanner?.totalPaymentLimit || 0;
 
           setUserMain((prev) => ({
