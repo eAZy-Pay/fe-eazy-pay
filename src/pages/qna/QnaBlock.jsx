@@ -4,32 +4,43 @@ import notAnsweredIcon from '../../assets/notAnsweredIcon.png';
 const QnaBlock = ({ title, date, content, answered, userName }) => {
   const writer = userName;
   return (
-    <div className="p-7 bg-[#f2f6fc] rounded-lg drop-shadow-sm transition-all duration-300 hover:bg-gray-300 hover:text-gray-200">
-      <div className="text-2xl">{title}</div>
-      <div
-        className="text-lg my-4 mx-3
-        flex-grow overflow-hidden text-ellipsis whitespace-nowrap
-      "
-      >
-        {content}
+    <div className="p-9 rounded-lg transition-all duration-300 border-[1px] hover:bg-gray-100 ">
+      <div className="flex text-2xl font-extrabold">
+        <div className="mr-2 text-blue-500">Q.</div>
+        <div className="">{title}</div>
       </div>
 
-      <div className="flex mx-3 justify-between">
-        <div className="text-lg my-4 mx-2">{date}</div>
-        <div className="text-lg my-4">{writer}</div>
+      <hr className=" bg-gray-300 w-full h-0.8 my-4"></hr>
+      <div className="mx-3">
+        <div
+          className="text-xl py-1
+        flex-grow overflow-hidden text-ellipsis whitespace-nowrap
+        "
+        >
+          {content}
+        </div>
 
-        <div className="flex ml-auto">
-          {answered ? (
-            <>
-              <div className="self-center mx-1 text-nowrap">답변 완료</div>{' '}
-              <img src={answeredIcon} alt="답변완료" />{' '}
-            </>
-          ) : (
-            <>
-              <div className="self-center mx-1 text-nowrap">답변 대기</div>{' '}
-              <img src={notAnsweredIcon} alt="답변대기" />{' '}
-            </>
-          )}
+        <div className="flex justify-between items-end text-slate-500">
+          <div className="text-md ">{date}</div>
+          <div className="text-md ml-2">{writer}</div>
+
+          <div className="flex ml-auto text-md">
+            {answered ? (
+              <>
+                <div className="p-2 bg-green-500 text-white text-sm rounded-md self-center">
+                  답변 완료
+                </div>{' '}
+                <img src={answeredIcon} alt="답변완료" />{' '}
+              </>
+            ) : (
+              <>
+                <div className="p-2 bg-slate-300 text-white text-sm rounded-md self-center">
+                  답변 대기중
+                </div>{' '}
+                <img src={notAnsweredIcon} alt="답변 대기중" />{' '}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

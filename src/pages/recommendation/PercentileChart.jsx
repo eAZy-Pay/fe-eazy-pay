@@ -61,14 +61,14 @@ const PercentileChart = ({ userState, userTitle, usageStatics, totalAmount }) =>
                   <span className="text-3xl font-bold text-[#FF9169]">
                     {totalAmount ? percentileGroup : rank * 10}%
                   </span>
-                  <div className="text-2xl">는</div>
+                  <div className="text-2xl">,</div>
                 </div>
                 <p className="text-2xl mx-1">평균</p>
                 <p className="text-2xl font-bold mr-1">
                   {totalAmount ? totalAmount?.toLocaleString() : otherTotalAmount?.toLocaleString()}
                   원
                 </p>
-                <p className="text-2xl">사용합니다.</p>
+                <p className="text-2xl">소비했어요</p>
               </div>
               {userState === 0 && (
                 <p className="text-lg text-gray-500">

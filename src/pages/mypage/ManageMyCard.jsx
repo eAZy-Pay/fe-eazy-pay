@@ -1,18 +1,16 @@
 // import React from 'react';
 import DefaultFrame from '../../components/layout/DefaultFrame';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getCardsSummary } from '../../apis/CardAPI';
 import { getUserSession } from '../../utils/authUtils';
-import { useState } from 'react';
-import RotatedCard from '../../components/card/RotatedCard';
 import plusIcon from '../../assets/plusIcon.svg';
 import eAZyCard from '../../assets/eAZyCard.svg';
 import infoIcon from '../../assets/infoIcon.svg';
 import { Link } from 'react-router-dom';
-import CardsGage from '../main/CardsGage';
-import CardLetter from '../main/CardLetter';
 import Marquee from 'react-fast-marquee';
+
+import CardItem from './CardItem';
 
 const ManageMyCard = () => {
   const [userCards, setUserCards] = useState([]); // 배열로 초기화
@@ -106,53 +104,11 @@ const ManageMyCard = () => {
 
         <div className="flex justify-between items-center text-2xl mt-16 mb-8">내 카드 관리</div>
         <div className="flex flex-wrap justify-between">
-          {userCards.map(({ card, num, benefitAmount, uid }, index) => {
-            // num 문자열에서 마지막 4자리를 추출합니다.
-            const lastFourDigits = num.slice(-4);
-            // 마지막 4자리를 *로 대체합니다.
-            const maskedNum = lastFourDigits.replace(/\d(?=\d{0}$)/, '*');
-
-            return (
-              <div
-                key={index} // 고유한 키 부여
-                className="mb-6"
-                style={{ width: '39.25rem' }}
-              >
-                <Link to={`/mypage/card-management/selected-card`} state={uid}>
-                  <DefaultFrame>
-                    <div className="flex flex-col p-4">
-                      <div className="flex">
-                        <RotatedCard
-                          image={card.image}
-                          style={{ maxWidth: '7rem', height: 'auto' }}
-                        />
-                        <div className="flex flex-col justify-center items-center gap-5 ml-11">
-                          <CardsGage
-                            color="#f79042"
-                            amount={benefitAmount}
-                            total={card.benefitLimit}
-                            width="w-3/4"
-                          />
-                          <CardLetter
-                            color="#f79042"
-                            label="받은 혜택"
-                            amount={benefitAmount}
-                            total={card.benefitLimit}
-                          />
-                        </div>
-                      </div>
-                      <div className="text-2xl">{card.name}</div>
-                      {/* 마지막 4자리를 *로 대체한 값을 표시합니다. */}
-                      <div className="text-xl text-gray-400">카드 번호 {maskedNum}</div>
-                    </div>
-                  </DefaultFrame>
-                </Link>
-              </div>
-            );
-          })}
+          {userCards.map((card, index) => (
+            <CardItem key={index} {...card} />
+          ))}
           <div
             style={{ width: '39.25rem', cursor: 'pointer' }} // 마지막에 카드 추가를 위한 공간 추가
-            // onClick={() => navigate('/add-card')} // 카드 추가 페이지로 이동하는 이벤트
           >
             <Link to="/card-search">
               <DefaultFrame className="flex justify-center h-[304.83px] ">
@@ -168,7 +124,5 @@ const ManageMyCard = () => {
     </>
   );
 };
-
-ManageMyCard.propTypes = {};
 
 export default ManageMyCard;

@@ -36,8 +36,8 @@ const QnaDetail = ({ onClose, uid, title, date, content, answered, userId, userN
                   답변 완료
                 </span>
               ) : (
-                <span className="px-2 py-1 bg-red-500 text-white text-sm rounded-md">
-                  답변 대기
+                <span className="px-2 py-1 bg-slate-300 text-white text-sm rounded-md">
+                  답변 대기중
                 </span>
               )}
             </div>
@@ -48,7 +48,7 @@ const QnaDetail = ({ onClose, uid, title, date, content, answered, userId, userN
 
             <hr></hr>
 
-            <p className="text-gray-700 mb-4 p-5">{content}</p>
+            <p className="text-gray-700 my-4 p-5 text-xl">{content}</p>
             {user &&
               userId == user.uid && ( //로그인 후 본인이어야 수정 및 삭제
                 <div className="flex justify-between">
@@ -65,7 +65,8 @@ const QnaDetail = ({ onClose, uid, title, date, content, answered, userId, userN
               )}
             <hr className="my-3"></hr>
             <div>
-              <div className="p-7 bg-[#f2f6fc] rounded-lg drop-shadow-sm ">
+              <div className="p-7 bg-slate-100 rounded-lg drop-shadow-sm ">
+                <div className="mr-2 font-bold text-blue-700 text-xl">A.</div>
                 <div className="text-lg my-4">{answer}</div>
               </div>
             </div>
