@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { createContext, useContext } from 'react';
 import SideBarFull from './SideBarFull';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import { ModalContext } from '../../App';
+
+export const CurrentPageContext = createContext();
 
 const AdminDefaultLayout = ({ children }) => {
   const { modal } = useContext(ModalContext);
