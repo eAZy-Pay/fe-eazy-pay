@@ -79,7 +79,7 @@ const MainPage = () => {
         }
         bannerClassName={'py-14'}
       >
-        {user && (
+        {user && userMain.cards.length ? (
           <>
             <div className="flex mt-12 gap-3">
               <div className="text-3xl font-bold self-left">eAZy가 알아서 골라줬어요</div>
@@ -91,6 +91,8 @@ const MainPage = () => {
               ))}
             </div>
           </>
+        ) : (
+          <></>
         )}
 
         {/* <div className="my-3 w-auto h-[10em] bg-gray-500">Event</div> */}
