@@ -115,7 +115,7 @@ const RegisterPage = () => {
           {/* 동일한 정렬 및 패딩을 사용해 버튼 위치 고정 */}
         </div>
         {/* 하단 버튼 */}
-        <div className="flex space-x-4 pt-14">
+        <div className="flex space-x-4 ">
           {' '}
           {stepperIndex !== 4 ? (
             <div className="flex justify-center items-center space-x-4">
@@ -140,7 +140,7 @@ const RegisterPage = () => {
                 className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
                 onClick={handleNext}
               >
-                홈
+                확인
               </button>
             </div>
           )}
