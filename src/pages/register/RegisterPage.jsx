@@ -70,13 +70,14 @@ const RegisterPage = () => {
         </div>
         {/* 가운데 바디 */}
         <div className="flex justify-center bg-white p-10 w-full">
-          {/* stepperIndex가 0일 때와 1~4일 때의 높이 조정 */}
-          <div className="flex justify-end pr-10 w-1/3">
+          {/* <div className="flex justify-end pr-10 w-1/3"> */}
+          <div className="flex-none md:flex-none md:w-1/3">
             <div className={`hidden md:flex items-center justify-center`}>
               <VerticalStepper activeStep={stepperIndex} setActiveStep={setStepperIndex} />
             </div>
           </div>
-          <div className={`flex justify-start w-1/3 ${stepperIndex === 0 ? '' : 'h-64'}`}>
+          {/* <div className={`flex justify-start w-1/3 sm:w-1/2 h-64`}> */}
+          <div className={`flex-1 sm:w-1/2 md:w-1/3 h-64`}>
             {' '}
             {/* 조건에 따라 높이 설정 */}
             <div className="flex justify-center w-full items-center">
@@ -111,7 +112,8 @@ const RegisterPage = () => {
               {stepperIndex === 4 && <RegisterComplete />}
             </div>
           </div>
-          <div className="w-1/3"></div>
+          {/* <div className="w-1/3"></div> */}
+          <div className="flex-none md:w-1/3"></div>
           {/* 동일한 정렬 및 패딩을 사용해 버튼 위치 고정 */}
         </div>
         {/* 하단 버튼 */}

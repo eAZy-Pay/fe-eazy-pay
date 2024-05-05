@@ -66,7 +66,7 @@ const AgreementForm = ({ checkBox1, setCheckBox1, checkBox2, setCheckBox2 }) => 
             (필수) 개인정보 수집 및 이용·제공 동의
           </label>
           <button
-            className="mr-2 w-14 border border-blue-500 rounded-lg px-2 py-2 text-blue-500 font-bold hover:bg-blue-500 hover:text-white transition duration-300"
+            className="mr-2 w-12 border border-blue-500 rounded-lg py-1 text-blue-500 font-bold hover:bg-blue-500 hover:text-white transition duration-300"
             onClick={() => {
               setModal({
                 isOpen: true,
@@ -92,7 +92,7 @@ const AgreementForm = ({ checkBox1, setCheckBox1, checkBox2, setCheckBox2 }) => 
             (필수) 개인정보 제3자 정보제공 동의
           </label>
           <button
-            className="mr-2 w-14 border border-blue-500 rounded-lg px-2 py-2 text-blue-500 font-bold hover:bg-blue-500 hover:text-white transition duration-300"
+            className="mr-2 w-12 border border-blue-500 rounded-lg py-1 text-blue-500 font-bold hover:bg-blue-500 hover:text-white transition duration-300"
             onClick={() => {
               setModal({
                 isOpen: true,
