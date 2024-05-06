@@ -5,6 +5,7 @@ import { getUserSession } from '../../utils/authUtils';
 import { getUserInfo } from '../../apis/UserAPI';
 import UserInfoComponent from './UserInfoComponent';
 import ChangePasswordSection from './ChangePasswordSection';
+import ChangePinPasswordSection from './ChangePinPasswordSection';
 
 const ManageMyInformation = () => {
   const [isOpen, setIsOpen] = useState(true); // 기본적으로 펼쳐진 상태
@@ -20,6 +21,13 @@ const ManageMyInformation = () => {
     return `${areaCode}-${firstPart}-${secondPart}`;
   };
 
+  const userInfoSubset = [
+    { label: "이름", value: userInfo.name },
+    { label: "생년월일", value: userInfo.birthday },
+    { label: "이메일", value: userInfo.email },
+    { label: "전화번호", value: userInfo.phoneNumber }
+  ];
+  
   const toggleSection = () => {
     setIsOpen(!isOpen); // 상태 토글
   };
@@ -57,54 +65,42 @@ const ManageMyInformation = () => {
         <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">회원 정보 변경</div>
         <div className="flex flex-col items-center">
           <hr className="bold-hr w-5/6" />
-          <div className="flex justify-between items-center w-5/6 text-3xl px-4 my-4">
+          <button onClick={toggleSection} className="flex justify-between items-center w-5/6 text-2xl px-4 my-4">
             필수정보
-            <button onClick={toggleSection}>
               <img
                 src={arrowIcon}
                 alt="Arrow Icon"
-                className={`transform ${isOpen ? '-rotate-90' : 'rotate-90'}`} // isOpen 상태에 따라 회전
+                className={`transform ${isOpen ? '-rotate-90' : 'rotate-90'}`} 
               />
-            </button>
-          </div>
+          </button>
 
           {isOpen && (
             <div
               className="flex flex-col justify-center gap-8 w-5/6 px-40 py-24"
               style={{ backgroundColor: '#F4F7FC' }}
             >
-              <UserInfoComponent category="이름" userInfo={userInfo.name}></UserInfoComponent>
-
-              <UserInfoComponent
-                category="생년월일"
-                userInfo={userInfo.birthday}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="휴대폰번호"
-                userInfo={userInfo.phoneNumber}
-                button={true}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="이메일"
-                userInfo={userInfo.email}
-                button={true}
-              ></UserInfoComponent>
+              {userInfoSubset.map((item, index) => (
+                <div key={index} className="flex flex-col items-center w-full">
+                  <div className="flex w-4/5 items-center justify-between">
+                    <p className="text-2xl">{item.label}</p>
+                    <div className="flex items-center w-[361px] px-4 py-3 bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd] text-base text-[#697077]">
+                      {item.value}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
           <hr className="bold-hr2 w-5/6" />
-          <div className="flex justify-between items-center w-5/6 text-3xl px-4 my-4">
+          <button onClick={passwordSection} className="flex justify-between items-center w-5/6 text-2xl px-4 my-4">
             비밀번호 변경
-            <button onClick={passwordSection}>
               <img
                 src={arrowIcon}
                 alt="Arrow Icon"
                 className={`transform ${passwordOpen ? '-rotate-90' : 'rotate-90'}`}
               />
-            </button>
-          </div>
+          </button>
 
           {passwordOpen && (
             <div
@@ -116,47 +112,17 @@ const ManageMyInformation = () => {
           )}
 
           <hr className="bold-hr2 w-5/6" />
-          <div className="flex justify-between items-center w-5/6 text-3xl px-4 my-4">
+          <button onClick={PinPasswordSection} className="flex justify-between items-center w-5/6 text-2xl px-4 my-4">
             PIN 비밀번호 변경
-            <button onClick={PinPasswordSection}>
               <img
                 src={arrowIcon}
                 alt="Arrow Icon"
-                className={`transform ${PinPasswordOpen ? '-rotate-90' : 'rotate-90'}`}
+                className={`transform '-rotate-90' `}
               />
-            </button>
-          </div>
+          </button>
 
           {PinPasswordOpen && (
-            <div
-              className="flex flex-col gap-16 w-5/6 px-40 py-24 items-center"
-              style={{ backgroundColor: '#F4F7FC' }}
-            >
-              <UserInfoComponent
-                category="기존 PIN 입력"
-                userInfo="기존 PIN 입력"
-                changeButton={false}
-                passwordSection={true}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="새 PIN 입력"
-                userInfo="새 PIN 입력"
-                changeButton={false}
-                passwordSection={true}
-              ></UserInfoComponent>
-
-              <UserInfoComponent
-                category="한 번 더 입력"
-                userInfo="한 번 더 입력"
-                changeButton={false}
-                passwordSection={true}
-              ></UserInfoComponent>
-
-              <div className="flex justify-center items-center w-[6rem] h-[2.813rem] rounded-[8.16px] bg-white border-[0.82px] border-black">
-                <p className="text-lg">변경하기</p>
-              </div>
-            </div>
+               <ChangePinPasswordSection pin={userInfo.pin}/>
           )}
 
           <hr className="bold-hr2 w-5/6" />
