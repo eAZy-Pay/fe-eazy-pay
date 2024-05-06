@@ -13,7 +13,7 @@ const Modal = () => {
       <div className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-[#000000] bg-opacity-50">
         <div className="flex flex-col justify-center items-center bg-[#FFFFFF] w-2/6 h-3/5 rounded-3xl">
           <div className="flex justify-end items-center w-full h-1/6 px-10">
-            <div className="flex justify-left items-center w-full h-full text-[#21272a] text-4xl font-bold mt-10">
+            <div className="flex justify-left items-center w-full h-full text-[#21272a] text-3xl font-bold mt-10">
               {modal.title}
             </div>
             <button

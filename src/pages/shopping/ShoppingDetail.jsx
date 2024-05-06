@@ -32,7 +32,9 @@ const PaymentModal = ({
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const [payback, setPayback] = useState(0);
   const cardId = cards[currentIndex]?.cardId;
+  const payback = cards[currentIndex]?.payback;
 
   const makeContents = (cards) => {
     setContents(
@@ -231,20 +233,22 @@ const PaymentModal = ({
       ) : (
         <>
           {/* isEnteringPin이 false이면 추천 카드 선택 모달을 렌더링 */}
-          <div className="flex flex-col justify-center items-center mt-5 p-4">
+          <div className="flex flex-col justify-center items-center p-4">
             {currentIndex === 0 ? (
-              <div className="flex flex-col items-center mb-3">
-                <div className="flex flex-row">
+              <div className="flex w-full mb-10 justify-center items-end ">
+                <div className="h-24 w-full text-center ">
                   <span className="text-lg text-gray-700 font-extrabold">{productName}</span>
                   <span className="text-lg text-gray-700 ">에 딱 맞는</span>
+                  <p className="text-2xl my-1 font-bold text-blue-700 ">{recommendedCardName}</p>
+                  <p className="mb-7 text-lg text-gray-700 ">카드를 추천해요!</p>
                 </div>
-                <p className="text-2xl my-1 font-bold text-blue-700 ">{recommendedCardName}</p>
-                <p className="mb-7 text-lg text-gray-700 ">카드를 추천해요!</p>
               </div>
             ) : (
-              <div className="flex flex-col items-center mb-3">
-                <p className="text-2xl mb-1 font-bold text-gray-400 ">{recommendedCardName}</p>
-                <p className="mb-7 text-lg text-gray-300 ">카드를 추천해요!</p>
+              <div className="flex h-24 w-full mb-10 justify-center items-end ">
+                <div className="text-center">
+                  <p className="text-2xl mb-1 font-bold text-gray-400 ">{recommendedCardName}</p>
+                  <p className="text-lg text-gray-300 ">카드를 추천해요!</p>
+                </div>
               </div>
             )}
             {/* Slider  */}
@@ -255,7 +259,6 @@ const PaymentModal = ({
                 cards={cards}
                 setCurrentIndex={setCurrentIndex}
               />
-              <p className=" text-white">{currentIndex}</p>
             </div>
             <div className="flex flex-col w-full mt-14 mb-6">
               <div className="flex justify-between items-baseline">
@@ -264,7 +267,7 @@ const PaymentModal = ({
               </div>
               <div className="flex justify-between items-baseline my-4">
                 <p className="text-xl text-gray-600">예상 혜택</p>
-                <p className="text-3xl font-bold text-gray-900 ml-2">0 원</p>
+                <p className="text-3xl font-bold text-gray-900 ml-2">{payback} 원</p>
               </div>
             </div>
           </div>
