@@ -26,8 +26,10 @@ const CardUsageSummary = ({ userMain, userId }) => {
         <span className="text-3xl font-extrabold">eAZy</span>
         <span className="text-2xl ">하게 챙겼어요</span>
       </div>
-      <div className="flex mb-4">
-        <div className={`flex flex-col justify-center`}>
+      <div className="sm:flex sm:mb-4">
+        <div
+          className={`flex flex-col justify-center mb-[3rem] sm:ml-[4rem] sm:mt-0 ml-[7rem] mt-[2rem] sm:mb-0 `}
+        >
           <OverlappedCards images={userMain.images} />
         </div>
         <DefaultFrame className={'flex px-[2rem] h-[20rem] '}>
@@ -70,7 +72,7 @@ const CardUsageSummary = ({ userMain, userId }) => {
 
                 <span className="text-xl mr-2">이번달</span>
                 <div className="text-xl mr-[1rem]">총 혜택</div>
-                <div className="text-4xl font-black text-blue-700">
+                <div className="text-4xl font-black text-main-color">
                   {summary.benefitOfMonth ? summary.benefitOfMonth.toLocaleString() : 0}
                 </div>
                 <div className="text-3xl">원</div>
