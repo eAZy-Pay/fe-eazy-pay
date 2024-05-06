@@ -66,7 +66,7 @@ const ShoppingComplete = () => {
             )}
           </div>
           <button
-            className="text-lg bg-main-color text-white py-2 rounded-lg hover:bg-[#0055ffe7] transition duration-300 w-4/5 mt-6"
+            className="text-lg bg-main-color text-white py-2 rounded-lg hover:bg-[#0051ffee] transition duration-300 w-4/5 mt-6"
             onClick={handleCloseModal}
           >
             확인

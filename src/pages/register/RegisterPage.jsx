@@ -129,7 +129,7 @@ const RegisterPage = () => {
                 이전
               </button>
               <button
-                className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+                className="w-20 py-2 bg-main-color text-white font-bold rounded-lg hover:bg-[#0051ffee] transition duration-300"
                 onClick={handleNext}
                 disabled={isButtonDisabled()}
               >
@@ -139,7 +139,7 @@ const RegisterPage = () => {
           ) : (
             <div className="flex justify-center items-center">
               <button
-                className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300"
+                className="w-20 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-[#0051ffee] transition duration-300"
                 onClick={handleNext}
               >
                 확인

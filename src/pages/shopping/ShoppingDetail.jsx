@@ -272,7 +272,7 @@ const PaymentModal = ({
           </div>
           <div className="flex flex-col justify-center">
             <button
-              className="text-lg  bg-main-color text-white py-2 rounded-lg hover:bg-[#0055ffe7] transition duration-300"
+              className="text-lg  bg-main-color text-white py-2 rounded-lg hover:bg-[#0051ffee] transition duration-300"
               onClick={handleEnteringPin}
             >
               eAZy 결제
@@ -327,7 +327,7 @@ const ShoppingDetail = () => {
                 </p>
               </div>
               <button
-                className="mt-2 mb-6 mx-6 text-lg bg-main-color text-white py-2 rounded-lg hover:bg-[#0055ffe7] transition duration-300"
+                className="mt-2 mb-6 mx-6 text-lg bg-main-color text-white py-2 rounded-lg hover:bg-[#0051ffee] transition duration-300"
                 onClick={openModal}
               >
                 eAZy 결제

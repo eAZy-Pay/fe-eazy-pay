@@ -88,10 +88,10 @@ const ShoppingPage = () => {
       storeCode: '060000160001',
       storeName: '우리여행사',
       image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtbzgr9P93ojweefXCBj_Pf0LKUo47C2NL6w&usqp=CAU',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEBTm4xgRuEHDBFpON7UFumFDuFt0f_eNFAQ&usqp=CAU',
       category: '숙박/여행',
-      name: '캐나다 패키지 여행 9박 10일',
-      price: '23095000',
+      name: '광안대교 뷰 호텔 1박 2일',
+      price: '154000',
     },
     {
       categoryId: '7',
