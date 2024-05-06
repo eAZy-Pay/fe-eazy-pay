@@ -52,7 +52,7 @@ const ShoppingComplete = () => {
               <span> 카드로</span>
             </div>
             <div className="flex justify-center items-center mb-2">
-              <span className="text-xl font-semibold  text-blue-700">{parsedResponse.price}</span>
+              <span className="text-xl font-semibold  text-main-color">{parsedResponse.price}</span>
               <span className="text-lg">원 결제했어요!</span>
             </div>
             {/* 다음 달에 페이백 받을 금액이 있을 때는 그 금액을 보여줌 */}
@@ -66,7 +66,7 @@ const ShoppingComplete = () => {
             )}
           </div>
           <button
-            className="text-lg bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 w-4/5 mt-6"
+            className="text-lg bg-main-color text-white py-2 rounded-lg hover:bg-[#0055ffe7] transition duration-300 w-4/5 mt-6"
             onClick={handleCloseModal}
           >
             확인

@@ -32,7 +32,6 @@ const PaymentModal = ({
   const [contents, setContents] = useState([]);
   const [recommendedCardName, setRecommendedCardName] = useState(''); // 추천 카드 이름
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [payback, setPayback] = useState(0);
   const cardId = cards[currentIndex]?.cardId;
   const payback = cards[currentIndex]?.payback;
 
@@ -239,7 +238,7 @@ const PaymentModal = ({
                 <div className="h-24 w-full text-center ">
                   <span className="text-lg text-gray-700 font-extrabold">{productName}</span>
                   <span className="text-lg text-gray-700 ">에 딱 맞는</span>
-                  <p className="text-2xl my-1 font-bold text-blue-700 ">{recommendedCardName}</p>
+                  <p className="text-2xl my-1 font-bold text-main-color ">{recommendedCardName}</p>
                   <p className="mb-7 text-lg text-gray-700 ">카드를 추천해요!</p>
                 </div>
               </div>
@@ -263,7 +262,7 @@ const PaymentModal = ({
             <div className="flex flex-col w-full mt-14 mb-6">
               <div className="flex justify-between items-baseline">
                 <p className="text-xl font-semibold text-gray-600 ">최종 결제 금액</p>
-                <p className="text-3xl font-bold text-blue-600">{formattedPrice} 원</p>
+                <p className="text-3xl font-bold text-main-color">{formattedPrice} 원</p>
               </div>
               <div className="flex justify-between items-baseline my-4">
                 <p className="text-xl text-gray-600">예상 혜택</p>
@@ -273,7 +272,7 @@ const PaymentModal = ({
           </div>
           <div className="flex flex-col justify-center">
             <button
-              className="text-lg  bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+              className="text-lg  bg-main-color text-white py-2 rounded-lg hover:bg-[#0055ffe7] transition duration-300"
               onClick={handleEnteringPin}
             >
               eAZy 결제
@@ -307,27 +306,28 @@ const ShoppingDetail = () => {
 
   return (
     <DefaultLayout>
-      <div className="flex justify-between py-4 my-4">
-        <div className=" flex w-1/2 justify-center">
+      <div className="flex justify-between flex-col md:flex-row py-4 my-4">
+        <div className=" flex w-full md:w-1/2 justify-center">
           <div className="flex items-center">
             <img src={image} alt="Example" className="object-cover h-[26rem] w-[26rem]" />
           </div>
         </div>
         {/* 오른쪽 상품 정보 영역 */}
-        <div className="flex w-1/2">
-          <div className="w-3/4 flex flex-col items-start mx-4  p-6 ">
-            {' '}
+        <div className="flex w-full md:w-1/2">
+          <div className="w-full md:w-3/4 flex flex-col items-start mx-4 md:p-6 ">
             <div className="flex flex-col w-full">
-              <div className="flex flex-col justify-end p-6">
-                <p className="my-6 text-3xl font-semibold text-gray-800">{storeName}</p>{' '}
-                <p className="my-6 text-2xl font-semibold text-gray-800">{name}</p>{' '}
+              <div className="flex flex-col justify-end p-1 md:p-6">
+                <p className="my-2 md:my-6 text-3xl font-semibold text-gray-800">{storeName}</p>{' '}
+                <p className="my-2 md:my-6 text-2xl font-semibold text-gray-800">{name}</p>{' '}
               </div>
-              <div className="flex flex-col items-end justify-end p-6">
+              <div className="flex flex-col items-end justify-end p-2 md:p-6">
                 <p className="text-2xl  text-gray-600">결제 금액</p>
-                <p className="mt-6 text-3xl font-bold text-blue-700">{formattedPrice}원</p>
+                <p className="mt-1 md:mt-6 text-3xl font-bold text-main-color">
+                  {formattedPrice}원
+                </p>
               </div>
               <button
-                className="mt-2 mb-6 mx-6 text-lg bg-blue-500 text-gray-200 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                className="mt-2 mb-6 mx-6 text-lg bg-main-color text-white py-2 rounded-lg hover:bg-[#0055ffe7] transition duration-300"
                 onClick={openModal}
               >
                 eAZy 결제
