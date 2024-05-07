@@ -10,9 +10,9 @@ const CardItemForMyPage = ({ card, benefitAmount, uid }) => {
   const { isFulfilled, fulfilledColor } = useFulfillment(uid);
   return (
     <Link to={`/mypage/card-management/selected-card`} state={uid} key={uid}>
-      <DefaultFrame className="flex max-w-[32rem] mx-6 mb-11">
+      <DefaultFrame className="flex md:w-[32rem] sm:w-full md:mx-6 mb-11">
         <RotatedCard image={card.image} style={{ maxWidth: '5.75rem', height: 'auto' }} />
-        <div className="flex flex-col justify-center gap-4">
+        <div className="flex flex-col justify-center w-full gap-4">
           <CardsGage
             color="#f79042"
             fulfilledColor={fulfilledColor}

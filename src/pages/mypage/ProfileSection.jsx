@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ProfileSection = ({ name }) => (
-  <DefaultFrame boxShadow={false}>
+  <DefaultFrame boxShadow={false} className={`flex-grow`}>
     <div className="flex items-center gap-4 p-4">
       <img src={ProfileImage} alt="Profile" className="w-32 h-32 rounded-full" />
       <div className="flex gap-1">

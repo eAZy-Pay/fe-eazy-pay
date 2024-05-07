@@ -18,7 +18,7 @@ const CardItem = ({ card, num, benefitAmount, uid }) => {
           <div className="flex flex-col p-4">
             <div className="flex">
               <RotatedCard image={card.image} style={{ maxWidth: '7rem', height: 'auto' }} />
-              <div className="flex flex-col justify-center items-center gap-5 ml-11">
+              <div className="flex flex-col justify-center w-full items-center gap-5 ml-11">
                 <CardsGage
                   color="#F79042"
                   fulfilledColor={fulfilledColor}
