@@ -24,7 +24,7 @@ const CardDetailPage = () => {
       bannerClassName={'py-14 bg-[#F4F7FC]'}
     >
       <div className="flex flex-col items-center w-full mt-10">
-        <div className="flex gap-4 text-lg font-light">
+        <div className="flex gap-2 text-lg font-light">
           <div>{`연회비: ${formatAnnualFee(cardWithBenefit.card.annualFee)}`}</div>
           <div>{` / `}</div>
           <div>{`전월 실적 기준: ${cardWithBenefit.card.performance.toLocaleString()}원`}</div>

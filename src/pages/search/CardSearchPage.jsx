@@ -82,7 +82,6 @@ const CardSearchPage = () => {
       ) : (
         <div className="text-2xl text-center my-6">검색 결과가 없습니다.</div>
       )}
-
       <Banner
         to={'/card-recommend'}
         title="어떤 카드를 골라야할지 고민이신가요?"

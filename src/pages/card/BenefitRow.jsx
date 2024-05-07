@@ -5,13 +5,13 @@ const BenefitRow = ({ categoryName, benefitRate, className, index }) => {
   return (
     <div className="flex w-full my-1" key={index}>
       <div
-        className={`flex justify-center items-center w-full text-3xl font-semibold ${className}`}
+        className={`flex justify-center items-center w-full text-lg md:text-3xl font-semibold ${className}`}
       >
         <div className="flex items-center">
           <GetCategoryIcon categoryName={categoryName} />
-          <div className="mx-2 w-40 text-center">{categoryName}</div>
+          <div className="md:mx-2 w-20 md:w-40 text-center">{categoryName}</div>
           <div className="mx-2">{`카테고리에서`}</div>
-          <div className="mx-2 w-16 text-center">{`${benefitRate}%`}</div>
+          <div className="mr-2 md:w-16 text-center">{`${benefitRate}%`}</div>
           <div className="font-semibold">{`할인`}</div>
         </div>
       </div>
