@@ -82,7 +82,7 @@ const PercentileChart = ({ userState, userTitle, usageStatics, totalAmount }) =>
           {usageStatics.length > 0 ? (
             <BounceChart
               rank={totalAmount ? userRank : rank}
-              setRank={totalAmount ? () => { } : setRank}
+              setRank={totalAmount ? () => {} : setRank}
             />
           ) : null}
         </div>

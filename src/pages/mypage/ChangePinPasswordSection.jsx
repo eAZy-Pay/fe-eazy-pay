@@ -1,20 +1,40 @@
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import { changePinPassword } from '../../apis/AuthAPI';
 
-const ChangePinPasswordSection = ({ pin: existingPin }) => {
+const ChangePinPasswordSection = ({ pin: existingPin, uid }) => {
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const [pin, setPin] = useState('');
   const [storedPin, setStoredPin] = useState(existingPin);
   const [newPin, setNewPin] = useState('');
-  const [confirmNewPin, setConfirmNewPin] = useState('');
   const [stage, setStage] = useState(1); // 1: 기존 PIN 확인, 2: 새 PIN 설정, 3: 새 PIN 확인
   const [keypadNumbers, setKeypadNumbers] = useState([]);
   const [pinStatus, setPinStatus] = useState([false, false, false, false, false, false]);
   const [message, setMessage] = useState('기존 PIN 번호를 입력해주세요');
   const [wrongPinMessage, setWrongPinMessage] = useState('');
 
-  console.log(pin);
+  const handlePinPasswordChange = async () => {
+    try {
+      const response = await changePinPassword(uid, newPin);
+      if (response.ok) {
+        alert('PIN비밀번호가 성공적으로 변경되었습니다.');
+        // Clear input fields and reset all states
+        setStoredPin(newPin);
+        setPin('');
+        setNewPin('');
+        setStage(1);
+        setPinStatus([false, false, false, false, false, false]);
+        setMessage('기존 PIN 번호를 입력해주세요');
+        setWrongPinMessage('');
+      } else {
+        alert('PIN비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('Password change failed:', error);
+      alert('PIN비밀번호 변경 중 오류가 발생했습니다.');
+    }
+  };
 
   const shuffleKeypad = () => {
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
@@ -81,7 +101,8 @@ const ChangePinPasswordSection = ({ pin: existingPin }) => {
           setPinStatus([false, false, false, false, false, false]);
         }
       } else if (stage === 3 && pin === newPin) {
-        closeModal(); // 정보 업데이트 로직 추가 예정
+        closeModal();
+        handlePinPasswordChange();
       } else {
         setMessage('PIN번호를 다시 입력해주세요');
         setWrongPinMessage('PIN번호가 일치하지 않아요');
@@ -147,7 +168,8 @@ const ChangePinPasswordSection = ({ pin: existingPin }) => {
 };
 
 ChangePinPasswordSection.propTypes = {
-    storedPin: PropTypes.string,
+  pin: PropTypes.string,
+  uid: PropTypes.number.isRequired,
 };
 
 export default ChangePinPasswordSection;

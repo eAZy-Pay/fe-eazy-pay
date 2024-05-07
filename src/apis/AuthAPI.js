@@ -57,6 +57,22 @@ export const changePassword = async (user_uid, new_password) => {
   return response;
 };
 
+export const changePinPassword = async (uid, pin) => {
+  const response = await fetch(`${BASE_URL}/change-pin`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ uid: uid.toString(), pin }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Server error');
+  }
+
+  return response;
+};
+
 checkPin.propTypes = {
   uid: PropTypes.string.isRequired,
   pin: PropTypes.string.isRequired,

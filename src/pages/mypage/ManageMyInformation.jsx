@@ -3,7 +3,6 @@ import arrowIcon from '../../assets/arrowIcon.svg';
 import { useState, useEffect } from 'react';
 import { getUserSession } from '../../utils/authUtils';
 import { getUserInfo } from '../../apis/UserAPI';
-import UserInfoComponent from './UserInfoComponent';
 import ChangePasswordSection from './ChangePasswordSection';
 import ChangePinPasswordSection from './ChangePinPasswordSection';
 
@@ -22,12 +21,12 @@ const ManageMyInformation = () => {
   };
 
   const userInfoSubset = [
-    { label: "이름", value: userInfo.name },
-    { label: "생년월일", value: userInfo.birthday },
-    { label: "이메일", value: userInfo.email },
-    { label: "전화번호", value: userInfo.phoneNumber }
+    { label: '이름', value: userInfo.name },
+    { label: '생년월일', value: userInfo.birthday },
+    { label: '이메일', value: userInfo.email },
+    { label: '전화번호', value: userInfo.phoneNumber },
   ];
-  
+
   const toggleSection = () => {
     setIsOpen(!isOpen); // 상태 토글
   };
@@ -57,7 +56,7 @@ const ManageMyInformation = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [userInfo]);
 
   return (
     <>
@@ -65,13 +64,16 @@ const ManageMyInformation = () => {
         <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">회원 정보 변경</div>
         <div className="flex flex-col items-center">
           <hr className="bold-hr w-5/6" />
-          <button onClick={toggleSection} className="flex justify-between items-center w-5/6 text-2xl px-4 my-4">
+          <button
+            onClick={toggleSection}
+            className="flex justify-between items-center w-5/6 text-2xl px-4 my-4"
+          >
             필수정보
-              <img
-                src={arrowIcon}
-                alt="Arrow Icon"
-                className={`transform ${isOpen ? '-rotate-90' : 'rotate-90'}`} 
-              />
+            <img
+              src={arrowIcon}
+              alt="Arrow Icon"
+              className={`transform ${isOpen ? '-rotate-90' : 'rotate-90'}`}
+            />
           </button>
 
           {isOpen && (
@@ -93,13 +95,16 @@ const ManageMyInformation = () => {
           )}
 
           <hr className="bold-hr2 w-5/6" />
-          <button onClick={passwordSection} className="flex justify-between items-center w-5/6 text-2xl px-4 my-4">
+          <button
+            onClick={passwordSection}
+            className="flex justify-between items-center w-5/6 text-2xl px-4 my-4"
+          >
             비밀번호 변경
-              <img
-                src={arrowIcon}
-                alt="Arrow Icon"
-                className={`transform ${passwordOpen ? '-rotate-90' : 'rotate-90'}`}
-              />
+            <img
+              src={arrowIcon}
+              alt="Arrow Icon"
+              className={`transform ${passwordOpen ? '-rotate-90' : 'rotate-90'}`}
+            />
           </button>
 
           {passwordOpen && (
@@ -112,18 +117,15 @@ const ManageMyInformation = () => {
           )}
 
           <hr className="bold-hr2 w-5/6" />
-          <button onClick={PinPasswordSection} className="flex justify-between items-center w-5/6 text-2xl px-4 my-4">
+          <button
+            onClick={PinPasswordSection}
+            className="flex justify-between items-center w-5/6 text-2xl px-4 my-4"
+          >
             PIN 비밀번호 변경
-              <img
-                src={arrowIcon}
-                alt="Arrow Icon"
-                className={`transform '-rotate-90' `}
-              />
+            <img src={arrowIcon} alt="Arrow Icon" className={`transform '-rotate-90' `} />
           </button>
 
-          {PinPasswordOpen && (
-               <ChangePinPasswordSection pin={userInfo.pin}/>
-          )}
+          {PinPasswordOpen && <ChangePinPasswordSection uid={userInfo.uid} pin={userInfo.pin} />}
 
           <hr className="bold-hr2 w-5/6" />
         </div>
