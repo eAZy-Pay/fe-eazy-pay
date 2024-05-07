@@ -3,9 +3,6 @@ import { getSignIn, changePassword } from '../../apis/AuthAPI';
 import PropTypes from 'prop-types';
 
 const ChangePasswordSection = ({ id, uid }) => {
-  // const [isEditing, setIsEditing] = useState(false);
-  // const [editedUserInfo, setEditedUserInfo] = useState(userInfo);
-
   const [nowPassword, setNowPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [checkNewPassword, setCheckNewPassword] = useState('');

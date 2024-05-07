@@ -11,16 +11,16 @@ const NoLinkedCard = () => {
           </div>
 
           <div
-            className="mt-[1.5rem] mx-auto py-3 px-5 rounded-[20px] bg-[#1d92e9] text-2xl text-center text-white"
+            className="mt-[1.5rem] mx-auto py-3 px-5 rounded-[20px] bg-main-color text-2xl text-center text-white"
             onClick={() => (window.location.href = '/card-search')}
           >
             카드 검색 페이지로 이동
           </div>
         </div>
-        <img src={OverlappedCard} alt="Card" className="w-auto h-auto" />
-        <div className="absolute right-10 bottom-5">
+        <img src={OverlappedCard} alt="Card" className="w-auto h-auto sm:mx-0 mx-auto" />
+        <div className="absolute right-10 bottom-5 hidden sm:inline">
           <div className="flex-end relative">
-            <span className="text-5xl font-black text-blue-700 relative">???</span>
+            <span className="text-5xl font-black text-main-color relative">???</span>
             <span className="text-3xl">원</span>
           </div>
         </div>
