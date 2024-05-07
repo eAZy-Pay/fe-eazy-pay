@@ -26,6 +26,18 @@
   unicode-range: U+0020-007E;
 }
 
+@media screen and (max-width: 768px) {
+  :root {
+    font-size: 14px; /* 화면 크기가 작을 때 글꼴 크기 조절 */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    font-size: 12px; /* 더 작은 화면 크기일 때 글꼴 크기 조절 */
+  }
+}
+
 body {
   font-family: 'NanumSquare', 'noto-sans', Arial, sans-serif;
   color: #444444;

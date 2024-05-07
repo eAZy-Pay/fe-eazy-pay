@@ -15,10 +15,10 @@ const CardLetter = ({
 
   if (total === 0) {
     totalDisplay = '/ 무실적';
-    specialStyle = 'text-2xl font-bold text-red-500'; // 무실적인 경우의 스타일
+    specialStyle = 'sm:text-2xl font-bold text-red-500'; // 무실적인 경우의 스타일
   } else if (total >= 1000000000) {
     totalDisplay = '/ 무제한';
-    specialStyle = 'text-2xl font-bold text-green-500'; // 제한없음 경우의 스타일
+    specialStyle = 'sm:text-2xl font-bold text-green-500'; // 제한없음 경우의 스타일
   } else {
     totalDisplay = `/ ${total.toLocaleString()}`; // 숫자 포맷으로 출력
   }
@@ -30,17 +30,17 @@ const CardLetter = ({
     <div className={`flex justify-center ${className}`}>
       <div className="flex items-center">
         <div className="mr-4 font-semibold text-[#bfbdbd]">
-          <div className=" text-2xl" style={{ color: dynamicColor }}>
+          <div className="sm:text-2xl" style={{ color: dynamicColor }}>
             {label}
           </div>
         </div>
         <div>
           <div className="">
-            <span className="text-2xl font-semibold" style={{ color: fulfilledColor }}>
+            <span className="sm:text-2xl font-semibold" style={{ color: fulfilledColor }}>
               {amount.toLocaleString()}
             </span>
             <span
-              className={specialStyle.length > 0 ? specialStyle : 'text-base'}
+              className={specialStyle.length > 0 ? specialStyle : 'sm:text-base'}
               style={{ color: fulfilledColor }}
             >
               {' '}

@@ -9,7 +9,7 @@ const CategoryBenefit = ({ categoryName, benefitAmount, rank }) => {
           <GetCategoryIcon categoryName={categoryName} />
         </div>
         <div className="text-center mx-auto">
-          <div className="text-blue-700">{categoryName}</div>
+          <div className="text-main-color">{categoryName}</div>
 
           <div className="flex ml-1 mr-1 font-extrabold">
             {benefitAmount.toLocaleString()} <div>원</div>
