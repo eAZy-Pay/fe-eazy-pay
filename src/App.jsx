@@ -36,6 +36,7 @@ function App() {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [dropdownContent, setDropdownContent] = useState();
 
   // 드롭다운바 닫힘 상태로 초기화
   useEffect(() => {
@@ -45,7 +46,9 @@ function App() {
   return (
     <Router>
       <ModalContext.Provider value={{ modal, setModal }}>
-        <DropdownContext.Provider value={{ isDropdownOpen, setIsDropdownOpen }}>
+        <DropdownContext.Provider
+          value={{ isDropdownOpen, setIsDropdownOpen, dropdownContent, setDropdownContent }}
+        >
           <CurrentPageContext.Provider value={{ currentPage, setCurrentPage }}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
