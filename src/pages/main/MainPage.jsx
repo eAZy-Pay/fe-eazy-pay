@@ -110,6 +110,7 @@ const MainPage = () => {
           setCheckedIndex={setcheckedIndex}
         />
 
+        <CategoryCards categoryCards={highlightedCards} maxColumn={5} maxRow={1} showInfo={false} />
       </DefaultLayout>
     </>
   );
