@@ -54,16 +54,13 @@ const MainPage = () => {
       getCardsSummary(userId, 1, 4).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
-          if (cardObj.linkEazy) {
-            // linkEazy가 true인 카드만 추가
-            tmp.push(cardObj.card.image);
-          }
+          tmp.push(cardObj.card.image);
         });
         setUserMain((prev) => ({
           ...prev,
           benefitAmount: res.totalBenefitAmount,
           images: tmp,
-          cards: res.cards.filter((cardObj) => cardObj.linkEazy),
+          cards: res.cards,
         }));
       });
     } else {
