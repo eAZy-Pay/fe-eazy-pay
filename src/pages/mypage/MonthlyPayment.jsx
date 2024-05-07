@@ -239,7 +239,7 @@ const MonthlyPayment = () => {
                 ? transaction.cardNum.slice(-4).replace(/\d(?=\d{0}$)/, '*')
                 : '';
               return (
-                <div key={index} className="flex flex-col text-center w-full text-lg">
+                <div key={index} className="flex flex-col text-center w-full text-sm md:text-lg">
                   <div className="flex justify-center items-center justify-between my-5">
                     <div className="flex gap-4">
                       <p className="">{formattedDate}</p>
