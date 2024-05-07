@@ -1,14 +1,16 @@
-// import * as React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { checkPhoneNumber } from '../../apis/RegisterAPI';
 
 const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail }) => {
   const [errorName, setErrorName] = useState('');
   const [errorBirth, setErrorBirth] = useState('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
+  const [successPhoneNumber, setSuccessPhoneNumber] = useState('');
   const [phoneNumSTR, setPhoneNumSTR] = useState('');
+  const [localPhoneNumber, setLocalPhoneNumber] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
 
   const handleNameChange = (event) => {
@@ -51,10 +53,16 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     }
     if (onlyNums.length === 11) {
       setErrorPhoneNumber(''); // 에러 메시지를 지움
-      setPhoneNumber(onlyNums); // 최종 상태를 업데이트
+      setLocalPhoneNumber(onlyNums);
+      // setPhoneNumber(onlyNums); // 최종 상태를 업데이트
     } else {
       setErrorPhoneNumber('휴대폰 번호를 11자리로 입력해주세요'); // 에러 메시지 설정
     }
+  };
+
+  const handlePhoneNumberBlur = () => {
+    console.log(`localPhoneNumber: ${localPhoneNumber}`);
+    checkPhoneNumber(localPhoneNumber, setPhoneNumber, setSuccessPhoneNumber, setErrorPhoneNumber);
   };
 
   const handleEmailChange = (event) => {
@@ -127,8 +135,9 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
             variant="outlined"
             value={phoneNumSTR}
             onChange={handlePhoneNumberChange}
+            onBlur={handlePhoneNumberBlur}
             error={!!errorPhoneNumber}
-            helperText={errorPhoneNumber ? errorPhoneNumber : ''}
+            helperText={errorPhoneNumber || successPhoneNumber}
           />
         </Box>
         <Box
