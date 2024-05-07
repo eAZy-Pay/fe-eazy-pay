@@ -1,4 +1,4 @@
-import OverlappedCard from '../../assets/overlappedCard.png';
+import OverlappedCard from '../../assets/overlappedCard.webp';
 
 const NoLinkedCard = () => {
   return (
