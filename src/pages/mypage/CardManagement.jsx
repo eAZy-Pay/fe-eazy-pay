@@ -20,7 +20,7 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
   };
 
   return (
-    <div className="flex-grow p-4">
+    <div className="flex-grow p-4 md:w-1/2">
       <DefaultFrame boxShadow={false}>
         <Link
           to="/mypage/card-management"
@@ -34,14 +34,14 @@ const CardManagement = ({ cards = [], amount = 0 }) => {
         {/* 이지카드 총 혜택 */}
         <div className="mx-6 mt-10 mb-6 text-2xl">eAZy 카드</div>
         <Link to="/mypage/card-management/link-eazy">
-          <DefaultFrame className="flex max-w-[32rem] m-6">
+          <DefaultFrame className="flex md:w-[32rem] sm:w-full md:m-6">
             <img
               src={eazy}
               alt="Eazy Image"
               className="ml-9"
-              style={{ transform: 'rotate(90deg)', maxWidth: '5.75rem', height: 'auto' }}
+              style={{ transform: 'rotate(90deg)', maxWidth: '5.75em', height: 'auto' }}
             />
-            <div className="flex flex-col justify-center gap-4">
+            <div className="flex flex-col justify-center gap-4 w-full">
               <CardsGage color="#f79042" amount={amount} total={amount} width="w-3/4" />
               <CardLetter color="#f79042" label="총 혜택" amount={amount} total={amount} />
             </div>

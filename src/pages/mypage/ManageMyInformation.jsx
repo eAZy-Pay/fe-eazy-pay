@@ -61,7 +61,7 @@ const ManageMyInformation = () => {
   return (
     <>
       <DefaultLayout>
-        <div className="mt-[3rem] mb-8 text-2xl font-bold self-left">회원 정보 변경</div>
+        <div className="mt-[3rem] mb-16 text-3xl font-bold self-left">회원 정보 변경</div>
         <div className="flex flex-col items-center">
           <hr className="bold-hr w-5/6" />
           <button
@@ -78,13 +78,13 @@ const ManageMyInformation = () => {
 
           {isOpen && (
             <div
-              className="flex flex-col justify-center gap-8 w-5/6 px-40 py-24"
+              className="flex flex-col justify-center gap-8 w-5/6 md:px-40 py-24"
               style={{ backgroundColor: '#F4F7FC' }}
             >
               {userInfoSubset.map((item, index) => (
                 <div key={index} className="flex flex-col items-center w-full">
                   <div className="flex w-4/5 items-center justify-between">
-                    <p className="text-2xl">{item.label}</p>
+                    <p className="md:text-2xl">{item.label}</p>
                     <div className="flex items-center w-[361px] px-4 py-3 bg-[#f2f4f8] border-b border-l-0 border-[#c1c7cd] text-base text-[#697077]">
                       {item.value}
                     </div>
@@ -109,7 +109,7 @@ const ManageMyInformation = () => {
 
           {passwordOpen && (
             <div
-              className="flex flex-col gap-8 w-5/6 px-40 py-24 items-center"
+              className="flex flex-col gap-8 w-5/6 md:px-40 py-24 items-center"
               style={{ backgroundColor: '#F4F7FC' }}
             >
               <ChangePasswordSection id={userInfo.id} uid={userInfo.uid} />

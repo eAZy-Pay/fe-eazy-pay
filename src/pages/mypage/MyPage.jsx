@@ -69,8 +69,8 @@ const MyPage = () => {
   return (
     <>
       <DefaultLayout>
-        <div className="flex justify-between h-auto pt-14">
-          <div className="flex flex-col w-1/2   gap-10 p-4">
+        <div className="flex flex-wrap justify-between h-auto pt-14">
+          <div className="flex flex-col w-full md:w-1/2 gap-10 p-4">
             <ProfileSection name={userMain.name} />
             <RecentPayment transactions={userMain.transactions} />
             <AvailableFunds
