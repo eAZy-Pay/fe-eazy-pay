@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const RotatedCard = ({ image, style }) => {
   return (
-    <div className="inline-block object-cover">
+    <div className="inline-block object-cover sm:ml-0 ml-[6rem]">
       <img src={image} style={style} className="rotate-90 ml-9" />
     </div>
   );

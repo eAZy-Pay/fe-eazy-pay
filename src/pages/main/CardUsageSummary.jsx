@@ -28,11 +28,11 @@ const CardUsageSummary = ({ userMain, userId }) => {
       </div>
       <div className="sm:flex sm:mb-4">
         <div
-          className={`flex flex-col justify-center mb-[3rem] sm:ml-[4rem] sm:mt-0 ml-[7rem] mt-[2rem] sm:mb-0 `}
+          className={`flex flex-col justify-center mb-[3rem] sm:ml-[4rem] sm:mt-0 mx-[6rem] mt-[2rem] sm:mb-0 `}
         >
           <OverlappedCards images={userMain.images} />
         </div>
-        <DefaultFrame className={'flex px-[2rem] h-[20rem] '}>
+        <DefaultFrame className={'flex sm:px-[2rem] h-[20rem] '}>
           <div className="flex flex-col text-4xl font-bold w-full ">
             <div className="text-xl flex flex-row gap-2 w-full h-full justify-center">
               {

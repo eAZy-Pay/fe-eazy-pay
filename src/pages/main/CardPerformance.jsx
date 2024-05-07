@@ -16,49 +16,57 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
 
   return (
     <>
-      <div className="lg:flex items-center m-10">
+      <div className="lg:flex items-center sm:m-10 ">
         <RotatedCard
           image={card.image}
           style={{
             width: '157.71px',
             height: '251.98px',
-            marginLeft: window.outerWidth <= 520 ? '10rem' : '0',
           }}
         />
         <div className="flex flex-col sm:gap-8">
-          <div className="sm:flex items-center">
+          <div className="sm:flex items-center sm:mx-0 mx-auto">
             <CardsGage
               color="#F79042"
               fulfilledColor={fulfilledColor}
               amount={benefitAmount}
               total={card.benefitLimit}
-              margin="ml-28"
+              margin="sm:ml-28"
             />
-            <CardLetter
-              color="#F79042"
-              label="받은 혜택"
-              amount={benefitAmount}
-              total={card.benefitLimit}
-              fulfilledColor={fulfilledColor}
-              fulfilled={isFulfilled}
-              className="ml-8"
-            />
-            <div className="ml-3 text-xl "> | 전월 실적 :</div>
-            <div
-              className={`flex items-center ml-3 text-xl ${isFulfilled ? 'text-[#007AFF]' : 'text-[#bfbdbd]'}`}
-            >
-              {isFulfilled ? '충족' : '미충족'}
+            <div className="flex mx-auto items-center">
+              <CardLetter
+                color="#F79042"
+                label="받은 혜택"
+                amount={benefitAmount}
+                total={card.benefitLimit}
+                fulfilledColor={fulfilledColor}
+                fulfilled={isFulfilled}
+                className="sm:ml-8 ml-[4rem]"
+              />
+              <div className="flex">
+                <div className="sm:ml-3 sm:text-xl text-sm"> | 전월 실적 :</div>
+                <div
+                  className={`flex items-center ml-3 sm:text-xl text-sm ${isFulfilled ? 'text-[#007AFF]' : 'text-[#bfbdbd]'}`}
+                >
+                  {isFulfilled ? '충족' : '미충족'}
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="sm:flex items-center">
-            <CardsGage color="#007AFF" amount={useAmount} total={card.performance} margin="ml-28" />
+          <div className="sm:flex items-center sm:mx-0 mx-auto">
+            <CardsGage
+              color="#007AFF"
+              amount={useAmount}
+              total={card.performance}
+              margin="sm:ml-28"
+            />
             <CardLetter
               color="#007AFF"
               label="채운 실적"
               amount={useAmount}
               total={card.performance}
-              className="ml-8"
+              className="sm:ml-8 sm:mx-0 mx-auto"
             />
           </div>
         </div>
