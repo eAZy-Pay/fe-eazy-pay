@@ -109,21 +109,7 @@ const MainPage = () => {
           checkedIndex={checkedIndex}
           setCheckedIndex={setcheckedIndex}
         />
-        <div className="hidden sm:blcok">
-          <CategoryCards
-            categoryCards={highlightedCards}
-            maxColumn={5}
-            maxRow={1}
-            showInfo={false}
-          />
-        </div>
-        <CategoryCards
-          className="sm:hidden"
-          categoryCards={highlightedCards}
-          maxColumn={2}
-          maxRow={4}
-          showInfo={false}
-        />
+
       </DefaultLayout>
     </>
   );
