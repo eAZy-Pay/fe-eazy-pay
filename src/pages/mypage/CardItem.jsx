@@ -13,7 +13,7 @@ const CardItem = ({ card, num, benefitAmount, uid }) => {
 
   return (
     <div className="mb-6" style={{ width: '39.25rem' }}>
-      <Link to={`/mypage/card-management/selected-card`} state={{ uid }}>
+      <Link to={`/mypage/card-management/selected-card`} state={uid}>
         <DefaultFrame>
           <div className="flex flex-col p-4">
             <div className="flex">
