@@ -17,13 +17,16 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
   return (
     <>
       <div className="lg:flex items-center sm:m-10 ">
-        <RotatedCard
-          image={card.image}
-          style={{
-            width: '157.71px',
-            height: '251.98px',
-          }}
-        />
+        <div className="flex">
+          <div className="w-[6rem] sm:hidden"></div>
+          <RotatedCard
+            image={card.image}
+            style={{
+              width: '157.71px',
+              height: '251.98px',
+            }}
+          />
+        </div>
         <div className="flex flex-col sm:gap-8">
           <div className="sm:flex items-center sm:mx-0 mx-auto">
             <CardsGage
