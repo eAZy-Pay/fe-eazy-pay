@@ -18,14 +18,14 @@ const HashTagSearch = ({ tags, checkedIndex, setCheckedIndex }) => {
     const className = isSelected ? '' : 'text-gray-300 hover:text-gray-500';
 
     return (
-      <div key={tag} onClick={handleClick} className={`p-2 cursor-pointer ${className}`}>
+      <div key={tag} onClick={handleClick} className={`p-2 cursor-pointer text-2xl ${className}`}>
         #{tag}
       </div>
     );
   };
 
   return (
-    <div className="flex gap-4 text-2xl font-bold text-left mt-8 mb-4">
+    <div className="flex gap-4 font-bold text-left mt-8 mb-4 sm:text-lg md:text-xl lg:text-2xl">
       {tags.map((item, index) => makeSelectHashTag(index, item?.categoryName || item?.name))}
     </div>
   );
