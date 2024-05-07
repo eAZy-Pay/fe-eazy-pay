@@ -125,7 +125,7 @@ const RecommendationPage = () => {
         )}
 
         <HashTagSearch
-          tags={monthlyFor6}
+          tags={monthlyFor6.length === 0 ? otherMonthlyFor6 : monthlyFor6}
           checkedIndex={checkedIndex}
           setCheckedIndex={setCheckedIndex}
         />

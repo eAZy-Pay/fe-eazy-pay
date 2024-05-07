@@ -27,7 +27,9 @@ const CardsGage = ({ color, amount = 0, total = 1, width = 'w-full', margin = ' 
   }, [amount, total]);
 
   return (
-    <div className={`flex justify-center items-center w-[25rem] ${margin}`}>
+    <div
+      className={`flex justify-center items-center w-full sm:w-[15rem] md:w-[20rem] lg:w-[25rem] ${margin}`}
+    >
       <div
         className={`rounded-[1.7em] bg-[#bfbdbd]/20 overflow-hidden relative h-[1.5em]  ${width}`}
       >

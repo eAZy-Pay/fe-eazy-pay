@@ -28,7 +28,7 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
           />
         </div>
         <div className="flex flex-col sm:gap-8">
-          <div className="sm:flex items-center sm:mx-0 mx-auto">
+          <div className="sm:flex items-center sm:mx-0">
             <CardsGage
               color="#F79042"
               fulfilledColor={fulfilledColor}
@@ -57,7 +57,7 @@ const UserMainComponent = ({ benefitAmount, useAmount, card, uid }) => {
             </div>
           </div>
 
-          <div className="sm:flex items-center sm:mx-0 mx-auto">
+          <div className="sm:flex items-center sm:mx-0">
             <CardsGage
               color="#007AFF"
               amount={useAmount}

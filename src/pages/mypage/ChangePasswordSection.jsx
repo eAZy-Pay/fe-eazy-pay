@@ -126,7 +126,7 @@ const ChangePasswordSection = ({ id, uid }) => {
     <>
       <div className="flex flex-col items-center w-full">
         <div className="flex w-4/5 items-center justify-between">
-          <p className="text-2xl">아이디</p>
+          <p className="md:text-2xl">아이디</p>
           <input
             type="text"
             value={id}
@@ -138,7 +138,7 @@ const ChangePasswordSection = ({ id, uid }) => {
 
       <div className="flex flex-col items-center w-full">
         <div className="flex w-4/5 items-center justify-between">
-          <p className="text-2xl">기존 비밀번호 입력</p>
+          <p className="md:text-2xl">기존 비밀번호 입력</p>
           <input
             type="password"
             value={nowPassword}
@@ -155,7 +155,7 @@ const ChangePasswordSection = ({ id, uid }) => {
 
       <div className="flex flex-col items-center w-full">
         <div className="flex w-4/5 items-center justify-between">
-          <p className="text-2xl">새 비밀번호 입력</p>
+          <p className="md:text-2xl">새 비밀번호 입력</p>
           <input
             type="password"
             value={newPassword}
@@ -172,7 +172,7 @@ const ChangePasswordSection = ({ id, uid }) => {
 
       <div className="flex flex-col items-center w-full">
         <div className="flex w-4/5 items-center justify-between">
-          <p className="text-2xl">한 번 더 입력</p>
+          <p className="md:text-2xl">한 번 더 입력</p>
           <input
             type="password"
             value={checkNewPassword}

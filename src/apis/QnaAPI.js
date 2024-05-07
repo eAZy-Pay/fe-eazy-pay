@@ -1,17 +1,18 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const getQna = async ({ uid, page, size }) => {
-  if (uid !== undefined && uid > 0) {
-    const data = (
-      await fetch(`${BASE_URL}/api/qnas?uid=${uid}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-    ).json();
-    return data;
-  }
+export const getQna = async (uid) => {
+  const data = (
+    await fetch(`${BASE_URL}/api/qnas?uid=${uid}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  ).json();
+  return data;
+};
+
+export const getQnas = async ({ page, size }) => {
   page = page || 0;
   size = size || 10;
   const data = (
@@ -27,15 +28,14 @@ export const getQna = async ({ uid, page, size }) => {
 
 // Qna 게시글 삭제 요청
 export const deleteQna = async (uid) => {
-  const data = (
-    await fetch(`${BASE_URL}/api/qnas?uid=${uid}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  ).json();
-  return data;
+  const response = await fetch(`${BASE_URL}/api/qnas?uid=${uid}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  return response;
 };
 
 // Qna 게시글 생성 요청

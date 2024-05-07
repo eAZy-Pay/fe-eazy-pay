@@ -13,9 +13,13 @@ const CardDetail = ({ card, benefitList, showApplyButton }) => {
       <div className="flex w-full">
         <CreditCard card={card} showName={false} showInfo={false} useLink={false} sclae={130} />
         <div className="flex flex-col p-6">
-          <div className="flex flex-col gap-4">
-            <h1 className="text-5xl font-semibold">{card.name}</h1>
-            <div className="w-full text-2xl font-medium">{card.info}</div>
+          <div className="flex flex-col gap-4 items-start">
+            <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl">
+              {card.name}
+            </h1>
+            <div className="w-full text-lg font-medium text-gray-500 sm:text-xl md:text-2xl lg:text-3xl">
+              {card.info}
+            </div>
             <div className="flex flex-col items-baseline mt-4">
               {isAllCategory ? (
                 <BenefitRow

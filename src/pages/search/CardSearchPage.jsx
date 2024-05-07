@@ -21,6 +21,26 @@ const CardSearchPage = () => {
     { uid: 9, name: '기타' },
   ];
 
+  const [maxColumn, setMaxColumn] = useState(4);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setMaxColumn(2);
+      } else if (window.innerWidth < 1024) {
+        setMaxColumn(3);
+      } else {
+        setMaxColumn(4);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 리스너 해제
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const [checkedIndex, setcheckedIndex] = useState(0);
   const categoryId = categories[checkedIndex]?.uid;
   const [searchText, setSearchText] = useState('');
@@ -78,11 +98,10 @@ const CardSearchPage = () => {
       />
       <div className="my-6 text-3xl font-bold">검색 결과</div>
       {categoryCards?.length ? (
-        <CategoryCards categoryCards={categoryCards} maxColumn={4} maxRow={3} />
+        <CategoryCards categoryCards={categoryCards} maxColumn={maxColumn} maxRow={3} />
       ) : (
         <div className="text-2xl text-center my-6">검색 결과가 없습니다.</div>
       )}
-
       <Banner
         to={'/card-recommend'}
         title="어떤 카드를 골라야할지 고민이신가요?"
