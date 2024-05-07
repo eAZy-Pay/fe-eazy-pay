@@ -14,7 +14,7 @@ export const subscribeToNotifications = (userId, onMessage) => {
       onMessage(newMessage);
     };
 
-    eventSource.onerror = (error) => {
+    eventSource.onerror = () => {
       eventSource.close();
       isReconnecting = false;
       setTimeout(connect, 5000);

@@ -6,7 +6,7 @@ const useQnaById = ({ uid }) => {
 
   useEffect(() => {
     const fetchQna = async () => {
-      const data = await getQna({ uid });
+      const data = await getQna(uid);
       setQna(data);
     };
     fetchQna();

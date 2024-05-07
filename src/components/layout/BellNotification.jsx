@@ -9,7 +9,6 @@ import { useContext } from 'react';
 import { DropdownContext } from '../../App';
 import BellIcon from '../../assets/bellIcon.svg';
 import NotificationBellIcon from '../../assets/notificationBellIcon.svg';
-import { Settings2Icon } from 'lucide-react';
 
 const BellNotification = () => {
   const { isDropdownOpen, setIsDropdownOpen, setDropdownContent } = useContext(DropdownContext);
@@ -48,7 +47,7 @@ const BellNotification = () => {
       );
     } else {
       setDropdownContent(
-        <div class="flex flex-col justify-center items-center w-60 bg-white shadow-lg rounded-lg overflow-hidden gap-1">
+        <div className="flex flex-col justify-center items-center w-60 bg-white shadow-lg rounded-lg overflow-hidden gap-1">
           <div
             className="cursor-pointer flex justify-center p-3 gap-4"
             onClick={() => {
@@ -67,7 +66,7 @@ const BellNotification = () => {
                 setMessages((prev) => prev.filter((m) => m.uid !== msg.uid));
               }}
             >
-              <p class="text-gray-800 text-lg">{msg.message}</p>
+              <p className="text-gray-800 text-lg">{msg.message}</p>
             </div>
           ))}
         </div>
