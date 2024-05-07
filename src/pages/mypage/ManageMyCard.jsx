@@ -90,13 +90,16 @@ const ManageMyCard = () => {
                 </Link>
               </div>
               {userCards.filter(({ linkEazy }) => linkEazy).length > 4 ? (
-                <div className="flex justify-center w-[900px]">
+                <div className="flex justify-center md:w-[900px]">
                   <Marquee className="gap-[2.5rem]" speed={30}>
-                    {linkedCards(userCards.slice(0, 4), gapStyle(userCards.length))}
+                    {linkedCards(
+                      userCards,
+                      gapStyle(userCards.filter((card) => card.linkEazy).length)
+                    )}
                   </Marquee>
                 </div>
               ) : (
-                linkedCards(userCards, gapStyle(userCards.length))
+                linkedCards(userCards, gapStyle(userCards.filter((card) => card.linkEazy).length))
               )}
             </div>
           </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { checkId } from '../../apis/CheckIdAPI';
+import { checkId } from '../../apis/RegisterAPI';
 
 const EazyPayRegisterForm = ({ setId, setPw }) => {
   const [id, setLocalId] = useState('');
