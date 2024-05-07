@@ -259,7 +259,7 @@ const PaymentModal = ({
                 setCurrentIndex={setCurrentIndex}
               />
             </div>
-            <div className="flex flex-col w-full mt-14 mb-6">
+            <div className="flex flex-col w-full mt-6 md:mt-14 mb-6">
               <div className="flex justify-between items-baseline">
                 <p className="text-xl font-semibold text-gray-600 ">최종 결제 금액</p>
                 <p className="text-3xl font-bold text-main-color">{formattedPrice} 원</p>
