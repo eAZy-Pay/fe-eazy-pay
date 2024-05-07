@@ -5,7 +5,7 @@ const CreditCard = ({ card, showName, showInfo, useLink, scale }) => {
   const cardContent = (
     <>
       <img
-        className={`w-[80px] md:w-[157.71px] h-[140px] md:h-[251.98px] ${useLink ? 'hover:translate-y-[-1.5rem]' : ''}`}
+        className={`w-[9.8rem] h-[15.7rem] ${useLink ? 'hover:translate-y-[-1.5rem]' : ''}`}
         src={card.image}
         alt="Credit Card"
         style={{ transform: `scale(${scale / 100})` }}
@@ -18,14 +18,12 @@ const CreditCard = ({ card, showName, showInfo, useLink, scale }) => {
   return useLink ? (
     <Link
       to={`/card-detail/${card.uid}`}
-      className="w-[400px] h-[300px] md:h-[400px] flex flex-col items-center justify-center gap-4"
+      className="w-96 h-96 flex flex-col items-center justify-center gap-4"
     >
       {cardContent}
     </Link>
   ) : (
-    <div className="w-[400px] h-[300px] md:h-[400px] flex flex-col items-center justify-center gap-4">
-      {cardContent}
-    </div>
+    <div className="w-96 h-96 flex flex-col items-center justify-center gap-4">{cardContent}</div>
   );
 };
 

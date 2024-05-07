@@ -1,16 +1,18 @@
 //import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import DropdownMenu from './DropDownMenu';
+import DropdownMenu from '../dropdown/DropDownMenu';
+import MenuContent from '../dropdown/MenuContent';
+
 import { DropdownContext } from '../../App';
+import BellNotification from './BellNotification';
 
 import MainLogo from '../../assets/mainLogo.svg';
 import MenuIcon from '../../assets/menuIcon.svg';
-import BellIcon from '../../assets/bellIcon.svg';
-// import BellIcon from '../../assets/bellAlertIcon.svg';
+
 const NavBar = () => {
   // 드롭다운바 열림/닫힘 상태 관리
-  const { isDropdownOpen, setIsDropdownOpen } = useContext(DropdownContext);
+  const { isDropdownOpen, setIsDropdownOpen, setDropdownContent } = useContext(DropdownContext);
 
   return (
     <div className="flex w-full h-20 items-center">
@@ -33,13 +35,16 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="flex items-center gap-1 md:gap-2 lg:gap-4">
-          <img src={BellIcon} alt="Notifications" className="w-8 h-8" />
+          <BellNotification />
           <div className="relative">
             <img
               src={MenuIcon}
               alt="Menu"
               className="w-8 h-8 cursor-pointer"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onClick={() => {
+                setDropdownContent(<MenuContent />);
+                setIsDropdownOpen(!isDropdownOpen);
+              }}
             />
             <DropdownMenu />
           </div>

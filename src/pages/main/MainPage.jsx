@@ -28,6 +28,25 @@ const MainPage = () => {
     },
     []
   );
+  const [maxColumn, setMaxColumn] = useState(5);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setMaxColumn(3);
+      } else if (window.innerWidth < 1024) {
+        setMaxColumn(4);
+      } else {
+        setMaxColumn(5);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 리스너 해제
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -110,7 +129,12 @@ const MainPage = () => {
           setCheckedIndex={setcheckedIndex}
         />
 
-        <CategoryCards categoryCards={highlightedCards} maxColumn={5} maxRow={1} showInfo={false} />
+        <CategoryCards
+          categoryCards={highlightedCards}
+          maxColumn={maxColumn}
+          maxRow={1}
+          showInfo={false}
+        />
       </DefaultLayout>
     </>
   );
