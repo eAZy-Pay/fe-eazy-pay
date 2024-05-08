@@ -34,6 +34,7 @@ const PaymentModal = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardId = cards[currentIndex]?.cardId;
   const payback = cards[currentIndex]?.payback;
+  const [isPayRequestInProcess, setIsPayRequestInProcess] = useState(false);
 
   const makeContents = (cards) => {
     setContents(
@@ -111,6 +112,10 @@ const PaymentModal = ({
 
             try {
               const price = Number(formattedPrice.replace(/,/g, ''));
+              if (isPayRequestInProcess) {
+                return;
+              } // 결제 요청 중복 방지
+              setIsPayRequestInProcess(true);
               const response = await payRequest(
                 userId,
                 cardId,
@@ -119,6 +124,7 @@ const PaymentModal = ({
                 storeCode,
                 storeName
               );
+              setIsPayRequestInProcess(false);
 
               closeModal();
 
