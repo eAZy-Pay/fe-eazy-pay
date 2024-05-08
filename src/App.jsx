@@ -22,7 +22,6 @@ import CardApplyPage from './pages/card/CardApplyPage';
 import ManageLinkEazy from './pages/mypage/ManageLinkEazy';
 import SelectedCard from './pages/mypage/SelectedCard';
 import AdminQnaPage from './pages/admin/AdminQnaPage';
-import NotFoundPage from './pages/NotFoundPage';
 
 export const ModalContext = createContext();
 export const DropdownContext = createContext();
@@ -52,7 +51,6 @@ function App() {
         >
           <CurrentPageContext.Provider value={{ currentPage, setCurrentPage }}>
             <Routes>
-              <Route path="/*" element={<NotFoundPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<MainPage />} />
               <Route path="/card-recommend" element={<RecommendationPage />} />
