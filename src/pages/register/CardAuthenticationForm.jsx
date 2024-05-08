@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { checkPhoneNumber } from '../../apis/RegisterAPI';
+import DatePicker from './DatePicker';
 
 const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail }) => {
   const [errorName, setErrorName] = useState('');
-  const [errorBirth, setErrorBirth] = useState('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
   const [successPhoneNumber, setSuccessPhoneNumber] = useState('');
+  const [localBirth, setLocalBirth] = useState('');
   const [phoneNumSTR, setPhoneNumSTR] = useState('');
   const [localPhoneNumber, setLocalPhoneNumber] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
@@ -23,19 +24,6 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     } else {
       setErrorName('');
       setName(name);
-    }
-  };
-
-  const handleBirthChange = (event) => {
-    const birth = event.target.value;
-    console.log(`birth: ${birth}`);
-    const numericRegex = /^\d+$/;
-    if (birth.length < 8 || !numericRegex.test(birth)) {
-      setErrorBirth('생년월일을 8자리로 입력해주세요');
-    } else {
-      setErrorBirth('');
-      setBirth(birth);
-      console.log(`birth: ${birth}`);
     }
   };
 
@@ -61,7 +49,6 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
   };
 
   const handlePhoneNumberBlur = () => {
-    console.log(`localPhoneNumber: ${localPhoneNumber}`);
     checkPhoneNumber(localPhoneNumber, setPhoneNumber, setSuccessPhoneNumber, setErrorPhoneNumber);
   };
 
@@ -76,6 +63,13 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
       setEmail(email);
     }
   };
+
+  // useEffect(() => {
+  //   if (localBirth !== '') {
+  //     setBirth(String(localBirth.format('YYYYMMDD')));
+  //     console.log(`birth: ${String(localBirth.format('YYYYMMDD'))}`);
+  //   }
+  // }, [localBirth]);
 
   return (
     <div className="flex">
@@ -106,19 +100,7 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
           noValidate
           autoComplete="off"
         >
-          <TextField
-            id="birth"
-            label="생년월일"
-            // // 클릭시 label이 위로 올라가는 효과 없애기
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
-            // variant="outlined"
-            // type="text"
-            onChange={handleBirthChange}
-            error={!!errorBirth}
-            helperText={errorBirth ? errorBirth : ''}
-          />
+          <DatePicker localBirth={localBirth} setLocalBirth={setLocalBirth} />
         </Box>
 
         <Box

@@ -26,7 +26,6 @@ const RegisterPage = () => {
 
   // 다음 버튼 클릭 로직
   const handleNext = () => {
-    console.log(`stepperIndex : ${stepperIndex}`); // TODO: 추후 로그 삭제
     if (stepperIndex === 4) {
       navigate('/');
     } else {
@@ -35,7 +34,6 @@ const RegisterPage = () => {
   };
 
   const handleBack = () => {
-    console.log(`stepperIndex : ${stepperIndex}`); // TODO: 추후 로그 삭제
     if (stepperIndex > 0) {
       setStepperIndex((prevStepperIndex) => prevStepperIndex - 1);
     }
@@ -43,15 +41,15 @@ const RegisterPage = () => {
 
   // 다음 버튼의 활성화/비활성화 조건 설정. true일 때 비활성화
   const isButtonDisabled = () => {
-    // if (stepperIndex === 0) { //TODO: 페이지 완성하면 주석 해제
-    //   return !(checkBox1 && checkBox2);
-    // }
-    // if (stepperIndex === 1) {
-    //   return !(name && birthday && phoneNumber && email);
-    // }
-    // if (stepperIndex === 3) {
-    //   return !(id && password);
-    // }
+    if (stepperIndex === 0) {
+      return !(checkBox1 && checkBox2);
+    }
+    if (stepperIndex === 1) {
+      return !(name && birthday && phoneNumber && email);
+    }
+    if (stepperIndex === 3) {
+      return !(id && password);
+    }
 
     return false;
   };
