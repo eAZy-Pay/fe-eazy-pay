@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -64,12 +64,11 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     }
   };
 
-  // useEffect(() => {
-  //   if (localBirth !== '') {
-  //     setBirth(String(localBirth.format('YYYYMMDD')));
-  //     console.log(`birth: ${String(localBirth.format('YYYYMMDD'))}`);
-  //   }
-  // }, [localBirth]);
+  useEffect(() => {
+    if (localBirth !== '') {
+      setBirth(localBirth);
+    }
+  }, [localBirth]);
 
   return (
     <div className="flex">

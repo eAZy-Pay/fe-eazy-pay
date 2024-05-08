@@ -44,7 +44,7 @@ const SelectedCardModal = ({
         <div className="mt-4">{content}</div>
         {errorMessage && <div className="text-red-500 text-center mt-4">{errorMessage}</div>}
         <div className="flex justify-end gap-5 mt-6">
-          <button className="p-3 bg-red-500 text-white rounded-lg" onClick={handleConfirm}>
+          <button className="p-3 w-[67.69px] bg-red-500 text-white rounded-lg" onClick={handleConfirm}>
             예
           </button>
           <button className="p-3 bg-gray-500 text-white rounded-lg" onClick={handleClose}>
