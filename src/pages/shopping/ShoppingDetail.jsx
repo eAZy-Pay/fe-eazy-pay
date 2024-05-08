@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
@@ -34,6 +34,7 @@ const PaymentModal = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardId = cards[currentIndex]?.cardId;
   const payback = cards[currentIndex]?.payback;
+  const isPayRequestInProcess = useRef(false);
 
   const makeContents = (cards) => {
     setContents(
@@ -111,6 +112,10 @@ const PaymentModal = ({
 
             try {
               const price = Number(formattedPrice.replace(/,/g, ''));
+              if (isPayRequestInProcess.current) {
+                return;
+              } // 결제 요청 중복 방지
+              isPayRequestInProcess.current = true;
               const response = await payRequest(
                 userId,
                 cardId,
@@ -119,6 +124,7 @@ const PaymentModal = ({
                 storeCode,
                 storeName
               );
+              isPayRequestInProcess.current = false;
 
               closeModal();
 
@@ -136,6 +142,7 @@ const PaymentModal = ({
             setPinStatus([false, false, false, false, false, false]);
             setPin('');
             shuffleKeypad();
+            isPayRequestInProcess.current = false;
           }
         }
       }
