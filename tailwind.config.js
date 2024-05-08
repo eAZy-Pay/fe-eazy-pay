@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'main-color': '#007AFF',
+        'main-color': '#008BFF',
       },
       animation: {
         'spin-slow': 'spin-custom 2s linear infinite',

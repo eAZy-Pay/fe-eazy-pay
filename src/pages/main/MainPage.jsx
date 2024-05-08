@@ -28,6 +28,25 @@ const MainPage = () => {
     },
     []
   );
+  const [maxColumn, setMaxColumn] = useState(5);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setMaxColumn(3);
+      } else if (window.innerWidth < 1024) {
+        setMaxColumn(4);
+      } else {
+        setMaxColumn(5);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 리스너 해제
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -35,16 +54,13 @@ const MainPage = () => {
       getCardsSummary(userId, 1, 4).then((res) => {
         const tmp = [eazy];
         res.cards.forEach((cardObj) => {
-          if (cardObj.linkEazy) {
-            // linkEazy가 true인 카드만 추가
-            tmp.push(cardObj.card.image);
-          }
+          tmp.push(cardObj.card.image);
         });
         setUserMain((prev) => ({
           ...prev,
           benefitAmount: res.totalBenefitAmount,
           images: tmp,
-          cards: res.cards.filter((cardObj) => cardObj.linkEazy),
+          cards: res.cards,
         }));
       });
     } else {
@@ -110,7 +126,12 @@ const MainPage = () => {
           setCheckedIndex={setcheckedIndex}
         />
 
-        <CategoryCards categoryCards={highlightedCards} maxColumn={5} maxRow={1} showInfo={false} />
+        <CategoryCards
+          categoryCards={highlightedCards}
+          maxColumn={maxColumn}
+          maxRow={1}
+          showInfo={false}
+        />
       </DefaultLayout>
     </>
   );

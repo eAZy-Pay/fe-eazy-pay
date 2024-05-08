@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'NanumSquare';
-  src: url(./assets/fonts/NanumSquareB.ttf) format('truetype');
+  src: url(./assets/fonts/NanumSquareB.woff2) format('truetype');
   /* 볼드체 폰트 */
   font-weight: 700;
   /* 볼드체의 폰트 두께 값을 700으로 설정 */
@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: 'NanumSquare';
-  src: url(./assets/fonts/NanumSquareEB.ttf) format('truetype');
+  src: url(./assets/fonts/NanumSquareEB.woff2) format('truetype');
   /* extra bold 폰트 파일 경로 확인 필요 */
   font-weight: 800;
   /* extra bold 폰트 두께 값을 800으로 설정 */
@@ -22,21 +22,19 @@
 
 @font-face {
   font-family: 'noto-sans';
-  src: url(./assets/fonts/NotoSans-Regular.ttf) format('truetype');
+  src: url(./assets/fonts/NotoSans-Regular.woff2) format('truetype');
   unicode-range: U+0020-007E;
 }
 
 @media screen and (max-width: 768px) {
   :root {
-    font-size: 14px;
-    /* 화면 크기가 작을 때 글꼴 크기 조절 */
+    font-size: 14px; /* 화면 크기가 작을 때 글꼴 크기 조절 */
   }
 }
 
 @media screen and (max-width: 480px) {
   :root {
-    font-size: 12px;
-    /* 더 작은 화면 크기일 때 글꼴 크기 조절 */
+    font-size: 12px; /* 더 작은 화면 크기일 때 글꼴 크기 조절 */
   }
 }
 
