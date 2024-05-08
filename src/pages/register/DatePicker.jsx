@@ -6,11 +6,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function BasicDatePicker({ localBirth, setLocalBirth }) {
-  useEffect(() => {
-    if (localBirth !== null) {
-      console.log(`localBirth: ${localBirth}`);
-    }
-  }, [localBirth]);
+  // useEffect(() => {
+  //   if (localBirth !== null) {
+  //     console.log(`localBirth: ${localBirth}`);
+  //   }
+  // }, [localBirth]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} dateFormats={{ monthShort: 'M' }}>
@@ -22,7 +22,13 @@ export default function BasicDatePicker({ localBirth, setLocalBirth }) {
           views={['year', 'month', 'day']}
           format="YYYY / MM / DD"
           onChange={(newValue) => {
-            setLocalBirth(newValue);
+            // setLocalBirth(newValue);
+            // setLocalBirth(newValue.format('YYYY-MM-DD'));
+            if (newValue) {
+              setLocalBirth(newValue);
+            } else {
+              setLocalBirth(null);
+            }
           }}
         />
       </DemoContainer>
@@ -31,6 +37,6 @@ export default function BasicDatePicker({ localBirth, setLocalBirth }) {
 }
 
 BasicDatePicker.propTypes = {
-  localBirth: PropTypes.any.isRequired,
+  localBirth: PropTypes.string.isRequired,
   setLocalBirth: PropTypes.func.isRequired,
 };

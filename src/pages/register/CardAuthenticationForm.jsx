@@ -7,7 +7,6 @@ import DatePicker from './DatePicker';
 
 const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail }) => {
   const [errorName, setErrorName] = useState('');
-  const [errorBirth, setErrorBirth] = useState('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
   const [successPhoneNumber, setSuccessPhoneNumber] = useState('');
   const [localBirth, setLocalBirth] = useState('');
@@ -25,19 +24,6 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     } else {
       setErrorName('');
       setName(name);
-    }
-  };
-
-  const handleBirthChange = (event) => {
-    const birth = event.target.value;
-    console.log(`birth: ${birth}`);
-    const numericRegex = /^\d+$/;
-    if (birth.length < 8 || !numericRegex.test(birth)) {
-      setErrorBirth('생년월일을 8자리로 입력해주세요');
-    } else {
-      setErrorBirth('');
-      setBirth(birth);
-      console.log(`birth: ${birth}`);
     }
   };
 
@@ -63,7 +49,6 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
   };
 
   const handlePhoneNumberBlur = () => {
-    console.log(`localPhoneNumber: ${localPhoneNumber}`);
     checkPhoneNumber(localPhoneNumber, setPhoneNumber, setSuccessPhoneNumber, setErrorPhoneNumber);
   };
 
@@ -79,12 +64,12 @@ const CardAuthenticationForm = ({ setName, setBirth, setPhoneNumber, setEmail })
     }
   };
 
-  useEffect(() => {
-    if (localBirth !== '') {
-      setBirth(String(localBirth.format('YYYYMMDD')));
-      console.log(`birth: ${String(localBirth.format('YYYYMMDD'))}`);
-    }
-  }, [localBirth]);
+  // useEffect(() => {
+  //   if (localBirth !== '') {
+  //     setBirth(String(localBirth.format('YYYYMMDD')));
+  //     console.log(`birth: ${String(localBirth.format('YYYYMMDD'))}`);
+  //   }
+  // }, [localBirth]);
 
   return (
     <div className="flex">
