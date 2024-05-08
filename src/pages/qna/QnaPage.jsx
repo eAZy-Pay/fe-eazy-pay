@@ -4,7 +4,8 @@ import WriteImg from '../../assets/writeImg.png';
 import { useState, useEffect } from 'react';
 import QnaBlock from './QnaBlock';
 import QnaDetail from './QnaDetail';
-import { getQna } from '../../apis/QnaAPI';
+import { getQnas } from '../../apis/QnaAPI';
+
 const QnaPage = () => {
   const [qnas, setQnas] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,7 @@ const QnaPage = () => {
   const [selectedQna, setSelectedQna] = useState(null); // 선택된 QnaBlock의 정보를 유지하기 위한 상태
 
   useEffect(() => {
-    getQna({
+    getQnas({
       page: 0,
       size: 1000,
     }).then((res) => {
